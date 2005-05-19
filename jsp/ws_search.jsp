@@ -10,7 +10,7 @@ version="1.2">
 <f:view>
         <ws:page id="gravesearch">
                 <h:form id="gravesearchfrom">
-                		<f:subview >
+                		<f:subview id="memorial_search_view">
                 			<jsp:include page="search_component.jsp">
 							<jsp:param name="wspage" value="true" />
 						</jsp:include>
