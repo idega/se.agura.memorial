@@ -1,5 +1,5 @@
 /*
- * $Id: IWBundleStarter.java,v 1.2 2005/05/19 13:34:32 gummi Exp $
+ * $Id: IWBundleStarter.java,v 1.3 2005/05/20 15:32:57 dainis Exp $
  * Created on 15.5.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -20,10 +20,10 @@ import com.idega.idegaweb.include.GlobalIncludeManager;
 
 /**
  * 
- *  Last modified: $Date: 2005/05/19 13:34:32 $ by $Author: gummi $
+ *  Last modified: $Date: 2005/05/20 15:32:57 $ by $Author: dainis $
  * 
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class IWBundleStarter implements IWBundleStartable {
 	private static final String STYLE_SHEET_URL = "/style/memorial.css";
@@ -58,9 +58,10 @@ public class IWBundleStarter implements IWBundleStartable {
 		
 		DefaultViewNode memorialNode = new DefaultViewNode("memorial",contentNode);
 		memorialNode.setJspUri(bundle.getJSPURI("ws_search.jsp"));
+		
 		DefaultViewNode searchMemorialNode = new DefaultViewNode("search",memorialNode);
 		String jspUri = bundle.getJSPURI("search_component.jsp");
-		memorialNode.setJspUri(jspUri);
+		searchMemorialNode.setJspUri(jspUri);
 		
 	}
 }
