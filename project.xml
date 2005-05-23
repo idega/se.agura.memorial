@@ -43,6 +43,7 @@
         <j:if test="${idegaweb.project.source.dependent}=='true'}"><eclipse.dependency>true</eclipse.dependency></j:if>
       </properties>
     </dependency>
+    
      <dependency>
       <groupId>bundles</groupId>
       <artifactId>com.idega.user</artifactId>
@@ -54,6 +55,25 @@
         <j:if test="${idegaweb.project.source.dependent}=='true'}"><eclipse.dependency>true</eclipse.dependency></j:if>
       </properties>
     </dependency>
+    
+    <!-- myfaces -->
+	<dependency>
+      <groupId>myfaces</groupId>
+      <artifactId>myfaces</artifactId>
+      <version>1.0.9</version>
+      <type>jar</type>
+      <url>http://www.myfaces.org/</url>
+    </dependency>    
+    
+    <!-- for apache myfaces extension -->
+    <dependency>
+      <groupId>myfaces</groupId>
+      <artifactId>myfaces-extensions</artifactId>
+      <version>1.0.9</version>
+      <type>jar</type>
+      <url>http://www.myfaces.org/</url>
+    </dependency>  
+    
   </dependencies>
 </project>
 
