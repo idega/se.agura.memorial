@@ -1,9 +1,15 @@
 package se.agura.memorial.search.impl;
 
-import javax.ejb.FinderException;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
-import com.idega.data.GenericEntity;
-import com.idega.data.IDOQuery;
+import java.util.List;
+
+import com.idega.util.database.ConnectionBroker;
 import se.agura.memorial.search.api.ObituarySearch;
 
 
@@ -12,7 +18,7 @@ import se.agura.memorial.search.api.ObituarySearch;
  * @author Igors
  *
  */
-public abstract class MalmoSearchBMPBean extends GenericEntity implements ObituarySearch {
+public class MalmoSearchBMPBean implements ObituarySearch {
 
 	public MalmoSearchBMPBean() {
 		super();
@@ -24,13 +30,78 @@ public abstract class MalmoSearchBMPBean extends GenericEntity implements Obitua
 
 	}
 	
+	public List getGraveyards(){
+		
+		
+		String sqlStatement = "select * from ga_kgard";
+		String datasourceName = "malmo";
+		Connection conn = null;
+		Statement Stmt = null;
+
+		List result = new ArrayList();
+		
+		try {
+		conn = ConnectionBroker.getConnection(datasourceName);
+
+		ResultSet RS = null;
+//		List placeHolderValues = subsetQuery.getValues();
+//		if(placeHolderValues==null || placeHolderValues.isEmpty()){
+		    Stmt = conn.createStatement();
+//		    RS = Stmt.executeQuery(subsetQuery.toString());
+		    RS = Stmt.executeQuery(sqlStatement);
+//		}
+////		 use PreparedStatement
+//		else{
+//		    Stmt = conn.prepareStatement(subsetQuery.toString(true));
+//		    DatastoreInterface dsi = DatastoreInterface.getInstance(_entity);
+//		     
+//			dsi.insertIntoPreparedStatement(placeHolderValues,(PreparedStatement)Stmt,1);
+//		    RS = ((PreparedStatement)Stmt).executeQuery();
+//		}
+
+		int count = 0;
+		while(RS.next() && count < 1000)
+		{
+		//	Graves g = new Graves();
+			count++;
+			System.out.println(RS.getObject(3));
+
+			
+			
+//		...  here the returning classes would be created and added to the list.
+			result.add(RS.getObject(3));
+		}
+
+		RS.close();
+		} catch (SQLException sqle) {
+		sqle.printStackTrace();
+
+		} finally {
+		if (Stmt != null) {
+		try {
+		Stmt.close();
+		}
+		catch (SQLException e) {
+		e.printStackTrace();
+		}
+		}
+		if (conn != null) {
+			ConnectionBroker.freeConnection(datasourceName, conn);
+		}
+		}
+		return result;
+		
+		
+	} 
+	
     public Collection findGraves(
 	   							 String firstName,
 	   							 String lastName,
-	   							// Interval dateOfBirth,
-	   							// Interval dayOfDeath,
+	   						  	 String dateOfBirth,
+	   							 String dayOfDeath,
 	   							 String region,
-	   							 String graveyard)  {
+	   							 String graveyard,
+	   							 String database)  {
 	    String pTable = "GA_Gravsatt";
 		boolean beginWhere=false;
 			
@@ -49,6 +120,12 @@ public abstract class MalmoSearchBMPBean extends GenericEntity implements Obitua
 
 		return null ;//this.idoFindPKsBySQL(sqlQuery.toString());
 	 }
+
+
+	public void findGrave(String identifier) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

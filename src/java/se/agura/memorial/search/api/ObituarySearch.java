@@ -37,12 +37,13 @@ public interface ObituarySearch {
 	public Collection findGraves (
 			           String firstName,
 			           String lastName,
-			           //Interval dateOfBirth,
-			           //Interval dayOfDeath,
+			           String dateOfBirth,
+			           String dayOfDeath,
 			           String region,
-			           String graveyard);
+			           String graveyard,
+			           String database);
 	
-	public Collection findGraves();
+
 	
 	public void findGrave(String identifier);
 	

@@ -28,6 +28,23 @@ public class GraveyardSearchBean {
 	public GraveyardSearchBean() {
 		cemeteries = new LinkedHashMap();
 		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		Cemetery c1 = new Cemetery("1. cem", "1"); //name, id
 		Cemetery c2 = new Cemetery("2. cem", "2"); 
 		Cemetery c3 = new Cemetery("3. cem", "3"); 
