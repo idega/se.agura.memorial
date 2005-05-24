@@ -1,5 +1,5 @@
 /*
- * $Id: IWBundleStarter.java,v 1.5 2005/05/23 13:46:02 dainis Exp $
+ * $Id: IWBundleStarter.java,v 1.6 2005/05/24 07:23:11 dainis Exp $
  * Created on 15.5.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -20,10 +20,10 @@ import com.idega.idegaweb.include.GlobalIncludeManager;
 
 /**
  * 
- *  Last modified: $Date: 2005/05/23 13:46:02 $ by $Author: dainis $
+ *  Last modified: $Date: 2005/05/24 07:23:11 $ by $Author: dainis $
  * 
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class IWBundleStarter implements IWBundleStartable {
 	private static final String STYLE_SHEET_URL = "/style/memorial.css";
@@ -59,12 +59,12 @@ public class IWBundleStarter implements IWBundleStartable {
 		DefaultViewNode memorialNode = new DefaultViewNode("memorial",contentNode);
 		memorialNode.setJspUri(bundle.getJSPURI("ws_search.jsp"));
 		
-		DefaultViewNode searchMemorialNode = new DefaultViewNode("search",memorialNode);
-		String jspUri = bundle.getJSPURI("search_component.jsp");
-		searchMemorialNode.setJspUri(jspUri);
+		//DefaultViewNode searchMemorialNode = new DefaultViewNode("search",memorialNode);
+		//String jspUri = bundle.getJSPURI("search_component.jsp");
+		//searchMemorialNode.setJspUri(jspUri);
 		
-		DefaultViewNode dainisMemorialNode = new DefaultViewNode("dainis",memorialNode);
-		dainisMemorialNode.setJspUri(bundle.getJSPURI("dainis.jsp"));
+		DefaultViewNode dainisMemorialNode = new DefaultViewNode("Search",memorialNode);
+		dainisMemorialNode.setJspUri(bundle.getJSPURI("search.jsp"));
 		
 		DefaultViewNode obituaryMemorialNode = new DefaultViewNode("obituary",memorialNode);
 		obituaryMemorialNode.setJspUri(bundle.getJSPURI("obituary.jsp"));		
