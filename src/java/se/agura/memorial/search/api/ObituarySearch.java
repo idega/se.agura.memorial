@@ -35,7 +35,7 @@ import java.util.List;
  */
 public interface ObituarySearch {
               
-	public Collection findGraves (
+	public List findGraves (
 			           String firstName,
 			           String lastName,
 			           String dateOfBirth,
