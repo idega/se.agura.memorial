@@ -111,14 +111,14 @@ version="1.2">
             </h:panelGroup>  
             
             <h:panelGroup>
-                <h:outputLabel for="cemetery">
-                	<h:outputText value="Cemetery"/>
+                <h:outputLabel for="graveyard">
+                	<h:outputText value="Graveyard"/>
                 </h:outputLabel>                
                 <f:verbatim escape="false"><br /></f:verbatim>                	
-                <h:selectOneMenu id="cemetery" value="#{graveyardSearchBean.cemetery}"
-                        converter="se.agura.memorial.experiment.CemeteryConverter" >  
+                <h:selectOneMenu id="graveyard" value="#{graveyardSearchBean.graveyard}"
+                        converter="se.agura.memorial.search.presentation.GraveyardConverter" >  
                     <f:selectItem itemValue=""  itemLabel="" />
-                    <f:selectItems value="#{graveyardSearchBean.cemeteriesItems}" />
+                    <f:selectItems value="#{graveyardSearchBean.graveyardsItems}" />
                 </h:selectOneMenu>
             </h:panelGroup>  
             

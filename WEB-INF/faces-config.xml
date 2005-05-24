@@ -11,7 +11,7 @@
 	<managed-bean>
 		<description>Backing bean for graveyard search form</description>
 		<managed-bean-name>graveyardSearchBean</managed-bean-name>
-		<managed-bean-class>se.agura.memorial.experiment.GraveyardSearchBean</managed-bean-class>		
+		<managed-bean-class>se.agura.memorial.search.presentation.SearchFormBackingBean</managed-bean-class>		
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>	
 	
@@ -20,13 +20,12 @@
 		<managed-bean-name>PersonList</managed-bean-name>
 		<managed-bean-class>se.agura.memorial.experiment.PersonList</managed-bean-class>		
 		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>	
-	
+	</managed-bean>
 	
 	<converter>
-	  <converter-id>se.agura.memorial.experiment.CemeteryConverter</converter-id>
+	  <converter-id>se.agura.memorial.search.presentation.GraveyardConverter</converter-id>
 	  <converter-class>
-		se.agura.memorial.experiment.CemeteryConverter
+		se.agura.memorial.search.presentation.GraveyardConverter
 	  </converter-class>
 	</converter> 	
 	
