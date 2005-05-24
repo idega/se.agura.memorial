@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ws="http://xmlns.idega.com/com.idega.workspace"
+        xmlns:article="http://xmlns.idega.com/com.idega.block.article" 
+        xmlns:builder="http://xmlns.idega.com/com.idega.builder"
+        xmlns:x="http://myfaces.apache.org/extensions"        
+version="1.2">
+<jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
+<f:view>
+	<ws:page id="obituary">
+
+	<h:form id="newPersonForm">
+	        
+    <h:panelGrid columns="2" cellspacing="7" border="0"> 
+        <h:outputLabel for="firstName">
+            <h:outputText value="First name"/>
+        </h:outputLabel>    	                                        
+        <h:inputText id="firstName" value="#{newPersonBean.firstName}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+        </h:inputText>	
+        
+        <h:outputLabel for="lastName">
+            <h:outputText value="Last name"/>
+        </h:outputLabel>    	                                        
+        <h:inputText id="lastName" value="#{newPersonBean.lastName}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+        </h:inputText>	
+    
+        <h:outputLabel for="dateOfBirth">
+            <h:outputText value="Date of birth"/>
+        </h:outputLabel>    	                                        
+        <h:inputText id="dateOfBirth" value="#{newPersonBean.dateOfBirth}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+        </h:inputText> 
+        
+        <h:outputLabel for="dateOfDeath">
+            <h:outputText value="Date of death"/>
+        </h:outputLabel>    	                                        
+        <h:inputText id="dateOfDeath" value="#{newPersonBean.dateOfDeath}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+        </h:inputText>  
+   
+    
+        <h:outputLabel for="hometown">
+            <h:outputText value="Hometown"/>
+        </h:outputLabel>    	                                        
+        <h:inputText id="hometown" value="#{newPersonBean.hometown}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+        </h:inputText>
+    
+        <h:outputLabel for="burialPlace">
+            <h:outputText value="Burial place"/>
+        </h:outputLabel>    	                                        
+        <h:inputText id="burialPlace" value="#{newPersonBean.burialPlace}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+        </h:inputText> 
+    
+    
+        <h:outputLabel for="cemetery">
+            <h:outputText value="Cemetery"/>
+        </h:outputLabel>    
+    
+        <h:panelGroup>
+            
+            <h:panelGrid columns="7" cellspacing="6" border="0">
+               
+                <h:inputText id="cemetery" value="#{newPersonBean.cemetery}" maxlength="25" >
+                    <f:validateLength maximum="25" minimum="0" />
+                </h:inputText>            
+            
+                <h:outputLabel for="department">
+                    <h:outputText value="Department"/>
+                </h:outputLabel> 
+                <h:inputText id="department" value="#{newPersonBean.department}" maxlength="10" >
+                    <f:validateLength maximum="10" minimum="0" />
+                </h:inputText>
+                
+                <h:outputLabel for="block">
+                    <h:outputText value="Block"/>
+                </h:outputLabel> 
+                <h:inputText id="block" value="#{newPersonBean.block}" maxlength="5" >
+                    <f:validateLength maximum="5" minimum="0" />
+                </h:inputText>
+                
+                <h:outputLabel for="graveNumber">
+                    <h:outputText value="Grave number"/>
+                </h:outputLabel> 
+                <h:inputText id="graveNumber" value="#{newPersonBean.graveNumber}" maxlength="5" >
+                    <f:validateLength maximum="50" minimum="0" />
+                </h:inputText>    
+            
+            </h:panelGrid>         
+        </h:panelGroup>                   
+    
+    </h:panelGrid> 
+    
+    
+    <h:panelGrid columns="3" cellspacing="7" border="0"> 
+        
+        <h:outputLabel for="createObituaryAfterSaving">
+            <h:outputText value="Create obituary after saving?"/>
+        </h:outputLabel>       
+        <h:selectBooleanCheckbox id="createObituaryAfterSaving" value="#{newPersonBean.createObituaryAfterSaving}" />
+        
+        <h:commandButton value="Save" action="#{newPersonBean.save}" id="cbSave" />
+        
+    </h:panelGrid>    
+
+    </h:form>
+  
+	</ws:page>
+</f:view>
+</jsp:root>
