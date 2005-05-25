@@ -2,7 +2,7 @@ package se.agura.memorial.search.api;
 
 
 
-import java.util.Iterator;
+
 import java.util.List;
 
 import se.agura.memorial.search.impl.MalmoSearchBMPBean;
@@ -12,7 +12,7 @@ import com.idega.presentation.IWContext;
 import com.idega.presentation.Table;
 import com.idega.presentation.ui.DropdownMenu;
 import com.idega.presentation.ui.Form;
-import com.idega.presentation.ui.SelectDropdown;
+
 import com.idega.presentation.ui.SubmitButton;
 import com.idega.presentation.ui.TextInput;
 
@@ -66,23 +66,21 @@ public class MemorialSearch extends Block{
 		TextInput editCemetery = new TextInput(PARAMETER_NAME_TO_SEARCH_FOR);
 		DropdownMenu editDatabase = new DropdownMenu(PARAMETER_NAME_TO_SEARCH_FOR);		
 		
-		MalmoSearchBMPBean b = new MalmoSearchBMPBean();
 		
 		
 		DropdownMenu from = new DropdownMenu(PARAMETER_NAME_TO_SEARCH_FOR);
 		DropdownMenu to   = new DropdownMenu(PARAMETER_NAME_TO_SEARCH_FOR);
-		List myList = b.getGraveyards();
-		Iterator iter = myList.iterator();
+//		Iterator iter = myList.iterator();
 	//	while (iter.hasNext()) {
 //			CurrencyHolder holder = (CurrencyHolder) iter.next();
-	//		editDatabase.addMenuElement("Malmö","ss");
+	//		editDatabase.addMenuElement("Malmï¿½","ss");
 			
 
 	//	}
 
-		//editDatabase.add("Malmö");
+		//editDatabase.add("Malmï¿½");
 		
-		editDatabase.addMenuElement("0","Malmö");
+		editDatabase.addMenuElement("0","Malmï¿½");
 		editDatabase.addMenuElement("1","test 2");		
 		editDatabase.addMenuElement("2","test 3");		
 		editDatabase.addMenuElement("-1","                       ");		
@@ -117,7 +115,10 @@ public class MemorialSearch extends Block{
 		form.add(table);
 		add(form);
 		
-		
+		MalmoSearchBMPBean b = new MalmoSearchBMPBean();
+		//List myList = b.findGrave(30673,10,"malmï¿½");
+		//b.getGraveyards("malmo");
+		b.findGraves(null,null,null,null,null,null,null,"Pau",null);
 	}
 }	
 	

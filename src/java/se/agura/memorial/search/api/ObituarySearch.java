@@ -27,7 +27,7 @@ county, Commune, Parish.
  * 
  */
 
-import java.util.Collection;
+
 import java.util.List;
 /**
  * @author Igors
@@ -38,15 +38,17 @@ public interface ObituarySearch {
 	public List findGraves (
 			           String firstName,
 			           String lastName,
-			           String dateOfBirth,
-			           String dayOfDeath,
+			           String dateOfBirthFrom,
+			           String dateOfBirthTo,			           
+			           String dayOfDeathFrom,
+			           String dayOfDeathTo,			           
 			           String region,
 			           String graveyard,
 			           String database);
 	
-	public List getGraveyards();	
+	public List getGraveyards(String database);	
 
 	
-	public void findGrave(String identifier);
+	public List findGrave(int gravID,int LopNr,String database);
 	
 }
