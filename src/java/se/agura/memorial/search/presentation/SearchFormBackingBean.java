@@ -39,13 +39,13 @@ public class SearchFormBackingBean {
 		this.setGraveyard(g1);
 		*/
 		
-		MalmoSearchBMPBean b = new MalmoSearchBMPBean();
-		List listOfGraveyards = b.getGraveyards();
+	//	MalmoSearchBMPBean b = new MalmoSearchBMPBean();
+	//	List listOfGraveyards = b.getGraveyards();
 
-		for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
-			Graveyard g = (Graveyard) it.next();
-			graveyards.put(new Integer(g.getId()).toString(), g);
-		}		
+	//	for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
+	//		Graveyard g = (Graveyard) it.next();
+	//		graveyards.put(new Integer(g.getId()).toString(), g);
+	//	}		
 		
 		
 	}
