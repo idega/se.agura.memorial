@@ -82,6 +82,10 @@
       <type>jar</type>
       <jar>mssqlserver.jar</jar>
       <url>http://www.microsoft.com/</url>
+      <properties>
+        <idegaweb.bundle.include>true</idegaweb.bundle.include>
+        <j:if test="${idegaweb.project.source.dependent}=='true'}"><eclipse.dependency>true</eclipse.dependency></j:if>
+      </properties>
     </dependency>
     <dependency>
       <groupId>mssqlserver</groupId>
@@ -90,6 +94,10 @@
       <type>jar</type>
       <jar>msutil.jar</jar>
       <url>http://www.microsoft.com/</url>
+      <properties>
+        <idegaweb.bundle.include>true</idegaweb.bundle.include>
+        <j:if test="${idegaweb.project.source.dependent}=='true'}"><eclipse.dependency>true</eclipse.dependency></j:if>
+      </properties>
     </dependency>
     <dependency>
       <groupId>mssqlserver</groupId>
@@ -98,6 +106,10 @@
       <type>jar</type>
       <jar>msbase.jar</jar>
       <url>http://www.microsoft.com/</url>
+      <properties>
+        <idegaweb.bundle.include>true</idegaweb.bundle.include>
+        <j:if test="${idegaweb.project.source.dependent}=='true'}"><eclipse.dependency>true</eclipse.dependency></j:if>
+      </properties>
     </dependency>
     
   </dependencies>
