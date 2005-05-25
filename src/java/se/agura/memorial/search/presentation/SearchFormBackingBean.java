@@ -30,8 +30,6 @@ public class SearchFormBackingBean {
 	Graveyard graveyard;
 
 	static Map graveyards;
-	
-	
 
 	List searchResults = new ArrayList();
 
@@ -52,25 +50,19 @@ public class SearchFormBackingBean {
 		 */
 
 		MalmoSearchBMPBean b = new MalmoSearchBMPBean();
-		List listOfGraveyards = b.getGraveyards();
-		this.setGraveyard(g1);
-		*/
-		
-	//	MalmoSearchBMPBean b = new MalmoSearchBMPBean();
-	//	List listOfGraveyards = b.getGraveyards();
+		List listOfGraveyards = b.getGraveyards("test dummy database");
 
-	//	for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
-	//		Graveyard g = (Graveyard) it.next();
-	//		graveyards.put(new Integer(g.getId()).toString(), g);
-	//	}		
-		
-		
+		for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
+			Graveyard g = (Graveyard) it.next();
+			graveyards.put(new Integer(g.getId()).toString(), g);
+		}		
+
 	}
 
 	String database;
-	
+
 	public int getSearchResultCount() {
-		return searchResults.size(); 
+		return searchResults.size();
 	}
 
 	public Graveyard getGraveyard() {
@@ -126,7 +118,7 @@ public class SearchFormBackingBean {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;//.replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+		this.firstName = leftTrimRightTrim(firstName);
 	}
 
 	public String getHometown() {
@@ -134,7 +126,7 @@ public class SearchFormBackingBean {
 	}
 
 	public void setHometown(String hometown) {
-		this.hometown = hometown;//.replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+		this.hometown = leftTrimRightTrim(hometown);
 	}
 
 	public String getSurname() {
@@ -142,7 +134,7 @@ public class SearchFormBackingBean {
 	}
 
 	public void setSurname(String surname) {
-		this.surname = surname;//.replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+		this.surname = leftTrimRightTrim(surname);
 	}
 
 	/**
@@ -150,19 +142,13 @@ public class SearchFormBackingBean {
 	 */
 	public String search() {
 
-		//System.out.println("qwertyuio");
-
-		//findGraves(
-		//String firstName, String lastName,
-		//String dateOfBirth, String dayOfDeath, 
-		//String region,
-		//String graveyard, String database)
-
 		searchResults = new MalmoSearchBMPBean().findGraves(
 				this.getFirstName(), this.getSurname(), 
-				this.getDateOfBirthFrom(), this.dateOfDeceaseFrom, 
-				this.getHometown(),
-				this.graveyard != null ? this.graveyard.getBenamning() : null, null);
+				this.getDateOfBirthFrom(), this.getDateOfBirthTo(), 
+				this.getDateOfDeceaseFrom(), this.getDateOfDeceaseTo(),
+				this.getHometown(), 
+				this.graveyard != null ? this.graveyard.getBenamning() : null, 
+				null);
 
 		for (Iterator it = searchResults.iterator(); it.hasNext();) {
 			GraveInformation gi = (GraveInformation) it.next();
@@ -212,5 +198,13 @@ public class SearchFormBackingBean {
 
 	public List getSearchResults() {
 		return searchResults;
+	}
+	
+	private String leftTrimRightTrim(String s) {
+		if (s != null) {
+			return s.replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+		} else {
+			return s;
+		}
 	}
 }
