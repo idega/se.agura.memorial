@@ -94,7 +94,7 @@ public class MalmoSearchBMPBean implements ObituarySearch {
 			String dayOfDeathFrom, String dayOfDeathTo, String region,
 			String graveyard, String database) {
 
-		database = "malmo"; // for TEST ONLY
+		database = "malmo"; // for TEST MODE ONLY
 		
 		
 		List result = new ArrayList();
@@ -136,7 +136,7 @@ public class MalmoSearchBMPBean implements ObituarySearch {
 					  beginWhere = true;						
 				}
 				else
-					  sqlStatement += " where GA_Gravsatt.PERS_NR  LIKE: '%" + dateOfBirthFrom.trim() + "%' \n";
+					  sqlStatement += " and GA_Gravsatt.PERS_NR  LIKE: '%" + dateOfBirthFrom.trim() + "%' \n";
 			}
 			
 			if (dayOfDeathFrom != null){
@@ -165,9 +165,6 @@ public class MalmoSearchBMPBean implements ObituarySearch {
 			sqlStatement += " and GA_Grav.Kvarter_Lopnr=GA_Kvarter.Lopnr";
 			sqlStatement += " and GA_Kvarter.KGard_ID=GA_KGard.ID";
 
-			// sqlStatement+=" and
-			// GA_Avdelning.Kvarter_KGard_ID=GA_KVarter.KGard_ID";
-			// sqlStatement+=" and GA_Avdelning.Kvarter_Lopnr=GA_KVarter.Lopnr";
 
 			if (firstName != null)
 				sqlStatement += " and GA_Gravsatt.FORNAMN LIKE: '%" + firstName.trim() + "%' ";
