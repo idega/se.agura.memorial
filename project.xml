@@ -74,6 +74,32 @@
       <url>http://www.myfaces.org/</url>
     </dependency>  
     
+    <!-- for ms-sql-server -->
+    <dependency>
+      <groupId>mssqlserver</groupId>
+      <artifactId>mssqlserver</artifactId>
+      <!--version></version-->
+      <type>jar</type>
+      <jar>mssqlserver.jar</jar>
+      <url>http://www.microsoft.com/</url>
+    </dependency>
+    <dependency>
+      <groupId>mssqlserver</groupId>
+      <artifactId>msutil</artifactId>
+      <!--version></version-->
+      <type>jar</type>
+      <jar>msutil.jar</jar>
+      <url>http://www.microsoft.com/</url>
+    </dependency>
+    <dependency>
+      <groupId>mssqlserver</groupId>
+      <artifactId>msbase</artifactId>
+      <!--version></version-->
+      <type>jar</type>
+      <jar>msbase.jar</jar>
+      <url>http://www.microsoft.com/</url>
+    </dependency>
+    
   </dependencies>
 </project>
 
