@@ -11,7 +11,7 @@ version="1.2">
 <f:view>
 	<ws:page id="obituary">
 		<h:form id="obituaryform1">    
-			<f:verbatim>Stub for Obituary page</f:verbatim>  
+			<f:verbatim>Obituary page</f:verbatim>  
 
 
 		    <h:panelGrid columns="2" border="1" cellspacing="5">
@@ -28,38 +28,50 @@ version="1.2">
 		                    <h:outputText value="First name" />
 		                </h:panelGroup>
 		                <h:panelGroup>               
-		                    <h:outputText value="Anders Knut Christian" />
+		                    <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.firstName}" >
+								<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+							</h:outputText>				                    
 		                </h:panelGroup>
 		                
 		                <h:panelGroup>               
 		                    <h:outputText value="Last name" />
 		                </h:panelGroup>
 		                <h:panelGroup>               
-		                    <h:outputText value="Andersen" />
+		                    <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.lastName}" >
+								<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+							</h:outputText>				                    
 		                </h:panelGroup>                
 		                
 		                <h:panelGroup>               
 		                    <h:outputText value="Date of birth" />
 		                </h:panelGroup>
 		                <h:panelGroup>               
-		                    <h:outputText value="19180122" />
+		                    <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.dateOfBirth}" >
+		                    	<f:converter converterId="se.agura.memorial.search.presentation.DateConverter" /> 
+		                    </h:outputText>
 		                </h:panelGroup>   
 		                
 		                <h:panelGroup>               
-		                    <h:outputText value="Date of death" />
+		                    <h:outputText value="Date of death" />		                    
 		                </h:panelGroup>
 		                <h:panelGroup>               
-		                    <h:outputText value="19740131" />
+		                    <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.dateOfDeath}" >
+		                    	<f:converter converterId="se.agura.memorial.search.presentation.DateConverter" /> 
+		                    </h:outputText>		                    
 		                </h:panelGroup> 
 		                
 		                <h:panelGroup>               
-		                    <h:outputText value="Hemort" />
+		                    <h:outputText value="Hemort: " />
+                            <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.homeTown}" >
+							     <f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+							 </h:outputText>		                            
+                            
 		                </h:panelGroup>
 		                <h:panelGroup>                  
 		                    <h:panelGrid columns="3" border="0" cellspacing="5">             
-		                        <h:outputText value="County: Skane" /> 
-		                        <h:outputText value="Commune: Malmoe" /> 
-		                        <h:outputText value="Parish: Limhamn" />
+		                        <h:outputText value="County: [todo] Skane" /> 
+		                        <h:outputText value="Commune: [todo] Malmoe" /> 
+		                        <h:outputText value="Parish: [todo] Limhamn" />
 		                    </h:panelGrid>
 		                </h:panelGroup>
 		                
@@ -73,35 +85,45 @@ version="1.2">
 		                             <h:outputText value="Grave no:" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="0022" />
+		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.graveNumber}" >
+										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+									</h:outputText>			                             
 		                         </h:panelGroup>  
 		                         
 		                         <h:panelGroup>
 		                             <h:outputText value="Block:" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="kv 13" />
+		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.block}" >
+										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+									</h:outputText>			                             
 		                         </h:panelGroup>                         
 		                         
 		                         <h:panelGroup>
 		                             <h:outputText value="Departm" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="Nora sidan" />
+		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.department}" >
+										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+									</h:outputText>			                             
 		                         </h:panelGroup>                          
 		                         
 		                         <h:panelGroup>
 		                             <h:outputText value="Cemetery" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="Oestra kyrkogarden" />
+		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.cemetery}" >
+										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+									</h:outputText>			                             
 		                         </h:panelGroup>                          
 		                                                                           
 		                         <h:panelGroup>
 		                             <h:outputText value="Other burial place" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="?" />
+		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.burialPlace}" >
+										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+									</h:outputText>			                             
 		                         </h:panelGroup>  
 		                                                  
 		                    </h:panelGrid>
@@ -163,7 +185,7 @@ version="1.2">
 		        </h:panelGroup>  
 		        
 		    </h:panelGrid>
-
+	
 
 	    </h:form>    
 	</ws:page>

@@ -44,7 +44,24 @@
 		<managed-bean-name>newPersonBean</managed-bean-name>
 		<managed-bean-class>se.agura.memorial.search.presentation.NewPersonBean</managed-bean-class>		
 		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>		
+	</managed-bean>	
+	
+	<managed-bean>
+		<managed-bean-name>obituaryInformationDisplayBackingBean</managed-bean-name>
+		<managed-bean-class>se.agura.memorial.search.presentation.ObituaryInformationDisplayBackingBean</managed-bean-class>		
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>graveID</property-name>
+			<value>#{param.graveID}</value>
+		</managed-property> 
+		<managed-property>
+			<property-name>lopNr</property-name>
+			<value>#{param.lopNr}</value>
+		</managed-property> 			
+				
+		
+	</managed-bean>	
+		
 	
 	<managed-bean>
 		<description>List of persons</description>

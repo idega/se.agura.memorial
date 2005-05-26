@@ -63,6 +63,8 @@ public class SearchFormBackingBean {
 
 	String database;
 
+	private boolean moreThen100ResultsFound;
+
 	public int getSearchResultCount() {
 		return searchResults.size();
 	}
@@ -144,6 +146,8 @@ public class SearchFormBackingBean {
 	 */
 	public String search() {
 
+		this.moreThen100ResultsFound = false; 
+		
 		searchResults = new MalmoSearchBMPBean().findGraves(
 				this.getFirstName(), this.getSurname(), 
 				this.getDateOfBirthFrom(), this.getDateOfBirthTo(), 
@@ -158,11 +162,14 @@ public class SearchFormBackingBean {
 //		}
 		
 		if (searchResults.size() > 100) {
+			
+			this.moreThen100ResultsFound = true; 
+			
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_WARN, "More than 100 hits",
-					"Your search resulted in more than 100 hits – only the first 100 is shown. Please delimit your search"));
-			
+					"Your search resulted in more than 100 hits – only the first 100 is shown. Please delimit your search"));			
+						
 			//and now remove the last element
 			int count = 0;
 			for (Iterator it = searchResults.iterator(); it.hasNext();) {				
@@ -172,10 +179,7 @@ public class SearchFormBackingBean {
 				if (count > 100) it.remove();
 			}
 			
-		}
-		
-		
-		
+		}		
 
 		return "success";
 	}
@@ -219,6 +223,14 @@ public class SearchFormBackingBean {
 	}
 
 	public List getSearchResults() {
+		
+		if (this.moreThen100ResultsFound) {		
+//			FacesContext facesContext = FacesContext.getCurrentInstance();
+//			facesContext.addMessage(null, new FacesMessage(
+//					FacesMessage.SEVERITY_WARN, "More than 100 hits",
+//					"Your search resulted in more than 100 hits – only the first 100 is shown. Please delimit your search"));
+		}
+		
 		return searchResults;
 	}
 	
