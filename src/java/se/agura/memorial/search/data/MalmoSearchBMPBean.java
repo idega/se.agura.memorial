@@ -1,4 +1,4 @@
-package se.agura.memorial.search.impl;
+package se.agura.memorial.search.data;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.util.List;
 import se.agura.memorial.search.api.GraveInformation;
 import se.agura.memorial.search.api.Graves;
 import se.agura.memorial.search.api.Graveyard;
-import se.agura.memorial.search.api.ObituarySearch;
+import se.agura.memorial.search.business.ObituarySearch;
 
 import com.idega.util.database.ConnectionBroker;
 
@@ -200,11 +200,12 @@ public class MalmoSearchBMPBean implements ObituarySearch {
 						  RS.getString("firstName"), 
 						  RS.getString("lastName"),
 						  RS.getString("dateOfBirth"),
-						  RS.getString("dateOfDeath"));
+						  RS.getString("dateOfDeath"),
+						  count+1);
 
 				count++;
 				result.add(info);
-				System.out.println(info.getLastName()+" "+info.getFirstName());
+				System.out.println(info.getRowNr()+" "+info.getLastName()+" "+info.getFirstName());
 			}
 
 			RS.close();
@@ -295,8 +296,8 @@ public List findGrave(int gravID,int lopNr,String database) {
 						  RS.getString("blockName"),						    
 						  RS.getString("gravyNumber"));
 
-				System.out.println("-------------------------------------------------------------------2");
-				System.out.println(RS.getString("lastName")+"."+info.getFirstName());
+//				System.out.println("-------------------------------------------------------------------2");
+				System.out.println(info.getRowNr()+" "+RS.getString("lastName")+"."+info.getFirstName());
 				
 				count++;
 				result.add(info);

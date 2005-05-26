@@ -1,4 +1,4 @@
-package se.agura.memorial.search.api;
+package se.agura.memorial.search.business;
 /**
  * 
  

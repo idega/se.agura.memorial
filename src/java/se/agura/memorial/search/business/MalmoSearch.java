@@ -1,8 +1,7 @@
-package se.agura.memorial.search.impl;
+package se.agura.memorial.search.business;
 
 
 //import com.idega.data.query;
-import se.agura.memorial.search.api.ObituarySearch;
 
 
 /**

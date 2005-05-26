@@ -10,7 +10,7 @@ import javax.faces.model.SelectItem;
 
 import se.agura.memorial.search.api.GraveInformation;
 import se.agura.memorial.search.api.Graveyard;
-import se.agura.memorial.search.impl.MalmoSearchBMPBean;
+import se.agura.memorial.search.data.MalmoSearchBMPBean;
 
 public class SearchFormBackingBean {
 	String firstName;

@@ -16,17 +16,20 @@ public class GraveInformation {
 	private String lastName; // GA_Gravsatt.EFTERNAMN
 	private String dateOfBirth; // GA_Gravsatt.PERS_NR
 	private String dateOfDeath; // GA_Gravsatt.DODSDATUM
+	private int rowNr; // counter	
+	
 	public GraveInformation() {
 	
 	}
 
 	public void init(
             int graveID,
-            int LopNr,
+            int lopNr,
             String firstName,
             String lastName,
             String dateOfBirth,
-            String dateOfDeath) {
+            String dateOfDeath,
+            int rowNr) {
 
 
 			this.setGraveID(graveID);
@@ -35,7 +38,18 @@ public class GraveInformation {
 			this.setLastName(lastName);
 			this.setDateOfBirth(dateOfBirth);
 			this.setDateOfDeath(dateOfDeath); 
+			this.setRowNr(rowNr);
 	}
+
+	public int getRowNr() {
+		return rowNr;
+	}
+	
+
+	public void setRowNr(int rowNr) {
+		this.rowNr = rowNr;
+	}
+	
 
 	public String getDateOfBirth() {
 		return dateOfBirth;

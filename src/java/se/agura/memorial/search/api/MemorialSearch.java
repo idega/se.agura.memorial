@@ -1,18 +1,12 @@
 package se.agura.memorial.search.api;
 
 
-
-
-import java.util.List;
-
-import se.agura.memorial.search.impl.MalmoSearchBMPBean;
-
+import se.agura.memorial.search.data.MalmoSearchBMPBean;
 import com.idega.presentation.Block;
 import com.idega.presentation.IWContext;
 import com.idega.presentation.Table;
 import com.idega.presentation.ui.DropdownMenu;
 import com.idega.presentation.ui.Form;
-
 import com.idega.presentation.ui.SubmitButton;
 import com.idega.presentation.ui.TextInput;
 

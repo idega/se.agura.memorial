@@ -18,6 +18,8 @@ public class Graves extends GraveInformation{
 	    private String block;
 	    private String grave_number;
 	    private String grandID;
+		private int rowNr; 
+		
 		
 		
 		public Graves()	{
@@ -53,12 +55,26 @@ public class Graves extends GraveInformation{
 			this.setDepartment(department);
 			this.setBlock(block);
 			this.setGraveNumber(grave_number);
+			this.setRowNr(0);
+
 		}
+
+		public int getRowNr() {
+			return rowNr;
+		}
+		
+
+		public void setRowNr(int rowNr) {
+			this.rowNr = rowNr;
+		}
+		
 
 		public String getDepartment() {
 			return department;
 		}
 		
+
+
 
 		public String getCemetery() {
 			return cemetery;
