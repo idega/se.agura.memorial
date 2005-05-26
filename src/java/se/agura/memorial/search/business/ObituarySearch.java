@@ -29,6 +29,8 @@ county, Commune, Parish.
 
 
 import java.util.List;
+
+import se.agura.memorial.search.api.Grave;
 /**
  * @author Igors
  *
@@ -49,6 +51,6 @@ public interface ObituarySearch {
 	public List getGraveyards(String database);	
 
 	
-	public List findGrave(int gravID,int LopNr,String database);
+	public Grave findGrave(int gravID,int LopNr,String database);
 	
 }

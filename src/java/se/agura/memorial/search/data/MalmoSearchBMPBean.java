@@ -228,9 +228,11 @@ public class MalmoSearchBMPBean implements ObituarySearch {
 		return result;
 	}
 
-public List findGrave(int gravID,int lopNr,String database) {
-		List result = new ArrayList();
+public Grave findGrave(int gravID,int lopNr,String database) {
+		
 		StringBuffer sqlQuery = new StringBuffer();
+
+		Grave info = new Grave(); 
 
 		
 		database = "malmo"; // TEST MODE ONLY
@@ -282,7 +284,6 @@ public List findGrave(int gravID,int lopNr,String database) {
 			int count = 0;
 			
 			while (RS.next() && count <= 300) {
-				Grave info = new Grave(); 
 				info.init(RS.getInt("graveID"),
 						  RS.getInt("lopNr"),
  					      RS.getString("firstName"),
@@ -300,7 +301,7 @@ public List findGrave(int gravID,int lopNr,String database) {
 				System.out.println(info.getRowNr()+" "+RS.getString("lastName")+"."+info.getFirstName());
 				
 				count++;
-				result.add(info);
+				
 				
 				
 			}
@@ -326,7 +327,7 @@ public List findGrave(int gravID,int lopNr,String database) {
 		}
 
 		
-        return result;
+        return info;
 	}
 
 }
