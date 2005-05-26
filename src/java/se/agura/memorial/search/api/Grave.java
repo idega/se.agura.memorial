@@ -3,7 +3,7 @@ package se.agura.memorial.search.api;
 
 import se.agura.memorial.search.api.GraveInformation;
 
-public class Graves extends GraveInformation{
+public class Grave extends GraveInformation{
   		private int graveID; // GA_Gravsatt.Grav_ID
   		private int lopNr; // GA_Gravsatt.LopNr
 		private String firstName; // GA_Gravsatt.FORNAMN
@@ -22,7 +22,7 @@ public class Graves extends GraveInformation{
 		
 		
 		
-		public Graves()	{
+		public Grave()	{
 			super();
 			
 		}

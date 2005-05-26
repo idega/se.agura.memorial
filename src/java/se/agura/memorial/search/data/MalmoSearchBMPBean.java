@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.agura.memorial.search.api.GraveInformation;
-import se.agura.memorial.search.api.Graves;
+import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.business.ObituarySearch;
 
@@ -282,7 +282,7 @@ public List findGrave(int gravID,int lopNr,String database) {
 			int count = 0;
 			
 			while (RS.next() && count <= 300) {
-				Graves info = new Graves(); 
+				Grave info = new Grave(); 
 				info.init(RS.getInt("graveID"),
 						  RS.getInt("lopNr"),
  					      RS.getString("firstName"),
