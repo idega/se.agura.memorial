@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import se.agura.memorial.search.api.GraveInformation;
@@ -150,10 +152,30 @@ public class SearchFormBackingBean {
 				this.graveyard != null ? this.graveyard.getBenamning() : null, 
 				null);
 
-		for (Iterator it = searchResults.iterator(); it.hasNext();) {
-			GraveInformation gi = (GraveInformation) it.next();
-			//System.out.println(gi.getFirstName());
+//		for (Iterator it = searchResults.iterator(); it.hasNext();) {
+//			GraveInformation gi = (GraveInformation) it.next();
+//			//System.out.println(gi.getFirstName());
+//		}
+		
+		if (searchResults.size() > 100) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_WARN, "More than 100 hits",
+					"Your search resulted in more than 100 hits – only the first 100 is shown. Please delimit your search"));
+			
+			//and now remove the last element
+			int count = 0;
+			for (Iterator it = searchResults.iterator(); it.hasNext();) {				
+				count++;
+				System.out.println("tagad ir: " + count);
+				GraveInformation gi = (GraveInformation) it.next();
+				if (count > 100) it.remove();
+			}
+			
 		}
+		
+		
+		
 
 		return "success";
 	}

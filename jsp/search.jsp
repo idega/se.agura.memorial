@@ -178,28 +178,51 @@
 					<br />
 					<br />
 				</f:verbatim>
+				
+				<!-- here are error messages and warnings -->					
+				<h:messages id="messageList" showSummary="false" showDetail="true" globalOnly="true"/> 			
+				
+				<f:verbatim>					
+					<br />
+				</f:verbatim>				
 				<x:dataTable id="searchResultsTable" var="person" 
 					value="#{graveyardSearchBean.searchResults}" rows="10">
 					<h:column>
-						<h:outputText value="x. " />
+						<h:outputText value="#{person.rowNr}." />
 					</h:column>
 					<h:column>
-						<h:outputText value="#{person.lastName}" />
-						<h:outputText value=", #{person.firstName}" />
+						
+						<h:outputText value="#{person.lastName}" >
+							<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+						</h:outputText>
+						
+						<h:outputText value=", " />
+						
+						<h:outputText value="#{person.firstName}" >
+							<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+						</h:outputText>						
+						
 					</h:column>
 					<h:column>
-						<h:outputText value="(#{person.dateOfBirth}" />
+						<h:outputText value="(" />
+						<h:outputText value="#{person.dateOfBirth}" >
+							<f:converter converterId="se.agura.memorial.search.presentation.DateConverter" /> 
+						</h:outputText>
 					</h:column>
 					<h:column>
 						<h:outputText value=" - " />
 					</h:column>
 					<h:column>
-						<h:outputText value="#{person.dateOfDeath})" />
+						<h:outputText value="#{person.dateOfDeath}" >
+							<f:converter converterId="se.agura.memorial.search.presentation.DateConverter" /> 
+						</h:outputText>
+						<h:outputText value=")" />
 					</h:column>
 					<h:column>
-						<h:commandLink action="showObituaryAction" 
-							immediate="true">
+						<h:commandLink action="showObituaryAction" immediate="true">							
 							<h:outputText value="show" />
+							<f:param name="graveID" value="#{person.graveID}"/>
+							<f:param name="lopNr" value="#{person.lopNr}"/>
 						</h:commandLink>
 					</h:column>
 				</x:dataTable>
@@ -211,7 +234,7 @@
 				<x:dataScroller id="scroll_1" for="searchResultsTable" 
 					fastStep="10" pageCountVar="pageCount" 
 					pageIndexVar="pageIndex" styleClass="scroller" 
-					paginator="true" paginatorMaxPages="9" 
+					paginator="true" paginatorMaxPages="10" 
 					paginatorActiveColumnStyle="font-weight:bold;" 
                    rendered="#{graveyardSearchBean.searchResultCount==0?false:true}"
                     >

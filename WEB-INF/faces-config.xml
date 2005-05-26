@@ -59,5 +59,20 @@
 		se.agura.memorial.search.presentation.GraveyardConverter
 	  </converter-class>
 	</converter> 
+	
+	
+	<converter>
+	  <converter-id>se.agura.memorial.search.presentation.DateConverter</converter-id>
+	  <converter-class>
+		se.agura.memorial.search.presentation.DateConverter
+	  </converter-class>
+	</converter> 
+	
+	<converter>
+	  <converter-id>se.agura.memorial.search.presentation.EmptyStringConverter</converter-id>
+	  <converter-class>
+		se.agura.memorial.search.presentation.EmptyStringConverter
+	  </converter-class>
+	</converter> 		
     
 </faces-config>
