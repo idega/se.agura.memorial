@@ -41,7 +41,14 @@ version="1.2">
 	    
 	    <h:graphicImage url="/idegaweb/bundles/se.agura.memorial.bundle/resources/images/style_image_l10n.png"
 	        alt="Image test"
-	        title="Image test" />
+	        title="Image test" />	        
+	        
+	    <f:verbatim><br /><br />Image that uses #{bundles['identifier'].resourcesPath}/your_path_in_resources_folder</f:verbatim>   
+	    
+	    <h:graphicImage url="#{bundles['se.agura.memorial'].resourcesPath}/images/style_image_l10n.png"
+	        alt="Image test 2"
+	        title="Image test 2" />	       
+	       
 	       
 	    <f:verbatim><br /><br /></f:verbatim>    
 	    
