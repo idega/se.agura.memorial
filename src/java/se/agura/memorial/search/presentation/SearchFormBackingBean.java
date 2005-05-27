@@ -28,6 +28,8 @@ public class SearchFormBackingBean {
 	String dateOfDeceaseTo;
 
 	String hometown;
+	
+	String personIdentifier;
 
 	Graveyard graveyard;
 
@@ -191,6 +193,7 @@ public class SearchFormBackingBean {
 
 		setFirstName(null);
 		setGraveyard(null);
+		
 		return "success";
 
 	}
@@ -241,4 +244,14 @@ public class SearchFormBackingBean {
 			return s;
 		}
 	}
+
+	public String getPersonIdentifier() {
+		return personIdentifier;
+	}
+
+	public void setPersonIdentifier(String personIdentifier) {
+		this.personIdentifier = personIdentifier;
+	}	
+	
+
 }

@@ -46,14 +46,14 @@
 						</h:panelGroup>
 						<h:panelGroup>
 							<h:outputLabel for="dateOfBirthFrom">
-								<h:outputText value="Date of birth"/>
+								<h:outputText value="Date of birth (YYYYMMDD)"/>
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
 							</f:verbatim>
 							<h:inputText id="dateOfBirthFrom" 
 								value="#{graveyardSearchBean.dateOfBirthFrom}" 
-								maxlength="12" >
+								maxlength="12"  size="8">
 								<f:validateLength maximum="12" minimum="0" />
 							</h:inputText>
 						</h:panelGroup>
@@ -69,24 +69,38 @@
 							</f:verbatim>
 							<h:inputText id="dateOfBirthTo" 
 								value="#{graveyardSearchBean.dateOfBirthTo}" 
-								maxlength="12" >
+								maxlength="12"  size="8">
 								<f:validateLength maximum="12" minimum="0" />
 							</h:inputText>
 						</h:panelGroup>
 						<!-- end of 1. row -->
 						<!-- 2. row -->
+						<h:panelGroup >
+                            <h:outputLabel for="personIdentifier">
+								<h:outputText value="Person identifier"/>
+							</h:outputLabel>
+							<f:verbatim escape="false">
+								<br />
+							</f:verbatim>
+							<h:inputText id="personIdentifier" 
+								value="#{graveyardSearchBean.personIdentifier}" 
+								maxlength="12" size="12" >
+								<f:validateLength maximum="12" minimum="0" />
+							</h:inputText> 
+                       </h:panelGroup >
+                        
 						<h:panelGroup />
-						<h:panelGroup />
+                        
 						<h:panelGroup>
 							<h:outputLabel for="dateOfDeceaseFrom">
-								<h:outputText value="Date of decease"/>
+								<h:outputText value="Date of decease (YYYYMMDD)"/>
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
 							</f:verbatim>
 							<h:inputText id="dateOfDeceaseFrom" 
 								value="#{graveyardSearchBean.dateOfDeceaseFrom}" 
-								maxlength="8" >
+								maxlength="8" size="8" >
 								<f:validateLength maximum="8" minimum="0" />
 							</h:inputText>
 						</h:panelGroup>
@@ -102,7 +116,7 @@
 							</f:verbatim>
 							<h:inputText id="dateOfDeceaseTo" 
 								value="#{graveyardSearchBean.dateOfDeceaseTo}" 
-								maxlength="8" >
+								maxlength="8"  size="8">
 								<f:validateLength maximum="8" minimum="0" />
 							</h:inputText>
 						</h:panelGroup>
