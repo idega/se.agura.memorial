@@ -1,7 +1,12 @@
 package se.agura.memorial.search.api;
 
 
+
+import se.agura.memorial.search.data.GraveLocallyStored;
+import se.agura.memorial.search.data.GraveLocallyStoredHome;
 import se.agura.memorial.search.data.MalmoSearchBMPBean;
+
+import com.idega.data.IDOLookup;
 import com.idega.presentation.Block;
 import com.idega.presentation.IWContext;
 import com.idega.presentation.Table;
@@ -16,9 +21,6 @@ import com.idega.presentation.ui.TextInput;
  */
 public class MemorialSearch extends Block{
 
-	/**
-	 * @param args
-	 */
 
 	private static String PARAMETER_ACTION = "ACTION";
 	private static String ACTION_SEARCH = "SEARCH";
@@ -27,6 +29,15 @@ public class MemorialSearch extends Block{
 	
 	public void main(IWContext iwc) throws Exception {
 		
+		GraveLocallyStoredHome home = (GraveLocallyStoredHome)IDOLookup.getHome(GraveLocallyStored.class);            
+		GraveLocallyStored aaa = home.create();
+		
+        aaa.setAPIDBConnection("MyConn");
+        aaa.setDatabaseName("MyDatabase");
+        aaa.store();	 
+
+		
+
 		Form form = new Form();
 		Table table = new Table(5,7);
 		table.setBorder(0);
@@ -64,28 +75,12 @@ public class MemorialSearch extends Block{
 		
 		DropdownMenu from = new DropdownMenu(PARAMETER_NAME_TO_SEARCH_FOR);
 		DropdownMenu to   = new DropdownMenu(PARAMETER_NAME_TO_SEARCH_FOR);
-//		Iterator iter = myList.iterator();
-	//	while (iter.hasNext()) {
-//			CurrencyHolder holder = (CurrencyHolder) iter.next();
-	//		editDatabase.addMenuElement("Malm�","ss");
-			
-
-	//	}
-
-		//editDatabase.add("Malm�");
 		
 		editDatabase.addMenuElement("0","Malm�");
 		editDatabase.addMenuElement("1","test 2");		
 		editDatabase.addMenuElement("2","test 3");		
 		editDatabase.addMenuElement("-1","                       ");		
 		
-		
-	//	editDatabase.add(b);
-		
-/*		TextInput editFirstName = new TextInput(PARAMETER_NAME_TO_SEARCH_FOR);
-		TextInput editFirstName = new TextInput(PARAMETER_NAME_TO_SEARCH_FOR);
-		TextInput editFirstName = new TextInput(PARAMETER_NAME_TO_SEARCH_FOR);
-	*/	
 		SubmitButton resetBtn = new SubmitButton("Reset", PARAMETER_ACTION, ACTION_SEARCH);
 		SubmitButton searchBtn = new SubmitButton("Search", PARAMETER_ACTION, ACTION_SEARCH);
 
