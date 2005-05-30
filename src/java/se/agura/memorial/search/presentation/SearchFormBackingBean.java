@@ -8,50 +8,36 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.el.ValueBinding;
 import javax.faces.model.SelectItem;
 
 import se.agura.memorial.search.api.GraveInformation;
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.data.MalmoSearchBMPBean;
 
+import com.idega.idegaweb.IWBundle;
+import com.idega.presentation.IWContext;
+
 public class SearchFormBackingBean {
-	String firstName;
-
-	String surname;
-
-	String dateOfBirthFrom;
-
-	String dateOfBirthTo;
-
-	String dateOfDeceaseFrom;
-
-	String dateOfDeceaseTo;
-
-	String hometown;
 	
-	String personIdentifier;
-
-	Graveyard graveyard;
-
-	static Map graveyards;
+	private static final String IW_BUNDLE_IDENTIFIER = "se.agura.memorial";
+	
+	private String firstName;
+	private String surname;
+	private String dateOfBirthFrom;
+	private String dateOfBirthTo;
+	private String dateOfDeceaseFrom;
+	private String dateOfDeceaseTo;
+	private String hometown;	
+	private String personIdentifier;
+	private Graveyard graveyard;
+	
+	private static Map graveyards;
 
 	List searchResults = new ArrayList();
 
 	public SearchFormBackingBean() {
 		graveyards = new LinkedHashMap();
-
-		/*
-		 Graveyard g1 = new Graveyard(1, "1. dist", "1. cem", 21); // name, id
-		 Graveyard g2 = new Graveyard(2, "2. dist", "2. cem", 22);
-		 Graveyard g3 = new Graveyard(3, "3. dist", "3. cem", 23);
-
-		 graveyards.put(new Integer(g1.getId()).toString(), g1); // key, value
-		 graveyards.put(new Integer(g2.getId()).toString(), g2); // key, value
-		 graveyards.put(new Integer(g3.getId()).toString(), g3); // key, value
-		 
-
-		 this.setGraveyard(g1);
-		 */
 
 		MalmoSearchBMPBean b = new MalmoSearchBMPBean();
 		List listOfGraveyards = b.getGraveyards("test dummy database");
@@ -147,7 +133,7 @@ public class SearchFormBackingBean {
 	 * searches
 	 */
 	public String search() {
-
+	
 		this.moreThen100ResultsFound = false; 
 		
 		searchResults = new MalmoSearchBMPBean().findGraves(
@@ -157,26 +143,28 @@ public class SearchFormBackingBean {
 				this.getHometown(), 
 				this.graveyard != null ? this.graveyard.getBenamning() : null, 
 				null);
-
-//		for (Iterator it = searchResults.iterator(); it.hasNext();) {
-//			GraveInformation gi = (GraveInformation) it.next();
-//			//System.out.println(gi.getFirstName());
-//		}
 		
 		if (searchResults.size() > 100) {
 			
 			this.moreThen100ResultsFound = true; 
 			
 			FacesContext facesContext = FacesContext.getCurrentInstance();
+            
+            IWContext iwContext = IWContext.getIWContext(facesContext);
+    		IWBundle bundle = iwContext.getIWMainApplication().getBundle(IW_BUNDLE_IDENTIFIER);
+    		ValueBinding vbSummary = bundle.getValueBinding("messages.more_than_100_hits_summary"); 
+			ValueBinding vbDetail = bundle.getValueBinding("messages.more_than_100_hits_detail");  
+			
 			facesContext.addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_WARN, "More than 100 hits",
-					"Your search resulted in more than 100 hits – only the first 100 is shown. Please delimit your search"));			
+					FacesMessage.SEVERITY_WARN, 
+					vbSummary.getValue(facesContext).toString(), // summary
+					vbDetail.getValue(facesContext).toString()// detail
+					));			
 						
-			//and now remove the last element
+			//remove the last element
 			int count = 0;
 			for (Iterator it = searchResults.iterator(); it.hasNext();) {				
-				count++;
-				System.out.println("tagad ir: " + count);
+				count++;				
 				GraveInformation gi = (GraveInformation) it.next();
 				if (count > 100) it.remove();
 			}
@@ -187,7 +175,7 @@ public class SearchFormBackingBean {
 	}
 
 	/**
-	 * clears everything
+	 * clear search form
 	 */
 	public String clear() {
 
