@@ -1,3 +1,34 @@
-message.one=(one) [in swedish!] sveiks, podnieka d\u0113ls!
-message_two=(two) [in swedish!] there they are, {0}!
-message_three=(three) [in swedish!] sveiks, podnieka d\u0113ls!
+first_name = F\u00f6rnamn
+last_name = Efternamn
+surname = Tillnamn
+date_of_birth = F\u00f6dd datum
+date_of_decease = Avliden datum
+person_identifier = Person identifier
+hometown = Hemstad
+graveyard = Kyrkog\u00e5rd
+database = Databas
+search = S\u00f6k
+clear = Rensa
+next_page = Next page
+previous_page = Previous page
+show = Show
+messages.more_than_100_hits_summary = More than 100 found
+messages.more_than_100_hits_detail = Your search resulted in more \
+									 than 100 hits \u2013 only the first 100 is shown. \
+									 Please delimit your search.
+									 
+county = County
+commune = Commune									 
+parish = Parish
+grave_information = Grave information
+grave_no = Gravnummer
+block = Kvarter
+department = Avdelning
+other_burial_place = Other burial place
+obituary = D\u00f6dsruna
+picture_of_person = Picture of person
+picture_of_grave = Picture of grave
+
+
+									 
+									 
