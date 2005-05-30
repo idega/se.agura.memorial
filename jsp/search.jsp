@@ -7,8 +7,7 @@
 	xmlns:builder="http://xmlns.idega.com/com.idega.builder" 
 	xmlns:x="http://myfaces.apache.org/extensions" version="1.2">
 	
-	<jsp:directive.page contentType="text/html;charset=UTF-8" 
-		pageEncoding="UTF-8"/>
+	<jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 	
 	<f:view>
 		<ws:page id="dainissearch">
@@ -20,7 +19,7 @@
 						<!-- 1. row -->
 						<h:panelGroup>
 							<h:outputLabel for="firstName">
-								<h:outputText value="First name"/>
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['first_name']}"/>
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
@@ -33,7 +32,7 @@
 						</h:panelGroup>
 						<h:panelGroup>
 							<h:outputLabel for="surname">
-								<h:outputText value="Surname"/>
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['surname']}"/>
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
@@ -46,7 +45,7 @@
 						</h:panelGroup>
 						<h:panelGroup>
 							<h:outputLabel for="dateOfBirthFrom">
-								<h:outputText value="Date of birth (YYYYMMDD)"/>
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['date_of_birth']}" />
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
@@ -77,7 +76,7 @@
 						<!-- 2. row -->
 						<h:panelGroup >
                             <h:outputLabel for="personIdentifier">
-								<h:outputText value="Person identifier"/>
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['person_identifier']}" />
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
@@ -93,7 +92,7 @@
                         
 						<h:panelGroup>
 							<h:outputLabel for="dateOfDeceaseFrom">
-								<h:outputText value="Date of decease (YYYYMMDD)"/>
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['date_of_decease']}"/>
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
@@ -124,7 +123,7 @@
 						<!-- 3. row -->
 						<h:panelGroup>
 							<h:outputLabel for="hometown">
-								<h:outputText value="Hometown"/>
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['hometown']}"/>
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
@@ -137,7 +136,7 @@
 						</h:panelGroup>
 						<h:panelGroup>
 							<h:outputLabel for="graveyard">
-								<h:outputText value="Graveyard"/>
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['graveyard']}"/>
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
@@ -148,8 +147,7 @@
 								>
 								<f:selectItem itemValue="" itemLabel="" />
 								<f:selectItems 
-									value="#{graveyardSearchBean.graveyardsItems}" 
-									/>
+									value="#{graveyardSearchBean.graveyardsItems}" />
 							</h:selectOneMenu>
 						</h:panelGroup>
 						<h:panelGroup>
@@ -158,13 +156,13 @@
 						</h:panelGroup>
 						<h:panelGroup>
 							<h:outputLabel for="database">
-								<h:outputText value="Database"/>
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['database']}"/>
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
 							</f:verbatim>
 							<h:selectOneMenu id="database" 
-								value="#{graveyardSearchBean.database}">
+								value="#{graveyardSearchBean.database}" onchange="this.form.submit();" >
 								<f:selectItem itemValue="1" itemLabel="Malmö"/>
 								<f:selectItem itemValue="2" itemLabel="Övriga"/>
 							</h:selectOneMenu>
@@ -172,17 +170,15 @@
 						<!-- end of 3. row -->
 						<!-- 4. row -->
 						<f:facet name="footer">
-							<h:panelGroup>
-								<h:commandButton id="clearButton" value="Clear" 
-									action="#{graveyardSearchBean.clear}" 
-									immediate="false" />
+							<h:panelGroup>								
 								<h:commandButton id="searchButton" 
-									value="Search" 
+									value="#{localizedStrings['se.agura.memorial']['search']}" 
 									action="#{graveyardSearchBean.search}" 
 									immediate="false" />
-								<!-- 
-                    <h:commandButton id="clearButton"  value="Clear"  action="#{graveyardSearchBean.clear}"  immediate="true" />                        
-                    -->
+                               <h:commandButton id="clearButton" value="#{localizedStrings['se.agura.memorial']['clear']}" 
+									action="#{graveyardSearchBean.clear}" 
+									immediate="false" />                                    
+                                    
 							</h:panelGroup>
 						</f:facet>
 						<!-- end of 4. row -->
@@ -234,49 +230,24 @@
 					</h:column>
 					<h:column>
 						<h:commandLink action="showObituaryAction" immediate="true">							
-							<h:outputText value="show" />
+							<h:outputText value="#{localizedStrings['se.agura.memorial']['show']}" />
 							<f:param name="graveID" value="#{person.graveID}"/>
 							<f:param name="lopNr" value="#{person.lopNr}"/>
 						</h:commandLink>
 					</h:column>
 				</x:dataTable>
                 
-                <!--
-                <h:outputText value="blah: #{graveyardSearchBean.searchResultCount} " />
-                -->
-                
 				<x:dataScroller id="scroll_1" for="searchResultsTable" 
 					fastStep="10" pageCountVar="pageCount" 
 					pageIndexVar="pageIndex" styleClass="scroller" 
 					paginator="true" paginatorMaxPages="10" 
 					paginatorActiveColumnStyle="font-weight:bold;" 
-                   rendered="#{graveyardSearchBean.searchResultCount==0?false:true}"
-                    >
-					<!--
-			        <f:facet name="first" >
-			            <h:outputText value="|&lt;" />
-			        </f:facet>
-			        <f:facet name="last">
-			            <h:outputText value="&gt;|" />
-			        </f:facet>
-			        <f:facet name="previous">
-			            <h:outputText value="&lt;" />
-			        </f:facet>
-			        <f:facet name="next">
-			            <h:outputText value="&gt;" />
-			        </f:facet>
-			        <f:facet name="fastforward">
-			            <h:outputText value="&gt;&gt;" />
-			        </f:facet>
-			        <f:facet name="fastrewind">
-			            <h:outputText value="&lt;&lt;" />
-			        </f:facet>
-			        -->
+                   rendered="#{graveyardSearchBean.searchResultCount==0?false:true}" >
 					<f:facet name="previous">
-						<h:outputText value="&lt; previous" />
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['previous_page']}" />
 					</f:facet>
 					<f:facet name="next">
-						<h:outputText value="next page &gt;" />
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['next_page']}" />
 					</f:facet>
 				</x:dataScroller>
 			</h:form>

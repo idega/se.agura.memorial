@@ -11,21 +11,22 @@ version="1.2">
 <f:view>
 	<ws:page id="obituary">
 		<h:form id="obituaryform1">    
-			<f:verbatim>Obituary page</f:verbatim>  
-
+			<f:verbatim>Obituary page</f:verbatim> 
 
 		    <h:panelGrid columns="2" border="1" cellspacing="5">
 		        <h:panelGroup>   
 		            
 		            <h:panelGrid columns="1" border="0" cellspacing="5" >   
 		                <h:panelGroup>
-		                    <h:outputText value="Detailed  grave information" />
+		                	
+		                    <h:outputText value="Detailed  grave information#{localizedStrings['se.agura.memorial']['detailed_grave_information']}" style="font-weight: bold; "/>
+		                    
 		                </h:panelGroup>
 		            </h:panelGrid>   
 		           
 		            <h:panelGrid columns="2" border="0" cellspacing="5"> 
 		                <h:panelGroup>               
-		                    <h:outputText value="First name" />
+		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['first_name']}" />
 		                </h:panelGroup>
 		                <h:panelGroup>               
 		                    <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.firstName}" >
@@ -34,7 +35,7 @@ version="1.2">
 		                </h:panelGroup>
 		                
 		                <h:panelGroup>               
-		                    <h:outputText value="Last name" />
+		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['surname']}" />
 		                </h:panelGroup>
 		                <h:panelGroup>               
 		                    <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.lastName}" >
@@ -43,7 +44,7 @@ version="1.2">
 		                </h:panelGroup>                
 		                
 		                <h:panelGroup>               
-		                    <h:outputText value="Date of birth" />
+		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['date_of_birth']}" />
 		                </h:panelGroup>
 		                <h:panelGroup>               
 		                    <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.dateOfBirth}" >
@@ -52,7 +53,7 @@ version="1.2">
 		                </h:panelGroup>   
 		                
 		                <h:panelGroup>               
-		                    <h:outputText value="Date of death" />		                    
+		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['date_of_decease']}" />		                    
 		                </h:panelGroup>
 		                <h:panelGroup>               
 		                    <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.dateOfDeath}" >
@@ -61,7 +62,7 @@ version="1.2">
 		                </h:panelGroup> 
 		                
 		                <h:panelGroup>               
-		                    <h:outputText value="Hemort: " />
+		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['hometown']}: " />
                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.homeTown}" >
 							     <f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
 							 </h:outputText>		                            
@@ -69,20 +70,20 @@ version="1.2">
 		                </h:panelGroup>
 		                <h:panelGroup>                  
 		                    <h:panelGrid columns="3" border="0" cellspacing="5">             
-		                        <h:outputText value="County: [todo] Skane" /> 
-		                        <h:outputText value="Commune: [todo] Malmoe" /> 
-		                        <h:outputText value="Parish: [todo] Limhamn" />
+		                        <h:outputText value="#{localizedStrings['se.agura.memorial']['county']}: [todo]Skane" /> 
+		                        <h:outputText value="#{localizedStrings['se.agura.memorial']['commune']}: [todo]Malmoe" /> 
+		                        <h:outputText value="#{localizedStrings['se.agura.memorial']['parish']}: [todo]Limhamn" />
 		                    </h:panelGrid>
 		                </h:panelGroup>
 		                
 		                
 		                <h:panelGroup >               
-		                    <h:outputText value="Grave information" />
+		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['grave_information']}" />
 		                </h:panelGroup>
 		                <h:panelGroup>               
 		                    <h:panelGrid columns="2" border="0" cellspacing="5" > 
 		                         <h:panelGroup>
-		                             <h:outputText value="Grave no:" />
+		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['grave_no']}:" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
 		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.graveNumber}" >
@@ -91,7 +92,7 @@ version="1.2">
 		                         </h:panelGroup>  
 		                         
 		                         <h:panelGroup>
-		                             <h:outputText value="Block:" />
+		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['block']}:" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
 		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.block}" >
@@ -100,7 +101,7 @@ version="1.2">
 		                         </h:panelGroup>                         
 		                         
 		                         <h:panelGroup>
-		                             <h:outputText value="Departm" />
+		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['department']}" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
 		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.department}" >
@@ -109,7 +110,7 @@ version="1.2">
 		                         </h:panelGroup>                          
 		                         
 		                         <h:panelGroup>
-		                             <h:outputText value="Cemetery" />
+		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['graveyard']}" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
 		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.cemetery}" >
@@ -118,7 +119,7 @@ version="1.2">
 		                         </h:panelGroup>                          
 		                                                                           
 		                         <h:panelGroup>
-		                             <h:outputText value="Other burial place" />
+		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['other_burial_place']}" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
 		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.burialPlace}" >
@@ -136,7 +137,9 @@ version="1.2">
 		            <h:panelGrid columns="1" border="0" cellspacing="5">   
 		                <h:panelGroup>
 		                    <f:verbatim><br /><br /></f:verbatim>  
-		                    <h:outputText value="Obituary" />
+		                   
+		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['obituary']}"  style="font-weight: bold; "/>
+		                   
 		                </h:panelGroup>
 		            </h:panelGrid>
 		            
@@ -162,7 +165,9 @@ version="1.2">
 		        <h:panelGroup> 
 		            <h:panelGrid columns="1" border="0" cellspacing="5">
 		                <h:panelGroup>
-		                    <h:outputText value="Picture of person" />
+		                	
+		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['picture_of_person']}"  style="font-weight: bold; " />
+		                    
 		                    <f:verbatim><br /><br /></f:verbatim> 
 		                    <h:graphicImage 
 		                       alt=""
@@ -175,7 +180,9 @@ version="1.2">
 		            <h:panelGrid columns="1" border="0" cellspacing="5">   
 		                <h:panelGroup>
 		                    <f:verbatim><br /><br /></f:verbatim> 
-		                    <h:outputText value="Picture of grave" />
+		                    
+		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['picture_of_grave']}"  style="font-weight: bold; "/>
+		                    
 		                    <f:verbatim><br /><br /></f:verbatim> 
 		                    <h:graphicImage 
 		                       alt=""
