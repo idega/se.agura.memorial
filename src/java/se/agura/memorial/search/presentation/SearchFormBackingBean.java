@@ -136,6 +136,8 @@ public class SearchFormBackingBean {
 	
 		this.moreThen100ResultsFound = false; 
 		
+		searchResults = new ArrayList();
+		
 		searchResults = new MalmoSearchBMPBean().findGraves(
 				this.getFirstName(), this.getSurname(), 
 				this.getDateOfBirthFrom(), this.getDateOfBirthTo(), 

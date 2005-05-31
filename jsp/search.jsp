@@ -11,7 +11,7 @@
 	
 	<f:view>
 		<ws:page id="dainissearch">
-			<h:form id="dainispagesform1">
+			<!-- if this form is here, then nothing works in IE <h:form id="dainispagesform1">  -->
 				<!-- search form -->
 				<h:form id="searchForm">
 					<h:panelGrid columns="5" border="0" cellspacing="5" 
@@ -52,9 +52,13 @@
 							</f:verbatim>
 							<h:inputText id="dateOfBirthFrom" 
 								value="#{graveyardSearchBean.dateOfBirthFrom}" 
-								maxlength="12"  size="8">
-								<f:validateLength maximum="12" minimum="0" />
-							</h:inputText>
+								maxlength="8"  size="8">
+								<f:validateLength maximum="8" minimum="0" />
+								<f:validator validatorId="se.agura.memorial.search.presentation.SearchFormDateValidator" />
+							</h:inputText>	
+													
+							<h:message for="dateOfBirthFrom"  showSummary="false" showDetail="true" />
+														
 						</h:panelGroup>
 						<h:panelGroup>
 							<f:verbatim escape="false">
@@ -68,9 +72,13 @@
 							</f:verbatim>
 							<h:inputText id="dateOfBirthTo" 
 								value="#{graveyardSearchBean.dateOfBirthTo}" 
-								maxlength="12"  size="8">
-								<f:validateLength maximum="12" minimum="0" />
+								maxlength="8"  size="8">
+								<f:validateLength maximum="8" minimum="0" />
+								<f:validator validatorId="se.agura.memorial.search.presentation.SearchFormDateValidator" />
 							</h:inputText>
+							
+							<h:message for="dateOfBirthTo"  showSummary="false" showDetail="true" />
+							
 						</h:panelGroup>
 						<!-- end of 1. row -->
 						<!-- 2. row -->
@@ -101,7 +109,11 @@
 								value="#{graveyardSearchBean.dateOfDeceaseFrom}" 
 								maxlength="8" size="8" >
 								<f:validateLength maximum="8" minimum="0" />
+								<f:validator validatorId="se.agura.memorial.search.presentation.SearchFormDateValidator" />
 							</h:inputText>
+							
+							<h:message for="dateOfDeceaseFrom"  showSummary="false" showDetail="true" />
+							
 						</h:panelGroup>
 						<h:panelGroup>
 							<f:verbatim escape="false">
@@ -117,7 +129,11 @@
 								value="#{graveyardSearchBean.dateOfDeceaseTo}" 
 								maxlength="8"  size="8">
 								<f:validateLength maximum="8" minimum="0" />
+								<f:validator validatorId="se.agura.memorial.search.presentation.SearchFormDateValidator" />
 							</h:inputText>
+							
+							<h:message for="dateOfDeceaseTo"  showSummary="false" showDetail="true" />
+							
 						</h:panelGroup>
 						<!-- end of 2. row -->
 						<!-- 3. row -->
@@ -183,7 +199,9 @@
 						</f:facet>
 						<!-- end of 4. row -->
 					</h:panelGrid >
-				</h:form>
+				
+				<!-- </h:form>  -->
+				
 				<f:verbatim>
 					<br />
 					<br />

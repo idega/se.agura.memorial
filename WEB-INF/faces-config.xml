@@ -90,6 +90,11 @@
 	  <converter-class>
 		se.agura.memorial.search.presentation.EmptyStringConverter
 	  </converter-class>
-	</converter> 		
+	</converter> 	
+	
+	<validator> 
+		<validator-id>se.agura.memorial.search.presentation.SearchFormDateValidator</validator-id>
+		<validator-class>se.agura.memorial.search.presentation.SearchFormDateValidator</validator-class>
+	</validator>	
     
 </faces-config>
