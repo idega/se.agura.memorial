@@ -20,7 +20,7 @@ public class SearchFormDateValidator implements Validator {
 	
 	public void validate(FacesContext facesContext, UIComponent arg1, Object arg2) throws ValidatorException {
 		
-		String s = (String) arg2;
+		String s = (String) arg2; 
 		
 		if (!isStringMatchingRegexp(s, DATE_PATTERN)) {	
 			
