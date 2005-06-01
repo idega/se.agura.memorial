@@ -51,15 +51,9 @@
 		<managed-bean-class>se.agura.memorial.search.presentation.ObituaryInformationDisplayBackingBean</managed-bean-class>		
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
-			<property-name>graveID</property-name>
-			<value>#{param.graveID}</value>
+			<property-name>graveId</property-name>
+			<value>#{param.graveId}</value>
 		</managed-property> 
-		<managed-property>
-			<property-name>lopNr</property-name>
-			<value>#{param.lopNr}</value>
-		</managed-property> 			
-				
-		
 	</managed-bean>	
 		
 	

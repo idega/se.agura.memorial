@@ -63,7 +63,7 @@ version="1.2">
 		                
 		                <h:panelGroup>               
 		                    <h:outputText value="#{localizedStrings['se.agura.memorial']['hometown']}: " />
-                            <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.homeTown}" >
+                            <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.hometown}" >
 							     <f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
 							 </h:outputText>		                            
                             
@@ -86,7 +86,7 @@ version="1.2">
 		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['grave_no']}:" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.graveNumber}" >
+		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.graveInfo.graveNumber}" >
 										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
 									</h:outputText>			                             
 		                         </h:panelGroup>  
@@ -95,7 +95,7 @@ version="1.2">
 		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['block']}:" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.block}" >
+		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.graveInfo.block}" >
 										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
 									</h:outputText>			                             
 		                         </h:panelGroup>                         
@@ -104,7 +104,7 @@ version="1.2">
 		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['department']}" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.department}" >
+		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.graveInfo.department}" >
 										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
 									</h:outputText>			                             
 		                         </h:panelGroup>                          
@@ -113,7 +113,7 @@ version="1.2">
 		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['graveyard']}" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.cemetery}" >
+		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.graveInfo.cemetery}" >
 										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
 									</h:outputText>			                             
 		                         </h:panelGroup>                          
@@ -122,8 +122,8 @@ version="1.2">
 		                             <h:outputText value="#{localizedStrings['se.agura.memorial']['other_burial_place']}" />
 		                         </h:panelGroup>
 		                         <h:panelGroup>
-		                             <h:outputText value="#{obituaryInformationDisplayBackingBean.grave.burialPlace}" >
-										<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+		                             <h:outputText value="[TODO]" >
+										
 									</h:outputText>			                             
 		                         </h:panelGroup>  
 		                                                  

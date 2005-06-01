@@ -1,21 +1,24 @@
 package se.agura.memorial.search.presentation;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.FinderException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 import javax.faces.model.SelectItem;
 
-import se.agura.memorial.search.api.GraveInformation;
+import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.Graveyard;
-import se.agura.memorial.search.data.MalmoSearchBMPBean;
+import se.agura.memorial.search.api.ObituarySearch;
+import se.agura.memorial.search.business.SearchImplBroker;
 
+import com.idega.business.IBOLookup;
+import com.idega.business.IBOLookupException;
 import com.idega.idegaweb.IWBundle;
 import com.idega.presentation.IWContext;
 
@@ -40,13 +43,38 @@ public class SearchFormBackingBean {
 	public SearchFormBackingBean() {
 		graveyards = new LinkedHashMap();
 
-		MalmoSearchBMPBean b = new MalmoSearchBMPBean();
-		List listOfGraveyards = b.getGraveyards("test dummy database");
+//		MalmoSearchBMPBean b = new MalmoSearchBMPBean();
+//		List listOfGraveyards = b.getGraveyards("test dummy database");
 
-		for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
-			Graveyard g = (Graveyard) it.next();
-			graveyards.put(new Integer(g.getId()).toString(), g);
-		}		
+//		for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
+//			Graveyard g = (Graveyard) it.next();
+//			graveyards.put(new Integer(g.getId()).toString(), g);
+//		}
+		
+		//MySession ms2 = (MySession) IBOLookup.getSessionInstance(iwc, MySession.class);
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		IWContext iwc = IWContext.getIWContext(facesContext);
+		
+		try {
+			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
+			
+			ObituarySearch os = sib.getSearch();
+			List listOfGraveyards = (List) os.getGraveyards();
+			
+			for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
+				Graveyard g = (Graveyard) it.next();
+				graveyards.put(new Integer(g.getId()).toString(), g);
+			}
+			
+		} catch (IBOLookupException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+		}
+		
 
 	}
 
@@ -142,26 +170,50 @@ public class SearchFormBackingBean {
 		searchResults = new ArrayList();
 		
 		
+//		try {
+			
+		IWContext iwc = IWContext.getIWContext(facesContext);
 		try {
+			SearchImplBroker sib = (SearchImplBroker) IBOLookup
+					.getServiceInstance(iwc, SearchImplBroker.class);
+			ObituarySearch os = sib.getSearch();
+
+			searchResults = (ArrayList) 
+				os.findGraves(
+						this.getFirstName(),
+						this.getSurname(),
+						this.getPersonIdentifier(),
+						this.getDateOfBirthFrom(),
+						this.getDateOfBirthTo(),
+						this.getDateOfDeceaseFrom(),
+						this.getDateOfDeceaseTo(),	           
+						this.getHometown(),
+						this.graveyard != null ? this.graveyard.getBenamning(): null);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}			
 			
-			searchResults = new ArrayList(new MalmoSearchBMPBean().findGraves(
-					this.getFirstName(), this.getSurname(), 
-					this.getPersonIdentifier(), 
-					this.getDateOfBirthFrom(),	this.getDateOfBirthTo(), 
-					this.getDateOfDeceaseFrom(), this.getDateOfDeceaseTo(), 
-					this.getHometown(),
-					this.graveyard != null ? this.graveyard.getBenamning(): null, 
-					null));
 			
-		} catch (FinderException e) {
+// searchResults = new ArrayList(new MalmoSearchBMPBean().findGraves(
+//					this.getFirstName(), this.getSurname(), 
+//					this.getPersonIdentifier(), 
+//					this.getDateOfBirthFrom(),	this.getDateOfBirthTo(), 
+//					this.getDateOfDeceaseFrom(), this.getDateOfDeceaseTo(), 
+//					this.getHometown(),
+//					this.graveyard != null ? this.graveyard.getBenamning(): null, 
+//					null));
 			
-			facesContext.addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_ERROR,
-					"Error occured while searching", // summary
-					"Error occured while searching in database: " + e.getMessage()// detail
-			));
-			
-		}
+//		} catch (FinderException e) {
+//			
+//			facesContext.addMessage(null, new FacesMessage(
+//					FacesMessage.SEVERITY_ERROR,
+//					"Error occured while searching", // summary
+//					"Error occured while searching in database: " + e.getMessage()// detail
+//			));
+//			
+//		}
 		
 		if (searchResults.size() > 100) {
 			
@@ -184,7 +236,7 @@ public class SearchFormBackingBean {
 			int count = 0;
 			for (Iterator it = searchResults.iterator(); it.hasNext();) {				
 				count++;				
-				GraveInformation gi = (GraveInformation) it.next();
+				Grave g = (Grave) it.next();
 				if (count > 100) it.remove();
 			}
 			

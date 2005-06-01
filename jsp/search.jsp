@@ -213,27 +213,28 @@
 				<f:verbatim>					
 					<br />
 				</f:verbatim>				
-				<x:dataTable id="searchResultsTable" var="person" 
+				<x:dataTable id="searchResultsTable" var="grave" 
 					value="#{graveyardSearchBean.searchResults}" rows="10">
 					<h:column>
-						<h:outputText value="#{person.rowNr}." />
+						<!-- <h:outputText value="#{person.rowNr}." /> -->
+                        <h:outputText value="[TODO]" />
 					</h:column>
 					<h:column>
 						
-						<h:outputText value="#{person.lastName}" >
+						<h:outputText value="#{grave.lastName}" >
 							<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
 						</h:outputText>
 						
 						<h:outputText value=", " />
 						
-						<h:outputText value="#{person.firstName}" >
+						<h:outputText value="#{grave.firstName}" >
 							<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
 						</h:outputText>						
 						
 					</h:column>
 					<h:column>
 						<h:outputText value="(" />
-						<h:outputText value="#{person.dateOfBirth}" >
+						<h:outputText value="#{grave.dateOfBirth}" >
 							<f:converter converterId="se.agura.memorial.search.presentation.DateConverter" /> 
 						</h:outputText>
 					</h:column>
@@ -241,7 +242,7 @@
 						<h:outputText value=" - " />
 					</h:column>
 					<h:column>
-						<h:outputText value="#{person.dateOfDeath}" >
+						<h:outputText value="#{grave.dateOfDeath}" >
 							<f:converter converterId="se.agura.memorial.search.presentation.DateConverter" /> 
 						</h:outputText>
 						<h:outputText value=")" />
@@ -249,8 +250,7 @@
 					<h:column>
 						<h:commandLink action="showObituaryAction" immediate="true">							
 							<h:outputText value="#{localizedStrings['se.agura.memorial']['show']}" />
-							<f:param name="graveID" value="#{person.graveID}"/>
-							<f:param name="lopNr" value="#{person.lopNr}"/>
+							<f:param name="graveId" value="#{grave.graveId}" />							
 						</h:commandLink>
 					</h:column>
 				</x:dataTable>

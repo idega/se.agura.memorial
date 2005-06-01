@@ -12,7 +12,6 @@ import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.GraveInformation;
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
-import se.agura.memorial.search.util.Utility;
 
 import com.idega.data.query.Column;
 import com.idega.data.query.InCriteria;
@@ -36,12 +35,12 @@ public class MalmoChurchSearch implements ObituarySearch {
 	public static final String COLUMN_NAME_LAST_NAME = "Efternamn";
 	public static final String COLUMN_NAME_DATE_OF_BIRTH = "Pers_nr";
 	public static final String COLUMN_NAME_DATE_OF_DEATH = "Gravs_DATUM";
-	public static final String COLUMN_NAME_HOME_TOWN = "HOMETOWN";
+	public static final String COLUMN_NAME_HOME_TOWN = "HEMORT";
 	public static final String COLUMN_NAME_BURIAL_PLACE = "BURIAL_PLACE";
 	public static final String COLUMN_NAME_CEMETERY = "CEMETERY";
 	public static final String COLUMN_NAME_DEPARTMENT = "DEPARTMENT";
 	public static final String COLUMN_NAME_BLOCK = "BLOCK";
-	public static final String COLUMN_NAME_GRAVE_NUMBER = "GRAVE_NUMBER";
+	public static final String COLUMN_NAME_GRAVE_NUMBER = "GRAVNUMMER";
 	public static final String COLUMN_NAME_ID = "ID";	
 	public static final String COLUMN_NAME_KGARD_ID = "KGARD_ID";	
 	public static final String COLUMN_NAME_AVDELNING_ID = "AVDELNING_ID";	
@@ -288,20 +287,20 @@ public class MalmoChurchSearch implements ObituarySearch {
 		Grave grave = null;	
 		String sqlStatement = "select ";
 		
-		sqlStatement += " GA_Gravsatt.Grav_ID graveID,";
-		sqlStatement += " GA_Gravsatt.LopNR lopNr,";			
-		sqlStatement += " GA_Gravsatt.FORNAMN firstName,";
-		sqlStatement += " GA_Gravsatt.EFTERNAMN lastName,";
-		sqlStatement += " GA_Gravsatt.PERS_NR dateOfBirth,";
-		sqlStatement += " GA_Gravsatt.Gravs_Datum dateOfDeath,";
-		sqlStatement += " GA_Gravsatt.HEMORT homeTown,";
+		sqlStatement += " GA_Gravsatt.Grav_ID,";
+		sqlStatement += " GA_Gravsatt.LopNR,";			
+		sqlStatement += " GA_Gravsatt.FORNAMN,";
+		sqlStatement += " GA_Gravsatt.EFTERNAMN,";
+		sqlStatement += " GA_Gravsatt.PERS_NR,";
+		sqlStatement += " GA_Gravsatt.Gravs_Datum,";
+		sqlStatement += " GA_Gravsatt.HEMORT,";
 		//sqlStatement += " '???' burialPlace,";
-		sqlStatement += " GA_Gravsatt.HEMORT burialPlace,";
+		sqlStatement += " GA_Gravsatt.HEMORT,";
 		
-		sqlStatement += " GA_KGard.BENAMNING cemetery,";
-		sqlStatement += " GA_Avdelning.BENAMNING department,";
-		sqlStatement += " GA_KVarter.BENAMNING blockName,";
-		sqlStatement += " GA_Grav.GRAVNUMMER gravyNumber";
+		sqlStatement += " GA_KGard.BENAMNING,";
+		sqlStatement += " GA_Avdelning.BENAMNING,";
+		sqlStatement += " GA_KVarter.BENAMNING,";
+		sqlStatement += " GA_Grav.GRAVNUMMER";
 		sqlStatement += " From GA_Gravsatt,GA_KGard,GA_KVarter,GA_Avdelning,GA_Grav";
 
 		sqlStatement += " where GA_Gravsatt.Grav_ID="+getGravId(graveId);
@@ -327,24 +326,32 @@ public class MalmoChurchSearch implements ObituarySearch {
 
 			int count = 0;
 			while (RS.next() && count <= 300) {
-						grave = new Grave(
-						RS.getString("Grav_ID")+":"+RS.getString("LopNr"), 
-						RS.getString(COLUMN_NAME_FIRST_NAME), 
+				
+				
+					
+					grave = new Grave(
+						RS.getString(COLUMN_NAME_GRAVE_ID)+":"+RS.getString(COLUMN_NAME_LOP_NR), 
+						RS.getString(COLUMN_NAME_FIRST_NAME),    
 						RS.getString(COLUMN_NAME_LAST_NAME), 
-						Utility.stringToDate(RS.getString(COLUMN_NAME_DATE_OF_BIRTH)), 
-						Utility.stringToDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
+						null, //Utility.stringToDate(RS.getString(COLUMN_NAME_DATE_OF_BIRTH)), 
+						null, //Utility.stringToDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
 						RS.getString(COLUMN_NAME_HOME_TOWN),
 						new GraveInformation(
-								RS.getString(COLUMN_NAME_GRAVE_NUMBER), 
-								RS.getString(COLUMN_NAME_BLOCK), 
-								RS.getString(COLUMN_NAME_DEPARTMENT), 
-								RS.getString(COLUMN_NAME_CEMETERY)
+								null,//RS.getString(COLUMN_NAME_GRAVE_NUMBER), 
+								null,//RS.getString(COLUMN_NAME_BLOCK), 
+								null,//RS.getString(COLUMN_NAME_DEPARTMENT), 
+								null//RS.getString(COLUMN_NAME_CEMETERY)
 								));
+					
+						
+						System.out.println(grave.getFirstName());
+						
 				count++;
 			}
 			RS.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
+			System.out.println();
 		} finally {
 			if (Stmt != null) {
 				try {
@@ -357,6 +364,7 @@ public class MalmoChurchSearch implements ObituarySearch {
 				ConnectionBroker.freeConnection(DATABASE, conn);
 			}
 		}
+		
         return grave;
 	}
 

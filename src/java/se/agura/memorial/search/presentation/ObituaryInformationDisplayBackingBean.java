@@ -1,49 +1,60 @@
 package se.agura.memorial.search.presentation;
 
+import java.rmi.RemoteException;
+
+import javax.faces.context.FacesContext;
+
 import se.agura.memorial.search.api.Grave;
-import se.agura.memorial.search.data.MalmoSearchBMPBean;
+import se.agura.memorial.search.api.ObituarySearch;
+import se.agura.memorial.search.business.SearchImplBroker;
+
+import com.idega.business.IBOLookup;
+import com.idega.business.IBOLookupException;
+import com.idega.presentation.IWContext;
 
 public class ObituaryInformationDisplayBackingBean {
-	int graveID;
-	int lopNr;
+	String graveId;
 	
 	private Grave grave = null;
 	
-	String aaa = "aaa";
-
-	public String getAaa() {
-		return aaa;
+	public String getGraveId() {
+		return graveId;
 	}
 
-	public void setAaa(String aaa) {
-		this.aaa = aaa;
-	}
-
-	public int getGraveID() {
-		return graveID;
-	}
-
-	public void setGraveID(int graveID) {
+	public void setGraveId(String graveId) {		
+		this.graveId = graveId;
 		
-		
-		this.graveID = graveID;
-	}
-
-	public int getLopNr() {
-		return lopNr;
-	}
-
-	public void setLopNr(int lopNr) {
-		//i am allmost sure that managed properties are 
+		//i am almost sure that managed properties are 
 		//initialized in order they are defined in faces-config.xml
 		
-		this.lopNr = lopNr;
-		
 		//now lets get grave		
-		MalmoSearchBMPBean ms = new MalmoSearchBMPBean();
-		this.grave = ms.findGrave(this.getGraveID(), this.getLopNr(), null); 
+		
+//		MalmoSearchBMPBean ms = new MalmoSearchBMPBean();
+//		this.grave = ms.findGrave(this.getGraveId()); 
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		IWContext iwc = IWContext.getIWContext(facesContext);
+		
+		try {
+			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
+			
+			ObituarySearch os = sib.getSearch();
+			this.grave = os.findGrave(this.getGraveId());
+			
+			System.out.println("aaa");
+			
+		} catch (IBOLookupException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+		}
+		
+		System.out.println("aaa");
 		
 		System.out.println("grave: " + grave.getFirstName());
+		
 	}
 
 	public Grave getGrave() {
