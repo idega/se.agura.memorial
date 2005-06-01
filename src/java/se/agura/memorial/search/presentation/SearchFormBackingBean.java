@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.FinderException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
@@ -133,24 +134,40 @@ public class SearchFormBackingBean {
 	 * searches
 	 */
 	public String search() {
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
 	
 		this.moreThen100ResultsFound = false; 
 		
 		searchResults = new ArrayList();
 		
-		searchResults = new MalmoSearchBMPBean().findGraves(
-				this.getFirstName(), this.getSurname(), 
-				this.getDateOfBirthFrom(), this.getDateOfBirthTo(), 
-				this.getDateOfDeceaseFrom(), this.getDateOfDeceaseTo(),
-				this.getHometown(), 
-				this.graveyard != null ? this.graveyard.getBenamning() : null, 
-				null);
+		
+		try {
+			
+			searchResults = new ArrayList(new MalmoSearchBMPBean().findGraves(
+					this.getFirstName(), this.getSurname(), 
+					this.getPersonIdentifier(), 
+					this.getDateOfBirthFrom(),	this.getDateOfBirthTo(), 
+					this.getDateOfDeceaseFrom(), this.getDateOfDeceaseTo(), 
+					this.getHometown(),
+					this.graveyard != null ? this.graveyard.getBenamning(): null, 
+					null));
+			
+		} catch (FinderException e) {
+			
+			facesContext.addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error occured while searching", // summary
+					"Error occured while searching in database: " + e.getMessage()// detail
+			));
+			
+		}
 		
 		if (searchResults.size() > 100) {
 			
 			this.moreThen100ResultsFound = true; 
 			
-			FacesContext facesContext = FacesContext.getCurrentInstance();
+			
             
             IWContext iwContext = IWContext.getIWContext(facesContext);
     		IWBundle bundle = iwContext.getIWMainApplication().getBundle(IW_BUNDLE_IDENTIFIER);

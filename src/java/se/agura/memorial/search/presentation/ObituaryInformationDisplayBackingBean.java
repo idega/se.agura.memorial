@@ -1,6 +1,7 @@
 package se.agura.memorial.search.presentation;
 
 import se.agura.memorial.search.api.Grave;
+import se.agura.memorial.search.data.MalmoSearchBMPBean;
 
 public class ObituaryInformationDisplayBackingBean {
 	int graveID;
@@ -39,8 +40,8 @@ public class ObituaryInformationDisplayBackingBean {
 		this.lopNr = lopNr;
 		
 		//now lets get grave		
-		//MalmoSearchBMPBean mb = new MalmoSearchBMPBean();
-		//this.grave = mb.findGrave(this.getGraveID(), this.getLopNr(), null); 
+		MalmoSearchBMPBean ms = new MalmoSearchBMPBean();
+		this.grave = ms.findGrave(this.getGraveID(), this.getLopNr(), null); 
 		
 		System.out.println("grave: " + grave.getFirstName());
 	}
