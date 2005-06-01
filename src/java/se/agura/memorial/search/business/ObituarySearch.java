@@ -28,7 +28,10 @@ county, Commune, Parish.
  */
 
 
+import java.util.Collection;
 import java.util.List;
+
+import javax.ejb.FinderException;
 
 import se.agura.memorial.search.api.Grave;
 /**
@@ -37,16 +40,17 @@ import se.agura.memorial.search.api.Grave;
  */
 public interface ObituarySearch {
               
-	public List findGraves (
+	public Collection findGraves (
 			           String firstName,
 			           String lastName,
+					   String personIdentifier,
 			           String dateOfBirthFrom,
 			           String dateOfBirthTo,			           
 			           String dayOfDeathFrom,
 			           String dayOfDeathTo,			           
 			           String region,
 			           String graveyard,
-			           String database);
+			           String database)  throws FinderException ;
 	
 	public List getGraveyards(String database);	
 

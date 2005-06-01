@@ -4,7 +4,7 @@ package se.agura.memorial.search.api;
 
 import se.agura.memorial.search.data.GraveLocallyStored;
 import se.agura.memorial.search.data.GraveLocallyStoredHome;
-import se.agura.memorial.search.data.MalmoSearchBMPBean;
+
 
 import com.idega.data.IDOLookup;
 import com.idega.presentation.Block;
@@ -14,6 +14,7 @@ import com.idega.presentation.ui.DropdownMenu;
 import com.idega.presentation.ui.Form;
 import com.idega.presentation.ui.SubmitButton;
 import com.idega.presentation.ui.TextInput;
+
 
 /**
  * @author Igors
@@ -104,10 +105,10 @@ public class MemorialSearch extends Block{
 		form.add(table);
 		add(form);
 		
-		MalmoSearchBMPBean b = new MalmoSearchBMPBean();
+		//MalmoSearchBMPBean b = new MalmoSearchBMPBean();
 		//List myList = b.findGrave(30673,10,"malm�");
 		//b.getGraveyards("malmo");
-		b.findGraves(null,null,null,null,null,null,null,"Pau",null);
+		//b.findGraves(null,null,null,null,null,null,null,"Pau",null);
 	}
 }	
 	

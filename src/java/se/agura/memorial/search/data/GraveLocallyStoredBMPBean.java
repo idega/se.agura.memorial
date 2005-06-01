@@ -46,18 +46,16 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
  
 			addAttribute(getIDColumnName());
 			addAttribute(COLUMN_NAME_GRAVE_LOCALLY_STORED_ID, "ID of Grave ", true, true, Integer.class);
-			addAttribute(COLUMN_NAME_FIRST_NAME, "ID of Grave ", true, true, String.class, 40);
-			addAttribute(COLUMN_NAME_LAST_NAME, "ID of Grave ", true, true, String.class, 25);
-			addAttribute(COLUMN_NAME_DATE_OF_BIRTH, "ID of Grave ", true, true, Timestamp.class); 
-			addAttribute(COLUMN_NAME_DATE_OF_DEATH, "ID of Grave ", true, true, Timestamp.class);
-			addAttribute(COLUMN_NAME_HOMETOWN, "ID of Grave ", true, true, String.class, 50);
-			addAttribute(COLUMN_NAME_BURIAL_PLACE, "ID of Grave ", true, true, String.class, 50);
-			addAttribute(COLUMN_NAME_CEMETERY, "ID of Grave ", true, true, String.class, 30);
-			addAttribute(COLUMN_NAME_DEPARTMENT, "ID of Grave ", true, true, String.class, 30);
-			addAttribute(COLUMN_NAME_BLOCK, "ID of Grave ", true, true, String.class, 30);
-			addAttribute(COLUMN_NAME_GRAVE_NUMBER, "ID of Grave ", true, true, String.class, 15);
-			
-			
+			addAttribute(COLUMN_NAME_FIRST_NAME, "person first name  ", true, true, String.class, 40);
+			addAttribute(COLUMN_NAME_LAST_NAME, "person last name ", true, true, String.class, 25);
+			addAttribute(COLUMN_NAME_DATE_OF_BIRTH, "Date of birth ", true, true, Timestamp.class); 
+			addAttribute(COLUMN_NAME_DATE_OF_DEATH, "Date of death ", true, true, Timestamp.class);
+			addAttribute(COLUMN_NAME_HOMETOWN, "Place of birth ", true, true, String.class, 50);
+			addAttribute(COLUMN_NAME_BURIAL_PLACE, "Place of dead ", true, true, String.class, 50);
+			addAttribute(COLUMN_NAME_CEMETERY, "Name of cemetery ", true, true, String.class, 30);
+			addAttribute(COLUMN_NAME_DEPARTMENT, "Description of the departament ", true, true, String.class, 30);
+			addAttribute(COLUMN_NAME_BLOCK, "Name of block ", true, true, String.class, 30);
+			addAttribute(COLUMN_NAME_GRAVE_NUMBER, "Grave number ", true, true, String.class, 15);
 
 
 //			this.addManyToManyRelationShip(Address.class, "SR_SUPPLIER_IC_ADDRESS");
