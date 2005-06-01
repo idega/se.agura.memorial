@@ -58,9 +58,10 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 	public static final String COLUMN_NAME_KVARTER_KGARD_ID = "KVARTER_KGARD_ID";	
 	public static final String COLUMN_NAME_KVARTER_LOPNR = "KVARTER_LOPNR";	
 	public static final String COLUMN_NAME_BENAMNING = "BENAMNING";	
+	public static final String COLUMN_KGARD_ID="KGARD_ID";
 	private final static String TABLE_NAME_GA_GRAVSATT = "GA_Gravsatt";	
 	private final static String TABLE_NAME_GA_GRAV = "GA_Grav";
-	private final static String TABLE_NAME_GA_AVDELNING = "GA_KVARTER";
+	private final static String TABLE_NAME_GA_AVDELNING = "GA_AVDELNING";
 	private final static String TABLE_NAME_GA_KVARTER = "GA_KVARTER";
 	private final static String TABLE_NAME_GA_KGARD = "GA_KGARD";
 	private final static String TABLE_NAME_SYS_LKF = "SYS_LKF";	
@@ -225,21 +226,8 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 		try {
 			conn = ConnectionBroker.getConnection(database);
 			ResultSet RS = null;
-			//		List placeHolderValues = subsetQuery.getValues();
-			//		if(placeHolderValues==null || placeHolderValues.isEmpty()){
 			Stmt = conn.createStatement();
-			//		    RS = Stmt.executeQuery(subsetQuery.toString());
 			RS = Stmt.executeQuery(sqlStatement);
-			//		}
-			////		 use PreparedStatement
-			//		else{
-			//		    Stmt = conn.prepareStatement(subsetQuery.toString(true));
-			//		    DatastoreInterface dsi = DatastoreInterface.getInstance(_entity);
-			//		     
-			//			dsi.insertIntoPreparedStatement(placeHolderValues,(PreparedStatement)Stmt,1);
-			//		    RS = ((PreparedStatement)Stmt).executeQuery();
-			//		}
-
 			int count = 0;
 			while (RS.next() && count <= 100) {
 				Graveyard g = new Graveyard(RS.getInt("ID"),
@@ -248,7 +236,7 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 						                    RS.getInt("Distrikt_ID"));
 				count++;
 			    result.add(g);
-				System.out.println(g.getBenamning());
+//				System.out.println(g.getBenamning());
 
 			}
 
@@ -292,7 +280,7 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 		String sqlStatement=null;		
 		Collection result = new ArrayList();;
 		
-		database = "malmo"; // TEST MODE ONLY
+		//database = "malmo"; // TEST MODE ONLY
 		
 	    Table table = new Table(this);
 	    Column colGraveID = new Column(table, COLUMN_NAME_GRAVE_ID);
@@ -323,34 +311,18 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 		    Table tableGA_Kvarter = new Table(TABLE_NAME_GA_KVARTER);
 		    Table tableGA_Avdelning = new Table(TABLE_NAME_GA_AVDELNING);
 		    Table tableGA_KGard = new Table(TABLE_NAME_GA_KGARD);
-
-			sqlStatement=query.toString();					
-			
 			Column colGraveyard = new Column(tableGA_KGard, COLUMN_NAME_BENAMNING);			
-
-			sqlStatement=query.toString();					
-			
 			Column colHomeTown = new Column(table, COLUMN_NAME_HOME_TOWN);
 
 			query.addJoin(table,COLUMN_NAME_GRAVE_ID,tableGA_Grav,COLUMN_NAME_ID);
-			sqlStatement=query.toString();					
-
-			query.addJoin(tableGA_Grav,COLUMN_NAME_AVDELNING_ID,tableGA_Avdelning,COLUMN_NAME_KGARD_ID);
-			sqlStatement=query.toString();					
-
+			query.addJoin(tableGA_Grav,COLUMN_NAME_AVDELNING_ID,tableGA_Avdelning,COLUMN_NAME_ID);
 			query.addJoin(tableGA_Grav,COLUMN_NAME_KVARTER_KGARD_ID,tableGA_Kvarter,COLUMN_NAME_KGARD_ID);
-
-			sqlStatement=query.toString();					
 			query.addJoin(tableGA_Grav,COLUMN_NAME_KVARTER_LOPNR,tableGA_Kvarter,COLUMN_NAME_LOP_NR);
-
-			sqlStatement=query.toString();					
 			query.addJoin(tableGA_Kvarter,COLUMN_NAME_KGARD_ID,tableGA_KGard,COLUMN_NAME_ID);
+			query.addJoin(tableGA_Avdelning,COLUMN_NAME_KVARTER_KGARD_ID,tableGA_Kvarter,COLUMN_KGARD_ID);
+			query.addJoin(tableGA_Avdelning,COLUMN_NAME_KVARTER_LOPNR,tableGA_Kvarter,COLUMN_NAME_LOP_NR);
 			
-			//if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
-			if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + "a" + "%"));
-			
-			sqlStatement=query.toString();					
-			
+			if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
 			if (homeTown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + homeTown.trim() + "%"));
 			
         }
@@ -362,13 +334,9 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 		if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
 		if (dateOfDeathTo != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, "%" + dateOfDeathTo.trim() + "%"));
 		
-//		query.addOrder(orderByLastName);
-//		query.addOrder(orderByFirstName);
+		query.addOrder(orderByLastName);
+		query.addOrder(orderByFirstName);
 		
-	//	sqlStatement += " and GA_Grav.Avdelning_ID=GA_Avdelning.ID ";
-
-	//	sqlStatement += " and GA_Avdelning.Kvarter_KGard_ID=GA_KVarter.KGard_ID ";
-	//	sqlStatement += " and GA_Avdelning.Kvarter_Lopnr=GA_KVarter.Lopnr";
 		
 
 		sqlStatement=query.toString();					
@@ -459,19 +427,22 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 			query.addJoin(tableGA_Grav,COLUMN_NAME_KVARTER_KGARD_ID,tableGA_Kvarter,COLUMN_NAME_KGARD_ID);
 			query.addJoin(tableGA_Grav,COLUMN_NAME_KVARTER_LOPNR,tableGA_Kvarter,COLUMN_NAME_LOP_NR);
 			query.addJoin(tableGA_Kvarter,COLUMN_NAME_KGARD_ID,tableGA_KGard,COLUMN_NAME_ID);
-			query.addJoin(tableGA_Kvarter,COLUMN_NAME_KGARD_ID,tableGA_KGard,COLUMN_NAME_ID);
+			query.addJoin(tableGA_Avdelning,COLUMN_NAME_KVARTER_KGARD_ID,tableGA_Kvarter,COLUMN_KGARD_ID);
+			query.addJoin(tableGA_Avdelning,COLUMN_NAME_KVARTER_LOPNR,tableGA_Kvarter,COLUMN_NAME_LOP_NR);
 			
 			
-			if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "'%" + graveyard.trim() + "%'"));
-			if (homeTown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "'%" + homeTown.trim() + "%'"));
+			
+			if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
+			if (homeTown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + homeTown.trim() + "%"));
 			
         }
-		if (firstName != null)  query.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "'%" + firstName.trim() + "%'"));
-		if (lastName != null)  query.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "'%" + lastName.trim() + "%'"));
-		if (dateOfBirthFrom != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.LIKE, dateOfBirthFrom.trim() + "%'"));
-		if (dateOfBirthTo != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.LIKE, dateOfBirthFrom.trim() + "%'"));
-		if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%'"));
-		if (dateOfDeathTo != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, "'%" + dateOfDeathTo.trim() + "%'"));
+            
+		if (firstName != null)  query.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"));
+		if (lastName != null)  query.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
+		if (dateOfBirthFrom != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.LIKE, dateOfBirthFrom.trim() + "%"));
+		if (dateOfBirthTo != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.LIKE, dateOfBirthFrom.trim() + "%"));
+		if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
+		if (dateOfDeathTo != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, "%" + dateOfDeathTo.trim() + "%"));
 		
 		query.addOrder(orderByLastName);
 		query.addOrder(orderByFirstName);
