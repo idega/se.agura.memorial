@@ -9,107 +9,54 @@ package se.agura.memorial.search.api;
  * 
  */
 public class GraveInformation {
+	  
+	String graveNumber; 
+	String block; 
+	String department; 
+	String cemetery;
+	public GraveInformation(
+			String graveNumber, 
+			String block, 
+			String department, 
+			String cemetery) {
+		super();
 
-	private int graveID; // GA_Gravsatt.Grav_ID
-	private int lopNr; // GA_Gravsatt.LopNr
-	private String firstName; // GA_Gravsatt.FORNAMN
-	private String lastName; // GA_Gravsatt.EFTERNAMN
-	private String dateOfBirth; // GA_Gravsatt.PERS_NR
-	private String dateOfDeath; // GA_Gravsatt.DODSDATUM
-	private int rowNr; // counter	
-	
-	public GraveInformation() {
-	
+		this.graveNumber = graveNumber;
+		this.block = block;
+		this.department = department;
+		this.cemetery = cemetery;
 	}
-
-	public void init(
-            int graveID,
-            int lopNr,
-            String firstName,
-            String lastName,
-            String dateOfBirth,
-            String dateOfDeath,
-            int rowNr) {
-
-
-			this.setGraveID(graveID);
-			this.setLopNr(lopNr);
-			this.setFirstName(firstName);
-			this.setLastName(lastName);
-			this.setDateOfBirth(dateOfBirth);
-			this.setDateOfDeath(dateOfDeath); 
-			this.setRowNr(rowNr);
-	}
-
-	public int getRowNr() {
-		return rowNr;
+	public String getBlock() {
+		return block;
 	}
 	
-
-	public void setRowNr(int rowNr) {
-		this.rowNr = rowNr;
+	public void setBlock(String block) {
+		this.block = block;
 	}
 	
-
-	public String getDateOfBirth() {
-		return dateOfBirth;
+	public String getCemetery() {
+		return cemetery;
 	}
 	
-
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setCemetery(String cemetery) {
+		this.cemetery = cemetery;
 	}
 	
-
-	public int getLopNr() {
-		return lopNr;
+	public String getDepartment() {
+		return department;
 	}
 	
-
-	public void setLopNr(int lopNr) {
-		this.lopNr = lopNr;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 	
-
-	public String getDateOfDeath() {
-		return dateOfDeath;
+	public String getGraveNumber() {
+		return graveNumber;
 	}
 	
-
-	public void setDateOfDeath(String dateOfDeath) {
-		this.dateOfDeath = dateOfDeath;
+	public void setGraveNumber(String graveNumber) {
+		this.graveNumber = graveNumber;
 	}
 	
-
-	public String getFirstName() {
-		return firstName;
-	}
-	
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	
-
-	public int getGraveID() {
-		return graveID;
-	}
-	
-
-	public void setGraveID(int graveID) {
-		this.graveID = graveID;
-	}
-	
-
-	public String getLastName() {
-		return lastName;
-	}
-	
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	
-
 
 }
