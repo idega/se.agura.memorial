@@ -44,8 +44,8 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 
 	public static final String COLUMN_NAME_FIRST_NAME = "Fornamn";
 	public static final String COLUMN_NAME_LAST_NAME = "Efternamn";
-	public static final String COLUMN_NAME_DATE_OF_BIRTH = "Dodsdatum";
-	public static final String COLUMN_NAME_DATE_OF_DEATH = "Begr_Datum";
+	public static final String COLUMN_NAME_DATE_OF_BIRTH = "Pers_nr";
+	public static final String COLUMN_NAME_DATE_OF_DEATH = "Gravs_DATUM";
 	public static final String COLUMN_NAME_HOME_TOWN = "HOMETOWN";
 	public static final String COLUMN_NAME_BURIAL_PLACE = "BURIAL_PLACE";
 	public static final String COLUMN_NAME_CEMETERY = "CEMETERY";
@@ -280,7 +280,7 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 		String sqlStatement=null;		
 		Collection result = new ArrayList();;
 		
-		//database = "malmo"; // TEST MODE ONLY
+		database = "malmo"; // TEST MODE ONLY
 		
 	    Table table = new Table(this);
 	    Column colGraveID = new Column(table, COLUMN_NAME_GRAVE_ID);
@@ -464,7 +464,7 @@ public  Grave findGrave(int gravID,int lopNr,String database) {
 		sqlStatement += " GA_Gravsatt.FORNAMN firstName,";
 		sqlStatement += " GA_Gravsatt.EFTERNAMN lastName,";
 		sqlStatement += " GA_Gravsatt.PERS_NR dateOfBirth,";
-		sqlStatement += " GA_Gravsatt.DODSDATUM  dateOfDeath,";
+		sqlStatement += " GA_Gravsatt.Gravs_Datum dateOfDeath,";
 		sqlStatement += " GA_Gravsatt.HEMORT homeTown,";
 		//sqlStatement += " '???' burialPlace,";
 		sqlStatement += " GA_Gravsatt.HEMORT burialPlace,";
