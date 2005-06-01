@@ -18,6 +18,7 @@ import se.agura.memorial.search.api.Graveyard;
 import com.idega.data.GenericEntity;
 import com.idega.data.IDOLookup;
 import com.idega.data.query.Column;
+import com.idega.data.query.InCriteria;
 import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.Order;
 import com.idega.data.query.SelectQuery;
@@ -213,7 +214,40 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
 		setColumn(getColumnNameGraveNumber(), graveNumber);
 	}			
 			
+	public int getYearFromString(String date) {
+		int result = 0;
+		String str;
+		if(date.length()<4) return 0;
+		str = date.substring(date.length()-4,date.length()-2);
+		
+		result = Integer.valueOf(str).intValue();
+		
+		if(result<1800) result=0;
+		if(result<2050) result=0;
+		
+		
+		return result;
+	}
+
 	
+	public Collection getListOfYear(String beginDate, String endDate) {
+		
+		int beginYear,endYear;
+		beginYear=getYearFromString(beginDate);
+		endYear=getYearFromString(endDate);
+		String tmp=null;
+
+		List result = new ArrayList();
+		
+		
+		for (int i=beginYear;i<=endYear;i++){
+			
+			result.add(Integer.toString(i));
+		}
+		return result;
+
+	}			
+			
 
 	public List getGraveyards(String database) {
 
@@ -329,8 +363,16 @@ public class MalmoSearchBMPBean extends GenericEntity implements MalmoSearch{
             
 		if (firstName != null)  query.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"));
 		if (lastName != null)  query.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
-		if (dateOfBirthFrom != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.LIKE, dateOfBirthFrom.trim() + "%"));
-		if (dateOfBirthTo != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.LIKE, dateOfBirthFrom.trim() + "%"));
+		if (dateOfBirthTo != null){
+			
+			Collection years = getListOfYear("tdummy database","ddd");
+			query.addCriteria(new InCriteria(colDateOfBirth,years));
+	
+			sqlStatement=query.toString();	
+		}
+		else
+			if (dateOfBirthFrom != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.LIKE, dateOfBirthFrom.trim() + "%"));
+			
 		if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
 		if (dateOfDeathTo != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, "%" + dateOfDeathTo.trim() + "%"));
 		
