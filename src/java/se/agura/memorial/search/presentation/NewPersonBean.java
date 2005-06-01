@@ -80,9 +80,10 @@ public class NewPersonBean {
 	public void setCreateObituaryAfterSaving(Boolean createObituaryAfterSaving) {
 		this.createObituaryAfterSaving = createObituaryAfterSaving;
 	}
-	
-	
+		
 	public String save() {
+		//here we call businness logic
+		
 		return "success";
 	}
 }
