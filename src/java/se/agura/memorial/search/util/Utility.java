@@ -11,13 +11,18 @@ public class Utility {
 
 	public static Date stringToDate(String s){
 		Date date = null;
+		String tmp = null;
+		
+		if(s!=null) return null;
 		
 		if (s == null) return null;
 		
 		if (s.length()<8) return null;
 	    try {
 			DateFormat formatter = new SimpleDateFormat("yyyymmdd");
-	        date = (Date)formatter.parse(s.substring(0,8));
+			tmp = s.substring(0,8);
+	        //date = (Date)formatter.parse(tmp);
+			date = (Date)formatter.parse("20010101");
 	    } catch (ParseException e) {
 	    }	
 		
