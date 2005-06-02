@@ -36,22 +36,22 @@ public class SearchFormBackingBean {
 	private String personIdentifier;
 	private Graveyard graveyard;
 	
+	private String database;
+	
+	
 	private static Map graveyards;
 
 	List searchResults = new ArrayList();
 
-	public SearchFormBackingBean() {
-		graveyards = new LinkedHashMap();
-
-//		MalmoSearchBMPBean b = new MalmoSearchBMPBean();
-//		List listOfGraveyards = b.getGraveyards("test dummy database");
-
-//		for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
-//			Graveyard g = (Graveyard) it.next();
-//			graveyards.put(new Integer(g.getId()).toString(), g);
-//		}
+	public SearchFormBackingBean() {	
+		initGraveyards();
+	}
+	
+	
+	
+	private void initGraveyards() {
 		
-		//MySession ms2 = (MySession) IBOLookup.getSessionInstance(iwc, MySession.class);
+		graveyards = new LinkedHashMap();
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		IWContext iwc = IWContext.getIWContext(facesContext);
@@ -59,7 +59,7 @@ public class SearchFormBackingBean {
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			
-			ObituarySearch os = sib.getSearch();
+			ObituarySearch os = sib.getSearch(1);
 			List listOfGraveyards = (List) os.getGraveyards();
 			
 			for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
@@ -73,12 +73,9 @@ public class SearchFormBackingBean {
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();	
-		}
-		
-
+		}		
 	}
-
-	String database;
+	
 
 	private boolean moreThen100ResultsFound;
 
@@ -100,6 +97,12 @@ public class SearchFormBackingBean {
 
 	public void setDatabase(String database) {
 		this.database = database;
+		
+		//here some actions when database is changed
+		//in future this could be done via ActionListener...
+		initGraveyards();
+		System.out.println("database is changed, graveyards are reloaded");
+		
 	}
 
 	public String getDateOfBirthFrom() {
@@ -176,7 +179,7 @@ public class SearchFormBackingBean {
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup
 					.getServiceInstance(iwc, SearchImplBroker.class);
-			ObituarySearch os = sib.getSearch();
+			ObituarySearch os = sib.getSearch(1);
 
 			searchResults = (ArrayList) 
 				os.findGraves(
@@ -252,6 +255,8 @@ public class SearchFormBackingBean {
 
 		setFirstName(null);
 		setGraveyard(null);
+		
+		searchResults = new ArrayList(); 
 		
 		return "success";
 

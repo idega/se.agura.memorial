@@ -13,24 +13,25 @@ import com.idega.data.IDOFactory;
  * @author Dainis
  *
  */
-public class GraveCemeteryHomeImpl extends IDOFactory implements
-		GraveCemeteryHome {
+public class GraveGraveyardHomeImpl extends IDOFactory implements
+		GraveGraveyardHome {
 	protected Class getEntityInterfaceClass() {
-		return GraveCemetery.class;
+		return GraveGraveyard.class;
 	}
 
-	public GraveCemetery create() throws javax.ejb.CreateException {
-		return (GraveCemetery) super.createIDO();
+	public GraveGraveyard create() throws javax.ejb.CreateException {
+		return (GraveGraveyard) super.createIDO();
 	}
 
-	public GraveCemetery findByPrimaryKey(Object pk)
+	public GraveGraveyard findByPrimaryKey(Object pk)
 			throws javax.ejb.FinderException {
-		return (GraveCemetery) super.findByPrimaryKeyIDO(pk);
+		return (GraveGraveyard) super.findByPrimaryKeyIDO(pk);
 	}
 
 	public Collection findAll() throws FinderException {
 		com.idega.data.IDOEntity entity = this.idoCheckOutPooledEntity();
-		java.util.Collection ids = ((GraveCemeteryBMPBean) entity).ejbFindAll();
+		java.util.Collection ids = ((GraveGraveyardBMPBean) entity)
+				.ejbFindAll();
 		this.idoCheckInPooledEntity(entity);
 		return this.getEntityCollectionForPrimaryKeys(ids);
 	}

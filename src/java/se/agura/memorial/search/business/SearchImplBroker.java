@@ -15,6 +15,7 @@ public interface SearchImplBroker extends IBOService {
 	/**
 	 * @see se.agura.memorial.search.business.SearchImplBrokerBean#getSearch
 	 */
-	public ObituarySearch getSearch() throws java.rmi.RemoteException;
+	public ObituarySearch getSearch(int databaseConnId)
+			throws java.rmi.RemoteException;
 
 }

@@ -38,7 +38,7 @@ public class ObituaryInformationDisplayBackingBean {
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			
-			ObituarySearch os = sib.getSearch();
+			ObituarySearch os = sib.getSearch(1);
 			this.grave = os.findGrave(this.getGraveId());
 			
 			System.out.println("aaa");
