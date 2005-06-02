@@ -29,7 +29,7 @@ public class GraveDatabaseConnBMPBean extends GenericEntity  implements GraveDat
 		addAttribute(COLUMN_DATABASE_NAME, "Database name", true, true,
 				String.class, 200);
 		addAttribute(COLUMN_API_DB_CONNECTION,
-				"Identificator for database connection", true, true,
+				"full class name of database connection implementation", true, true,
 				String.class, 200);
 	}
 	
@@ -50,15 +50,15 @@ public class GraveDatabaseConnBMPBean extends GenericEntity  implements GraveDat
 	public void insertStartData() throws Exception {
 		GraveDatabaseConnHome home = (GraveDatabaseConnHome) IDOLookup.getHome(GraveDatabaseConn.class);
 
-//		GraveDatabaseConn data1 = home.create();
-//		data1.setDatabaseName("First test");
-//		data1.setAPIDBConnection("First test conn");
-//		data1.store();
-//
-//		GraveDatabaseConn data2 = home.create();
-//		data2.setDatabaseName("Second test");
-//		data2.setAPIDBConnection("Second test conn");
-//		data2.store();
+		GraveDatabaseConn data1 = home.create();
+		data1.setDatabaseName("Malmo");
+		data1.setAPIDBConnection("se.agura.memorial.search.impl.MalmoChurchSearch");
+		data1.store();
+
+		GraveDatabaseConn data2 = home.create();
+		data2.setDatabaseName("Ovriga (Local)");
+		data2.setAPIDBConnection("se.agura.memorial.search.impl.LocalObituarySearch");
+		data2.store();
 	}	
 	
 	

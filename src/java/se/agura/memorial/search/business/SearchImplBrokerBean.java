@@ -31,7 +31,9 @@ public class SearchImplBrokerBean extends IBOServiceBean  implements SearchImplB
 		
 		
 		// lame implementation, in future names will be fetched from 
-		// GraveDatabaseConn and stored in hashnmap		
+		// GraveDatabaseConn and stored in hashnmap	
+		// currently there is a small problem- how do we localize
+		// database names in GraveDatabaseConn?
 		try {
 			Class implClass = Class
 					.forName("se.agura.memorial.search.impl.MalmoChurchSearch");

@@ -36,7 +36,7 @@ public class SearchFormBackingBean {
 	private String personIdentifier;
 	private Graveyard graveyard;
 	
-	private String database;
+	private String database = "1";
 	
 	
 	private static Map graveyards;
@@ -59,6 +59,9 @@ public class SearchFormBackingBean {
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			
+			//ObituarySearch os = sib.getSearch(stringToInt(this.database));
+			System.out.println("db = " + this.database);
+			System.out.println("str to int db = " + stringToInt(this.database));
 			ObituarySearch os = sib.getSearch(1);
 			List listOfGraveyards = (List) os.getGraveyards();
 			
@@ -161,107 +164,6 @@ public class SearchFormBackingBean {
 		this.surname = leftTrimRightTrim(surname);
 	}
 
-	/**
-	 * searches
-	 */
-	public String search() {
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-	
-		this.moreThen100ResultsFound = false; 
-		
-		searchResults = new ArrayList();
-		
-		
-//		try {
-			
-		IWContext iwc = IWContext.getIWContext(facesContext);
-		try {
-			SearchImplBroker sib = (SearchImplBroker) IBOLookup
-					.getServiceInstance(iwc, SearchImplBroker.class);
-			ObituarySearch os = sib.getSearch(1);
-
-			searchResults = (ArrayList) 
-				os.findGraves(
-						this.getFirstName(),
-						this.getSurname(),
-						this.getPersonIdentifier(),
-						this.getDateOfBirthFrom(),
-						this.getDateOfBirthTo(),
-						this.getDateOfDeceaseFrom(),
-						this.getDateOfDeceaseTo(),	           
-						this.getHometown(),
-						this.graveyard != null ? this.graveyard.getBenamning(): null);
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}			
-			
-			
-// searchResults = new ArrayList(new MalmoSearchBMPBean().findGraves(
-//					this.getFirstName(), this.getSurname(), 
-//					this.getPersonIdentifier(), 
-//					this.getDateOfBirthFrom(),	this.getDateOfBirthTo(), 
-//					this.getDateOfDeceaseFrom(), this.getDateOfDeceaseTo(), 
-//					this.getHometown(),
-//					this.graveyard != null ? this.graveyard.getBenamning(): null, 
-//					null));
-			
-//		} catch (FinderException e) {
-//			
-//			facesContext.addMessage(null, new FacesMessage(
-//					FacesMessage.SEVERITY_ERROR,
-//					"Error occured while searching", // summary
-//					"Error occured while searching in database: " + e.getMessage()// detail
-//			));
-//			
-//		}
-		
-		if (searchResults.size() > 100) {
-			
-			this.moreThen100ResultsFound = true; 
-			
-			
-            
-            IWContext iwContext = IWContext.getIWContext(facesContext);
-    		IWBundle bundle = iwContext.getIWMainApplication().getBundle(IW_BUNDLE_IDENTIFIER);
-    		ValueBinding vbSummary = bundle.getValueBinding("messages.more_than_100_hits_summary"); 
-			ValueBinding vbDetail = bundle.getValueBinding("messages.more_than_100_hits_detail");  
-			
-			facesContext.addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_WARN, 
-					vbSummary.getValue(facesContext).toString(), // summary
-					vbDetail.getValue(facesContext).toString()// detail
-					));			
-						
-			//remove the last element
-			int count = 0;
-			for (Iterator it = searchResults.iterator(); it.hasNext();) {				
-				count++;				
-				Grave g = (Grave) it.next();
-				if (count > 100) it.remove();
-			}
-			
-		}		
-
-		return "success";
-	}
-
-	/**
-	 * clear search form
-	 */
-	public String clear() {
-
-		setFirstName(null);
-		setGraveyard(null);
-		
-		searchResults = new ArrayList(); 
-		
-		return "success";
-
-	}
-
 	// this is needed for converter
 	public Map getGraveyards() {
 		return graveyards;
@@ -309,13 +211,119 @@ public class SearchFormBackingBean {
 		}
 	}
 
+	public void setPersonIdentifier(String personIdentifier) {
+		this.personIdentifier = personIdentifier;
+	}
+
+
+
 	public String getPersonIdentifier() {
 		return personIdentifier;
 	}
 
-	public void setPersonIdentifier(String personIdentifier) {
-		this.personIdentifier = personIdentifier;
-	}	
+	/**
+	 * searches
+	 */
+	public String search() {
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
 	
+		this.moreThen100ResultsFound = false; 
+		
+		searchResults = new ArrayList();	
+	
+			
+		IWContext iwc = IWContext.getIWContext(facesContext);
+		try {
+			SearchImplBroker sib = (SearchImplBroker) IBOLookup
+					.getServiceInstance(iwc, SearchImplBroker.class);
+			ObituarySearch os = sib.getSearch(stringToInt(this.database));
+	
+			searchResults = (ArrayList) 
+				os.findGraves(
+						this.getFirstName(),
+						this.getSurname(),
+						this.getPersonIdentifier(),
+						this.getDateOfBirthFrom(),
+						this.getDateOfBirthTo(),
+						this.getDateOfDeceaseFrom(),
+						this.getDateOfDeceaseTo(),	           
+						this.getHometown(),
+						this.graveyard != null ? this.graveyard.getBenamning(): null);
+	
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}			
+		
+	
+		if (searchResults.size() > 100) {
+			
+			this.moreThen100ResultsFound = true; 
+			
+			
+	        
+	        IWContext iwContext = IWContext.getIWContext(facesContext);
+			IWBundle bundle = iwContext.getIWMainApplication().getBundle(IW_BUNDLE_IDENTIFIER);
+			ValueBinding vbSummary = bundle.getValueBinding("messages.more_than_100_hits_summary"); 
+			ValueBinding vbDetail = bundle.getValueBinding("messages.more_than_100_hits_detail");  
+			
+			facesContext.addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_WARN, 
+					vbSummary.getValue(facesContext).toString(), // summary
+					vbDetail.getValue(facesContext).toString()// detail
+					));			
+						
+			//remove the last element
+			int count = 0;
+			for (Iterator it = searchResults.iterator(); it.hasNext();) {				
+				count++;				
+				Grave g = (Grave) it.next();
+				if (count > 100) it.remove();
+			}
+			
+		}		
+	
+		return "success";
+	}
+
+
+
+	/**
+	 * clear search form
+	 */
+	public String clear() {
+	
+		this.setFirstName(null);
+		this.setSurname(null);
+		this.setDateOfBirthFrom(null);
+		this.setDateOfBirthTo(null);
+		this.setDateOfDeceaseFrom(null);
+		this.setDateOfDeceaseTo(null);
+		this.setPersonIdentifier(null);
+		this.setHometown(null);		
+		this.setGraveyard(null);
+		
+		searchResults = new ArrayList();
+		return "success";
+	
+	}
+
+
+
+	private int stringToInt(String s) {
+		
+		if (s == null) {
+			return 0;			
+		}		
+
+		try {
+			int i = Integer.parseInt(s);
+			return i;
+		} catch (NumberFormatException nfe) {
+			return 0;
+		}
+
+	}
 
 }
