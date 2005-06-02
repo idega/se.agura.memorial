@@ -48,7 +48,7 @@ public class GraveGraveyardBMPBean extends GenericEntity  implements GraveGravey
 	}
 
 	public void insertStartData() throws Exception {
-		GraveGraveyardHome home = (GraveGraveyardHome) IDOLookup.getHome(GraveDatabaseConn.class);
+		GraveGraveyardHome home = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
 
 		GraveGraveyard data1 = home.create();
 		data1.setGraveyardName("Local 1. graveyard");		
