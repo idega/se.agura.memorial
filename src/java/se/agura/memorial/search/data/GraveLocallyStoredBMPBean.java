@@ -3,6 +3,7 @@ package se.agura.memorial.search.data;
 
 
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Collection;
 
@@ -19,7 +20,7 @@ import com.idega.data.query.WildCardColumn;
 
 public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLocallyStored{
 
-  		public static String TABLE_NAME = "GRAVE_LOCALLY_STORED";
+  		public static String TABLE_NAME = "MS_GRAVE_LOCALLY_STORED";
 		public static String COL_API_DB_CONNECTION = "";		
   		
 		public static final String DATABASE_NAME = "IdegaWeb";		
@@ -48,8 +49,8 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			addAttribute(COLUMN_NAME_GRAVE_LOCALLY_STORED_ID, "ID of Grave ", true, true, Integer.class);
 			addAttribute(COLUMN_NAME_FIRST_NAME, "person first name  ", true, true, String.class, 40);
 			addAttribute(COLUMN_NAME_LAST_NAME, "person last name ", true, true, String.class, 25);
-			addAttribute(COLUMN_NAME_DATE_OF_BIRTH, "Date of birth ", true, true, Timestamp.class); 
-			addAttribute(COLUMN_NAME_DATE_OF_DEATH, "Date of death ", true, true, Timestamp.class);
+			addAttribute(COLUMN_NAME_DATE_OF_BIRTH, "Date of birth ", true, true, Date.class); 
+			addAttribute(COLUMN_NAME_DATE_OF_DEATH, "Date of death ", true, true, Date.class);
 			addAttribute(COLUMN_NAME_HOMETOWN, "Place of birth ", true, true, String.class, 50);
 			addAttribute(COLUMN_NAME_BURIAL_PLACE, "Place of dead ", true, true, String.class, 50);
 			addAttribute(COLUMN_NAME_CEMETERY, "Name of cemetery ", true, true, String.class, 30);
@@ -73,8 +74,8 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			data1.setID(1);			
 			data1.setFirstName("Anders Beril Ove");
 			data1.setLastName("Andersson");			
-			data1.setDateOfBirth(Timestamp.valueOf("1945-03-02"));			
-			data1.setDateOfDeath(Timestamp.valueOf("2001-01-02"));
+			data1.setDateOfBirth(Date.valueOf("1945-03-02"));			
+			data1.setDateOfDeath(Date.valueOf("2001-01-02"));
 			data1.setHomeTown("Ystad");
 			data1.setBurialPlace("Stockholm");			
 			data1.setCemetery("Skogskyrkärden");			
@@ -170,11 +171,11 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			setColumn(getColumnNameFirstName(), lastName);
 		}
 
-		public void setDateOfBirth(Timestamp dateOfBirth) {
+		public void setDateOfBirth(Date dateOfBirth) {
 			setColumn(getColumnNameDateOfBirth(), dateOfBirth);
 		}
 
-		public void setDateOfDeath(Timestamp dateOfDeath) {
+		public void setDateOfDeath(Date dateOfDeath) {
 			setColumn(getColumnNameDateOfDeath(), dateOfDeath);
 		}
 		

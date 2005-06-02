@@ -3,6 +3,7 @@
  */
 package se.agura.memorial.search.data;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 
@@ -51,12 +52,12 @@ public interface GraveLocallyStored extends IDOEntity {
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDateOfBirth
 	 */
-	public void setDateOfBirth(Timestamp dateOfBirth);
+	public void setDateOfBirth(Date dateOfBirth);
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDateOfDeath
 	 */
-	public void setDateOfDeath(Timestamp dateOfDeath);
+	public void setDateOfDeath(Date dateOfDeath);
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setHomeTown

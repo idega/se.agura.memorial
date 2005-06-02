@@ -10,6 +10,9 @@ import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
 import se.agura.memorial.search.data.GraveGraveyard;
 import se.agura.memorial.search.data.GraveGraveyardHome;
+import se.agura.memorial.search.data.GraveLocallyStored;
+import se.agura.memorial.search.data.GraveLocallyStoredHome;
+
 
 import com.idega.data.IDOLookup;
 
@@ -20,8 +23,37 @@ public class LocalObituarySearch implements ObituarySearch {
 			String dateOfBirthTo, String dateOfDeathFrom, String dateOfDeathTo,
 			String hometown, String graveyard) 
 	{
-		// TODO make this work using data.GraveLocallyStored
-		return null;
+		List result = new ArrayList();
+		
+		GraveLocallyStoredHome ggh = null;	            
+        try {
+			ggh = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
+			Collection coll = ggh.findAll();
+			
+			Iterator it = coll.iterator();
+			while (it.hasNext()) {
+				Object o = it.next();
+				Grave g = (Grave) o;
+				    
+				result.add(new Grave(
+						g.getGraveId(),
+						g.getFirstName(),
+						g.getLastName(),
+						g.getDateOfBirth(),
+						g.getDateOfDeath(),
+						null,
+						null));
+
+			}				
+			
+		} catch (Exception e) {
+			System.out.println("error occured while getting graves:");
+			e.printStackTrace();
+		}
+		
+	
+		
+		return result;
 	}
 
 	public Collection getGraveyards() {
