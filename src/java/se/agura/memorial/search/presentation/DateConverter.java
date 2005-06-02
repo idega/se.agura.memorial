@@ -1,5 +1,9 @@
 package se.agura.memorial.search.presentation;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,12 +21,20 @@ public class DateConverter implements Converter{
 		
 		//this should be correct
 		//String s = (String) arg2;
-		//return formatDateString(s);
+		//return formatDateString(s);	
 		
 		
+		if (arg2 == null) {			
+			return "???? ?? ??";
+		} else {
+			Date d = (Date) arg2;
+			
+			Format formatter = new SimpleDateFormat("yyyy MM DD");
+		    String s = formatter.format(d);
+			return s;
+		}
 		
-		//if (arg2 == null) return "???? ?? ??";
-		return "2222 22 22";
+		//return "2222 22 22";
 		//return arg2.toString();
 	}
 	
