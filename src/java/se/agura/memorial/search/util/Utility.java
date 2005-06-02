@@ -13,11 +13,10 @@ public class Utility {
 		
 		if (s == null) return null;
 		
-		if (s.length()!=8) return null;
+		if (s.length()<8) return null;
 	    try {
 			DateFormat formatter = new SimpleDateFormat("yyyymmdd");
-			//TODO  what will happen if date is like this: 200301
-	        date = (Date)formatter.parse(s);
+	        date = (Date)formatter.parse(s.substring(0,8));
 	    } catch (ParseException e) {
 	    }	
 		
