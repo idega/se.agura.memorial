@@ -3,8 +3,9 @@ package se.agura.memorial.search.data;
 
 
 
+
+
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Collection;
 
 import javax.ejb.FinderException;
@@ -18,14 +19,13 @@ import com.idega.data.query.Table;
 import com.idega.data.query.WildCardColumn;
 
 
+
 public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLocallyStored{
 
   		public static String TABLE_NAME = "MS_GRAVE_LOCALLY_STORED";
 		public static String COL_API_DB_CONNECTION = "";		
   		
 		public static final String DATABASE_NAME = "IdegaWeb";		
-		
-		
 
 		public static final String COLUMN_NAME_GRAVE_LOCALLY_STORED_ID = "GRAVE_LOCALLY_STORED_ID";
 		public static final String COLUMN_NAME_FIRST_NAME = "FIRST_NAME";
@@ -58,13 +58,6 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			addAttribute(COLUMN_NAME_BLOCK, "Name of block ", true, true, String.class, 30);
 			addAttribute(COLUMN_NAME_GRAVE_NUMBER, "Grave number ", true, true, String.class, 15);
 
-
-//			this.addManyToManyRelationShip(Address.class, "SR_SUPPLIER_IC_ADDRESS");
-//			this.addManyToManyRelationShip(Phone.class, "SR_SUPPLIER_IC_PHONE");
-
-			
-//			addIndex("IDX_GRAVE_LSI_1", new String[]{getIDColumnName(), getColumnNameIsValid()});
-
 		}
 
 		public void insertStartData() throws Exception {
@@ -76,6 +69,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			data1.setLastName("Andersson");			
 			data1.setDateOfBirth(Date.valueOf("1945-03-02"));			
 			data1.setDateOfDeath(Date.valueOf("2001-01-02"));
+
 			data1.setHomeTown("Ystad");
 			data1.setBurialPlace("Stockholm");			
 			data1.setCemetery("Skogskyrkärden");			
@@ -84,13 +78,33 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			data1.setGraveNumber("0045");			
 			
 			data1.store();
-
-
-			
 				
 		}
 
+	    public String getId() {
+	        return String.valueOf(getStringColumnValue(getColumnNameID()));
+	    }		
+		
+	    public String getFirstName() {
+	        return getStringColumnValue(getColumnNameFirstName());
+	    }		
 
+	    public String getLastName() {
+	        return getStringColumnValue(getColumnNameLastName());
+	    }		
+
+	    public Date getDateOfBirth() {
+			return getDateColumnValue(getColumnNameDateOfBirth()) ;
+			
+
+	    }		
+
+	    public Date getDateOfDeath() {
+			return getDateColumnValue(getColumnNameDateOfDeath()) ;
+
+	    }		
+
+		
 		public static String getGraveLocallyStoredTableName() {
 			return TABLE_NAME;
 		}
@@ -103,12 +117,16 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			return COLUMN_NAME_FIRST_NAME;
 		}
 
-		public static String getColumnNameDateOfBirth() {
+		public static String getColumnNameLastName() {
 			return COLUMN_NAME_LAST_NAME;
 		}
 
-		public static String getColumnNameDateOfDeath() {
+		public static String getColumnNameDateOfBirth() {
 			return COLUMN_NAME_DATE_OF_BIRTH;
+		}
+
+		public static String getColumnNameDateOfDeath() {
+			return COLUMN_NAME_DATE_OF_DEATH;
 		}
 
 		public static String getColumnNameHomeTown() {
@@ -168,7 +186,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		}
 
 		public void setLastName(String lastName) {
-			setColumn(getColumnNameFirstName(), lastName);
+			setColumn(getColumnNameLastName(), lastName);
 		}
 
 		public void setDateOfBirth(Date dateOfBirth) {

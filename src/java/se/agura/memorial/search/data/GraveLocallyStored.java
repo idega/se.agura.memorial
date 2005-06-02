@@ -4,7 +4,7 @@
 package se.agura.memorial.search.data;
 
 import java.sql.Date;
-import java.sql.Timestamp;
+
 
 
 import com.idega.data.IDOEntity;
@@ -14,6 +14,31 @@ import com.idega.data.IDOEntity;
  *
  */
 public interface GraveLocallyStored extends IDOEntity {
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getId
+	 */
+	public String getId();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getFirstName
+	 */
+	public String getFirstName();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getLastName
+	 */
+	public String getLastName();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getDateOfBirth
+	 */
+	public Date getDateOfBirth();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getDateOfDeath
+	 */
+	public Date getDateOfDeath();
+
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDatabaseName
 	 */

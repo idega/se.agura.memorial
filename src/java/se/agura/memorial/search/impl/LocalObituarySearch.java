@@ -30,15 +30,17 @@ public class LocalObituarySearch implements ObituarySearch {
 			ggh = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
 			Collection coll = ggh.findAll();
 			
+			int counter = 0;
 			Iterator it = coll.iterator();
 			while (it.hasNext()) {
 				Object o = it.next();
-				Grave g = (Grave) o;
-				    
+
+				GraveLocallyStored g = (GraveLocallyStored) o;				
+				
 				result.add(new Grave(
-						g.getGraveId(),
+						g.getId(),
 						g.getFirstName(),
-						g.getLastName(),
+						g.getLastName(),						
 						g.getDateOfBirth(),
 						g.getDateOfDeath(),
 						null,
