@@ -36,7 +36,7 @@ public class SearchFormBackingBean {
 	private String personIdentifier;
 	private Graveyard graveyard;
 	
-	private String database = "1";
+	private int databaseId = 1;
 	
 	
 	private static Map graveyards;
@@ -60,9 +60,7 @@ public class SearchFormBackingBean {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			
 			//ObituarySearch os = sib.getSearch(stringToInt(this.database));
-			System.out.println("db = " + this.database);
-			System.out.println("str to int db = " + stringToInt(this.database));
-			ObituarySearch os = sib.getSearch(stringToInt(this.database));
+			ObituarySearch os = sib.getSearch(this.databaseId);
 			List listOfGraveyards = (List) os.getGraveyards();
 			
 			for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
@@ -95,12 +93,12 @@ public class SearchFormBackingBean {
 		this.graveyard = Graveyard;
 	}
 
-	public String getDatabase() {
-		return database;
+	public int getDatabaseId() {
+		return databaseId;
 	}
 
-	public void setDatabase(String database) {
-		this.database = database;
+	public void setDatabaseId(int databaseId) {
+		this.databaseId = databaseId;
 		
 		//here some actions when database is changed
 		//in future this could be done via ActionListener...
@@ -238,7 +236,7 @@ public class SearchFormBackingBean {
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup
 					.getServiceInstance(iwc, SearchImplBroker.class);
-			ObituarySearch os = sib.getSearch(stringToInt(this.database));
+			ObituarySearch os = sib.getSearch(this.getDatabaseId());
 	
 			searchResults = (ArrayList) 
 				os.findGraves(

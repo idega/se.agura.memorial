@@ -178,7 +178,7 @@
 								<br />
 							</f:verbatim>
 							<h:selectOneMenu id="database" 
-								value="#{graveyardSearchBean.database}" onchange="this.form.submit();" >
+								value="#{graveyardSearchBean.databaseId}" onchange="this.form.submit();" >
 								<f:selectItem itemValue="1" itemLabel="Malmö"/>
 								<f:selectItem itemValue="2" itemLabel="Övriga"/>
 							</h:selectOneMenu>
@@ -217,7 +217,8 @@
 					value="#{graveyardSearchBean.searchResults}" rows="10">
 					<h:column>
 						<!-- <h:outputText value="#{person.rowNr}." /> -->
-                        <h:outputText value="[TODO]" />
+                        <!-- <h:outputText value="[TODO]" /> -->
+                        <h:outputText value="" />
 					</h:column>
 					<h:column>
 						
@@ -249,8 +250,9 @@
 					</h:column>
 					<h:column>
 						<h:commandLink action="showObituaryAction" immediate="true">							
-							<h:outputText value="#{localizedStrings['se.agura.memorial']['show']}" />
-							<f:param name="graveId" value="#{grave.graveId}" />							
+							<h:outputText value="#{localizedStrings['se.agura.memorial']['show']}" />							
+							<f:param name="graveId" value="#{grave.graveId}" />
+							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
 						</h:commandLink>
 					</h:column>
 				</x:dataTable>

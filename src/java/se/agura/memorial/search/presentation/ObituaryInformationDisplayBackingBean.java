@@ -15,6 +15,8 @@ import com.idega.presentation.IWContext;
 public class ObituaryInformationDisplayBackingBean {
 	String graveId;
 	
+	int databaseId = 0;
+	
 	private Grave grave = null;
 	
 	public String getGraveId() {
@@ -38,7 +40,7 @@ public class ObituaryInformationDisplayBackingBean {
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			
-			ObituarySearch os = sib.getSearch(1);
+			ObituarySearch os = sib.getSearch(this.getDatabaseId());
 			this.grave = os.findGrave(this.getGraveId());
 			
 			System.out.println("aaa");
@@ -59,6 +61,15 @@ public class ObituaryInformationDisplayBackingBean {
 
 	public Grave getGrave() {
 		return grave;
+	}
+
+	public int getDatabaseId() {
+		return databaseId;
+	}
+
+	public void setDatabaseId(int databaseId) {
+		this.databaseId = databaseId;
+		System.out.println("this.databaseId: " + this.databaseId);
 	}
 	
 }

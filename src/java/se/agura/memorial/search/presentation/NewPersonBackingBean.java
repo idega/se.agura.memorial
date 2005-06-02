@@ -5,7 +5,7 @@ import se.agura.memorial.search.data.GraveLocallyStoredHome;
 
 import com.idega.data.IDOLookup;
 
-public class NewPersonBean {
+public class NewPersonBackingBean {
 	String firstName;
 	String lastName;
 	String dateOfBirth;

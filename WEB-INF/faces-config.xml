@@ -42,7 +42,7 @@
 	<managed-bean>
 		<description>new Person</description>
 		<managed-bean-name>newPersonBean</managed-bean-name>
-		<managed-bean-class>se.agura.memorial.search.presentation.NewPersonBean</managed-bean-class>		
+		<managed-bean-class>se.agura.memorial.search.presentation.NewPersonBackingBean</managed-bean-class>		
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>	
 	
@@ -50,6 +50,10 @@
 		<managed-bean-name>obituaryInformationDisplayBackingBean</managed-bean-name>
 		<managed-bean-class>se.agura.memorial.search.presentation.ObituaryInformationDisplayBackingBean</managed-bean-class>		
 		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>databaseId</property-name>
+			<value>#{param.databaseId}</value>
+		</managed-property> 
 		<managed-property>
 			<property-name>graveId</property-name>
 			<value>#{param.graveId}</value>
