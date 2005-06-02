@@ -73,8 +73,8 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			data1.setID(1);			
 			data1.setFirstName("Anders Beril Ove");
 			data1.setLastName("Andersson");			
-			data1.setDateOfBirth(Timestamp.valueOf("1945.03.02"));			
-			data1.setDateOfDeath(Timestamp.valueOf("2001.01.02"));
+			data1.setDateOfBirth(Timestamp.valueOf("1945-03-02"));			
+			data1.setDateOfDeath(Timestamp.valueOf("2001-01-02"));
 			data1.setHomeTown("Ystad");
 			data1.setBurialPlace("Stockholm");			
 			data1.setCemetery("Skogskyrkärden");			
