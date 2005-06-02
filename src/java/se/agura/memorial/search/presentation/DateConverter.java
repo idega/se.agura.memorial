@@ -14,8 +14,16 @@ public class DateConverter implements Converter{
 
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) throws ConverterException {
 		// TODO Auto-generated method stub
-		String s = (String) arg2;
-		return formatDateString(s);
+		
+		//this should be correct
+		//String s = (String) arg2;
+		//return formatDateString(s);
+		
+		
+		
+		//if (arg2 == null) return "???? ?? ??";
+		return "2222 22 22";
+		//return arg2.toString();
 	}
 	
 	private String formatDateString(String arg1) {	
