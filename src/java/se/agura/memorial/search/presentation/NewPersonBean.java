@@ -1,5 +1,10 @@
 package se.agura.memorial.search.presentation;
 
+import se.agura.memorial.search.data.GraveLocallyStored;
+import se.agura.memorial.search.data.GraveLocallyStoredHome;
+
+import com.idega.data.IDOLookup;
+
 public class NewPersonBean {
 	String firstName;
 	String lastName;
@@ -82,7 +87,35 @@ public class NewPersonBean {
 	}
 		
 	public String save() {
-		//here we call businness logic
+		//
+        try {
+			GraveLocallyStoredHome home = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
+			GraveLocallyStored gls = home.create();
+			
+			gls.setFirstName(this.getFirstName());			
+			gls.setLastName(this.getLastName());
+			
+			gls.setDateOfBirth(new java.sql.Date(new java.util.Date().getTime())); //TODO
+			gls.setDateOfDeath(new java.sql.Date(new java.util.Date().getTime())); //TODO
+			
+			gls.setHomeTown(this.getHometown());
+			
+			gls.setCemetery(this.getCemetery());
+			gls.setBurialPlace(this.getBurialPlace());
+			gls.setBlock(this.getBlock());
+			gls.setDepartment(this.getDepartment());
+			gls.setGraveNumber(this.getGraveNumber());
+			
+			gls.setAPIDBConnection("API DB CONN TEST"); //TODO
+			gls.setDatabaseName("Local"); //TODO
+						
+			gls.store();			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "failure";
+		}		
 		
 		return "success";
 	}
