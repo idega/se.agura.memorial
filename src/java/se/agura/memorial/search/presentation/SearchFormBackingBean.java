@@ -62,7 +62,7 @@ public class SearchFormBackingBean {
 			//ObituarySearch os = sib.getSearch(stringToInt(this.database));
 			System.out.println("db = " + this.database);
 			System.out.println("str to int db = " + stringToInt(this.database));
-			ObituarySearch os = sib.getSearch(1);
+			ObituarySearch os = sib.getSearch(stringToInt(this.database));
 			List listOfGraveyards = (List) os.getGraveyards();
 			
 			for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
@@ -83,6 +83,7 @@ public class SearchFormBackingBean {
 	private boolean moreThen100ResultsFound;
 
 	public int getSearchResultCount() {
+		if  (searchResults == null) return 0; 
 		return searchResults.size();
 	}
 
@@ -255,7 +256,7 @@ public class SearchFormBackingBean {
 			// TODO: handle exception
 			e.printStackTrace();
 		}			
-		
+		if (searchResults == null) searchResults = new ArrayList();  
 	
 		if (searchResults.size() > 100) {
 			
