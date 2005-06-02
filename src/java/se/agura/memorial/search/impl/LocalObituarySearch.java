@@ -59,7 +59,7 @@ public class LocalObituarySearch implements ObituarySearch {
 	}
 
 	public Collection getGraveyards() {
-		// TODO make this work using GraveGraveyard
+
 		List result = new ArrayList();
 		
 		GraveGraveyardHome ggh = null;	            
@@ -94,8 +94,39 @@ public class LocalObituarySearch implements ObituarySearch {
 	}
 
 	public Grave findGrave(String graveId) {
-		// TODO make this work using data.GraveLocallyStored
-		return null;
+         
+	    Grave grave = null;
+		
+		GraveLocallyStoredHome ggh = null;	            
+        try {
+			ggh = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
+			Collection coll = ggh.findAll();
+			
+			int counter = 0;
+			Iterator it = coll.iterator();
+			if (it.hasNext()) {
+				Object o = it.next();
+
+				GraveLocallyStored g = (GraveLocallyStored) o;				
+				
+				grave = new Grave(
+						g.getId(),
+						g.getFirstName(),
+						g.getLastName(),						
+						g.getDateOfBirth(),
+						g.getDateOfDeath(),
+						null,
+						null);
+				
+
+			}				
+			
+		} catch (Exception e) {
+			System.out.println("error occured while getting one grave:");
+			e.printStackTrace();
+		}
+		
+		return grave;
 	}
 
 }
