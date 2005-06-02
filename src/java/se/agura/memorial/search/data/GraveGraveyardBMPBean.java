@@ -56,7 +56,7 @@ public class GraveGraveyardBMPBean extends GenericEntity  implements GraveGravey
 		data1.store();
 
 		GraveGraveyard data2 = home.create();
-		data1.setGraveyardName("Local 2. graveyard");
+		data2.setGraveyardName("Local 2. graveyard");
 //		data1.setGraveDatabaseConn(null);  // TODO
 		data2.store();
 	}
