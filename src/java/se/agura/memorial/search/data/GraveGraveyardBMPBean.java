@@ -13,7 +13,7 @@ import com.idega.data.query.WildCardColumn;
 public class GraveGraveyardBMPBean extends GenericEntity  implements GraveGraveyard{ 
 	private final static String ENTITY_NAME = "MS_GRAVE_GRAVEYARD";
 	private static final String COLUMN_GRAVEYARD_NAME = "graveyard_name";
-	private static final String COLUMN_DATABASE_CONNECTION = "database_connection";
+//	private static final String COLUMN_DATABASE_CONNECTION = "database_connection";
 	
 	
 	public String getEntityName() {		
@@ -29,20 +29,20 @@ public class GraveGraveyardBMPBean extends GenericEntity  implements GraveGravey
 	
 	// i am pretty unsure, if this will work at all :) 
 	// seems like it is supposed to work with ID
-    public void setGraveDatabaseConn(GraveDatabaseConn conn) {
-        setColumn(COLUMN_DATABASE_CONNECTION, conn);
-    }
+//    public void setGraveDatabaseConn(GraveDatabaseConn conn) {
+//        setColumn(COLUMN_DATABASE_CONNECTION, conn);
+//    }
 	
 	// i am pretty unsure, if this will work at all :) 
 	// seems like it is supposed to work with ID
-    public GraveDatabaseConn getGraveDatabaseConn() {        
-		return (GraveDatabaseConn) getColumnValue(COLUMN_DATABASE_CONNECTION);		
-    }
+//    public GraveDatabaseConn getGraveDatabaseConn() {        
+//		return (GraveDatabaseConn) getColumnValue(COLUMN_DATABASE_CONNECTION);		
+//    }
 	
 
 	public void initializeAttributes() {
 		addAttribute(getIDColumnName()); // Primary key
-		addManyToOneRelationship(COLUMN_DATABASE_CONNECTION, GraveDatabaseConn.class);
+//		addManyToOneRelationship(COLUMN_DATABASE_CONNECTION, GraveDatabaseConn.class);
 		addAttribute(COLUMN_GRAVEYARD_NAME, "Graveyard name", true, true,
 				String.class, 200);
 	}
@@ -52,12 +52,12 @@ public class GraveGraveyardBMPBean extends GenericEntity  implements GraveGravey
 
 		GraveGraveyard data1 = home.create();
 		data1.setGraveyardName("Local 1. graveyard");		
-		data1.setGraveDatabaseConn(null);  // TODO
+//		data1.setGraveDatabaseConn(null);  // TODO
 		data1.store();
 
 		GraveGraveyard data2 = home.create();
 		data1.setGraveyardName("Local 2. graveyard");
-		data1.setGraveDatabaseConn(null);  // TODO
+//		data1.setGraveDatabaseConn(null);  // TODO
 		data2.store();
 	}
 	

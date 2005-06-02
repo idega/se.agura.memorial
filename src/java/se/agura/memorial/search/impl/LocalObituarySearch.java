@@ -33,15 +33,15 @@ public class LocalObituarySearch implements ObituarySearch {
 			ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
 			Collection coll = ggh.findAll();
 			
+			int counter = 0;
 			Iterator it = coll.iterator();
 			while (it.hasNext()) {
 				Object o = it.next();
-
-				GraveGraveyard g = (GraveGraveyard) o;
-				
+				System.out.println("one more graveyard!");
+				GraveGraveyard g = (GraveGraveyard) o;				
 				
 				result.add(new Graveyard(
-						1,//()g.getPrimaryKey(),
+						++counter,//()g.getPrimaryKey(),
 						g.getGraveyardName(),
 						g.getGraveyardName(),
 						1));
