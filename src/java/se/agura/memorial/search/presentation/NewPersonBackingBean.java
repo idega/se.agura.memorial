@@ -6,12 +6,15 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.CreateException;
+import javax.ejb.FinderException;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
 import se.agura.memorial.search.business.SearchImplBroker;
+import se.agura.memorial.search.data.GraveDatabaseConn;
+import se.agura.memorial.search.data.GraveDatabaseConnHome;
 import se.agura.memorial.search.data.GraveGraveyard;
 import se.agura.memorial.search.data.GraveGraveyardHome;
 import se.agura.memorial.search.data.GraveLocallyStored;
@@ -111,9 +114,13 @@ public class NewPersonBackingBean {
 			
 			try {
 		
+				GraveDatabaseConnHome gdch = (GraveDatabaseConnHome) IDOLookup.getHome(GraveDatabaseConn.class);
+				GraveDatabaseConn conn = gdch.findByPrimaryKey(new Integer(2)); //TODO
+				
 				GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
 				GraveGraveyard gg = ggh.create();
 				gg.setGraveyardName(this.getNewGraveyard());
+				gg.setGraveDatabaseConn(conn);
 				gg.store();
 				
 				this.setExistingGraveyardId((Integer)gg.getPrimaryKey());
@@ -121,6 +128,9 @@ public class NewPersonBackingBean {
 			} catch (IDOLookupException e) {				
 				e.printStackTrace();				
 			} catch (CreateException e) {				
+				e.printStackTrace();
+			} catch (FinderException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
