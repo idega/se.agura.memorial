@@ -98,7 +98,7 @@ version="1.2">
                 </h:inputText>
                 
                 <h:outputLabel for="graveNumber">
-                    <h:outputText value="Grave number"/>
+                    <h:outputText value="Grave number (is)"/>
                 </h:outputLabel> 
                 <h:inputText id="graveNumber" value="#{newPersonBean.graveNumber}" maxlength="5" >
                     <f:validateLength maximum="50" minimum="0" />
