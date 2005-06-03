@@ -17,8 +17,8 @@ public class GraveDatabaseConnBMPBean extends GenericEntity  implements GraveDat
 	private final static String ENTITY_NAME = "MS_GRAVE_DATABASE_CONN";
 	
 	private final static String COLUMN_DATABASE_NAME = "database_name";
-	private final static String COLUMN_API_DB_CONNECTION = "API_DB_connection";
-	
+	private final static String COLUMN_API_DB_CONNECTION = "API_DB_connection";	
+	private final static String COLUMN_DESCRIPTION = "description";	
 	
 	public String getEntityName() {		
 		return ENTITY_NAME;
@@ -26,12 +26,16 @@ public class GraveDatabaseConnBMPBean extends GenericEntity  implements GraveDat
 
 	public void initializeAttributes() {
 		addAttribute(getIDColumnName()); // Primary key
-		addAttribute(COLUMN_DATABASE_NAME, "Database name", true, true,
+		addAttribute(COLUMN_DATABASE_NAME, "Database connection name", true, true,
 				String.class, 200);
 		addAttribute(COLUMN_API_DB_CONNECTION,
-				"full class name of database connection implementation", true, true,
+				"Full class name of database connection implementation", true, true,
+				String.class, 200);
+		addAttribute(COLUMN_DESCRIPTION,
+				"Description", true, true,
 				String.class, 200);
 	}
+	
 	
 	public void setDatabaseName(String name) {
 		setColumn(COLUMN_DATABASE_NAME, name);
@@ -45,19 +49,30 @@ public class GraveDatabaseConnBMPBean extends GenericEntity  implements GraveDat
 	}
 	public String getAPIDBConnection() {
 		return getStringColumnValue(COLUMN_API_DB_CONNECTION);
-	}	
+	}		
+	
+	public void setDescription(String description) {
+		setColumn(COLUMN_DESCRIPTION, description);
+	}
+	public String getDescription() {
+		return getStringColumnValue(COLUMN_DESCRIPTION);
+	}
+	
+	
 
 	public void insertStartData() throws Exception {
 		GraveDatabaseConnHome home = (GraveDatabaseConnHome) IDOLookup.getHome(GraveDatabaseConn.class);
 
 		GraveDatabaseConn data1 = home.create();
-		data1.setDatabaseName("Malmo");
+		data1.setDatabaseName("Malm\u00f6"); //Malmo:
 		data1.setAPIDBConnection("se.agura.memorial.search.impl.MalmoChurchSearch");
+		data1.setDescription("Malmo church database search");
 		data1.store();
 
 		GraveDatabaseConn data2 = home.create();
-		data2.setDatabaseName("Ovriga (Local)");
+		data2.setDatabaseName("\u00d6vriga"); //O:vriga
 		data2.setAPIDBConnection("se.agura.memorial.search.impl.LocalObituarySearch");
+		data2.setDescription("Localy stored graves search");
 		data2.store();
 	}	
 	

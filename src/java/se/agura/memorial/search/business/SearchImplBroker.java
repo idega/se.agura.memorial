@@ -3,6 +3,8 @@
  */
 package se.agura.memorial.search.business;
 
+
+
 import se.agura.memorial.search.api.ObituarySearch;
 
 import com.idega.business.IBOService;

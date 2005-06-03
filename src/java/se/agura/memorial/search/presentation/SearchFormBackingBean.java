@@ -2,11 +2,13 @@ package se.agura.memorial.search.presentation;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.FinderException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
@@ -16,9 +18,14 @@ import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
 import se.agura.memorial.search.business.SearchImplBroker;
+import se.agura.memorial.search.data.GraveDatabaseConn;
+import se.agura.memorial.search.data.GraveDatabaseConnHome;
+import se.agura.memorial.search.util.Utility;
 
 import com.idega.business.IBOLookup;
 import com.idega.business.IBOLookupException;
+import com.idega.data.IDOLookup;
+import com.idega.data.IDOLookupException;
 import com.idega.idegaweb.IWBundle;
 import com.idega.presentation.IWContext;
 
@@ -144,7 +151,7 @@ public class SearchFormBackingBean {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = leftTrimRightTrim(firstName);
+		this.firstName = Utility.leftTrimRightTrim(firstName);
 	}
 
 	public String getHometown() {
@@ -152,7 +159,7 @@ public class SearchFormBackingBean {
 	}
 
 	public void setHometown(String hometown) {
-		this.hometown = leftTrimRightTrim(hometown);
+		this.hometown = Utility.leftTrimRightTrim(hometown);
 	}
 
 	public String getSurname() {
@@ -160,7 +167,7 @@ public class SearchFormBackingBean {
 	}
 
 	public void setSurname(String surname) {
-		this.surname = leftTrimRightTrim(surname);
+		this.surname = Utility.leftTrimRightTrim(surname);
 	}
 
 	// this is needed for converter
@@ -202,23 +209,49 @@ public class SearchFormBackingBean {
 		return searchResults;
 	}
 	
-	private String leftTrimRightTrim(String s) {
-		if (s != null) {
-			return s.replaceAll("^\\s+", "").replaceAll("\\s+$", "");
-		} else {
-			return s;
-		}
-	}
+
 
 	public void setPersonIdentifier(String personIdentifier) {
 		this.personIdentifier = personIdentifier;
 	}
 
-
-
 	public String getPersonIdentifier() {
 		return personIdentifier;
 	}
+	
+	
+	private Collection getAllDatabaseConnections()throws FinderException,IDOLookupException {
+
+		GraveDatabaseConnHome gdch = (GraveDatabaseConnHome) IDOLookup.getHome(GraveDatabaseConn.class);
+		Collection coll = gdch.findAll();		
+		return coll;	
+		
+	} 	
+	
+	public List getDatabaseSelectItemList() {
+		List l = new ArrayList();
+		
+		try {
+			Collection c = getAllDatabaseConnections();
+			
+			for (Iterator iter = c.iterator(); iter.hasNext();) {
+				GraveDatabaseConn gdc = (GraveDatabaseConn) iter.next();
+				l.add(new SelectItem(gdc.getPrimaryKey(), // java.lang.Integer
+						gdc.getDatabaseName()));
+			}			
+			
+		} catch (IDOLookupException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FinderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+		return l;
+		
+	}	
+	
 
 	/**
 	 * searches

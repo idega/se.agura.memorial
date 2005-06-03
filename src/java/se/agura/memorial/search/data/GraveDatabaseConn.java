@@ -32,4 +32,14 @@ public interface GraveDatabaseConn extends IDOEntity {
 	 */
 	public String getAPIDBConnection();
 
+	/**
+	 * @see se.agura.memorial.search.data.GraveDatabaseConnBMPBean#setDescription
+	 */
+	public void setDescription(String description);
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveDatabaseConnBMPBean#getDescription
+	 */
+	public String getDescription();
+
 }

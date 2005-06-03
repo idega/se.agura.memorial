@@ -32,5 +32,20 @@ public class Utility {
 	}
 	
 	
+	/**
+	 * Trims string, so "  aabb "  becomes "aabb". 
+	 * Of course, one can use String.trim() method :)
+	 * 
+	 * @param s 
+	 * @return 
+	 */
+	public static String leftTrimRightTrim(String s) {
+		if (s != null) {
+			return s.replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+		} else {
+			return s;
+		}
+	}
+	
 	
 }

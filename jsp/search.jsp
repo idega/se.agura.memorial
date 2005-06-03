@@ -172,16 +172,19 @@
 						</h:panelGroup>
 						<h:panelGroup>
 							<h:outputLabel for="database">
-								<h:outputText value="#{localizedStrings['se.agura.memorial']['database']}"/>
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['database']}s"/>
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
 							</f:verbatim>
-							<h:selectOneMenu id="database" 
-								value="#{graveyardSearchBean.databaseId}" onchange="this.form.submit();" >
-								<f:selectItem itemValue="1" itemLabel="Malmö"/>
-								<f:selectItem itemValue="2" itemLabel="Övriga"/>
+                                                      
+                           <h:selectOneMenu id="database" 
+								value="#{graveyardSearchBean.databaseId}" onchange="this.form.submit();" >								
+								<f:selectItems 
+									value="#{graveyardSearchBean.databaseSelectItemList}" />
 							</h:selectOneMenu>
+                           
+                            
 						</h:panelGroup>
 						<!-- end of 3. row -->
 						<!-- 4. row -->
