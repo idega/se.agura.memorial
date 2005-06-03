@@ -63,7 +63,6 @@ public class MalmoChurchSearch implements ObituarySearch {
 
 		String str;
 		if(date.length()<4) return 0;
-		//str = date.substring(date.length()-4,date.length()-2);
 		str = date.substring(0,4);		
 		
 		result = Integer.valueOf(str).intValue();
@@ -180,12 +179,14 @@ public class MalmoChurchSearch implements ObituarySearch {
 
 			int count = 0;
 			while (RS.next() && count <= 100) {
+				
+
 				Grave grave = new Grave(
 						RS.getString("Grav_ID")+":"+RS.getString("LopNr"), 
 						RS.getString(COLUMN_NAME_FIRST_NAME), 
 						RS.getString(COLUMN_NAME_LAST_NAME), 
-						Utility.stringToDate(RS.getString(COLUMN_NAME_DATE_OF_BIRTH)), 
-						Utility.stringToDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
+						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_DATE_OF_BIRTH)), 
+						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
 						null, 
 						null);
 				
@@ -319,8 +320,8 @@ public class MalmoChurchSearch implements ObituarySearch {
 						RS.getString(COLUMN_NAME_GRAVE_ID)+":"+RS.getString(COLUMN_NAME_LOP_NR), 
 						RS.getString(COLUMN_NAME_FIRST_NAME),    
 						RS.getString(COLUMN_NAME_LAST_NAME), 
-						Utility.stringToDate(RS.getString(COLUMN_NAME_DATE_OF_BIRTH)), 
-						Utility.stringToDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
+						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_DATE_OF_BIRTH)), 
+						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
 						RS.getString(COLUMN_NAME_HOME_TOWN),
 						new GraveInformation(
 								RS.getString(COLUMN_NAME_GRAVE_NUMBER), 

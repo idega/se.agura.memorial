@@ -12,7 +12,7 @@ import se.agura.memorial.search.data.GraveGraveyard;
 import se.agura.memorial.search.data.GraveGraveyardHome;
 import se.agura.memorial.search.data.GraveLocallyStored;
 import se.agura.memorial.search.data.GraveLocallyStoredHome;
-
+import se.agura.memorial.search.util.Utility;
 
 import com.idega.data.IDOLookup;
 
@@ -41,8 +41,8 @@ public class LocalObituarySearch implements ObituarySearch {
 						g.getColumID(),
 						g.getFirstName(),
 						g.getLastName(),						
-						g.getDateOfBirth(),
-						g.getDateOfDeath(),
+						Utility.dateToMemorialDate(g.getDateOfBirth()),
+						Utility.dateToMemorialDate(g.getDateOfDeath()),
 						null,
 						null));
 
@@ -113,8 +113,8 @@ public class LocalObituarySearch implements ObituarySearch {
 						(String)g.getPrimaryKey(),
 						g.getFirstName(),
 						g.getLastName(),						
-						g.getDateOfBirth(),
-						g.getDateOfDeath(),
+						Utility.dateToMemorialDate(g.getDateOfBirth()),
+						Utility.dateToMemorialDate(g.getDateOfDeath()),
 						null,
 						null);
 				

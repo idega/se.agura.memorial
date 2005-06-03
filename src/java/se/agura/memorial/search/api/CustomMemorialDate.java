@@ -29,6 +29,8 @@ public class CustomMemorialDate {
 		this.year = new Integer(year);
 	}	
 	
+
+
 	
 	public CustomMemorialDate(Date date) {		
 		GregorianCalendar cal = new GregorianCalendar();

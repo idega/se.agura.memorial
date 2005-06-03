@@ -1,15 +1,12 @@
 package se.agura.memorial.search.api;
 
-
-import java.util.Date;
-
 public class Grave {
 
     private String graveId;
 	private String firstName; 
 	private String lastName; 
-	private Date dateOfBirth; 
-	private Date dateOfDeath; 		
+	private CustomMemorialDate dateOfBirth; 
+	private CustomMemorialDate dateOfDeath; 		
     private String hometown;
 	
 	private GraveInformation graveInfo;
@@ -18,8 +15,8 @@ public class Grave {
 	public Grave(String graveId, 
 			     String firstName, 
 			     String lastName, 
-			     Date dateOfBirth, 
-			     Date dateOfDeath, 
+				 CustomMemorialDate dateOfBirth, 
+				 CustomMemorialDate dateOfDeath, 
 			     String hometown, 
 			     GraveInformation graveInfo) {
 		super();
@@ -34,22 +31,22 @@ public class Grave {
 	}
 
 
-	public Date getDateOfBirth() {
+	public CustomMemorialDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(CustomMemorialDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
 
-	public Date getDateOfDeath() {
+	public CustomMemorialDate getDateOfDeath() {
 		return dateOfDeath;
 	}
 	
 
-	public void setDateOfDeath(Date dateOfDeath) {
+	public void setDateOfDeath(CustomMemorialDate dateOfDeath) {
 		this.dateOfDeath = dateOfDeath;
 	}
 	
