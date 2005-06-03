@@ -21,7 +21,7 @@ public class Utility {
 		if (s.length()<8) return null;
 	    try {
 			DateFormat formatter = new SimpleDateFormat("yyyymmdd");
-			tmp = s.substring(0,8);
+			tmp = s.substring(0,7);
 	        date = (Date)formatter.parse(tmp);
 
 	    } catch (ParseException e) {
