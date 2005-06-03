@@ -27,11 +27,13 @@ public class DateConverter implements Converter{
 		if (arg2 == null) {			
 			return "???? ?? ??";
 		} else {
-			Date d = (Date) arg2;
+			//Date d = (Date) arg2;
 			
-			Format formatter = new SimpleDateFormat("yyyy MM DD");
-		    String s = formatter.format(d);
-			return s;
+			//Format formatter = new SimpleDateFormat("yyyy MM DD");
+		    //String s = formatter.format(d);
+			//return s;
+			
+			return arg2.toString();
 		}
 		
 		//return "2222 22 22";
