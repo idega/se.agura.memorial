@@ -6,7 +6,6 @@ package se.agura.memorial.search.data;
 import java.sql.Date;
 
 
-
 import com.idega.data.IDOEntity;
 
 /**
@@ -14,11 +13,6 @@ import com.idega.data.IDOEntity;
  *
  */
 public interface GraveLocallyStored extends IDOEntity {
-	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getId
-	 */
-	public String getId();
-
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getFirstName
 	 */
@@ -60,9 +54,14 @@ public interface GraveLocallyStored extends IDOEntity {
 	public String getAPIDBConnection();
 
 	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setID
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getCemetery
 	 */
-	public void setID(int id);
+	public String getCemetery();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setCemetery
+	 */
+	public void setCemetery(String cemetery);
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setFirstName
@@ -95,9 +94,9 @@ public interface GraveLocallyStored extends IDOEntity {
 	public void setBurialPlace(String burialPlace);
 
 	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setCemetery
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setCemeteryId
 	 */
-	public void setCemetery(String cemetery);
+	public void setCemeteryId(int cemetery);
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDepartment

@@ -38,7 +38,7 @@ public class LocalObituarySearch implements ObituarySearch {
 				GraveLocallyStored g = (GraveLocallyStored) o;				
 				
 				result.add(new Grave(
-						g.getId(),
+						"1",//(String)g.getPrimaryKey(),
 						g.getFirstName(),
 						g.getLastName(),						
 						g.getDateOfBirth(),
@@ -110,7 +110,7 @@ public class LocalObituarySearch implements ObituarySearch {
 				GraveLocallyStored g = (GraveLocallyStored) o;				
 				
 				grave = new Grave(
-						g.getId(),
+						(String)g.getPrimaryKey(),
 						g.getFirstName(),
 						g.getLastName(),						
 						g.getDateOfBirth(),
