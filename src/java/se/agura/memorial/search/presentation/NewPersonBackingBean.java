@@ -148,9 +148,19 @@ public class NewPersonBackingBean {
 			gls.setDateOfBirth(new java.sql.Date(new java.util.Date().getTime())); //TODO
 			gls.setDateOfDeath(new java.sql.Date(new java.util.Date().getTime())); //TODO
 			
-			gls.setHomeTown(this.getHometown());
+			gls.setHomeTown(this.getHometown());			
 			
-			gls.setCemetery(this.getNewGraveyard());
+			try {
+				GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
+				GraveGraveyard gg = ggh.findByPrimaryKey(this.getExistingGraveyardId());
+				gls.setGraveGraveyard(gg);
+			} catch (Exception e){
+				//TODO
+				System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
+				gls.setGraveGraveyard(null); 	
+			}	
+			
+			
 			gls.setBurialPlace(this.getBurialPlace());
 			gls.setBlock(this.getBlock());
 			gls.setDepartment(this.getDepartment());
