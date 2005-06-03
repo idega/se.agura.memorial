@@ -24,6 +24,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
   		
 		public static final String DATABASE_NAME = "dafault";		
 
+  		public static final String COLUMN_NAME_ID = "MS_GRAVE_LOCALLY_STORED_ID";
 		public static final String COLUMN_NAME_FIRST_NAME = "FIRST_NAME";
 		public static final String COLUMN_NAME_LAST_NAME = "LAST_NAME";
 		public static final String COLUMN_NAME_DATE_OF_BIRTH = "DATE_OF_BIRTH";
@@ -49,7 +50,6 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			addAttribute(COLUMN_NAME_DATE_OF_DEATH, "Date of death ", true, true, Date.class);
 			addAttribute(COLUMN_NAME_HOMETOWN, "Place of birth ", true, true, String.class, 50);
 			addAttribute(COLUMN_NAME_BURIAL_PLACE, "Place of dead ", true, true, String.class, 50);
-//			addAttribute(COLUMN_NAME_CEMETERY_ID, "ID ofcemetery ", true, true, Integer.class);
 			addAttribute(COLUMN_NAME_DEPARTMENT, "Description of the departament ", true, true, String.class, 30);
 			addAttribute(COLUMN_NAME_BLOCK, "Name of block ", true, true, String.class, 30);
 			addAttribute(COLUMN_NAME_GRAVE_NUMBER, "Grave number ", true, true, String.class, 15);
@@ -80,7 +80,13 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		}
 
 		
-	    public String getFirstName() {
+
+
+	    public String getColumID() {
+	        return getStringColumnValue(COLUMN_NAME_ID);
+	    }		
+		
+		public String getFirstName() {
 	        return getStringColumnValue(getColumnNameFirstName());
 	    }		
 

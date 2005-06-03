@@ -14,6 +14,11 @@ import com.idega.data.IDOEntity;
  */
 public interface GraveLocallyStored extends IDOEntity {
 	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getColumID
+	 */
+	public String getColumID();
+
+	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getFirstName
 	 */
 	public String getFirstName();
