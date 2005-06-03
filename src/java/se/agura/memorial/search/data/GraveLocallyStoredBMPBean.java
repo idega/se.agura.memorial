@@ -7,6 +7,7 @@ import javax.ejb.FinderException;
 
 import com.idega.data.GenericEntity;
 import com.idega.data.IDOLookup;
+import com.idega.data.IDOQuery;
 import com.idega.data.IDORelationshipException;
 import com.idega.data.query.Column;
 import com.idega.data.query.MatchCriteria;
@@ -113,28 +114,22 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
     }	
 
-    public void setDatabaseName(String name) {
-        setColumn(DATABASE_NAME, name);
-    }
-    public String getDatabaseName() {
-        return getStringColumnValue(DATABASE_NAME);
-    }	
-    
-    public void setAPIDBConnection(String name) {
-        setColumn(COL_API_DB_CONNECTION, name);
-    }
-    public String getAPIDBConnection() {
-        return getStringColumnValue(COL_API_DB_CONNECTION);
-    }   
+//    public void setDatabaseName(String name) {
+//        setColumn(DATABASE_NAME, name);
+//    }
+//    public String getDatabaseName() {
+//        return getStringColumnValue(DATABASE_NAME);
+//    }	
+//    
+//    public void setAPIDBConnection(String name) {
+//        setColumn(COL_API_DB_CONNECTION, name);
+//    }
+//    public String getAPIDBConnection() {
+//        return getStringColumnValue(COL_API_DB_CONNECTION);
+//    }   
+//	
 	
-	
-	public String getCemetery() {
-		return null;
-	}
 
-	public void setCemetery(String cemetery) {
-		// TODO 
-	}
 
 
 	public void setFirstName(String firstName) {
@@ -247,11 +242,19 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		
 			
 		return this.idoFindPKsByQuery(query);
+	
 	}
 
 	public String getEntityName() {		
 		return ENTITY_NAME;
 	}
 
+	public Collection ejbFindByGraveID(String graveId) throws FinderException {
+		IDOQuery query = this.idoQuery();
+		query.appendSelectAllFrom(this).appendWhereEquals(COLUMN_NAME_ID, graveId);
+		return this.idoFindPKsByQuery(query);
+	}
+	
+	
 }
 

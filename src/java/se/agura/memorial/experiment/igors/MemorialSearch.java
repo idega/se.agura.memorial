@@ -33,8 +33,8 @@ public class MemorialSearch extends Block{
 		GraveLocallyStoredHome home = (GraveLocallyStoredHome)IDOLookup.getHome(GraveLocallyStored.class);            
 		GraveLocallyStored aaa = home.create();
 		
-        aaa.setAPIDBConnection("MyConn");
-        aaa.setDatabaseName("MyDatabase");
+   //     aaa.setAPIDBConnection("MyConn");
+    //    aaa.setDatabaseName("MyDatabase");
         aaa.store();	 
 
 		

@@ -11,7 +11,7 @@ import com.idega.data.IDOHome;
 import com.idega.data.IDORelationshipException;
 
 /**
- * @author Dainis
+ * @author is
  *
  */
 public interface GraveLocallyStoredHome extends IDOHome {
@@ -28,5 +28,10 @@ public interface GraveLocallyStoredHome extends IDOHome {
 			String dateOfBirthTo, String dateOfDeathFrom, String dateOfDeathTo,
 			String hometown, String graveyard) throws FinderException,
 			IDORelationshipException;
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#ejbFindByGraveID
+	 */
+	public Collection findByGraveID(String graveId) throws FinderException;
 
 }

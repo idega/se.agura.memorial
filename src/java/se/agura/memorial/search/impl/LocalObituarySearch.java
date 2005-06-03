@@ -107,35 +107,35 @@ public class LocalObituarySearch implements ObituarySearch {
 	public Grave findGrave(String graveId) {
          
 	    Grave grave = null;
-//TODO: get by primary key		
-//		GraveLocallyStoredHome ggh = null;	            
-//        try {
-//			ggh = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
-//			Collection coll = ggh.findAll();
-//			
-//			int counter = 0;
-//			Iterator it = coll.iterator();
-//			if (it.hasNext()) {
-//				Object o = it.next();
-//
-//				GraveLocallyStored g = (GraveLocallyStored) o;				
-//				
-//				grave = new Grave(
-//						g.getColumID(),						
-//						g.getFirstName(),
-//						g.getLastName(),						
-//						Utility.dateToMemorialDate(g.getDateOfBirth()),
-//						Utility.dateToMemorialDate(g.getDateOfDeath()),
-//						null,
-//						null);
-//				
-//
-//			}				
-//			
-//		} catch (Exception e) {
-//			System.out.println("error occured while getting one grave:");
-//			e.printStackTrace();
-//		}
+	
+		GraveLocallyStoredHome ggh = null;	            
+        try {
+			ggh = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
+			Collection coll = ggh.findByGraveID(graveId);
+			
+			int counter = 0;
+			Iterator it = coll.iterator();
+			if (it.hasNext()) {
+				Object o = it.next();
+
+				GraveLocallyStored g = (GraveLocallyStored) o;				
+				
+				grave = new Grave(
+						g.getColumID(),						
+						g.getFirstName(),
+						g.getLastName(),						
+						Utility.dateToMemorialDate(g.getDateOfBirth()),
+						Utility.dateToMemorialDate(g.getDateOfDeath()),
+						null,
+						null);
+				
+
+			}				
+			
+		} catch (Exception e) {
+			System.out.println("error occured while getting one grave:");
+			e.printStackTrace();
+		}
 		
 		return grave;
 	}

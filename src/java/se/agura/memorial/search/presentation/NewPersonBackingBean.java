@@ -166,8 +166,6 @@ public class NewPersonBackingBean {
 			gls.setDepartment(this.getDepartment());
 			gls.setGraveNumber(this.getGraveNumber());
 			
-			gls.setAPIDBConnection("API DB CONN TEST"); //TODO
-			gls.setDatabaseName("Local"); //TODO
 						
 			gls.store();			
 			

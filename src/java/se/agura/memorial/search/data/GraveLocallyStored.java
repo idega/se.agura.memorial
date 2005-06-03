@@ -9,7 +9,7 @@ import java.sql.Date;
 import com.idega.data.IDOEntity;
 
 /**
- * @author Dainis
+ * @author is
  *
  */
 public interface GraveLocallyStored extends IDOEntity {
@@ -37,36 +37,6 @@ public interface GraveLocallyStored extends IDOEntity {
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getDateOfDeath
 	 */
 	public Date getDateOfDeath();
-
-	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDatabaseName
-	 */
-	public void setDatabaseName(String name);
-
-	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getDatabaseName
-	 */
-	public String getDatabaseName();
-
-	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setAPIDBConnection
-	 */
-	public void setAPIDBConnection(String name);
-
-	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getAPIDBConnection
-	 */
-	public String getAPIDBConnection();
-
-	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getCemetery
-	 */
-	public String getCemetery();
-
-	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setCemetery
-	 */
-	public void setCemetery(String cemetery);
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setFirstName
