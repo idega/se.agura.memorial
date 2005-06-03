@@ -32,7 +32,7 @@ public class GraveGraveyardBMPBean extends GenericEntity  implements GraveGravey
         setColumn(COLUMN_GRAVE_DATABASE_CONN_ID, conn);
     }	
 
-    public GraveDatabaseConn getGraveDatabaseConnId() {        
+    public GraveDatabaseConn getGraveDatabaseConn() {        
 		return (GraveDatabaseConn) getColumnValue(COLUMN_GRAVE_DATABASE_CONN_ID);		
     }
 	

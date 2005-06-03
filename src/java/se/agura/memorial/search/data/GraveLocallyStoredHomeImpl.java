@@ -11,7 +11,7 @@ import com.idega.data.IDOFactory;
 import com.idega.data.IDORelationshipException;
 
 /**
- * @author is
+ * @author Dainis
  *
  */
 public class GraveLocallyStoredHomeImpl extends IDOFactory implements
@@ -39,14 +39,6 @@ public class GraveLocallyStoredHomeImpl extends IDOFactory implements
 				.ejbFindGraves(firstName, lastName, personIdentifier,
 						dateOfBirthFrom, dateOfBirthTo, dateOfDeathFrom,
 						dateOfDeathTo, hometown, graveyard);
-		this.idoCheckInPooledEntity(entity);
-		return this.getEntityCollectionForPrimaryKeys(ids);
-	}
-
-	public Collection findAll() throws FinderException {
-		com.idega.data.IDOEntity entity = this.idoCheckOutPooledEntity();
-		java.util.Collection ids = ((GraveLocallyStoredBMPBean) entity)
-				.ejbFindAll();
 		this.idoCheckInPooledEntity(entity);
 		return this.getEntityCollectionForPrimaryKeys(ids);
 	}

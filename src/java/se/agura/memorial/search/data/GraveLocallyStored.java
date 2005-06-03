@@ -9,7 +9,7 @@ import java.sql.Date;
 import com.idega.data.IDOEntity;
 
 /**
- * @author is
+ * @author Dainis
  *
  */
 public interface GraveLocallyStored extends IDOEntity {
@@ -99,9 +99,14 @@ public interface GraveLocallyStored extends IDOEntity {
 	public void setBurialPlace(String burialPlace);
 
 	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setCemeteryId
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setGraveGraveyard
 	 */
-	public void setCemeteryId(int cemetery);
+	public void setGraveGraveyard(GraveGraveyard graveGraveyard);
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getGraveGraveyard
+	 */
+	public GraveGraveyard getGraveGraveyard(GraveGraveyard graveGraveyard);
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDepartment

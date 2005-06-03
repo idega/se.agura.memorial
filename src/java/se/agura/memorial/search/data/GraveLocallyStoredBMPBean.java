@@ -1,10 +1,5 @@
 package se.agura.memorial.search.data;
 
-
-
-
-
-
 import java.sql.Date;
 import java.util.Collection;
 
@@ -18,292 +13,245 @@ import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.Order;
 import com.idega.data.query.SelectQuery;
 import com.idega.data.query.Table;
-import com.idega.data.query.WildCardColumn;
 
 public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLocallyStored{
 
-  		public static String TABLE_NAME = "MS_GRAVE_LOCALLY_STORED";
-  		public static String TABLE_CEMETERY = "MS_GRAVE_GRAVEYARD";
+	public static String ENTITY_NAME = "MS_GRAVE_LOCALLY_STORED";
+	public static String TABLE_GRAVEYARD = "MS_GRAVE_GRAVEYARD";
 
-		public static String COL_API_DB_CONNECTION = "default";		
-  		
-		public static final String DATABASE_NAME = "dafault";		
+	public static String COL_API_DB_CONNECTION = "default";		
+	
+	public static final String DATABASE_NAME = "dafault";		
 
-  		public static final String COLUMN_NAME_ID = "MS_GRAVE_LOCALLY_STORED_ID";
-		public static final String COLUMN_NAME_FIRST_NAME = "FIRST_NAME";
-		public static final String COLUMN_NAME_LAST_NAME = "LAST_NAME";
-		public static final String COLUMN_NAME_DATE_OF_BIRTH = "DATE_OF_BIRTH";
-		public static final String COLUMN_NAME_DATE_OF_DEATH = "DATE_OF_DEATH";
-		public static final String COLUMN_NAME_HOMETOWN = "HOMETOWN";
-		public static final String COLUMN_NAME_BURIAL_PLACE = "BURIAL_PLACE";
-		public static final String COLUMN_NAME_CEMETERY = "GRAVEYARD_NAME";
-		public static final String COLUMN_NAME_CEMETERY_ID = "CEMETERY_ID";		
-		public static final String COLUMN_NAME_DEPARTMENT = "DEPARTMENT";
-		public static final String COLUMN_NAME_BLOCK = "BLOCK";
-		public static final String COLUMN_NAME_GRAVE_NUMBER = "GRAVE_NUMBER";
+	public static final String COLUMN_NAME_ID = "MS_GRAVE_LOCALLY_STORED_ID";
+	public static final String COLUMN_NAME_FIRST_NAME = "FIRST_NAME";
+	public static final String COLUMN_NAME_LAST_NAME = "LAST_NAME";
+	public static final String COLUMN_NAME_DATE_OF_BIRTH = "DATE_OF_BIRTH";
+	public static final String COLUMN_NAME_DATE_OF_DEATH = "DATE_OF_DEATH";
+	public static final String COLUMN_NAME_HOMETOWN = "HOMETOWN";
+	public static final String COLUMN_NAME_BURIAL_PLACE = "BURIAL_PLACE";
+	//public static final String COLUMN_NAME_CEMETERY = "GRAVEYARD_NAME";
+	public static final String COLUMN_NAME_GRAVEYARD_ID = "GRAVEYARD_ID";		
+	public static final String COLUMN_NAME_DEPARTMENT = "DEPARTMENT";
+	public static final String COLUMN_NAME_BLOCK = "BLOCK";
+	public static final String COLUMN_NAME_GRAVE_NUMBER = "GRAVE_NUMBER";
+	private static final String COLUMN_NAME_GRAVEYARD_NAME = "graveyard_name";
 
-		public GraveLocallyStoredBMPBean() {
-			super();
-		}
-		
-		public void initializeAttributes() {
- 
-			addAttribute(getIDColumnName());
-			addAttribute(COLUMN_NAME_FIRST_NAME, "person first name  ", true, true, String.class, 40);
-			addAttribute(COLUMN_NAME_LAST_NAME, "person last name ", true, true, String.class, 25);
-			addAttribute(COLUMN_NAME_DATE_OF_BIRTH, "Date of birth ", true, true, Date.class); 
-			addAttribute(COLUMN_NAME_DATE_OF_DEATH, "Date of death ", true, true, Date.class);
-			addAttribute(COLUMN_NAME_HOMETOWN, "Place of birth ", true, true, String.class, 50);
-			addAttribute(COLUMN_NAME_BURIAL_PLACE, "Place of dead ", true, true, String.class, 50);
-			addAttribute(COLUMN_NAME_DEPARTMENT, "Description of the departament ", true, true, String.class, 30);
-			addAttribute(COLUMN_NAME_BLOCK, "Name of block ", true, true, String.class, 30);
-			addAttribute(COLUMN_NAME_GRAVE_NUMBER, "Grave number ", true, true, String.class, 15);
-			addManyToOneRelationship(COLUMN_NAME_CEMETERY_ID, GraveGraveyard.class);
-			
+	public GraveLocallyStoredBMPBean() {
+		super();
+	}
 
+	public void initializeAttributes() {
 
-		}
-
-		public void insertStartData() throws Exception {
-			GraveLocallyStoredHome home = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
-
-			GraveLocallyStored data1 = home.create();
-			data1.setFirstName("Anders Beril Ove");
-			data1.setLastName("Andersson");			
-			data1.setDateOfBirth(Date.valueOf("1945-03-02"));			
-			data1.setDateOfDeath(Date.valueOf("2001-01-02"));
-
-			data1.setHomeTown("Ystad");
-			data1.setBurialPlace("Stockholm");			
-			data1.setCemeteryId(1);			
-			data1.setDepartment("Rad 12");			
-			data1.setBlock("Kv 4");			
-			data1.setGraveNumber("0045");			
-			
-			data1.store();
-				
-		}
-
-		
-
-
-	    public String getColumID() {
-	        return getStringColumnValue(COLUMN_NAME_ID);
-	    }		
-		
-		public String getFirstName() {
-	        return getStringColumnValue(getColumnNameFirstName());
-	    }		
-
-	    public String getLastName() {
-	        return getStringColumnValue(getColumnNameLastName());
-	    }		
-
-	    public Date getDateOfBirth() {
-			return getDateColumnValue(getColumnNameDateOfBirth()) ;
-			
-
-	    }		
-
-	    public Date getDateOfDeath() {
-			return getDateColumnValue(getColumnNameDateOfDeath()) ;
-
-	    }		
-
-		
-		public static String getGraveLocallyStoredTableName() {
-			return TABLE_NAME;
-		}
-
-		public static String getColumnNameFirstName() {
-			return COLUMN_NAME_FIRST_NAME;
-		}
-
-		public static String getColumnNameLastName() {
-			return COLUMN_NAME_LAST_NAME;
-		}
-
-		public static String getColumnNameDateOfBirth() {
-			return COLUMN_NAME_DATE_OF_BIRTH;
-		}
-
-		public static String getColumnNameDateOfDeath() {
-			return COLUMN_NAME_DATE_OF_DEATH;
-		}
-
-		public static String getColumnNameHomeTown() {
-			return COLUMN_NAME_HOMETOWN;
-		}
-
-		public static String getColumnNameBurialPlace() {
-			return COLUMN_NAME_BURIAL_PLACE;
-		}
-
-		public static String getColumnNameBlock() {
-			return COLUMN_NAME_BLOCK;
-		}
-
-
-		public static String getColumnNameCemeteryId() {
-			return COLUMN_NAME_CEMETERY_ID;
-		}
-		
-		
-		public static String getColumnNameDepartment() {
-			return COLUMN_NAME_DEPARTMENT;
-		}
-
-		public static String getColumnNameGraveNumber() {
-			return COLUMN_NAME_GRAVE_NUMBER;
-		}
-		
-		
-		public String getEntityName() {
-			return getGraveLocallyStoredTableName();
-		}
-
-
-        public void setDatabaseName(String name) {
-            setColumn(DATABASE_NAME, name);
-        }
-        public String getDatabaseName() {
-            return getStringColumnValue(DATABASE_NAME);
-        }	
-        
-        public void setAPIDBConnection(String name) {
-            setColumn(COL_API_DB_CONNECTION, name);
-        }
-        public String getAPIDBConnection() {
-            return getStringColumnValue(COL_API_DB_CONNECTION);
-        }   
-		
-		
-		public String getCemetery() {
-			return null;
-		}
-
-		public void setCemetery(String cemetery) {
-			// TODO 
-		}
-
-
-		public void setFirstName(String firstName) {
-			setColumn(getColumnNameFirstName(), firstName);
-		}
-
-		public void setLastName(String lastName) {
-			setColumn(getColumnNameLastName(), lastName);
-		}
-
-		public void setDateOfBirth(Date dateOfBirth) {
-			setColumn(getColumnNameDateOfBirth(), dateOfBirth);
-		}
-
-		public void setDateOfDeath(Date dateOfDeath) {
-			setColumn(getColumnNameDateOfDeath(), dateOfDeath);
-		}
-		
-		
-		public void setHomeTown(String homeTown) {
-			setColumn(getColumnNameHomeTown(), homeTown);
-		}
-
-		public void setBurialPlace(String burialPlace) {
-			setColumn(getColumnNameBurialPlace(), burialPlace);
-		}
-
-		public void setCemeteryId(int cemetery) {
-			setColumn(getColumnNameCemeteryId(), cemetery);
-		}
-		public void setDepartment(String department) {
-			setColumn(getColumnNameDepartment(), department);
-		}	
-
-		public void setBlock(String block) {
-			setColumn(getColumnNameBlock(), block);
-		}		
-
-		public void setGraveNumber(String graveNumber) {
-			setColumn(getColumnNameGraveNumber(), graveNumber);
-		}			
-				
-		public Collection ejbFindGraves(
-										String firstName, 
-										String lastName, 
-										String personIdentifier, 
-										String dateOfBirthFrom, 
-										String dateOfBirthTo, 
-										String dateOfDeathFrom, 
-										String dateOfDeathTo, 
-										String hometown,
-										String graveyard) 
-		throws FinderException, IDORelationshipException { 
-			
-		    Table table = new Table(TABLE_NAME);
-		    Table tableGraveyard = new Table(TABLE_CEMETERY);
-
-			
-			SelectQuery query = new SelectQuery(table);
-		    
-		    Column colGraveID = new Column(table, COLUMN_NAME_ID);
-			Column colFirstName = new Column(table, COLUMN_NAME_FIRST_NAME);
-			Column colLastName = new Column(table, COLUMN_NAME_LAST_NAME);		
-			Column colDateOfBirth = new Column(table, COLUMN_NAME_DATE_OF_BIRTH);		
-			Column colDateOfDeath = new Column(table, COLUMN_NAME_DATE_OF_DEATH);		
-			Column colHomeTown = new Column(table, COLUMN_NAME_HOMETOWN);
-			Column colGraveyard = new Column(tableGraveyard, COLUMN_NAME_CEMETERY);
-
-			
-			String sqlStatement = query.toString();					
-
-			
-			query.addColumn(colGraveID);
-			query.addColumn(colFirstName);
-			query.addColumn(colLastName);
-			query.addColumn(colDateOfBirth);
-			query.addColumn(colDateOfDeath);
-			query.addColumn(colGraveyard);			
-			sqlStatement = query.toString();
-			
-			sqlStatement = query.toString();
-			
-			query.addJoin(table,COLUMN_NAME_CEMETERY_ID,tableGraveyard,"MS_GRAVE_GRAVEYARD_ID");
-			
-
-
-			sqlStatement = query.toString();					
-			StringBuffer sqlQuery = new StringBuffer();
-				
-			if (firstName != null)  query.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"));
-			if (lastName != null)  query.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
-			if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
-			if (hometown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + hometown.trim() + "%"));
-			if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
-			if (dateOfDeathTo != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, "%" + dateOfDeathTo.trim() + "%"));
-			
-			Order orderByFirstName = new Order(colFirstName, true);
-			Order orderByLastName = new Order(colLastName, true);		
-			
-			query.addOrder(orderByLastName);
-			query.addOrder(orderByFirstName);
-			sqlStatement=query.toString();
-			
-				
-			return this.idoFindPKsByQuery(query);
-		}		
-
-		public Collection ejbFindAll() throws FinderException {
-			Table table = new Table(this);
-			Column name = new Column(table, getColumnNameFirstName());
-			Order order = new Order(name, true);
-			SelectQuery query = new SelectQuery(table);
-			query.addColumn(new WildCardColumn(table));
-			query.addOrder(order);
-			
-			return this.idoFindPKsByQuery(query);
-		}
-
-
+		addAttribute(getIDColumnName());
+		addAttribute(COLUMN_NAME_FIRST_NAME, "person first name  ", true, true,	String.class, 40);
+		addAttribute(COLUMN_NAME_LAST_NAME, "person last name ", true, true, String.class, 25);
+		addAttribute(COLUMN_NAME_DATE_OF_BIRTH, "Date of birth ", true, true, Date.class);
+		addAttribute(COLUMN_NAME_DATE_OF_DEATH, "Date of death ", true, true,Date.class);
+		addAttribute(COLUMN_NAME_HOMETOWN, "Place of birth ", true, true,String.class, 50);
+		addAttribute(COLUMN_NAME_BURIAL_PLACE, "Place of dead ", true, true,String.class, 50);
+		addAttribute(COLUMN_NAME_DEPARTMENT, "Description of the departament ",	true, true, String.class, 30);
+		addAttribute(COLUMN_NAME_BLOCK, "Name of block ", true, true,String.class, 30);
+		addAttribute(COLUMN_NAME_GRAVE_NUMBER, "Grave number ", true, true,	String.class, 15);
+		addManyToOneRelationship(COLUMN_NAME_GRAVEYARD_ID, GraveGraveyard.class);
 
 	}
+
+	public void insertStartData() throws Exception {
+		GraveLocallyStoredHome home = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
+
+		GraveLocallyStored data1 = home.create();
+		data1.setFirstName("Anders Beril Ove");
+		data1.setLastName("Andersson");			
+		data1.setDateOfBirth(Date.valueOf("1945-03-02"));			
+		data1.setDateOfDeath(Date.valueOf("2001-01-02"));
+
+		data1.setHomeTown("Ystad");
+		data1.setBurialPlace("Stockholm");			
+		
+				
+		//data1.setGraveGraveyard(null); 	
+		
+		//we dont want null
+		try {
+			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
+			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
+			data1.setGraveGraveyard(gg);
+		} catch (Exception e){
+			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
+			data1.setGraveGraveyard(null); 	
+		}
+				
+		data1.setDepartment("Rad 12");			
+		data1.setBlock("Kv 4");			
+		data1.setGraveNumber("0045");			
+		
+		data1.store();
+			
+	}
+
+
+    public String getColumID() {
+        return getStringColumnValue(COLUMN_NAME_ID);
+    }		
+	
+	public String getFirstName() {
+        return getStringColumnValue(COLUMN_NAME_FIRST_NAME);
+    }		
+
+    public String getLastName() {
+        return getStringColumnValue(COLUMN_NAME_LAST_NAME);
+    }		
+
+    public Date getDateOfBirth() {
+		return getDateColumnValue(COLUMN_NAME_DATE_OF_BIRTH) ;		
+
+    }		
+
+    public Date getDateOfDeath() {
+		return getDateColumnValue(COLUMN_NAME_DATE_OF_DEATH) ;
+
+    }	
+
+    public void setDatabaseName(String name) {
+        setColumn(DATABASE_NAME, name);
+    }
+    public String getDatabaseName() {
+        return getStringColumnValue(DATABASE_NAME);
+    }	
+    
+    public void setAPIDBConnection(String name) {
+        setColumn(COL_API_DB_CONNECTION, name);
+    }
+    public String getAPIDBConnection() {
+        return getStringColumnValue(COL_API_DB_CONNECTION);
+    }   
+	
+	
+	public String getCemetery() {
+		return null;
+	}
+
+	public void setCemetery(String cemetery) {
+		// TODO 
+	}
+
+
+	public void setFirstName(String firstName) {
+		setColumn(COLUMN_NAME_FIRST_NAME, firstName);
+	}
+
+	public void setLastName(String lastName) {
+		setColumn(COLUMN_NAME_LAST_NAME, lastName);
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		setColumn(COLUMN_NAME_DATE_OF_BIRTH, dateOfBirth);
+	}
+
+	public void setDateOfDeath(Date dateOfDeath) {
+		setColumn(COLUMN_NAME_DATE_OF_DEATH, dateOfDeath);
+	}
+	
+	
+	public void setHomeTown(String homeTown) {
+		setColumn(COLUMN_NAME_HOMETOWN, homeTown);
+	}
+
+	public void setBurialPlace(String burialPlace) {
+		setColumn(COLUMN_NAME_BURIAL_PLACE, burialPlace);
+	}
+
+	
+	public void setGraveGraveyard(GraveGraveyard graveGraveyard) {
+		setColumn(COLUMN_NAME_GRAVEYARD_ID, graveGraveyard);
+	}
+	
+	public GraveGraveyard getGraveGraveyard(GraveGraveyard graveGraveyard) {			
+		return (GraveGraveyard) getColumnValue(COLUMN_NAME_GRAVEYARD_ID);	
+	}
+	
+
+	
+	public void setDepartment(String department) {
+		setColumn(COLUMN_NAME_DEPARTMENT, department);
+	}	
+
+	public void setBlock(String block) {
+		setColumn(COLUMN_NAME_BLOCK, block);
+	}		
+
+	public void setGraveNumber(String graveNumber) {
+		setColumn(COLUMN_NAME_GRAVE_NUMBER, graveNumber);
+	}			
+			
+	public Collection ejbFindGraves(
+									String firstName, 
+									String lastName, 
+									String personIdentifier, 
+									String dateOfBirthFrom, 
+									String dateOfBirthTo, 
+									String dateOfDeathFrom, 
+									String dateOfDeathTo, 
+									String hometown,
+									String graveyard) 
+	throws FinderException, IDORelationshipException { 
+		
+	    Table table = new Table(ENTITY_NAME);
+	    Table tableGraveyard = new Table(TABLE_GRAVEYARD);
+
+		
+		SelectQuery query = new SelectQuery(table);
+	    
+	    Column colGraveID = new Column(table, COLUMN_NAME_ID);
+		Column colFirstName = new Column(table, COLUMN_NAME_FIRST_NAME);
+		Column colLastName = new Column(table, COLUMN_NAME_LAST_NAME);		
+		Column colDateOfBirth = new Column(table, COLUMN_NAME_DATE_OF_BIRTH);		
+		Column colDateOfDeath = new Column(table, COLUMN_NAME_DATE_OF_DEATH);		
+		Column colHomeTown = new Column(table, COLUMN_NAME_HOMETOWN);
+		Column colGraveyard = new Column(tableGraveyard, COLUMN_NAME_GRAVEYARD_NAME);  //TODO
+		
+		String sqlStatement = query.toString();					
+
+		
+		query.addColumn(colGraveID);
+		query.addColumn(colFirstName);
+		query.addColumn(colLastName);
+		query.addColumn(colDateOfBirth);
+		query.addColumn(colDateOfDeath);
+		query.addColumn(colGraveyard);			
+		sqlStatement = query.toString();
+		
+		sqlStatement = query.toString();
+		
+		query.addJoin(table,COLUMN_NAME_GRAVEYARD_ID,tableGraveyard,"MS_GRAVE_GRAVEYARD_ID");
+		
+
+
+		sqlStatement = query.toString();					
+		StringBuffer sqlQuery = new StringBuffer();
+			
+		if (firstName != null)  query.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"));
+		if (lastName != null)  query.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
+		if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
+		if (hometown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + hometown.trim() + "%"));
+		if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
+		if (dateOfDeathTo != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, "%" + dateOfDeathTo.trim() + "%"));
+		
+		Order orderByFirstName = new Order(colFirstName, true);
+		Order orderByLastName = new Order(colLastName, true);		
+		
+		query.addOrder(orderByLastName);
+		query.addOrder(orderByFirstName);
+		sqlStatement=query.toString();
+		
+			
+		return this.idoFindPKsByQuery(query);
+	}
+
+	public String getEntityName() {		
+		return ENTITY_NAME;
+	}
+
+}
 

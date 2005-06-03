@@ -28,8 +28,8 @@ public interface GraveGraveyard extends IDOEntity {
 	public void setGraveDatabaseConn(GraveDatabaseConn conn);
 
 	/**
-	 * @see se.agura.memorial.search.data.GraveGraveyardBMPBean#getGraveDatabaseConnId
+	 * @see se.agura.memorial.search.data.GraveGraveyardBMPBean#getGraveDatabaseConn
 	 */
-	public GraveDatabaseConn getGraveDatabaseConnId();
+	public GraveDatabaseConn getGraveDatabaseConn();
 
 }

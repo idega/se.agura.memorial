@@ -11,11 +11,11 @@ import com.idega.data.IDOHome;
 import com.idega.data.IDORelationshipException;
 
 /**
- * @author is
+ * @author Dainis
  *
  */
 public interface GraveLocallyStoredHome extends IDOHome {
-	public GraveLocallyStored create() throws javax.ejb.CreateException; 
+	public GraveLocallyStored create() throws javax.ejb.CreateException;
 
 	public GraveLocallyStored findByPrimaryKey(Object pk)
 			throws javax.ejb.FinderException;
@@ -28,10 +28,5 @@ public interface GraveLocallyStoredHome extends IDOHome {
 			String dateOfBirthTo, String dateOfDeathFrom, String dateOfDeathTo,
 			String hometown, String graveyard) throws FinderException,
 			IDORelationshipException;
-
-	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#ejbFindAll
-	 */
-	public Collection findAll() throws FinderException;
 
 }
