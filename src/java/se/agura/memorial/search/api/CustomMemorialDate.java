@@ -11,26 +11,26 @@ import java.util.GregorianCalendar;
  * There are no consitency checks for now, so actually 
  * date 2007-77-99 can be created, it's up to programmer to avoid such situations	
  */
-public class GraveCustomDate {
+public class CustomMemorialDate {
 	private Integer day = null;
 	private Integer month = null;
 	private Integer year = null;
 	
-	public GraveCustomDate(Integer day, Integer month, Integer year) {
+	public CustomMemorialDate(Integer year,  Integer month, Integer day) {
 		this.day = day;
 		this.month = month;
 		this.year = year;
 	}
 	
 	
-	public GraveCustomDate(int day, int month, int year) {
+	public CustomMemorialDate(int year, int month,  int day) {
 		this.day = new Integer(day);
 		this.month = new Integer(month);
 		this.year = new Integer(year);
 	}	
 	
 	
-	public GraveCustomDate(Date date) {		
+	public CustomMemorialDate(Date date) {		
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(date);	
 		
@@ -67,7 +67,7 @@ public class GraveCustomDate {
 		
 		s = (this.year != null) ? this.year.toString() : "????";
 		if (s.length() < 4) {
-			for (int i =0; i < s.length(); i++) {
+			for (int i = 0; i < (4 - s.length()); i++) {
 				sb.append('0');
 			}
 		}			
@@ -77,7 +77,7 @@ public class GraveCustomDate {
 		
 		s = (this.month != null) ? this.month.toString() : "??";
 		if (s.length() < 2) {
-			for (int i =0; i < s.length(); i++) {
+			for (int i = 0; i < (2 - s.length()); i++) {
 				sb.append('0');
 			}
 		}			
@@ -86,7 +86,7 @@ public class GraveCustomDate {
 		
 		s = (this.day != null) ? this.day.toString() : "??";
 		if (s.length() < 2) {
-			for (int i =0; i < s.length(); i++) {
+			for (int i = 0; i < (2 - s.length()); i++) {
 				sb.append('0');
 			}
 		}			
