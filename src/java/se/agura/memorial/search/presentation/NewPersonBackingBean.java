@@ -1,9 +1,27 @@
 package se.agura.memorial.search.presentation;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.ejb.CreateException;
+import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+
+import se.agura.memorial.search.api.Graveyard;
+import se.agura.memorial.search.api.ObituarySearch;
+import se.agura.memorial.search.business.SearchImplBroker;
+import se.agura.memorial.search.data.GraveGraveyard;
+import se.agura.memorial.search.data.GraveGraveyardHome;
 import se.agura.memorial.search.data.GraveLocallyStored;
 import se.agura.memorial.search.data.GraveLocallyStoredHome;
 
+import com.idega.business.IBOLookup;
+import com.idega.business.IBOLookupException;
 import com.idega.data.IDOLookup;
+import com.idega.data.IDOLookupException;
+import com.idega.presentation.IWContext;
 
 public class NewPersonBackingBean {
 	String firstName;
@@ -12,7 +30,10 @@ public class NewPersonBackingBean {
 	String dateOfDeath;
 	String hometown;
 	String burialPlace;
-	String cemetery;
+	
+	String newGraveyard;
+	Integer existingGraveyardId;
+	
 	String department;
 	String block;
 	String graveNumber;
@@ -29,12 +50,6 @@ public class NewPersonBackingBean {
 	}
 	public void setBurialPlace(String burialPlace) {
 		this.burialPlace = burialPlace;
-	}
-	public String getCemetery() {
-		return cemetery;
-	}
-	public void setCemetery(String cemetery) {
-		this.cemetery = cemetery;
 	}
 
 	public String getDateOfBirth() {
@@ -87,7 +102,32 @@ public class NewPersonBackingBean {
 	}
 		
 	public String save() {
-		//
+	
+		// if user entered new graveyard, then 
+		// insert new cemetery in grave_graveyard table
+		// and use that new value
+		
+		if (this.getNewGraveyard() != null) { 
+			
+			try {
+		
+				GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
+				GraveGraveyard gg = ggh.create();
+				gg.setGraveyardName(this.getNewGraveyard());
+				gg.store();
+				
+				this.setExistingGraveyardId((Integer)gg.getPrimaryKey());
+				
+			} catch (IDOLookupException e) {				
+				e.printStackTrace();				
+			} catch (CreateException e) {				
+				e.printStackTrace();
+			}
+			
+			
+			
+		} 
+		
         try {
 			GraveLocallyStoredHome home = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
 			GraveLocallyStored gls = home.create();
@@ -100,7 +140,7 @@ public class NewPersonBackingBean {
 			
 			gls.setHomeTown(this.getHometown());
 			
-			gls.setCemetery(this.getCemetery());
+			gls.setCemetery(this.getNewGraveyard());
 			gls.setBurialPlace(this.getBurialPlace());
 			gls.setBlock(this.getBlock());
 			gls.setDepartment(this.getDepartment());
@@ -115,8 +155,59 @@ public class NewPersonBackingBean {
 			// TODO: handle exception
 			e.printStackTrace();
 			return "failure";
-		}		
+		}	
+			
 		
 		return "success";
 	}
+	
+	public Integer getExistingGraveyardId() {
+		return existingGraveyardId;
+	}
+	
+	public void setExistingGraveyardId(Integer existingGraveyardId) {
+		this.existingGraveyardId = existingGraveyardId;
+	}
+	
+	public String getNewGraveyard() {
+		return newGraveyard;
+	}
+	
+	public void setNewGraveyard(String newGraveyard) {
+		this.newGraveyard = newGraveyard;
+	}
+	
+	
+	public List getGraveyardSelectItemList() {
+		List l = new ArrayList();
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		IWContext iwc = IWContext.getIWContext(facesContext);		
+		
+		SearchImplBroker sib;
+		try {
+			sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
+			ObituarySearch os = sib.getSearch(2); //TODO dynamic database id here
+			List listOfGraveyards = (List) os.getGraveyards();
+			
+			for (Iterator iter = listOfGraveyards.iterator(); iter.hasNext();) {
+				Graveyard g = (Graveyard) iter.next();
+				l.add(new SelectItem(new Integer(g.getId()), // java.lang.Integer
+						g.getBenamning()));
+			}			
+			
+			
+		} catch (IBOLookupException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+
+		return l;
+		
+	}	
+	
 }

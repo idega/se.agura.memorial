@@ -220,7 +220,7 @@ public class SearchFormBackingBean {
 	}
 	
 	
-	private Collection getAllDatabaseConnections()throws FinderException,IDOLookupException {
+	private Collection getAllDatabaseConnections() throws FinderException,IDOLookupException {
 
 		GraveDatabaseConnHome gdch = (GraveDatabaseConnHome) IDOLookup.getHome(GraveDatabaseConn.class);
 		Collection coll = gdch.findAll();		

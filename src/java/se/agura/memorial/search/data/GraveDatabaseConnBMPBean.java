@@ -72,7 +72,7 @@ public class GraveDatabaseConnBMPBean extends GenericEntity  implements GraveDat
 		GraveDatabaseConn data2 = home.create();
 		data2.setDatabaseName("\u00d6vriga"); //O:vriga
 		data2.setAPIDBConnection("se.agura.memorial.search.impl.LocalObituarySearch");
-		data2.setDescription("Localy stored graves search");
+		data2.setDescription("Locally stored graves search");
 		data2.store();
 	}	
 	

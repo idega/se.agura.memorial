@@ -57,18 +57,31 @@ version="1.2">
             <f:validateLength maximum="25" minimum="0" />
         </h:inputText> 
     
+        <h:outputLabel for="newGraveyard">
+            <h:outputText value="Graveyard (create new)"/>
+        </h:outputLabel>    	                                        
+        <h:inputText id="newGraveyard" value="#{newPersonBean.newGraveyard}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+        </h:inputText>         
+        
     
-        <h:outputLabel for="cemetery">
-            <h:outputText value="Cemetery"/>
+        <h:outputLabel for="existingGraveyard">
+            <h:outputText value="Graveyard (choose existing)"/>
         </h:outputLabel>    
     
         <h:panelGroup>
             
             <h:panelGrid columns="7" cellspacing="6" border="0">
                
-                <h:inputText id="cemetery" value="#{newPersonBean.cemetery}" maxlength="25" >
+                <!--
+                <h:inputText id="existingGraveyard" value="#{newPersonBean.existingGraveyardId}" maxlength="25" >
                     <f:validateLength maximum="25" minimum="0" />
-                </h:inputText>            
+                </h:inputText>
+                -->                
+                <h:selectOneMenu id="existingGraveyard" value="#{newPersonBean.existingGraveyardId}" >								
+				    <f:selectItems 	value="#{newPersonBean.graveyardSelectItemList}" />
+				</h:selectOneMenu>  
+                
             
                 <h:outputLabel for="department">
                     <h:outputText value="Department"/>
