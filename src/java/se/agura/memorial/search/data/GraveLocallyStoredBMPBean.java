@@ -7,11 +7,14 @@ package se.agura.memorial.search.data;
 
 import java.sql.Date;
 import java.util.Collection;
+
 import javax.ejb.FinderException;
+
 import com.idega.data.GenericEntity;
 import com.idega.data.IDOLookup;
+import com.idega.data.IDORelationshipException;
 import com.idega.data.query.Column;
-
+import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.Order;
 import com.idega.data.query.SelectQuery;
 import com.idega.data.query.Table;
@@ -20,6 +23,8 @@ import com.idega.data.query.WildCardColumn;
 public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLocallyStored{
 
   		public static String TABLE_NAME = "MS_GRAVE_LOCALLY_STORED";
+  		public static String TABLE_CEMETERY = "MS_GRAVE_GRAVEYARD";
+
 		public static String COL_API_DB_CONNECTION = "default";		
   		
 		public static final String DATABASE_NAME = "dafault";		
@@ -31,7 +36,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		public static final String COLUMN_NAME_DATE_OF_DEATH = "DATE_OF_DEATH";
 		public static final String COLUMN_NAME_HOMETOWN = "HOMETOWN";
 		public static final String COLUMN_NAME_BURIAL_PLACE = "BURIAL_PLACE";
-		//public static final String COLUMN_NAME_CEMETERY = "CEMETERY";
+		public static final String COLUMN_NAME_CEMETERY = "GRAVEYARD_NAME";
 		public static final String COLUMN_NAME_CEMETERY_ID = "CEMETERY_ID";		
 		public static final String COLUMN_NAME_DEPARTMENT = "DEPARTMENT";
 		public static final String COLUMN_NAME_BLOCK = "BLOCK";
@@ -222,21 +227,34 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			setColumn(getColumnNameGraveNumber(), graveNumber);
 		}			
 				
-		public Collection ejbFindGraves(String firstName, String lastName, String personIdentifier, String dateOfBirthFrom, String dateOfBirthTo, String dateOfDeathFrom, String dateOfDeathTo, String hometown, String graveyard) throws FinderException {
+		public Collection ejbFindGraves(
+										String firstName, 
+										String lastName, 
+										String personIdentifier, 
+										String dateOfBirthFrom, 
+										String dateOfBirthTo, 
+										String dateOfDeathFrom, 
+										String dateOfDeathTo, 
+										String hometown,
+										String graveyard) 
+		throws FinderException, IDORelationshipException { 
 			
 		    Table table = new Table(TABLE_NAME);
+		    Table tableGraveyard = new Table(TABLE_CEMETERY);
+
+			
 			SelectQuery query = new SelectQuery(table);
-/*		    
-		    Column colGraveID = new Column(table, COLUMN_NAME_GRAVE_LOCALLY_STORED_ID);
+		    
+		    Column colGraveID = new Column(table, COLUMN_NAME_ID);
 			Column colFirstName = new Column(table, COLUMN_NAME_FIRST_NAME);
 			Column colLastName = new Column(table, COLUMN_NAME_LAST_NAME);		
 			Column colDateOfBirth = new Column(table, COLUMN_NAME_DATE_OF_BIRTH);		
 			Column colDateOfDeath = new Column(table, COLUMN_NAME_DATE_OF_DEATH);		
-			Column colGraveyard = new Column(table, COLUMN_NAME_CEMETERY);			
 			Column colHomeTown = new Column(table, COLUMN_NAME_HOMETOWN);
+			Column colGraveyard = new Column(tableGraveyard, COLUMN_NAME_CEMETERY);
+
 			
-			Order orderByFirstName = new Order(colFirstName, true);
-			Order orderByLastName = new Order(colLastName, true);		
+			String sqlStatement = query.toString();					
 
 			
 			query.addColumn(colGraveID);
@@ -244,28 +262,33 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			query.addColumn(colLastName);
 			query.addColumn(colDateOfBirth);
 			query.addColumn(colDateOfDeath);
+			query.addColumn(colGraveyard);			
+			sqlStatement = query.toString();
+			
+			sqlStatement = query.toString();
+			
+			query.addJoin(table,COLUMN_NAME_CEMETERY_ID,tableGraveyard,"MS_GRAVE_GRAVEYARD_ID");
+			
 
-			String sqlStatement = query.toString();					
+
+			sqlStatement = query.toString();					
 			StringBuffer sqlQuery = new StringBuffer();
 				
-			if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
-			if (hometown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + hometown.trim() + "%"));
 			if (firstName != null)  query.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"));
 			if (lastName != null)  query.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
-//			if (dateOfBirthTo != null){
-//				
-//			}
-//			else
-//				if (dateOfBirthFrom != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.LIKE, dateOfBirthFrom.trim() + "%"));
-				
+			if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
+			if (hometown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + hometown.trim() + "%"));
 			if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
 			if (dateOfDeathTo != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, "%" + dateOfDeathTo.trim() + "%"));
+			
+			Order orderByFirstName = new Order(colFirstName, true);
+			Order orderByLastName = new Order(colLastName, true);		
 			
 			query.addOrder(orderByLastName);
 			query.addOrder(orderByFirstName);
 			sqlStatement=query.toString();
 			
-				*/
+				
 			return this.idoFindPKsByQuery(query);
 		}		
 
