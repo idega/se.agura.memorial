@@ -78,7 +78,7 @@ public class Utility {
 	
 	public static CustomMemorialDate dateToMemorialDate(Date date) {
 
-		CustomMemorialDate memorialDate = null;
+		CustomMemorialDate memorialDate = new CustomMemorialDate(null,null,null);
 		
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(date);	
