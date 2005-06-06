@@ -12,6 +12,7 @@ import javax.ejb.FinderException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import se.agura.memorial.search.api.Grave;
@@ -43,7 +44,7 @@ public class SearchFormBackingBean {
 	private String personIdentifier;
 	private Graveyard graveyard;
 	
-	private int databaseId = 1;
+	private Integer databaseId = new Integer(1);
 	
 	
 	private static Map graveyards;
@@ -53,8 +54,6 @@ public class SearchFormBackingBean {
 	public SearchFormBackingBean() {	
 		initGraveyards();
 	}
-	
-	
 	
 	private void initGraveyards() {
 		
@@ -66,8 +65,7 @@ public class SearchFormBackingBean {
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			
-			//ObituarySearch os = sib.getSearch(stringToInt(this.database));
-			ObituarySearch os = sib.getSearch(this.databaseId);
+			ObituarySearch os = sib.getSearch(this.databaseId.intValue());
 			List listOfGraveyards = (List) os.getGraveyards();
 			
 			for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
@@ -100,18 +98,12 @@ public class SearchFormBackingBean {
 		this.graveyard = Graveyard;
 	}
 
-	public int getDatabaseId() {
+	public Integer getDatabaseId() {
 		return databaseId;
 	}
 
-	public void setDatabaseId(int databaseId) {
-		this.databaseId = databaseId;
-		
-		//here some actions when database is changed
-		//in future this could be done via ActionListener...
-		initGraveyards();
-		System.out.println("database is changed, graveyards are reloaded");
-		
+	public void setDatabaseId(Integer databaseId) {
+		this.databaseId = databaseId;		
 	}
 
 	public String getDateOfBirthFrom() {
@@ -189,37 +181,26 @@ public class SearchFormBackingBean {
 			g = (Graveyard) graveyards.get(key);
 			list.add(new SelectItem(new Integer(g.getId()).toString(), // value
 					g.getBenamning(), // label
-					"some description" // desc )
+					null // desc )
 			));
-
 		}
 
 		return list;
 	}
 
-	public List getSearchResults() {
-		
-		if (this.moreThen100ResultsFound) {		
-//			FacesContext facesContext = FacesContext.getCurrentInstance();
-//			facesContext.addMessage(null, new FacesMessage(
-//					FacesMessage.SEVERITY_WARN, "More than 100 hits",
-//					"Your search resulted in more than 100 hits – only the first 100 is shown. Please delimit your search"));
-		}
-		
+	public List getSearchResults() {			
 		return searchResults;
-	}
-	
+	}	
 
 
 	public void setPersonIdentifier(String personIdentifier) {
 		this.personIdentifier = personIdentifier;
 	}
-
+	
 	public String getPersonIdentifier() {
 		return personIdentifier;
 	}
-	
-	
+		
 	private Collection getAllDatabaseConnections() throws FinderException,IDOLookupException {
 
 		GraveDatabaseConnHome gdch = (GraveDatabaseConnHome) IDOLookup.getHome(GraveDatabaseConn.class);
@@ -269,18 +250,18 @@ public class SearchFormBackingBean {
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup
 					.getServiceInstance(iwc, SearchImplBroker.class);
-			ObituarySearch os = sib.getSearch(this.getDatabaseId());
+			ObituarySearch os = sib.getSearch(getDatabaseId().intValue());
 	
 			searchResults = (ArrayList) 
 				os.findGraves(
-						this.getFirstName(),
-						this.getSurname(),
-						this.getPersonIdentifier(),
-						this.getDateOfBirthFrom(),
-						this.getDateOfBirthTo(),
-						this.getDateOfDeceaseFrom(),
-						this.getDateOfDeceaseTo(),	           
-						this.getHometown(),
+						getFirstName(),
+						getSurname(),
+						getPersonIdentifier(),
+						getDateOfBirthFrom(),
+						getDateOfBirthTo(),
+						getDateOfDeceaseFrom(),
+						getDateOfDeceaseTo(),	           
+						getHometown(),
 						this.graveyard != null ? this.graveyard.getBenamning(): null);
 	
 		} catch (Exception e) {
@@ -326,15 +307,15 @@ public class SearchFormBackingBean {
 	 */
 	public String clear() {
 	
-		this.setFirstName(null);
-		this.setSurname(null);
-		this.setDateOfBirthFrom(null);
-		this.setDateOfBirthTo(null);
-		this.setDateOfDeceaseFrom(null);
-		this.setDateOfDeceaseTo(null);
-		this.setPersonIdentifier(null);
-		this.setHometown(null);		
-		this.setGraveyard(null);
+		setFirstName(null);
+		setSurname(null);
+		setDateOfBirthFrom(null);
+		setDateOfBirthTo(null);
+		setDateOfDeceaseFrom(null);
+		setDateOfDeceaseTo(null);
+		setPersonIdentifier(null);
+		setHometown(null);		
+		setGraveyard(null);
 		
 		searchResults = new ArrayList();
 		return "success";
@@ -357,5 +338,13 @@ public class SearchFormBackingBean {
 		}
 
 	}
+	
+	
+	public void changeDatabase(ValueChangeEvent vce) {
+		setDatabaseId((Integer)vce.getNewValue());				
+		initGraveyards();		
+		searchResults = new ArrayList();
+	}
+	
 
 }

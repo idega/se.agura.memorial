@@ -179,7 +179,9 @@
 							</f:verbatim>
                                                       
                            <h:selectOneMenu id="database" 
-								value="#{graveyardSearchBean.databaseId}" onchange="this.form.submit();" >								
+								value="#{graveyardSearchBean.databaseId}" onchange="this.form.submit();" 
+								valueChangeListener="#{graveyardSearchBean.changeDatabase}"
+								>								
 								<f:selectItems 
 									value="#{graveyardSearchBean.databaseSelectItemList}" />
 							</h:selectOneMenu>
