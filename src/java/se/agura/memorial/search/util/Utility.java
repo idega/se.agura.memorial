@@ -23,8 +23,8 @@ public class Utility {
 		
 		if (s.length()<8) return null;
 	    try {
-			DateFormat formatter = new SimpleDateFormat("yyyymmdd");
-			tmp = s.substring(0,7);
+			DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+			tmp = s.substring(0,8);
 	        date = (Date)formatter.parse(tmp);
 
 	    } catch (ParseException e) {
