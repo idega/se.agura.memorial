@@ -43,8 +43,6 @@ public class ObituaryInformationDisplayBackingBean {
 			ObituarySearch os = sib.getSearch(this.getDatabaseId());
 			this.grave = os.findGrave(this.getGraveId());
 			
-			System.out.println("aaa");
-			
 		} catch (IBOLookupException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,10 +50,6 @@ public class ObituaryInformationDisplayBackingBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();	
 		}
-		
-		System.out.println("aaa");
-		
-		System.out.println("grave: " + grave.getFirstName());
 		
 	}
 
@@ -68,8 +62,7 @@ public class ObituaryInformationDisplayBackingBean {
 	}
 
 	public void setDatabaseId(int databaseId) {
-		this.databaseId = databaseId;
-		System.out.println("this.databaseId: " + this.databaseId);
+		this.databaseId = databaseId;		
 	}
 	
 }
