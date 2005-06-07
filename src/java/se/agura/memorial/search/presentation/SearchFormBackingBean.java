@@ -42,7 +42,9 @@ public class SearchFormBackingBean {
 	private String dateOfDeceaseTo;
 	private String hometown;	
 	private String personIdentifier;
+	
 	private Graveyard graveyard;
+	private boolean graveyardSetToNull = false;
 	
 	private Integer databaseId = new Integer(1);
 	
@@ -85,6 +87,8 @@ public class SearchFormBackingBean {
 
 	private boolean moreThen100ResultsFound;
 
+	
+
 	public int getSearchResultCount() {
 		if  (searchResults == null) return 0; 
 		return searchResults.size();
@@ -95,6 +99,10 @@ public class SearchFormBackingBean {
 	}
 
 	public void setGraveyard(Graveyard Graveyard) {
+		if (graveyardSetToNull) {
+			this.graveyard = null;
+			this.graveyardSetToNull = false;
+		}
 		this.graveyard = Graveyard;
 	}
 
@@ -341,7 +349,14 @@ public class SearchFormBackingBean {
 	
 	
 	public void changeDatabase(ValueChangeEvent vce) {
-		setDatabaseId((Integer)vce.getNewValue());				
+		setDatabaseId((Integer)vce.getNewValue());	
+		
+		graveyard = null; //this won't work	if we don't use the following code	
+		// a little hack, actually right way to do that would be
+		// process this event in right phase
+		// I just dont know how to do that _yet_
+		graveyardSetToNull = true;
+		
 		initGraveyards();		
 		searchResults = new ArrayList();
 	}
