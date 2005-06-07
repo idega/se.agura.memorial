@@ -29,16 +29,17 @@ public class LocalObituarySearch implements ObituarySearch {
         try {
 			ggh = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
 			
+
 			Collection coll = ggh.findGraves(
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null);
+					firstName,
+					lastName,
+					personIdentifier,
+					dateOfBirthFrom,
+					dateOfBirthTo,
+					dateOfDeathFrom,
+					dateOfDeathTo,
+					hometown,
+					graveyard);
 			
 			int counter = 0;
 			Iterator it = coll.iterator();

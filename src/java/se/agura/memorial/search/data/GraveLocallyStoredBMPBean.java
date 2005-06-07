@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import javax.ejb.FinderException;
 
+import se.agura.memorial.search.util.Utility;
+
 import com.idega.data.GenericEntity;
 import com.idega.data.IDOLookup;
 import com.idega.data.IDOQuery;
@@ -209,8 +211,18 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		if (lastName != null)  query.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
 		if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
 		if (hometown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + hometown.trim() + "%"));
-		if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
-		if (dateOfDeathTo != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, "%" + dateOfDeathTo.trim() + "%"));
+//		if(dateOfBirthTo != null){
+//		  // TODO search from - to
+//		}
+//		else
+//			if (dateOfBirthFrom != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.EQUALS, "'"+Utility.stringToDate(dateOfBirthFrom)+"'"));
+//		
+//		if (dateOfDeathTo != null){
+//			  // TODO search from - to
+//		}
+//		else 
+//			if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
+
 		
 		Order orderByFirstName = new Order(colFirstName, true);
 		Order orderByLastName = new Order(colLastName, true);		
