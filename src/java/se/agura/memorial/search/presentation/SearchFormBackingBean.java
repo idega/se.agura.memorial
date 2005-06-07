@@ -18,6 +18,7 @@ import javax.faces.model.SelectItem;
 import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
+import se.agura.memorial.search.business.SearchFormSessionBean;
 import se.agura.memorial.search.business.SearchImplBroker;
 import se.agura.memorial.search.data.GraveDatabaseConn;
 import se.agura.memorial.search.data.GraveDatabaseConnHome;
@@ -45,15 +46,27 @@ public class SearchFormBackingBean {
 	
 	private Graveyard graveyard;
 	private boolean graveyardSetToNull = false;
+	private static Map graveyards;
 	
 	private Integer databaseId = new Integer(1);
-	
-	
-	private static Map graveyards;
 
 	List searchResults = new ArrayList();
+	
+	private SearchFormSessionBean searchFormSessionBean = null;
 
-	public SearchFormBackingBean() {	
+	public SearchFormBackingBean() {
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		IWContext iwc = IWContext.getIWContext(facesContext);
+		try {
+			searchFormSessionBean = (SearchFormSessionBean) IBOLookup.getSessionInstance(iwc, SearchFormSessionBean.class);
+		} catch (IBOLookupException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		searchFormSessionBean.setDatabaseId(this.databaseId); 
+				
 		initGraveyards();
 	}
 	
@@ -98,12 +111,13 @@ public class SearchFormBackingBean {
 		return graveyard;
 	}
 
-	public void setGraveyard(Graveyard Graveyard) {
+	public void setGraveyard(Graveyard graveyard) {
 		if (graveyardSetToNull) {
 			this.graveyard = null;
 			this.graveyardSetToNull = false;
+			return;
 		}
-		this.graveyard = Graveyard;
+		this.graveyard = graveyard;
 	}
 
 	public Integer getDatabaseId() {
@@ -112,6 +126,7 @@ public class SearchFormBackingBean {
 
 	public void setDatabaseId(Integer databaseId) {
 		this.databaseId = databaseId;		
+		searchFormSessionBean.setDatabaseId(this.databaseId); 
 	}
 
 	public String getDateOfBirthFrom() {
