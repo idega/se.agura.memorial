@@ -1,5 +1,10 @@
 package se.agura.memorial.search.api;
 
+/**
+ * @author Igors
+ * 
+ */
+
 public class Graveyard {
 	private int id;
 
@@ -11,7 +16,7 @@ public class Graveyard {
 
 	public Graveyard(int id, String kGard, String Benamning, int distrikt_ID) {
 		super();
-		// TODO Auto-generated constructor stub
+
 		this.id = id;
 		this.kGard = kGard;
 		this.Benamning = Benamning;

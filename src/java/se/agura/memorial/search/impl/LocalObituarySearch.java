@@ -28,7 +28,6 @@ public class LocalObituarySearch implements ObituarySearch {
 		GraveLocallyStoredHome ggh = null;	            
         try {
 			ggh = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
-
 			
 			Collection coll = ggh.findGraves(
 					null,
@@ -64,8 +63,6 @@ public class LocalObituarySearch implements ObituarySearch {
 			e.printStackTrace();
 		}
 		
-	
-		
 		return result;
 	}
 
@@ -82,11 +79,9 @@ public class LocalObituarySearch implements ObituarySearch {
 			Iterator it = coll.iterator();
 			while (it.hasNext()) {
 				Object o = it.next();
-				System.out.println("one more graveyard!");
 				GraveGraveyard g = (GraveGraveyard) o;				
-				
 				result.add(new Graveyard(
-						++counter,//()g.getPrimaryKey(),
+						((Integer)g.getPrimaryKey()).intValue(),
 						g.getGraveyardName(),
 						g.getGraveyardName(),
 						1));
@@ -94,12 +89,9 @@ public class LocalObituarySearch implements ObituarySearch {
 			}				
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("error occured while getting graveyards:");
 			e.printStackTrace();
 		}
-		
-	
 		
 		return result;
 	}
@@ -119,7 +111,6 @@ public class LocalObituarySearch implements ObituarySearch {
 				Object o = it.next();
 
 				GraveLocallyStored g = (GraveLocallyStored) o;				
-				
 				grave = new Grave(
 						g.getColumID(),						
 						g.getFirstName(),
@@ -128,7 +119,6 @@ public class LocalObituarySearch implements ObituarySearch {
 						Utility.dateToMemorialDate(g.getDateOfDeath()),
 						null,
 						null);
-				
 
 			}				
 			

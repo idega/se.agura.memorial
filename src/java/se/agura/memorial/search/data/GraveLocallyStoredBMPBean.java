@@ -70,10 +70,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		data1.setHomeTown("Ystad");
 		data1.setBurialPlace("Stockholm");			
 		
-				
-		//data1.setGraveGraveyard(null); 	
-		
-		//we dont want null
+
 		try {
 			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
 			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
@@ -113,23 +110,6 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		return getDateColumnValue(COLUMN_NAME_DATE_OF_DEATH) ;
 
     }	
-
-//    public void setDatabaseName(String name) {
-//        setColumn(DATABASE_NAME, name);
-//    }
-//    public String getDatabaseName() {
-//        return getStringColumnValue(DATABASE_NAME);
-//    }	
-//    
-//    public void setAPIDBConnection(String name) {
-//        setColumn(COL_API_DB_CONNECTION, name);
-//    }
-//    public String getAPIDBConnection() {
-//        return getStringColumnValue(COL_API_DB_CONNECTION);
-//    }   
-//	
-	
-
 
 
 	public void setFirstName(String firstName) {
@@ -204,10 +184,9 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		Column colDateOfBirth = new Column(table, COLUMN_NAME_DATE_OF_BIRTH);		
 		Column colDateOfDeath = new Column(table, COLUMN_NAME_DATE_OF_DEATH);		
 		Column colHomeTown = new Column(table, COLUMN_NAME_HOMETOWN);
-		Column colGraveyard = new Column(tableGraveyard, COLUMN_NAME_GRAVEYARD_NAME);  //TODO
+		Column colGraveyard = new Column(tableGraveyard, COLUMN_NAME_GRAVEYARD_NAME);  
 		
 		String sqlStatement = query.toString();					
-
 		
 		query.addColumn(colGraveID);
 		query.addColumn(colFirstName);

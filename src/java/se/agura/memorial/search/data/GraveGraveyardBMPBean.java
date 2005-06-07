@@ -42,6 +42,7 @@ public class GraveGraveyardBMPBean extends GenericEntity  implements GraveGravey
 		addManyToOneRelationship(COLUMN_GRAVE_DATABASE_CONN_ID, GraveDatabaseConn.class);
 		addAttribute(COLUMN_GRAVEYARD_NAME, "Graveyard name", true, true,
 				String.class, 200);
+		
 	}
 
 	public void insertStartData() throws Exception {
