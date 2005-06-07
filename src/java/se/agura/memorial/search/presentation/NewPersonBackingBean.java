@@ -19,6 +19,7 @@ import se.agura.memorial.search.data.GraveGraveyard;
 import se.agura.memorial.search.data.GraveGraveyardHome;
 import se.agura.memorial.search.data.GraveLocallyStored;
 import se.agura.memorial.search.data.GraveLocallyStoredHome;
+import se.agura.memorial.search.util.Utility;
 
 import com.idega.business.IBOLookup;
 import com.idega.business.IBOLookupException;
@@ -29,8 +30,8 @@ import com.idega.presentation.IWContext;
 public class NewPersonBackingBean {
 	String firstName;
 	String lastName;
-	String dateOfBirth;
-	String dateOfDeath;
+	String dateOfBirth = "19101123";
+	String dateOfDeath = "20021031";
 	String hometown;
 	String burialPlace;
 	
@@ -145,8 +146,8 @@ public class NewPersonBackingBean {
 			gls.setFirstName(this.getFirstName());			
 			gls.setLastName(this.getLastName());
 			
-			gls.setDateOfBirth(new java.sql.Date(new java.util.Date().getTime())); //TODO
-			gls.setDateOfDeath(new java.sql.Date(new java.util.Date().getTime())); //TODO
+			gls.setDateOfBirth(new java.sql.Date(Utility.stringToDate(this.dateOfBirth).getTime())); //TODO some date quality control on jsf page, or better yet, get Date from JSF- not string
+			gls.setDateOfDeath(new java.sql.Date(Utility.stringToDate(this.dateOfDeath).getTime())); //TODO some date quality control on jsf page, or better yet, get Date from JSF- not string
 			
 			gls.setHomeTown(this.getHometown());			
 			
@@ -155,7 +156,7 @@ public class NewPersonBackingBean {
 				GraveGraveyard gg = ggh.findByPrimaryKey(this.getExistingGraveyardId());
 				gls.setGraveGraveyard(gg);
 			} catch (Exception e){
-				//TODO
+				//TODO handle error
 				System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
 				gls.setGraveGraveyard(null); 	
 			}	

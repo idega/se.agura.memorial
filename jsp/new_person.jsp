@@ -29,19 +29,18 @@ version="1.2">
         </h:inputText>	
     
         <h:outputLabel for="dateOfBirth">
-            <h:outputText value="Date of birth"/>
+            <h:outputText value="Date of birth (YYYYMMDD)"/>
         </h:outputLabel>    	                                        
-        <h:inputText id="dateOfBirth" value="#{newPersonBean.dateOfBirth}" maxlength="25" >
-            <f:validateLength maximum="25" minimum="0" />
+        <h:inputText id="dateOfBirth" value="#{newPersonBean.dateOfBirth}" maxlength="8" size="8">
+            <f:validateLength maximum="8" minimum="0" />
         </h:inputText> 
         
         <h:outputLabel for="dateOfDeath">
-            <h:outputText value="Date of death"/>
+            <h:outputText value="Date of death (YYYYMMDD)"/>
         </h:outputLabel>    	                                        
-        <h:inputText id="dateOfDeath" value="#{newPersonBean.dateOfDeath}" maxlength="25" >
-            <f:validateLength maximum="25" minimum="0" />
+        <h:inputText id="dateOfDeath" value="#{newPersonBean.dateOfDeath}" maxlength="8"  size="8">
+            <f:validateLength maximum="8" minimum="0" />
         </h:inputText>  
-   
     
         <h:outputLabel for="hometown">
             <h:outputText value="Hometown"/>
