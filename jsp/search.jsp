@@ -3,6 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:ws="http://xmlns.idega.com/com.idega.workspace" 
+	xmlns:wf="http://xmlns.idega.com/com.idega.webface" 
 	xmlns:article="http://xmlns.idega.com/com.idega.block.article" 
 	xmlns:builder="http://xmlns.idega.com/com.idega.builder" 
 	xmlns:x="http://myfaces.apache.org/extensions" version="1.2">
@@ -14,6 +15,22 @@
 			<!-- if this form is here, then nothing works in IE <h:form id="dainispagesform1">  -->
 				<!-- search form -->
 				<h:form id="searchForm">
+					
+					<wf:wfblock title="#{localizedStrings['se.agura.memorial']['search_for_person']}">
+						<f:facet name="wf_block_toolbar">
+							<wf:toolbar id="toolbar">
+							   	<h:commandLink id="searchButton" 
+									value="#{localizedStrings['se.agura.memorial']['search']}" 
+									action="#{graveyardSearchBean.search}" 
+									immediate="false" 
+									styleClass="page_preview_link"/>
+                               <h:commandLink id="clearButton" value="#{localizedStrings['se.agura.memorial']['clear']}" 
+									action="#{graveyardSearchBean.clear}" 
+									immediate="false" 
+									styleClass="page_preview_link"/>    
+							</wf:toolbar>
+						</f:facet>
+					
 					<h:panelGrid columns="5" border="0" cellspacing="5" 
 						footerClass="SearchFormFooterClass" >
 						<!-- 1. row -->
@@ -275,6 +292,8 @@
 						<h:outputText value="#{localizedStrings['se.agura.memorial']['next_page']}" />
 					</f:facet>
 				</x:dataScroller>
+
+				</wf:wfblock >
 			</h:form>
 		</ws:page>
 	</f:view>

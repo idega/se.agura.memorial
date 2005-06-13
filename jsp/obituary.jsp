@@ -3,6 +3,7 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:ws="http://xmlns.idega.com/com.idega.workspace"
+        xmlns:wf="http://xmlns.idega.com/com.idega.webface"
         xmlns:article="http://xmlns.idega.com/com.idega.block.article" 
         xmlns:builder="http://xmlns.idega.com/com.idega.builder"
         xmlns:x="http://myfaces.apache.org/extensions"        
@@ -11,9 +12,23 @@ version="1.2">
 <f:view>
 	<ws:page id="obituary">
 		<h:form id="obituaryform1">    
-			<f:verbatim>Obituary page</f:verbatim> 
+			
+					<wf:wfblock title="Obituary page">
+						<f:facet name="wf_block_toolbar">
+							<wf:toolbar id="toolbar">
+							   	<h:commandLink id="searchButton" 
+									value="#{localizedStrings['se.agura.memorial']['search']}" 
+									action="#{graveyardSearchBean.search}" 
+									immediate="true" 
+									styleClass="page_preview_link"/>
+								<h:outputLink value="" 
+									styleClass="page_preview_link">
+								  <f:verbatim>Back</f:verbatim>
+								</h:outputLink> 
+							</wf:toolbar>
+						</f:facet>
 
-		    <h:panelGrid columns="2" border="1" cellspacing="5">
+		    <h:panelGrid columns="2" border="0" cellspacing="5">
 		        <h:panelGroup>   
 		            
 		            <h:panelGrid columns="1" border="0" cellspacing="5" >   
@@ -171,7 +186,7 @@ version="1.2">
 		                    <f:verbatim><br /><br /></f:verbatim> 
 		                    <h:graphicImage 
 		                       alt=""
-		                       url="images/person-picture.png" />                    
+		                       url="#{bundles['se.agura.memorial'].resourcesPath}/images/jimi.jpg" />                    
 		                </h:panelGroup>
 		            </h:panelGrid> 
 		            
@@ -186,13 +201,14 @@ version="1.2">
 		                    <f:verbatim><br /><br /></f:verbatim> 
 		                    <h:graphicImage 
 		                       alt=""
-		                       url="images/person-grave.png" />  
+		                       url="#{bundles['se.agura.memorial'].resourcesPath}/images/jimi_headstone.jpg" />  
 		                </h:panelGroup>
 		            </h:panelGrid>    
 		        </h:panelGroup>  
 		        
 		    </h:panelGrid>
-	
+				
+			</wf:wfblock >
 
 	    </h:form>    
 	</ws:page>

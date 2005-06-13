@@ -3,6 +3,7 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:ws="http://xmlns.idega.com/com.idega.workspace"
+        xmlns:wf="http://xmlns.idega.com/com.idega.webface"
         xmlns:article="http://xmlns.idega.com/com.idega.block.article" 
         xmlns:builder="http://xmlns.idega.com/com.idega.builder"
         xmlns:x="http://myfaces.apache.org/extensions"        
@@ -12,7 +13,15 @@ version="1.2">
 	<ws:page id="obituary">
 
 	<h:form id="newPersonForm">
-	        
+
+					<wf:wfblock title="Create Grave">
+						<f:facet name="wf_block_toolbar">
+							<wf:toolbar id="toolbar">
+								<wf:toolbarbutton id="button1" displayText="#{localizedStrings['com.idega.builder']['create_simple_template.Create']}/#{localizedStrings['com.idega.builder']['create_simple_template.Edit']}" styleClass="page_create_edit_link"/>
+							   	<h:commandLink id="cbSave" value="#{localizedStrings['com.idega.builder']['create_simple_template.Save']}" action="#{newPersonBean.save}" styleClass="page_preview_link"/>
+							</wf:toolbar>
+						</f:facet>
+
     <h:panelGrid columns="2" cellspacing="7" border="0"> 
         <h:outputLabel for="firstName">
             <h:outputText value="First name"/>
@@ -81,6 +90,9 @@ version="1.2">
 				    <f:selectItems 	value="#{newPersonBean.graveyardSelectItemList}" />
 				</h:selectOneMenu>  
                 
+                <f:verbatim>					
+					<br />
+				</f:verbatim>	
             
                 <h:outputLabel for="department">
                     <h:outputText value="Department"/>
@@ -119,6 +131,8 @@ version="1.2">
         <h:commandButton value="Save" action="#{newPersonBean.save}" id="cbSave" />
         
     </h:panelGrid>    
+
+	</wf:wfblock>
 
     </h:form>
   
