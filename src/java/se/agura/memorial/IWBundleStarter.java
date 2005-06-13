@@ -1,5 +1,5 @@
 /*
- * $Id: IWBundleStarter.java,v 1.9 2005/06/02 14:36:55 dainis Exp $
+ * $Id: IWBundleStarter.java,v 1.10 2005/06/13 14:10:08 gummi Exp $
  * Created on 15.5.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -20,10 +20,10 @@ import com.idega.idegaweb.include.GlobalIncludeManager;
 
 /**
  * 
- *  Last modified: $Date: 2005/06/02 14:36:55 $ by $Author: dainis $
+ *  Last modified: $Date: 2005/06/13 14:10:08 $ by $Author: gummi $
  * 
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class IWBundleStarter implements IWBundleStartable {
 	private static final String STYLE_SHEET_URL = "/style/memorial.css";
@@ -60,35 +60,47 @@ public class IWBundleStarter implements IWBundleStartable {
 		ViewNode contentNode = cViewManager.getContentNode();
 		
 		DefaultViewNode memorialNode = new DefaultViewNode("memorial",contentNode);
-		memorialNode.setJspUri(bundle.getJSPURI("ws_search.jsp"));
+		memorialNode.setJspUri(bundle.getJSPURI("search.jsp"));
 		
 		//DefaultViewNode searchMemorialNode = new DefaultViewNode("search",memorialNode);
 		//String jspUri = bundle.getJSPURI("search_component.jsp");
 		//searchMemorialNode.setJspUri(jspUri);
 		
-		DefaultViewNode searchMemorialNode = new DefaultViewNode("Search",memorialNode);
-		searchMemorialNode.setJspUri(bundle.getJSPURI("search.jsp"));
+		DefaultViewNode obituaryNode = new DefaultViewNode("obituary",memorialNode);
+		obituaryNode.setJspUri(bundle.getJSPURI("search.jsp"));
 		
-		DefaultViewNode newPersonMemorialNode1 = new DefaultViewNode("new person",memorialNode);
-		newPersonMemorialNode1.setJspUri(bundle.getJSPURI("new_person.jsp"));
+		DefaultViewNode obituaryNodeSearch = new DefaultViewNode("search",obituaryNode);
+		obituaryNodeSearch.setJspUri(bundle.getJSPURI("search.jsp"));
+		obituaryNodeSearch.setVisibleInMenus(false);
+		
+		DefaultViewNode obituaryNodeCreate = new DefaultViewNode("create",obituaryNode);
+		obituaryNodeCreate.setJspUri(bundle.getJSPURI("create_obituary.jsp"));
+		obituaryNodeCreate.setVisibleInMenus(false);
+		
+		DefaultViewNode obituaryNodeEdit = new DefaultViewNode("edit",obituaryNode);
+		obituaryNodeEdit.setJspUri(bundle.getJSPURI("create_obituary.jsp"));
+		obituaryNodeEdit.setVisibleInMenus(false);
+		
+		DefaultViewNode obituaryNodeView = new DefaultViewNode("view",obituaryNode);
+		obituaryNodeView.setJspUri(bundle.getJSPURI("obituary.jsp"));
+		obituaryNodeView.setVisibleInMenus(false);
+		
+		DefaultViewNode obituaryNodePreview = new DefaultViewNode("preview",obituaryNode);
+		obituaryNodePreview.setJspUri(bundle.getJSPURI("obituary.jsp"));
+		obituaryNodePreview.setVisibleInMenus(false);
 		
 		
-		DefaultViewNode memorialForTestsNode = new DefaultViewNode("memorial for tests",contentNode);
+		DefaultViewNode graveNode = new DefaultViewNode("grave",memorialNode);
+		graveNode.setJspUri(bundle.getJSPURI("new_person.jsp"));
 		
-		DefaultViewNode searchMemorialForTestsNode = new DefaultViewNode("Search",memorialForTestsNode);
-		searchMemorialNode.setJspUri(bundle.getJSPURI("search.jsp"));		
+		DefaultViewNode graveNodeCreate = new DefaultViewNode("create",graveNode);
+		graveNodeCreate.setJspUri(bundle.getJSPURI("new_person.jsp"));
+		graveNodeCreate.setVisibleInMenus(false);
 		
-		DefaultViewNode obituaryMemorialNode = new DefaultViewNode("obituary",memorialForTestsNode);
-		obituaryMemorialNode.setJspUri(bundle.getJSPURI("obituary.jsp"));	
+		DefaultViewNode graveNodeEdit = new DefaultViewNode("edit",graveNode);
+		graveNodeEdit.setJspUri(bundle.getJSPURI("new_person.jsp"));
+		graveNodeEdit.setVisibleInMenus(false);
 		
-		DefaultViewNode newPersonMemorialNode = new DefaultViewNode("new person",memorialForTestsNode);
-		newPersonMemorialNode.setJspUri(bundle.getJSPURI("new_person.jsp"));
-		
-		DefaultViewNode newTest1MemorialNode = new DefaultViewNode("test 1",memorialForTestsNode);
-		newTest1MemorialNode.setJspUri(bundle.getJSPURI("style_image_l10n.jsp"));
-
-		DefaultViewNode newNaviTestMemorialNode = new DefaultViewNode("navi test",memorialForTestsNode);
-		newNaviTestMemorialNode.setJspUri(bundle.getJSPURI("navigation_test.jsp"));
 
 	}
 }
