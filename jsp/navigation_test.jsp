@@ -18,8 +18,7 @@ version="1.2">
 	        <p>
 	            Navigation OK
 	            
-              	    <h:commandLink action="newPerson" immediate="true">
-	        <h:outputText value="New Person test" />				
+		
 	            
 	        </p>
 	    </f:verbatim>
