@@ -5,16 +5,6 @@
   "http://java.sun.com/dtd/web-facesconfig_1_0.dtd">
 
 <faces-config>
-	<!--
-	<application>
-		<locale-config>
-		<default-locale>en</default-locale>
-			<supported-locale>en</supported-locale>
-			<supported-locale>sv_SE</supported-locale>
-		</locale-config>
-		<message-bundle>dainis</message-bundle>
-	</application>	
-	-->
 	
 	<navigation-rule>
 		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/style_image_l10n.jsp</from-view-id>
@@ -46,58 +36,6 @@
 		<navigation-case>
 			<from-outcome>showObituaryCreateAction</from-outcome>
 			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-	
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>navigationTest</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-	
-
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/new_person.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>showObituaryCreateAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-
-
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>showObituaryCreateAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>showObituaryCreateAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-
-
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/new_person.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>navigationTest</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-
-
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>showObituaryPreviewAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_preview.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
 	

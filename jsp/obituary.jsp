@@ -25,6 +25,21 @@ version="1.2">
 									styleClass="page_preview_link">
 								  <f:verbatim>Back</f:verbatim>
 								</h:outputLink> 
+
+							   	<h:commandLink id="test" 
+									value="TEST " 
+									action="#{showObituaryCreateAction}" 
+									immediate="true"  
+									styleClass="page_preview_link"/>
+
+							   	<h:commandLink id="test2" 
+									value="TEST2 "  
+									action="showObituaryCreateAction" 
+									immediate="true"  
+									styleClass="page_preview_link"/>
+									
+								
+								
 							</wf:toolbar>
 						</f:facet>
 
