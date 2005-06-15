@@ -13,6 +13,32 @@ import se.agura.memorial.search.api.CustomMemorialDate;
 public class Utility {
 
 
+	public static java.sql.Date stringToSQLDate(String s){
+//		java.sql.Date date = null;
+		String tmp = null;
+		java.util.Date tmpDate = null; 
+		int year=2005,month=5,day=3;
+		
+
+		java.sql.Date date = new java.sql.Date(year, month, day);
+		/*
+		if (s == null) return null;
+		
+		if (s.length()<8) return null;
+	    try {
+			DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+			tmp = s.substring(0,8);
+			tmpDate = (java.util.Date)formatter.parse(tmp);
+			date = (java.sql.Date)tmpDate;
+
+	    } catch (ParseException e) {
+	    }	
+		
+		*/
+		return date;
+	}
+	
+	
 	public static Date stringToDate(String s){
 		Date date = null;
 		String tmp = null;
