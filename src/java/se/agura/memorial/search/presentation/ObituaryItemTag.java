@@ -8,6 +8,7 @@ public class ObituaryItemTag extends UIComponentTag {
 
 	
 	private String title;
+	private String contentItem;
 	
 	/**
 	 * @see javax.faces.webapp.UIComponentTag#getRendererType()
@@ -32,19 +33,33 @@ public class ObituaryItemTag extends UIComponentTag {
 		title = null ;
 	}
 
-	protected void setProperties(UIComponent component) {      
+    protected void setContentItem(String contentItem){
+		
+		//TODO
+    }
+	
+    protected String getContentItem(){
+		
+		//TODO
+		return null;
+    }	
+	
+	protected void setProperties(UIComponent component) {
 		super.setProperties(component);
+		
 		if (component != null) {
-			if(title!=null){
-				if(isValueReference(title)){
-					ValueBinding vb = getFacesContext().getApplication().createValueBinding(title);
-					component.setValueBinding("title", vb);
-				} else {
-					component.getAttributes().put("title", title);
+			if(contentItem!=null){
+				if(isValueReference(contentItem)){
+					ValueBinding vb = getFacesContext().getApplication().createValueBinding(contentItem);
+					component.setValueBinding("contentItem", vb);
+				}
+				else {
+					ObituaryItemView viewer = (ObituaryItemView)component;
+					viewer.loadContentItem(contentItem);  //We have no other way to resolve String variable in this case.
 				}
 			}
 		}
 	}
-
+	
 	
 }

@@ -15,7 +15,7 @@ import se.agura.memorial.search.api.ObituarySearch;
 import se.agura.memorial.search.util.Utility;
 
 import com.idega.data.query.Column;
-import com.idega.data.query.InCriteria;
+
 import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.Order;
 import com.idega.data.query.SelectQuery;

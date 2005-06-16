@@ -5,11 +5,9 @@ import java.io.IOException;
 
 import se.agura.memorial.search.api.Grave;
 
-import com.idega.business.IBOLookup;
+
 import com.idega.content.bean.ContentItemBean;
 import com.idega.data.IDOStoreException;
-import com.idega.idegaweb.IWUserContext;
-import com.idega.presentation.IWContext;
 import com.idega.xml.XMLDocument;
 import com.idega.xml.XMLElement;
 import com.idega.xml.XMLException;
