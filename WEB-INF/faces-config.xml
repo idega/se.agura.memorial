@@ -23,6 +23,14 @@
 	</navigation-rule>		
 	
 	<navigation-rule>
+		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>showObituaryCreateAction</from-outcome>
+			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+	<navigation-rule>
 		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>newPerson</from-outcome>

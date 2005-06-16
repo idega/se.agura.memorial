@@ -276,6 +276,12 @@
 							<f:param name="graveId" value="#{grave.graveId}" />
 							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
 						</h:commandLink>
+						<h:commandLink action="showObituaryCreateAction" immediate="true">							
+							<h:outputText value="#{localizedStrings['se.agura.memorial']['edit']}" />							
+							<f:param name="graveId" value="#{grave.graveId}" />
+							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
+						</h:commandLink> 
+
 					</h:column>
 				</x:dataTable>
                 
