@@ -55,6 +55,7 @@ public class LocalObituarySearch implements ObituarySearch {
 						Utility.dateToMemorialDate(g.getDateOfBirth()),
 						Utility.dateToMemorialDate(g.getDateOfDeath()),
 						null,
+						null,
 						null));
 
 			}				
@@ -118,6 +119,7 @@ public class LocalObituarySearch implements ObituarySearch {
 						g.getLastName(),						
 						Utility.dateToMemorialDate(g.getDateOfBirth()),
 						Utility.dateToMemorialDate(g.getDateOfDeath()),
+						null,
 						null,
 						null);
 

@@ -1,7 +1,9 @@
 package se.agura.memorial.search.data;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import javax.ejb.FinderException;
 
@@ -60,35 +62,35 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
 	}
 
-	public void insertStartData() throws Exception {
-		GraveLocallyStoredHome home = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
-
-		GraveLocallyStored data1 = home.create();
-		data1.setFirstName("Anders Beril Ove");
-		data1.setLastName("Andersson");			
-		data1.setDateOfBirth(Date.valueOf("1945-03-02"));			
-		data1.setDateOfDeath(Date.valueOf("2001-01-02"));
-
-		data1.setHomeTown("Ystad");
-		data1.setBurialPlace("Stockholm");			
-		
-
-		try {
-			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
-			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
-			data1.setGraveGraveyard(gg);
-		} catch (Exception e){
-			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
-			data1.setGraveGraveyard(null); 	
-		}
-				
-		data1.setDepartment("Rad 12");			
-		data1.setBlock("Kv 4");			
-		data1.setGraveNumber("0045");			
-		
-		data1.store();
-			
-	}
+//	public void insertStartData() throws Exception {
+//		GraveLocallyStoredHome home = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
+//
+//		GraveLocallyStored data1 = home.create();
+//		data1.setFirstName("Anders Beril Ove");
+//		data1.setLastName("Andersson");			
+//		data1.setDateOfBirth(Date.valueOf("1945-03-02"));			
+//		data1.setDateOfDeath(Date.valueOf("2001-01-02"));
+//
+//		data1.setHomeTown("Ystad");
+//		data1.setBurialPlace("Stockholm");			
+//		
+//
+//		try {
+//			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
+//			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
+//			data1.setGraveGraveyard(gg);
+//		} catch (Exception e){
+//			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
+//			data1.setGraveGraveyard(null); 	
+//		}
+//				
+//		data1.setDepartment("Rad 12");			
+//		data1.setBlock("Kv 4");			
+//		data1.setGraveNumber("0045");			
+//		
+//		data1.store();
+//			
+//	}
 
 
     public String getColumID() {
@@ -207,33 +209,43 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		sqlStatement = query.toString();					
 		StringBuffer sqlQuery = new StringBuffer();
 			
-		if (firstName != null)  query.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"));
-		if (lastName != null)  query.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
 		if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
 		if (hometown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + hometown.trim() + "%"));
 		if(dateOfBirthTo != null){
 		  // TODO search from - to
+		} else if(dateOfBirthFrom != null){
+			//TODO
+//			query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.EQUALS, Utility.stringToSQLDate(dateOfBirthFrom).toString()));
 		}
-		else
-			if (dateOfBirthFrom != null)  query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.EQUALS, Utility.stringToSQLDate(dateOfBirthFrom).toString()));
 		
 		if (dateOfDeathTo != null){
 			  // TODO search from - to
+		} else if(dateOfDeathFrom != null) {
+			//TODO
+//			query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
 		}
-		else 
-			if (dateOfDeathFrom != null)  query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
 
 		
 		Order orderByFirstName = new Order(colFirstName, true);
 		Order orderByLastName = new Order(colLastName, true);		
 		
 		query.addOrder(orderByLastName);
-		query.addOrder(orderByFirstName);
-		sqlStatement=query.toString();
+		query.addOrder(orderByFirstName);		
 		
-			
-		return this.idoFindPKsByQuery(query);
-	
+		
+		Collection queries = Utility.getNameCriteriaQueries(firstName, lastName, colFirstName, colLastName, query,colGraveID);
+
+		int maxResult = Utility.MAX_RESULT;
+		Collection result = new ArrayList();
+		Iterator iter = queries.iterator();
+		while(result.size() < maxResult && iter.hasNext()){
+			SelectQuery q = (SelectQuery)iter.next();
+			System.out.println();
+			System.out.println(q);
+			System.out.println();
+			result.addAll(this.idoFindPKsByQuery(q,maxResult-result.size()));
+		}	
+		return result;	
 	}
 
 	public String getEntityName() {		

@@ -12,7 +12,8 @@ public class Grave {
 	private String firstName; 
 	private String lastName; 
 	private CustomMemorialDate dateOfBirth; 
-	private CustomMemorialDate dateOfDeath; 		
+	private CustomMemorialDate dateOfDeath; 
+	private CustomMemorialDate dateOfBurial; 		
     private String hometown;
 	
 	private GraveInformation graveInfo;
@@ -23,6 +24,7 @@ public class Grave {
 			     String lastName, 
 				 CustomMemorialDate dateOfBirth, 
 				 CustomMemorialDate dateOfDeath, 
+				 CustomMemorialDate dateOfBurial,
 			     String hometown, 
 			     GraveInformation graveInfo) {
 		super();
@@ -32,6 +34,7 @@ public class Grave {
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.dateOfDeath = dateOfDeath;
+		this.dateOfBurial = dateOfBurial;
 		this.hometown = hometown;
 		this.graveInfo = graveInfo;
 	}
@@ -110,4 +113,10 @@ public class Grave {
 	
 	
 		
+	public CustomMemorialDate getDateOfBurial() {
+		return dateOfBurial;
+	}
+	public void setDateOfBurial(CustomMemorialDate dateOfBurial) {
+		this.dateOfBurial = dateOfBurial;
+	}
 }

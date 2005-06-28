@@ -6,21 +6,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
-
-import se.agura.memorial.search.api.Grave;
-import se.agura.memorial.search.api.GraveInformation;
-import se.agura.memorial.search.api.Graveyard;
-import se.agura.memorial.search.api.ObituarySearch;
-import se.agura.memorial.search.presentation.ObituaryItemBean;
-import se.agura.memorial.search.util.Utility;
-
 import com.idega.data.query.Column;
 import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.Order;
 import com.idega.data.query.SelectQuery;
 import com.idega.data.query.Table;
 import com.idega.util.database.ConnectionBroker;
+import se.agura.memorial.search.api.Grave;
+import se.agura.memorial.search.api.GraveInformation;
+import se.agura.memorial.search.api.Graveyard;
+import se.agura.memorial.search.api.ObituarySearch;
+import se.agura.memorial.search.presentation.ObituaryItemBean;
+import se.agura.memorial.search.util.Utility;
 
 public class MalmoChurchSearch implements ObituarySearch {
     
@@ -32,7 +31,8 @@ public class MalmoChurchSearch implements ObituarySearch {
 	public static final String COLUMN_NAME_FIRST_NAME = "Fornamn";
 	public static final String COLUMN_NAME_LAST_NAME = "Efternamn";
 	public static final String COLUMN_NAME_PERSON_IDENTIFIER = "Pers_nr";
-	public static final String COLUMN_NAME_DATE_OF_DEATH = "Gravs_DATUM";
+	public static final String COLUMN_NAME_DATE_OF_DEATH = "Dodsdatum";
+	public static final String COLUMN_NAME_BURIAL_DATE = "Begr_datum";
 	public static final String COLUMN_NAME_HOME_TOWN = "HEMORT";
 	public static final String COLUMN_NAME_BURIAL_PLACE = "BURIAL_PLACE";
 	public static final String COLUMN_NAME_CEMETERY = "CEMETERY";
@@ -52,18 +52,17 @@ public class MalmoChurchSearch implements ObituarySearch {
 	private final static String TABLE_NAME_GA_AVDELNING = "GA_AVDELNING";
 	private final static String TABLE_NAME_GA_KVARTER = "GA_KVARTER";
 	private final static String TABLE_NAME_GA_KGARD = "GA_KGARD";
-	private final static String TABLE_NAME_SYS_LKF = "SYS_LKF";	
+	private final static String TABLE_NAME_SYS_LKF = "SYS_LKF";
+	private int maxResult = Utility.MAX_RESULT;	
 
 				
 	public Collection findGraves(String firstName, String lastName, String personIdentifier, String dateOfBirthFrom, String dateOfBirthTo, String dateOfDeathFrom, String dateOfDeathTo, String hometown, String graveyard) {
-		
-		
 		String sqlStatement=null;		
 		Collection result = new ArrayList();
 
+		//TODO Temp: remove asap
 		ObituaryItemBean aa = new ObituaryItemBean();
 		aa.setBody(null);
-        
 		aa.store();
 		
 	    Table table = new Table(TABLE_NAME);
@@ -73,6 +72,7 @@ public class MalmoChurchSearch implements ObituarySearch {
 		Column colLastName = new Column(table, COLUMN_NAME_LAST_NAME);		
 		Column colPersonIdentifier = new Column(table, COLUMN_NAME_PERSON_IDENTIFIER);		
 		Column colDateOfDeath = new Column(table, COLUMN_NAME_DATE_OF_DEATH);		
+		Column colDateOfBurial = new Column(table, COLUMN_NAME_BURIAL_DATE);
 		
 		Order orderByFirstName = new Order(colFirstName, true);
 		Order orderByLastName = new Order(colLastName, true);		
@@ -84,6 +84,7 @@ public class MalmoChurchSearch implements ObituarySearch {
 		query.addColumn(colLastName);
 		query.addColumn(colPersonIdentifier);
 		query.addColumn(colDateOfDeath);
+		query.addColumn(colDateOfBurial);
 
 		sqlStatement=query.toString();					
 		
@@ -109,14 +110,6 @@ public class MalmoChurchSearch implements ObituarySearch {
 			if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, graveyard.trim()));
 			if (hometown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + hometown.trim() + "%"));
         }
-            
-		if (firstName != null){
-			query.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"));
-		}
-		
-		if (lastName != null){
-			query.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
-		}
 		
 		/*date of birt is found from the person identifier*/
 		appendDateCriteria(dateOfBirthFrom, dateOfBirthTo, colPersonIdentifier, query);
@@ -129,12 +122,28 @@ public class MalmoChurchSearch implements ObituarySearch {
 		query.addOrder(orderByLastName);
 		query.addOrder(orderByFirstName);
 		
+		Collection queries = Utility.getNameCriteriaQueries(firstName, lastName, colFirstName, colLastName, query,colGraveID);
+		
+		Iterator iter = queries.iterator();
+		while(result.size() < maxResult && iter.hasNext()){
+			searchDatabase(result, (SelectQuery)iter.next());
+		}		
+		
+		return result;
+		
+	}
+
+
+	/**
+	 * @param result
+	 * @param query
+	 */
+	private void searchDatabase(Collection result, SelectQuery query) {
+		String sqlStatement;
 		sqlStatement=query.toString();
 		
 		System.out.println();
-		System.out.println();
 		System.out.println(sqlStatement);
-		System.out.println();
 		System.out.println();
 		
 		Connection conn = null;
@@ -146,8 +155,8 @@ public class MalmoChurchSearch implements ObituarySearch {
 			Stmt = conn.createStatement();
 			RS = Stmt.executeQuery(sqlStatement);
 
-			int count = 0;
-			while (RS.next() && count <= 100) {
+			int count = result.size();
+			while (RS.next() && count < maxResult) {
 
 				Grave grave = new Grave(
 						RS.getString(COLUMN_NAME_GRAVE_ID)+":"+RS.getString(COLUMN_NAME_LOP_NR), 
@@ -155,6 +164,7 @@ public class MalmoChurchSearch implements ObituarySearch {
 						RS.getString(COLUMN_NAME_LAST_NAME), 
 						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_PERSON_IDENTIFIER)), 
 						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
+						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_BURIAL_DATE)),
 						null, 
 						null);
 				
@@ -176,8 +186,6 @@ public class MalmoChurchSearch implements ObituarySearch {
 				ConnectionBroker.freeConnection(DATABASE, conn);
 			}
 		}
-		return result;
-		
 	}
 
 	/**
@@ -280,7 +288,9 @@ public class MalmoChurchSearch implements ObituarySearch {
 		Column colBurialPlace = new Column(table, COLUMN_NAME_HOME_TOWN);		
 		Column colDepartment = new Column(tableGA_Avdelning, COLUMN_NAME_DEPARTMENT);
 		Column colBlock = new Column(tableGA_Kvarter, COLUMN_NAME_BLOCK);
-		Column colGraveNumber = new Column(tableGA_Grav, COLUMN_NAME_GRAVE_NUMBER);		
+		Column colGraveNumber = new Column(tableGA_Grav, COLUMN_NAME_GRAVE_NUMBER);			
+		Column colDateOfBurial = new Column(table, COLUMN_NAME_BURIAL_DATE);
+		
 		
 		query.addColumn(colGraveID);
 		query.addColumn(colLopNr);
@@ -293,7 +303,8 @@ public class MalmoChurchSearch implements ObituarySearch {
 		query.addColumn(colGraveyard);		
 		query.addColumn(colDepartment);
 		query.addColumn(colBlock);
-		query.addColumn(colGraveNumber);		
+		query.addColumn(colGraveNumber);	
+		query.addColumn(colDateOfBurial);
 		
 		query.addJoin(table,COLUMN_NAME_GRAVE_ID,tableGA_Grav,COLUMN_NAME_ID);
 		query.addJoin(tableGA_Grav,COLUMN_NAME_AVDELNING_ID,tableGA_Avdelning,COLUMN_NAME_ID);
@@ -326,6 +337,7 @@ public class MalmoChurchSearch implements ObituarySearch {
 						RS.getString(COLUMN_NAME_LAST_NAME), 
 						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_PERSON_IDENTIFIER)), 
 						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
+						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_BURIAL_DATE)),
 						RS.getString(COLUMN_NAME_HOME_TOWN),
 						new GraveInformation(
 								RS.getString(COLUMN_NAME_GRAVE_NUMBER), 
