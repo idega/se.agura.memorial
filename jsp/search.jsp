@@ -6,6 +6,7 @@
 	xmlns:wf="http://xmlns.idega.com/com.idega.webface" 
 	xmlns:article="http://xmlns.idega.com/com.idega.block.article" 
 	xmlns:builder="http://xmlns.idega.com/com.idega.builder" 
+	xmlns:core="http://xmlns.idega.com/com.idega.core"
 	xmlns:x="http://myfaces.apache.org/extensions" version="1.2">
 	
 	<jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
@@ -228,6 +229,8 @@
 					<br />
 					<br />
 				</f:verbatim>
+				
+				<core:help helpTextBundle="se.agura.memorial" helpTextKey"search_help"/>
 				
 				<!-- here are error messages and warnings -->					
 				<h:messages id="messageList" showSummary="false" showDetail="true" globalOnly="true"/> 			
