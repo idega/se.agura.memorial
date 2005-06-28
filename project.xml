@@ -33,6 +33,21 @@
         <j:if test="${idegaweb.project.source.dependent}=='true'}"><eclipse.dependency>true</eclipse.dependency></j:if>
       </properties>
     </dependency>
+
+   <dependency>
+     <groupId>bundles</groupId>
+     <artifactId>com.idega.slide</artifactId>
+     <!--version>0.4.2</version-->
+     <version>SNAPSHOT</version>
+
+     <type>jar</type>
+     <url>http://www.idega.com/</url>
+     <properties>
+     <eclipse.dependency>true</eclipse.dependency>
+     </properties>
+   </dependency>
+
+
     <dependency>
       <groupId>bundles</groupId>
       <artifactId>com.idega.content</artifactId>
@@ -98,7 +113,36 @@
         <idegaweb.bundle.include>true</idegaweb.bundle.include>
         <j:if test="${idegaweb.project.source.dependent}=='true'}"><eclipse.dependency>true</eclipse.dependency></j:if>
       </properties>
+
     </dependency>
+
+    <dependency>
+      <groupId>commons-httpclient</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <!--version></version-->
+      <type>jar</type>
+      <jar>commons-httpclient-2.0.jar</jar>
+      <url>http://jakarta.apache.org/</url>
+      <properties>
+        <idegaweb.bundle.include>true</idegaweb.bundle.include>
+        <j:if test="${idegaweb.project.source.dependent}=='true'}"><eclipse.dependency>true</eclipse.dependency></j:if>
+      </properties>
+    </dependency>
+
+
+    <dependency>
+      <groupId>webdavlib</groupId>
+      <artifactId>webdavlib</artifactId>
+      <!--version></version-->
+      <type>jar</type>
+      <jar>webdavlib-2.0.jar</jar>
+      <url>http://www.webdav.org/</url>
+      <properties>
+        <idegaweb.bundle.include>true</idegaweb.bundle.include>
+        <j:if test="${idegaweb.project.source.dependent}=='true'}"><eclipse.dependency>true</eclipse.dependency></j:if>
+      </properties>
+    </dependency>
+
     <dependency>
       <groupId>mssqlserver</groupId>
       <artifactId>msbase</artifactId>

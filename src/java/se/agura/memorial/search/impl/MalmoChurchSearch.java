@@ -12,10 +12,10 @@ import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.GraveInformation;
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
+import se.agura.memorial.search.presentation.ObituaryItemBean;
 import se.agura.memorial.search.util.Utility;
 
 import com.idega.data.query.Column;
-
 import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.Order;
 import com.idega.data.query.SelectQuery;
@@ -56,8 +56,15 @@ public class MalmoChurchSearch implements ObituarySearch {
 
 				
 	public Collection findGraves(String firstName, String lastName, String personIdentifier, String dateOfBirthFrom, String dateOfBirthTo, String dateOfDeathFrom, String dateOfDeathTo, String hometown, String graveyard) {
+		
+		
 		String sqlStatement=null;		
 		Collection result = new ArrayList();
+
+		ObituaryItemBean aa = new ObituaryItemBean();
+		aa.setBody(null);
+        
+		aa.store();
 		
 	    Table table = new Table(TABLE_NAME);
 	    Column colGraveID = new Column(table, COLUMN_NAME_GRAVE_ID);
