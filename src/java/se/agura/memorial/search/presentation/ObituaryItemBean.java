@@ -3,6 +3,7 @@ package se.agura.memorial.search.presentation;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import org.apache.webdav.lib.PropertyName;
 import org.apache.webdav.lib.WebdavException;
 import org.apache.webdav.lib.WebdavResource;
 
@@ -15,9 +16,11 @@ import com.idega.data.IDOStoreException;
 import com.idega.idegaweb.IWUserContext;
 import com.idega.presentation.IWContext;
 import com.idega.slide.business.IWSlideSession;
+import com.idega.slide.util.WebdavRootResource;
 import com.idega.xml.XMLDocument;
 import com.idega.xml.XMLElement;
 import com.idega.xml.XMLException;
+import com.idega.xml.XMLNamespace;
 import com.idega.xml.XMLOutput;
 import com.idega.xml.XMLParser;
 
@@ -41,8 +44,13 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
     private Integer graveId;
 	
 	private String FIELDNAME_BODY="";
-	//private static final String idegaXMLNameSpace="<uri> http://xmlns.idega.com/se.agura.memorial </uri>.";
-	private static final String idegaXMLNameSpace="files/cms/obituary/1/30130000024.obituary/en.xml";	
+
+	public final static String ARTICLE_FILENAME_SCOPE = "obituary";
+	public final static String CONTENT_TYPE = "ContentType";
+	public static final PropertyName PROPERTY_CONTENT_TYPE = new PropertyName("IW:",CONTENT_TYPE);
+	
+	XMLNamespace idegaXMLNameSpace = new XMLNamespace("http://xmlns.agura.se/memorial");
+	
     private Grave grave;	
 	
 	
@@ -193,7 +201,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 	}
 	
 	public String getArticleName(){
-		
 		return "en.xml";
 	}
 	
@@ -203,16 +210,14 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 		if(storeOk){
 			try {
 				
-
-				
 				IWUserContext iwuc = IWContext.getInstance();
 				IWSlideSession session = (IWSlideSession)IBOLookup.getSessionInstance(iwuc,IWSlideSession.class);
-//				WebdavRootResource rootResource = session.getWebdavRootResource();
-				WebdavResource rootResource = session.getWebdavResource("");
+				WebdavRootResource rootResource = session.getWebdavRootResource();
+//				WebdavResource rootResource = session.getWebdavResource("");
 
 				//Setting the path for creating new file or creating localized version or updating existing file
 				String filePath=getResourcePath();
-				String articleFolderPath=getArticlePath();
+				String articleFolderPath= "/files/cms/obituary/test/"+((Math.random()*10000000)+10000000);//getArticlePath();   //Some random obituary id for testing
 
 				filePath=articleFolderPath+"/"+getArticleName();
 		
@@ -233,16 +238,13 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 				boolean test=rootResource.exists();
 				String path = rootResource.getPath()+filePath;
                  
-				if(rootResource.putMethod(path,"bbb")){
-//				if(rootResource.putMethod(filePath,article)){
-					//rootResource.proppatchMethod(filePath,"PROPERTY_CONTENT_TYPE","ARTICLE_FILENAME_SCOPE",true);
-					rootResource.proppatchMethod(filePath,"rrr");					
+				if(rootResource.putMethod(filePath,article)){
+					rootResource.proppatchMethod(filePath,PROPERTY_CONTENT_TYPE,ARTICLE_FILENAME_SCOPE,true);			
 				} 
 				else{
 					String fixedURL = session.getURI(filePath);
-					rootResource.putMethod(fixedURL,"ttt");
-					rootResource.putMethod(fixedURL);
-					rootResource.proppatchMethod(fixedURL,"ddd");
+					rootResource.putMethod(fixedURL,article);
+					rootResource.proppatchMethod(fixedURL,PROPERTY_CONTENT_TYPE,ARTICLE_FILENAME_SCOPE,true);
 				}
 		
 				rootResource.close();   
