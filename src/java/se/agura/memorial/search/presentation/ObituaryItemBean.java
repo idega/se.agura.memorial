@@ -206,37 +206,37 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 	
 	public void store() throws IDOStoreException,WebdavException{
 		boolean storeOk = true;
-        
+		        
 		if(storeOk){
 			try {
+				
 				
 				IWUserContext iwuc = IWContext.getInstance();
 				IWSlideSession session = (IWSlideSession)IBOLookup.getSessionInstance(iwuc,IWSlideSession.class);
 				WebdavRootResource rootResource = session.getWebdavRootResource();
 //				WebdavResource rootResource = session.getWebdavResource("");
 
+				
+				
 				//Setting the path for creating new file or creating localized version or updating existing file
 				String filePath=getResourcePath();
-				String articleFolderPath= "/files/cms/obituary/test/"+((Math.random()*10000000)+10000000);//getArticlePath();   //Some random obituary id for testing
+				String articleFolderPath= "/files/cms/obituary/test/"+Math.round(((Math.random()*10000000)+10000000));//getArticlePath();   //Some random obituary id for testing
 
-				filePath=articleFolderPath+"/"+getArticleName();
+				filePath=articleFolderPath+"/"+"test.txt";//getArticleName();
+				
 		
-				boolean hadToCreate = false;//session.createAllFoldersInPath(articleFolderPath);
+				boolean hadToCreate = session.createAllFoldersInPath(articleFolderPath);
 	
 				if(hadToCreate){
 					String fixedFolderURL = session.getURI(articleFolderPath);
-//					rootResource.proppatchMethod(fixedFolderURL,PROPERTY_CONTENT_TYPE,"LocalizedFile",true);
-					 rootResource.proppatchMethod(fixedFolderURL,"","LocalizedFile",true);					
+					rootResource.proppatchMethod(fixedFolderURL,PROPERTY_CONTENT_TYPE,"LocalizedFile",true);					
 				}
 				else{
-//					rootResource.proppatchMethod(articleFolderPath,PROPERTY_CONTENT_TYPE,"LocalizedFile",true);
-					rootResource.proppatchMethod(articleFolderPath,"","LocalizedFile",true);
+					rootResource.proppatchMethod(articleFolderPath,PROPERTY_CONTENT_TYPE,"LocalizedFile",true);
 				}
 
 				
 				String article = "aaa";//getAsXML();
-				boolean test=rootResource.exists();
-				String path = rootResource.getPath()+filePath;
                  
 				if(rootResource.putMethod(filePath,article)){
 					rootResource.proppatchMethod(filePath,PROPERTY_CONTENT_TYPE,ARTICLE_FILENAME_SCOPE,true);			
