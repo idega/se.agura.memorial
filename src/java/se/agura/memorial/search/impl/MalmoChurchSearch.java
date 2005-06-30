@@ -62,7 +62,11 @@ public class MalmoChurchSearch implements ObituarySearch {
 
 		//TODO Temp: remove asap
 		ObituaryItemBean aa = new ObituaryItemBean();
-		aa.setBody(null);
+		aa.setBody("bla bla bla ");
+		aa.setDatabaseId(Integer.valueOf("1"));
+		aa.setGraveId(Integer.valueOf("3002"));
+		aa.setGravePicturePath("wwwww");
+		aa.setPresonPicturePath("eeeee");
 		aa.store();
 		
 	    Table table = new Table(TABLE_NAME);

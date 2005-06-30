@@ -11,13 +11,16 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Set;
+
+import se.agura.memorial.search.api.CustomMemorialDate;
+import se.agura.memorial.search.presentation.ObituaryItemBean;
+
 import com.idega.data.query.AND;
 import com.idega.data.query.BaseLogicGroup;
 import com.idega.data.query.Column;
 import com.idega.data.query.InCriteria;
 import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.SelectQuery;
-import se.agura.memorial.search.api.CustomMemorialDate;
 
 public class Utility {
 
@@ -137,6 +140,10 @@ public class Utility {
 	public static Collection getNameCriteriaQueries(String firstName, String lastName, Column colFirstName, Column colLastName, SelectQuery queryBase, Column idColumn) {
 		ArrayList queries = new ArrayList();
 		
+		ObituaryItemBean aa = new ObituaryItemBean();
+		aa.setBody(null);
+		aa.store();
+		
 		if(firstName != null && lastName != null){
 			//'firstname' and 'lastname'
 			SelectQuery exactMatch = (SelectQuery)queryBase.clone();
@@ -209,16 +216,16 @@ public class Utility {
 			exactMatch.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, firstName.trim()));
 			queries.add(exactMatch);
 			
-			MatchCriteria notExact = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, firstName.trim());
-			queryBase.addCriteria(notExact);
+//			MatchCriteria notExact = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, firstName.trim());
+//			queryBase.addCriteria(notExact);
 			
 			
 			SelectQuery startsWith = (SelectQuery)queryBase.clone();
 			startsWith.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, firstName.trim() + "%"));
 			queries.add(startsWith);
 			
-			MatchCriteria notStartsWith = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, firstName.trim() + "%");
-			queryBase.addCriteria(notStartsWith);
+//			MatchCriteria notStartsWith = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, firstName.trim() + "%");
+//			queryBase.addCriteria(notStartsWith);
 			
 			
 			SelectQuery anyMatch = (SelectQuery)queryBase.clone();
@@ -230,16 +237,16 @@ public class Utility {
 			exactMatch.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, lastName.trim()));
 			queries.add(exactMatch);
 			
-			MatchCriteria notExact = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, lastName.trim());
-			queryBase.addCriteria(notExact);
+//			MatchCriteria notExact = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, lastName.trim());
+//			queryBase.addCriteria(notExact);
 			
 			
 			SelectQuery startsWith = (SelectQuery)queryBase.clone();
 			startsWith.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, lastName.trim() + "%"));
 			queries.add(startsWith);
 			
-			MatchCriteria notStartsWith = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, lastName.trim() + "%");
-			queryBase.addCriteria(notStartsWith);
+//			MatchCriteria notStartsWith = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, lastName.trim() + "%");
+//			queryBase.addCriteria(notStartsWith);
 			
 			
 			SelectQuery anyMatch = (SelectQuery)queryBase.clone();
