@@ -32,7 +32,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 
 	private String obituaryText;
 
-	private String presonPicturePath;
+	private String personPicturePath;
 
 	private String gravePicturePath;
 
@@ -42,7 +42,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 
 	private Integer databaseId;
 
-	private String FIELDNAME_BODY = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?> <article> </article>";
+	private final static String FIELDNAME_BODY = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?> <article> </article>";
 
 	public final static String ARTICLE_FILENAME_SCOPE = "obituary";
 
@@ -62,7 +62,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 
 	XMLNamespace idegaXMLNameSpace = new XMLNamespace("http://xmlns.agura.se/memorial");
 
-	private static final String CONTENT_PATH = "/files/cms/obituary/test/";
+	private static final String CONTENT_PATH = "/files/cms/obituary/";
 
 	public Integer getDatabaseId() {
 		return databaseId;
@@ -78,8 +78,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 		
 		path += getDatabaseId().toString();
 		path += "/" + getGraveId().toString();
-		path += "GraveImage/";
-		path += getContentLanguage();
+		path += ".GraveImage";
 		path += ".jpg";		
 		
 		return path;
@@ -96,8 +95,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 		
 		path += getDatabaseId().toString();
 		path += "/" + getGraveId().toString();
-		path += "PersonImage/";
-		path += getContentLanguage();
+		path += ".PersonImage";
 		path += ".jpg";
 		
 		return path;
@@ -131,8 +129,8 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 	}
 
 
-	public String getPresonPicturePath() {
-		return presonPicturePath;
+	public String getPersonPicturePath() {
+		return personPicturePath;
 	}
 
 	public String getUniqueAvenyId() {
@@ -152,7 +150,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 	}
 
 	public String getArticleName() {
-		return ".xml";
+		return ".txt";
 	}
 
 	public String[] getContentFieldNames() {
@@ -173,8 +171,8 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 		this.uniqueAvenyId = uniqueAvenyId;
 	}
 	
-	public void setPresonPicturePath(String presonPicturePath) {
-		this.presonPicturePath = presonPicturePath;
+	public void setPersonPicturePath(String presonPicturePath) {
+		this.personPicturePath = presonPicturePath;
 	}	
 	
 	public void setBody(String body) {
@@ -288,27 +286,9 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 		XMLDocument bodyDoc = null;
 		try {
 			WebdavResource theArticle = null;
-			if(webdavResource.isCollection()){
-				IWContext iwc = IWContext.getInstance();
-				
-				WebdavResources resources = webdavResource.getChildResources();
-				String userLanguageArticleName = "";//getArticleName(iwc.getCurrentLocale());
-				String systemLanguageArticleName = "";//getArticleName(iwc.getIWMainApplication().getDefaultLocale());
-				if(resources.isThereResourceName(userLanguageArticleName)){ //the language that the user has selected
-					theArticle = resources.getResource(userLanguageArticleName);
-				} else if(resources.isThereResourceName(systemLanguageArticleName)){ //the language that is default for the system
-					theArticle = resources.getResource(systemLanguageArticleName);
-				} else {  // take the first language
-					Enumeration en = resources.getResources();
-					if(en.hasMoreElements()){
-						theArticle = (WebdavResource)en.nextElement();
-					}
-				}
-			} else {
-				theArticle = webdavResource;
-			}
+			theArticle = webdavResource;
+			
 			if(theArticle!=null && !theArticle.isCollection()){
-				//setArticleResourcePath(theArticle.getPath());
 				bodyDoc = builder.parse(new ByteArrayInputStream(theArticle.getMethodDataAsString().getBytes()));
 			} else {
 				bodyDoc = null;
@@ -320,65 +300,49 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 			XMLElement rootElement = bodyDoc.getRootElement();
 	
 			try {
-				XMLElement language  = rootElement.getChild(FIELDNAME_CONTENT_LANGUAGE,idegaXMLNameSpace);
-				if(language != null){
-					//setContentLanguage(language.getText());
+				XMLElement obituaryText = rootElement.getChild(FIELDNAME_OBITUARY,idegaXMLNameSpace);
+				if(obituaryText != null){
+					this.setObituaryText(obituaryText.getText());
+					
 				} else {
-					//setContentLanguage(null);
-				}
-			}catch(Exception e) {	
-				//setContentLanguage(null);
-			}
-			try {
-				XMLElement headline = rootElement.getChild(FIELDNAME_OBITUARY,idegaXMLNameSpace);
-				if(headline != null){
-					//setHeadline(headline.getText());
-				} else {
-					//setHeadline("");
+					setObituaryText("");
 				}
 			}catch(Exception e) {		//Nullpointer could occur if field isn't used
 				e.printStackTrace();
-				//setHeadline("");
+				setObituaryText("");
 			}
-			try {
-				XMLElement teaser = rootElement.getChild(FIELDNAME_OBITUARY,idegaXMLNameSpace);
-				if(teaser != null){
-					//setTeaser(teaser.getText());
-				} else {
-					//setTeaser("");
-				}
-			}catch(Exception e) {		//Nullpointer could occur if field isn't used
-				e.printStackTrace();
-				//setTeaser("");
-			}
-			try {
-				XMLElement author = rootElement.getChild(FIELDNAME_OBITUARY,idegaXMLNameSpace);
-				if(author != null){
-					//setAuthor(author.getText());
-				} else {
-					//setAuthor("");
-				}
-			}catch(Exception e) {		//Nullpointer could occur if field isn't used
-				e.printStackTrace();
-				//setAuthor("");
-			}
-	
-			//Parse out the body
-			try {
-				XMLNamespace htmlNamespace = new XMLNamespace("http://www.w3.org/1999/xhtml");
-				XMLElement bodyElement = rootElement.getChild(FIELDNAME_BODY,idegaXMLNameSpace);
-				XMLElement htmlElement = bodyElement.getChild("html",htmlNamespace);
-				XMLElement htmlBodyElement = htmlElement.getChild("body",htmlNamespace);
-				String bodyValue = new XMLOutput().outputString(htmlBodyElement);
-	//			System.out.println("htmlBody value= "+bodyValue);
-				setBody(bodyValue);
-			}catch(Exception e) {		//Nullpointer could occur if field isn't used
-	//			e.printStackTrace();
-				Logger log = Logger.getLogger(this.getClass().toString());
-				log.warning("Body of article is empty");
-				setBody("");
-			}
+
 			
+			try {
+				XMLElement gravePicturePath = rootElement.getChild(FIELDNAME_GRAVE_IMAGE_PATH,idegaXMLNameSpace);
+				if(gravePicturePath != null){
+					setGravePicturePath(gravePicturePath.getText());
+					
+				} else {
+					setGravePicturePath("");
+				}
+			}catch(Exception e) {		//Nullpointer could occur if field isn't used
+				e.printStackTrace();
+				setGravePicturePath("");
+			}
+
+
+			try {
+				XMLElement personPicturePath = rootElement.getChild(FIELDNAME_PERSON_IMAGE_PATH,idegaXMLNameSpace);
+				if(personPicturePath != null){
+					setPersonPicturePath(personPicturePath.getText());
+
+					
+				} else {
+					setGravePicturePath("");
+				}
+			}catch(Exception e) {		//Nullpointer could occur if field isn't used
+				e.printStackTrace();
+				setGravePicturePath("");
+			}
+
+			
+
 			
 		} else {
 			//article not found
@@ -388,8 +352,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 			return false;
 		}
 		return true;
-//	    setFilename();
-//		setFolderLocation(bodyElement.getChild(FIELDNAME_FOLDER_LOCATION,idegans).getText());
 	}
 	
 
