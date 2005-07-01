@@ -110,5 +110,13 @@
 		<validator-id>se.agura.memorial.search.presentation.SearchFormDateValidator</validator-id>
 		<validator-class>se.agura.memorial.search.presentation.SearchFormDateValidator</validator-class>
 	</validator>	
+	
+	<component>
+		<component-type>GraveDetails</component-type>
+		<component-class>se.agura.memorial.obituary.presentation.GraveDetails</component-class>
+	</component>
+	
+	
+	
     
 </faces-config>

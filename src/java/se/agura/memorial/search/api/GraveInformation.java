@@ -10,10 +10,13 @@ package se.agura.memorial.search.api;
  */
 public class GraveInformation {
 	  
-	String graveNumber; 
-	String block; 
-	String department; 
-	String cemetery;
+	private String graveNumber; 
+	private String block; 
+	private String department; 
+	private String cemetery;
+	private String otherBurialPlace;
+	
+	
 	public GraveInformation(
 			String graveNumber, 
 			String block, 
@@ -25,7 +28,17 @@ public class GraveInformation {
 		this.block = block;
 		this.department = department;
 		this.cemetery = cemetery;
+		this.otherBurialPlace = null;
 	}
+	
+	public GraveInformation(String otherBurialPlace){
+		this.graveNumber = null;
+		this.block = null;
+		this.department = null;
+		this.cemetery = null;
+		this.otherBurialPlace = otherBurialPlace;
+	}
+	
 	public String getBlock() {
 		return block;
 	}
@@ -59,4 +72,10 @@ public class GraveInformation {
 	}
 	
 
+	public String getOtherBurialPlace() {
+		return otherBurialPlace;
+	}
+	public void setOtherBurialPlace(String otherBurialPlace) {
+		this.otherBurialPlace = otherBurialPlace;
+	}
 }
