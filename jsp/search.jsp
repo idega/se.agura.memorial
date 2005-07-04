@@ -230,7 +230,7 @@
 					<br />
 				</f:verbatim>
 				
-				<core:help helpTextBundle="se.agura.memorial" helpTextKey"search_help"/>
+				<core:help helpTextBundle="se.agura.memorial" helpTextKey="search_help"/>
 				
 				<!-- here are error messages and warnings -->					
 				<h:messages id="messageList" showSummary="false" showDetail="true" globalOnly="true"/> 			
