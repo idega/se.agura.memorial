@@ -274,16 +274,23 @@
 						<h:outputText value=")" />
 					</h:column>
 					<h:column>
+					
 						<h:commandLink action="showObituaryAction" immediate="true">							
-							<h:outputText value="#{localizedStrings['se.agura.memorial']['show']}" />							
+							<h:outputText value=" #{localizedStrings['se.agura.memorial']['show']}" />							
 							<f:param name="graveId" value="#{grave.graveId}" />
 							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
 						</h:commandLink>
 						<h:commandLink action="showObituaryCreateAction" immediate="true">							
-							<h:outputText value="#{localizedStrings['se.agura.memorial']['edit']}" />							
+							<h:outputText value=" #{localizedStrings['se.agura.memorial']['edit']}" />							
 							<f:param name="graveId" value="#{grave.graveId}" />
 							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
 						</h:commandLink> 
+						<h:commandLink action="showObituaryPreviewAction" immediate="true">							
+							<h:outputText value=" #{localizedStrings['se.agura.memorial']['preview']}" />							
+							<f:param name="graveId" value="#{grave.graveId}" />           
+							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
+						</h:commandLink> 
+
 
 					</h:column>
 				</x:dataTable>
