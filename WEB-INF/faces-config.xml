@@ -150,7 +150,7 @@
 	
 	<component>
 		<component-type>ObituaryItemViewer</component-type>
-		<component-class>se.agura.memorial.obituary.presentation.ObituaryDetails</component-class>
+		<component-class>se.agura.memorial.obituary.presentation.ObituaryItemViewer</component-class>
 	</component>
 	
 	
