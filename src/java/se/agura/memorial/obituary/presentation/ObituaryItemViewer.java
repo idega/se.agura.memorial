@@ -1,52 +1,71 @@
 package se.agura.memorial.obituary.presentation;
 
+
 import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.convert.Converter;
 import javax.faces.el.ValueBinding;
-import com.idega.idegaweb.IWBundle;
-import com.idega.webface.WFContainer;
-import com.idega.webface.WFUtil;
+
 import se.agura.memorial.search.presentation.EmptyStringConverter;
 import se.agura.memorial.util.MemorialUtil;
 
+import com.idega.content.bean.ContentItemBean;
+import com.idega.idegaweb.IWBundle;
+import com.idega.webface.WFContainer;
+import com.idega.webface.WFUtil;
 
-/**
- * 
- *  Last modified: $Date: 2005/07/05 09:35:42 $ by $Author: igors $
- * 
- */
-public class ObituaryDetails extends WFContainer {
 
-	public ObituaryDetails() {
+
+public abstract class ObituaryItemViewer extends UIComponent{
+	
+	private final static String FIELD_CREATION_DATE = ContentItemBean.FIELDNAME_CREATION_DATE;
+	private final static String facetIdPrefix = "image_";
+	private final static String styleClassPrefix = "image_";
+
+
+	public ObituaryItemViewer() {
 		super();
 	}
 
 	
-	protected void initializeContent() {
-		String managedBean = "ObituaryItemBean";
-
-		IWBundle bundle = MemorialUtil.getBundle();
-		
-		addLabelAndValue(bundle,"obituaryText","Obituary gg",WFUtil.createValueBinding("#{" + managedBean+".getObituaryText()" + "}"),new EmptyStringConverter(),this,"obituarydetail");
-
-		
-//		WFContainer hometownContainer = new WFContainer();
-//		hometownContainer.setStyleClass("label_value_group");
-//		getChildren().add(hometownContainer);
-//		
-//		HtmlOutputText hometown = new HtmlOutputText();
-//		hometown.setStyleClass("sub_headline");
-//		bundle.getLocalizedUIComponent("home_region",hometown,"Home region");
-//		hometownContainer.getChildren().add(hometown);
-//		
-//		
-//		addLabelAndValue(bundle,"county","County",WFUtil.createValueBinding("#{" + managedBean+".grave.hometown" + "}"),new EmptyStringConverter(),hometownContainer,"gravedetail");
-
-		
+	public String[] getViewerFieldNames(){
+//		return FIELD_ARRAY;
+		return null;
 	}
 	
+	/**
+	 * @return Returns the facetIdPrefix.
+	 */
+	protected String getFacetIdPrefix() {
+		return facetIdPrefix;
+	}
 
+	/**
+	 * @return Returns the styleClassPrefix.
+	 */
+	protected String getDefaultStyleClassPrefix() {
+		return styleClassPrefix;
+	}
+	
+	protected UIComponent createFieldComponent(String fieldName){
+//		if(FIELD_IMAGE.equals(fieldName)){
+//			return new HtmlGraphicImage();
+//		} else {
+//			return new HtmlOutputText();
+//		}
+	    return null;	
+	}
+	
+	protected void initializeContent() {
+		String managedBean = "ObituaryItemBean";
+		IWBundle bundle = MemorialUtil.getBundle();
+		addLabelAndValue(bundle,"obituaryText","Obituary gg",WFUtil.createValueBinding("#{" + managedBean+".obituaryText" + "}"),new EmptyStringConverter(),this,"obituarydetail");
+	
+	
+	}
+	public void loadContentItem(String contentItem){
+		//
+	}
 	protected void addLabelAndValue(IWBundle bundle, String labelLocalizationKey, String labelDefaultValue, ValueBinding value, Converter valueConverter, UIComponent parent, String styleClass){		
 		addLabelAndValue(bundle,labelLocalizationKey,labelDefaultValue,value,valueConverter,parent,styleClass,null);
 	}
@@ -92,4 +111,5 @@ public class ObituaryDetails extends WFContainer {
 		return labelText;
 	}
 
+	
 }

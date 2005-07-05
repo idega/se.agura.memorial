@@ -22,7 +22,7 @@ public class ObituaryItemTag extends UIComponentTag {
 	 * @see javax.faces.webapp.UIComponentTag#getComponentType()
 	 */
 	public String getComponentType() {
-		return "ObituaryDetails";
+		return "ObituaryItemViewer";
 	}
 	
 	public void setTitle(String title) {
@@ -59,7 +59,7 @@ public class ObituaryItemTag extends UIComponentTag {
 					component.setValueBinding(contentItem, vb);
 				}
 				else {
-					ObituaryItemView viewer = (ObituaryItemView)component;
+					ObituaryItemViewer viewer = (ObituaryItemViewer)component;
 					viewer.loadContentItem(contentItem);  //We have no other way to resolve String variable in this case.
 				}
 			}

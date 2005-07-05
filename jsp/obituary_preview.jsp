@@ -38,7 +38,8 @@ version="1.2">
                   
 				 <memorial:GraveDetails id="theobject"></memorial:GraveDetails>
                  
-                 <memorial:ObituaryDetails id="theobject"></memorial:ObituaryDetails>
+				 <memorial:ObituaryItemViewer id="theobject"></memorial:ObituaryItemViewer>
+
 				 <f:verbatim>
                     <br />
                     <br />

@@ -19,10 +19,12 @@
 			<required>false</required>
 			<rtexprvalue>false</rtexprvalue>
 		</attribute>
-   </tag>
-  
-  	<tag>
-		<name>ObituaryDetails</name>
+
+	</tag>	
+
+	<tag>
+
+		<name>ObituaryItemViewer</name>
 		<tag-class>se.agura.memorial.obituary.presentation.ObituaryItemTag</tag-class>
 		<attribute>
 			<name>id</name>
@@ -30,7 +32,30 @@
 			<rtexprvalue>false</rtexprvalue>
 		</attribute>
 		
+		<attribute>
+			<name>contentItem</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
 
-	</tag>
+		<attribute>
+			<name>obituaryText</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>graveImagePath</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>personImagePath</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+	</tag>	
 
 </taglib>

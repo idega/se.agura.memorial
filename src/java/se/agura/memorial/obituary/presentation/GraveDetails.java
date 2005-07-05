@@ -1,5 +1,5 @@
 /*
- * $Id: GraveDetails.java,v 1.2 2005/07/05 09:35:42 igors Exp $
+ * $Id: GraveDetails.java,v 1.3 2005/07/05 14:38:36 igors Exp $
  * Created on 29.6.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -32,10 +32,10 @@ import se.agura.memorial.util.MemorialUtil;
 
 /**
  * 
- *  Last modified: $Date: 2005/07/05 09:35:42 $ by $Author: igors $
- * 
+ *  Last modified: $Date: 2005/07/05 14:38:36 $ by $Author: igors $
+ *  
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class GraveDetails extends WFContainer {
 
