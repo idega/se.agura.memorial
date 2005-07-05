@@ -1,5 +1,5 @@
 /*
- * $Id: GraveDetails.java,v 1.1 2005/07/01 12:42:37 gummi Exp $
+ * $Id: GraveDetails.java,v 1.2 2005/07/05 09:35:42 igors Exp $
  * Created on 29.6.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -9,22 +9,22 @@
  */
 package se.agura.memorial.obituary.presentation;
 
-import java.rmi.RemoteException;
-import java.util.List;
+//import java.rmi.RemoteException;
+//import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.convert.Converter;
 import javax.faces.el.ValueBinding;
-import com.idega.business.IBOLookup;
-import com.idega.business.IBOLookupException;
+//import com.idega.business.IBOLookup;
+//import com.idega.business.IBOLookupException;
 import com.idega.idegaweb.IWBundle;
-import com.idega.idegaweb.UnavailableIWContext;
-import com.idega.presentation.IWContext;
+//import com.idega.idegaweb.UnavailableIWContext;
+//import com.idega.presentation.IWContext;
 import com.idega.webface.WFContainer;
 import com.idega.webface.WFUtil;
-import se.agura.memorial.search.api.Grave;
-import se.agura.memorial.search.api.ObituarySearch;
-import se.agura.memorial.search.business.SearchImplBroker;
+//import se.agura.memorial.search.api.Grave;
+//import se.agura.memorial.search.api.ObituarySearch;
+//import se.agura.memorial.search.business.SearchImplBroker;
 import se.agura.memorial.search.presentation.DateConverter;
 import se.agura.memorial.search.presentation.EmptyStringConverter;
 import se.agura.memorial.util.MemorialUtil;
@@ -32,10 +32,10 @@ import se.agura.memorial.util.MemorialUtil;
 
 /**
  * 
- *  Last modified: $Date: 2005/07/01 12:42:37 $ by $Author: gummi $
+ *  Last modified: $Date: 2005/07/05 09:35:42 $ by $Author: igors $
  * 
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class GraveDetails extends WFContainer {
 

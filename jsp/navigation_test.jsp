@@ -9,9 +9,9 @@
 version="1.2">
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 <f:view>
-	<ws:page id="obituary22sdfsd">
+	<ws:page id="navigation_test">
 
-	<h:form id="newPersonForm">
+	<h:form id="navigation_testform">
 	        
 	    <f:verbatim>
 	        <h1>test-5: navigation test</h1>

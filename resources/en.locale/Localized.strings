@@ -12,6 +12,8 @@ clear = Clear
 next_page = Next page
 previous_page = Previous page
 show = Show
+edit = Edit
+preview = Preview
 messages.more_than_100_hits_summary = More than 100 found
 messages.more_than_100_hits_detail = Your search resulted in more \
 									 than 100 hits \u2013 only the first 100 is shown. \

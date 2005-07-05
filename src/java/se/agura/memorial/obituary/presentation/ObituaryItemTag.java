@@ -1,4 +1,4 @@
-package se.agura.memorial.search.presentation;
+package se.agura.memorial.obituary.presentation;
 
 import javax.faces.component.UIComponent;
 import javax.faces.el.ValueBinding;
@@ -9,6 +9,7 @@ public class ObituaryItemTag extends UIComponentTag {
 	
 	private String title;
 	private String contentItem;
+	private String obituaryText;
 	
 	/**
 	 * @see javax.faces.webapp.UIComponentTag#getRendererType()
@@ -21,13 +22,17 @@ public class ObituaryItemTag extends UIComponentTag {
 	 * @see javax.faces.webapp.UIComponentTag#getComponentType()
 	 */
 	public String getComponentType() {
-		return "WFBlock";
+		return "ObituaryDetails";
 	}
 	
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	
+	public void setObituaryText(String obituaryText) {
+		this.obituaryText = obituaryText;
+	}
+
 	public void release() {      
 		super.release();      
 		title = null ;
@@ -35,13 +40,13 @@ public class ObituaryItemTag extends UIComponentTag {
 
     protected void setContentItem(String contentItem){
 		
-		//TODO
+		this.contentItem = contentItem;
     }
 	
     protected String getContentItem(){
 		
-		//TODO
-		return null;
+		
+		return contentItem;
     }	
 	
 	protected void setProperties(UIComponent component) {
@@ -51,7 +56,7 @@ public class ObituaryItemTag extends UIComponentTag {
 			if(contentItem!=null){
 				if(isValueReference(contentItem)){
 					ValueBinding vb = getFacesContext().getApplication().createValueBinding(contentItem);
-					component.setValueBinding("contentItem", vb);
+					component.setValueBinding(contentItem, vb);
 				}
 				else {
 					ObituaryItemView viewer = (ObituaryItemView)component;

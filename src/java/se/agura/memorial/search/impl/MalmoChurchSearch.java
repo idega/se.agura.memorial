@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+//import org.apache.commons.httpclient.Credentials;
+//import org.apache.commons.httpclient.HttpClient;
+//import com.idega.slide.util.WebdavExtendedResource;
+//import se.agura.memorial.search.presentation.ObituaryItemBean;
+
 import com.idega.data.query.Column;
 import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.Order;
@@ -18,7 +24,6 @@ import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.GraveInformation;
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
-import se.agura.memorial.search.presentation.ObituaryItemBean;
 import se.agura.memorial.search.util.Utility;
 
 public class MalmoChurchSearch implements ObituarySearch {
@@ -61,14 +66,22 @@ public class MalmoChurchSearch implements ObituarySearch {
 		Collection result = new ArrayList();
 
 		//TODO Temp: remove asap
-		ObituaryItemBean aa = new ObituaryItemBean();
-		aa.setBody("bla bla bla ");
-		aa.setDatabaseId(Integer.valueOf("1"));
-		aa.setGraveId(Integer.valueOf("3002"));
-		aa.setGravePicturePath("wwwww");
-		aa.setPresonPicturePath("eeeee");
-		aa.store();
-		
+//		ObituaryItemBean aa = new ObituaryItemBean();
+//		aa.setBody("bla bla bla ");
+//		aa.setDatabaseId(Integer.valueOf("1"));
+//		aa.setGraveId(Integer.valueOf("3002"));
+//		aa.setGravePicturePath("wwwww");
+//		aa.setPersonPicturePath("eeeee");
+		//aa.store();
+//		try {
+
+		//aa.load("http://localhost:8080/memorial/content/files/cms/obituary/1/3002.obituary/en.txt");
+//		aa.load("/files/cms/obituary/1/3002.obituary/en.txt");		
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+
 	    Table table = new Table(TABLE_NAME);
 	    Column colGraveID = new Column(table, COLUMN_NAME_GRAVE_ID);
 		Column colLopNr = new Column(table, COLUMN_NAME_LOP_NR);

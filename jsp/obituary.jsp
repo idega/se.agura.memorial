@@ -12,34 +12,28 @@ version="1.2">
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 <f:view>
 	<ws:page id="obituary">
-		<h:form id="obituaryform1">    
+		<h:form id="obituaryform">    
 			
 					<wf:wfblock title="Obituary page">
 						<f:facet name="wf_block_toolbar">
 							<wf:toolbar id="toolbar">
+							   	
 							   	<h:commandLink id="searchButton" 
 									value="#{localizedStrings['se.agura.memorial']['search']}" 
 									action="#{graveyardSearchBean.search}" 
 									immediate="true" 
 									styleClass="page_preview_link"/>
+								
 								<h:outputLink value="" 
 									styleClass="page_preview_link">
 								  <f:verbatim>Back</f:verbatim>
 								</h:outputLink> 
-
-							   	<h:commandLink id="test" 
-									value="TEST " 
-									action="#{showObituaryCreateAction}" 
-									immediate="true"  
-									styleClass="page_preview_link"/>
-
-							   	<h:commandLink id="test2" 
-									value="TEST2 "  
-									action="showObituaryCreateAction" 
-									immediate="true"  
-									styleClass="page_preview_link"/>
-									
 								
+							    <h:commandLink 
+							         action="navigationTest"
+							         immediate="true">
+ 						             <h:outputText value="Navigation test" />				
+ 	    						</h:commandLink>								
 								
 							</wf:toolbar>
 						</f:facet>

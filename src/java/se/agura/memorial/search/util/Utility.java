@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import se.agura.memorial.search.api.CustomMemorialDate;
-import se.agura.memorial.search.presentation.ObituaryItemBean;
+//import se.agura.memorial.search.presentation.ObituaryItemBean;
 
 import com.idega.data.query.AND;
 import com.idega.data.query.BaseLogicGroup;
@@ -140,17 +140,12 @@ public class Utility {
 	public static Collection getNameCriteriaQueries(String firstName, String lastName, Column colFirstName, Column colLastName, SelectQuery queryBase, Column idColumn) {
 		ArrayList queries = new ArrayList();
 		
-		ObituaryItemBean aa = new ObituaryItemBean();
-		aa.setBody(null);
-		aa.store();
-		
 		if(firstName != null && lastName != null){
 			//'firstname' and 'lastname'
 			SelectQuery exactMatch = (SelectQuery)queryBase.clone();
 			AND exact = new AND(new MatchCriteria(colFirstName, MatchCriteria.LIKE, firstName.trim()),new MatchCriteria(colLastName, MatchCriteria.LIKE, lastName.trim()));
 			exactMatch.addCriteria(exact);
 			queries.add(exactMatch);
-			
 			
 //			'%firstname%' and 'lastname' and not in ('firstname' and 'lastname')
 			SelectQuery exactMatchIdColumn = (SelectQuery)exactMatch.clone();

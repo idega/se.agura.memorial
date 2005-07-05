@@ -10,7 +10,7 @@ import javax.ejb.FinderException;
 import se.agura.memorial.search.util.Utility;
 
 import com.idega.data.GenericEntity;
-import com.idega.data.IDOLookup;
+//import com.idega.data.IDOLookup;
 import com.idega.data.IDOQuery;
 import com.idega.data.IDORelationshipException;
 import com.idega.data.query.Column;

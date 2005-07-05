@@ -10,9 +10,9 @@
 version="1.2">
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 <f:view>
-	<ws:page id="obituary">
+	<ws:page id="new_person">
 
-	<h:form id="newPersonForm">
+	<h:form id="new_personform">
 
 					<wf:wfblock title="Create Grave">
 						<f:facet name="wf_block_toolbar">

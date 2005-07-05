@@ -2,13 +2,14 @@ package se.agura.memorial.search.presentation;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Enumeration;
+//import java.util.Enumeration;
+//import org.apache.webdav.lib.WebdavResources;
+
 import java.util.logging.Logger;
 
 import org.apache.webdav.lib.PropertyName;
 import org.apache.webdav.lib.WebdavException;
 import org.apache.webdav.lib.WebdavResource;
-import org.apache.webdav.lib.WebdavResources;
 
 import com.idega.business.IBOLookup;
 import com.idega.content.bean.ContentItemBean;
@@ -125,7 +126,8 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 
 
 	public String getObituaryText() {
-		return obituaryText;
+		//return obituaryText;
+		return "AAAAA";
 	}
 
 

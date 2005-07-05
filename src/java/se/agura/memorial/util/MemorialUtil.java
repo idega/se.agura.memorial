@@ -1,5 +1,5 @@
 /*
- * $Id: MemorialUtil.java,v 1.1 2005/06/29 17:43:28 gummi Exp $
+ * $Id: MemorialUtil.java,v 1.2 2005/07/05 09:35:42 igors Exp $
  * Created on 7.2.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -14,15 +14,15 @@ import java.io.File;
 import com.idega.content.business.ContentUtil;
 import com.idega.idegaweb.IWBundle;
 import com.idega.presentation.IWContext;
-import com.idega.util.IWTimestamp;
+//import com.idega.util.IWTimestamp;
 
 
 /**
  * 
- *  Last modified: $Date: 2005/06/29 17:43:28 $ by $Author: gummi $
+ *  Last modified: $Date: 2005/07/05 09:35:42 $ by $Author: igors $
  * 
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class MemorialUtil {
 	

@@ -15,6 +15,15 @@
 	</navigation-rule>	
 	
 	<navigation-rule>
+		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>navigationTest</from-outcome>
+			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+
+
+	<navigation-rule>
 		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>showObituaryAction</from-outcome>
@@ -29,6 +38,15 @@
 			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
+	
+	<navigation-rule>
+		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>showObituaryPreviewAction</from-outcome>
+			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_preview.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+		
 
 	<navigation-rule>
 		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</from-view-id>
@@ -116,6 +134,10 @@
 		<component-class>se.agura.memorial.obituary.presentation.GraveDetails</component-class>
 	</component>
 	
+	<component>
+		<component-type>ObituaryDetails</component-type>
+		<component-class>se.agura.memorial.obituary.presentation.ObituaryDetails</component-class>
+	</component>
 	
 	
     

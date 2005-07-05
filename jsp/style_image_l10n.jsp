@@ -12,9 +12,9 @@ version="1.2">
 
 <!--  locale choose doesnt work this way <f:view locale="sv_SE" > --> 
 
-	<ws:page id="obituary11asfgh">
+	<ws:page id="aaobituary11asfgh">
 
-	<h:form id="newPersonForm">
+	<h:form id="aanewPersonForm">
 
 	    <f:verbatim>  
 	    <h1>test-5: style, images, l10n</h1>

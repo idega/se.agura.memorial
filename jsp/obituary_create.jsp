@@ -10,7 +10,7 @@ version="1.2">
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 <f:view>
 	<ws:page id="obituary_create">
-		<h:form id="obituarycreateform1">    
+		<h:form id="obituary__createform">    
 			<f:verbatim>Obituary page</f:verbatim> 
 
 		    <h:panelGrid columns="2" border="1" cellspacing="5">

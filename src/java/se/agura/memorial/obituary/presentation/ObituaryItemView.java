@@ -1,4 +1,4 @@
-package se.agura.memorial.search.presentation;
+package se.agura.memorial.obituary.presentation;
 
 
 import javax.faces.component.UIComponent;
