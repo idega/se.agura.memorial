@@ -52,24 +52,11 @@ version="1.2">
 
 
                   <f:verbatim escape="false">
-<p>
-                    The date was correct and the words were spelt right,
+
+                    <h:outputText styleClass="Text" value="#{obituaryText}" style="font-weight: bold; " />
                     <br />
-                    And it really gave me one hell of a fright.
                     <br />
-                    My name and age in a place none too merry,
-                    <br />
-                    No other spot than today's obituary!
-</p>
-<p>
-                    What a crazy mistake, I thought to myself,
-                    <br />
-                    As I picked up the phonebook from off the shelf,
-                    <br />
-                    To see my own death in the newspaper post;
-                    <br />
-                    It was somewhat bizarre, like being a ghost!
-</p>
+                    
                   </f:verbatim>
 
                   <h:outputText  styleClass="headline" value="#{localizedStrings['se.agura.memorial']['picture_of_person']}" style="font-weight: bold; " />

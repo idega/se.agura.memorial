@@ -60,6 +60,7 @@ public abstract class ObituaryItemViewer extends UIComponent{
 		String managedBean = "ObituaryItemBean";
 		IWBundle bundle = MemorialUtil.getBundle();
 		addLabelAndValue(bundle,"obituaryText","Obituary gg",WFUtil.createValueBinding("#{" + managedBean+".obituaryText" + "}"),new EmptyStringConverter(),this,"obituarydetail");
+		
 	
 	
 	}
