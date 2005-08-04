@@ -2,7 +2,9 @@ package se.agura.memorial.search.presentation;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,6 +17,7 @@ import javax.faces.el.ValueBinding;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
+import se.agura.memorial.search.api.CustomMemorialDate;
 import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
@@ -22,7 +25,7 @@ import se.agura.memorial.search.business.SearchFormSessionBean;
 import se.agura.memorial.search.business.SearchImplBroker;
 import se.agura.memorial.search.data.GraveDatabaseConn;
 import se.agura.memorial.search.data.GraveDatabaseConnHome;
-import se.agura.memorial.search.util.Utility;
+import se.agura.memorial.util.Utility;
 
 import com.idega.business.IBOLookup;
 import com.idega.business.IBOLookupException;
@@ -37,10 +40,29 @@ public class SearchFormBackingBean {
 	
 	private String firstName;
 	private String surname;
-	private String dateOfBirthFrom;
-	private String dateOfBirthTo;
-	private String dateOfDeceaseFrom;
-	private String dateOfDeceaseTo;
+
+	private CustomMemorialDate dateOfBirthTo= null;
+	private CustomMemorialDate dateOfBirthFrom= null;
+
+	private CustomMemorialDate dateOfDeceaseTo= null;
+	private CustomMemorialDate dateOfDeceaseFrom= null;
+
+	private Integer dateOfBirthFrom_year= null;
+	private Integer dateOfBirthFrom_month = new Integer(0);
+	private Integer dateOfBirthFrom_day = new Integer(0);
+
+	private Integer dateOfBirthTo_year = null;
+	private Integer dateOfBirthTo_month = new Integer(0);
+	private Integer dateOfBirthTo_day = new Integer(0);
+	
+	private Integer dateOfDeceaseFrom_year = null;
+	private Integer dateOfDeceaseFrom_month = new Integer(0);
+	private Integer dateOfDeceaseFrom_day = new Integer(0);
+	
+	private Integer dateOfDeceaseTo_year = null;
+	private Integer dateOfDeceaseTo_month = new Integer(0);
+	private Integer dateOfDeceaseTo_day = new Integer(0);
+	
 	private String hometown;	
 	private String personIdentifier;
 	
@@ -49,6 +71,9 @@ public class SearchFormBackingBean {
 	private static Map graveyards;
 	
 	private Integer databaseId = new Integer(1);
+	private Integer monthId = new Integer(0);	
+	private Integer yearId = new Integer(1950);	
+	private Integer dayId = new Integer(0);	
 
 	List searchResults = new ArrayList();
 	
@@ -70,6 +95,126 @@ public class SearchFormBackingBean {
 		initGraveyards();
 	}
 	
+	public Integer getDateOfBirthFrom_day() {
+		return dateOfBirthFrom_day;
+	}
+	
+
+	public void setDateOfBirthFrom_day(Integer dateOfBirthFrom_day) {
+		this.dateOfBirthFrom_day = dateOfBirthFrom_day;
+	}
+	
+
+	public Integer getDateOfBirthFrom_month() {
+		return dateOfBirthFrom_month;
+	}
+	
+
+	public void setDateOfBirthFrom_month(Integer dateOfBirthFrom_month) {
+		this.dateOfBirthFrom_month = dateOfBirthFrom_month;
+	}
+	
+
+	public Integer getDateOfBirthFrom_year() {
+		return dateOfBirthFrom_year;
+	}
+	
+
+	public void setDateOfBirthFrom_year(Integer dateOfBirthFrom_year) {
+		this.dateOfBirthFrom_year = dateOfBirthFrom_year;
+	}
+	
+
+	public Integer getDateOfBirthTo_day() {
+		return dateOfBirthTo_day;
+	}
+	
+
+	public void setDateOfBirthTo_day(Integer dateOfBirthTo_day) {
+		this.dateOfBirthTo_day = dateOfBirthTo_day;
+	}
+	
+
+	public Integer getDateOfBirthTo_month() {
+		return dateOfBirthTo_month;
+	}
+	
+
+	public void setDateOfBirthTo_month(Integer dateOfBirthTo_month) {
+		this.dateOfBirthTo_month = dateOfBirthTo_month;
+	}
+	
+
+	public Integer getDateOfBirthTo_year() {
+		return dateOfBirthTo_year;
+	}
+	
+
+	public void setDateOfBirthTo_year(Integer dateOfBirthTo_year) {
+		this.dateOfBirthTo_year = dateOfBirthTo_year;
+	}
+	
+
+	public Integer getDateOfDeceaseFrom_day() {
+		return dateOfDeceaseFrom_day;
+	}
+	
+
+	public void setDateOfDeceaseFrom_day(Integer dateOfDeceaseFrom_day) {
+		this.dateOfDeceaseFrom_day = dateOfDeceaseFrom_day;
+	}
+	
+
+	public Integer getDateOfDeceaseFrom_month() {
+		return dateOfDeceaseFrom_month;
+	}
+	
+
+	public void setDateOfDeceaseFrom_month(Integer dateOfDeceaseFrom_month) {
+		this.dateOfDeceaseFrom_month = dateOfDeceaseFrom_month;
+	}
+	
+
+	public Integer getDateOfDeceaseFrom_year() {
+		return dateOfDeceaseFrom_year;
+	}
+	
+
+	public void setDateOfDeceaseFrom_year(Integer dateOfDeceaseFrom_year) {
+		this.dateOfDeceaseFrom_year = dateOfDeceaseFrom_year;
+	}
+	
+
+	public Integer getDateOfDeceaseTo_day() {
+		return dateOfDeceaseTo_day;
+	}
+	
+
+	public void setDateOfDeceaseTo_day(Integer dateOfDeceaseTo_day) {
+		this.dateOfDeceaseTo_day = dateOfDeceaseTo_day;
+	}
+	
+
+	public Integer getDateOfDeceaseTo_month() {
+		return dateOfDeceaseTo_month;
+	}
+	
+
+	public void setDateOfDeceaseTo_month(Integer dateOfDeceaseTo_month) {
+		this.dateOfDeceaseTo_month = dateOfDeceaseTo_month;
+	}
+	
+
+	public Integer getDateOfDeceaseTo_year() {
+		return dateOfDeceaseTo_year;
+	}
+	
+
+	public void setDateOfDeceaseTo_year(Integer dateOfDeceaseTo_year) {
+		this.dateOfDeceaseTo_year = dateOfDeceaseTo_year;
+	}
+	
+
 	private void initGraveyards() {
 		
 		graveyards = new LinkedHashMap();
@@ -123,43 +268,141 @@ public class SearchFormBackingBean {
 	public Integer getDatabaseId() {
 		return databaseId;
 	}
+	
+	public Integer getYearId() {
+		return yearId;
+	}
+	
+	public void setYearId(Integer yearId) {
+		this.yearId = yearId;
+	}
 
+	
+	public Integer getMonthId() {
+		return monthId;
+	}
+	
+	public void setMonthId(Integer monthId) {
+		this.monthId = monthId;
+	}
+
+	public Integer getDayId() {
+		return dayId;
+	}
+	
+	public void setDayId(Integer dayId) {
+		this.dayId = dayId;
+	}
+
+	
 	public void setDatabaseId(Integer databaseId) {
 		this.databaseId = databaseId;		
 		searchFormSessionBean.setDatabaseId(this.databaseId); 
 	}
 
-	public String getDateOfBirthFrom() {
-		return dateOfBirthFrom;
+	public CustomMemorialDate getDateOfBirthFrom() {
+		
+		
+		if ((dateOfBirthFrom_year == null ) 
+			&& (dateOfBirthFrom_month == null )
+            && (dateOfBirthFrom_day == null ) )return null;
+		
+		CustomMemorialDate date = null;
+		Integer year=null,month=null,day=null;
+
+		
+		if ((dateOfBirthFrom_year != null )&& (dateOfBirthFrom_year.intValue()!=0)){
+			if ((dateOfBirthFrom_year.intValue()>1500) && (dateOfBirthFrom_year.intValue()<2050) ) year = dateOfBirthFrom_year; 
+		}
+		
+		if ((dateOfBirthFrom_month != null )&& (dateOfBirthFrom_month.intValue()!=0)){
+			 if (dateOfBirthFrom_month.intValue() < 12 ) month = dateOfBirthFrom_month;
+		}
+
+		if ((dateOfBirthFrom_day != null ) &&(dateOfBirthFrom_month.intValue()!=0) && (dateOfBirthFrom_day.intValue()!=0)){
+			if (dateOfBirthFrom_day.intValue()<32) day = dateOfBirthFrom_day;
+		}	
+		date = 	new CustomMemorialDate(year,month,day);	
+		return date;		
 	}
 
-	public void setDateOfBirthFrom(String dateOfBirthFrom) {
-		this.dateOfBirthFrom = dateOfBirthFrom;
+	public CustomMemorialDate getDateOfBirthTo() {
+		
+		
+		if ((dateOfBirthTo_year == null ) 
+			&& (dateOfBirthTo_month == null )
+            && (dateOfBirthTo_day == null ) )return null;
+		
+		CustomMemorialDate date = null;
+		Integer year=null,month=null,day=null;
+
+		
+		if ((dateOfBirthTo_year != null )&& (dateOfBirthTo_year.intValue()!=0)){
+			if ((dateOfBirthTo_year.intValue()>1500) && (dateOfBirthTo_year.intValue()<2050) ) year = dateOfBirthTo_year; 
+		}
+		
+		if ((dateOfBirthTo_month != null )&& (dateOfBirthTo_month.intValue()!=0)){
+			 if (dateOfBirthTo_month.intValue() < 12 ) month = dateOfBirthTo_month;
+		}
+
+		if ((dateOfBirthTo_day != null ) &&(dateOfBirthTo_month.intValue()!=0) && (dateOfBirthTo_day.intValue()!=0)){
+			if (dateOfBirthTo_day.intValue()<32) day = dateOfBirthTo_day;
+		}	
+		date = 	new CustomMemorialDate(year,month,day);	
+		return date;		
 	}
 
-	public String getDateOfBirthTo() {
-		return dateOfBirthTo;
+	public CustomMemorialDate getDateOfDeceaseFrom() {
+		
+		if ((dateOfDeceaseFrom_year == null ) 
+			&& (dateOfDeceaseFrom_month == null )
+            && (dateOfDeceaseFrom_day == null ) )return null;
+		
+		CustomMemorialDate date = null;
+		Integer year=null,month=null,day=null;
+
+		
+		if ((dateOfDeceaseFrom_year != null )&& (dateOfDeceaseFrom_year.intValue()!=0)){
+			if ((dateOfDeceaseFrom_year.intValue()>1500) && (dateOfDeceaseFrom_year.intValue()<2050) ) year = dateOfDeceaseFrom_year; 
+		}
+		
+		if ((dateOfDeceaseFrom_month != null )&& (dateOfDeceaseFrom_month.intValue()!=0)){
+			 if (dateOfDeceaseFrom_month.intValue() < 12 ) month = dateOfDeceaseFrom_month;
+		}
+
+		if ((dateOfDeceaseFrom_day != null ) &&(dateOfDeceaseFrom_month.intValue()!=0) && (dateOfDeceaseFrom_day.intValue()!=0)){
+			if (dateOfDeceaseFrom_day.intValue()<32) day = dateOfDeceaseFrom_day;
+		}	
+		date = 	new CustomMemorialDate(year,month,day);	
+		return date;		
 	}
 
-	public void setDateOfBirthTo(String dateOfBirthTo) {
-		this.dateOfBirthTo = dateOfBirthTo;
+
+	public CustomMemorialDate getDateOfDeceaseTo() {
+		
+		if ((dateOfDeceaseTo_year == null ) 
+			&& (dateOfDeceaseTo_month == null )
+            && (dateOfDeceaseTo_day == null ) )return null;
+		
+		CustomMemorialDate date = null;
+		Integer year=null,month=null,day=null;
+
+		
+		if ((dateOfDeceaseTo_year != null )&& (dateOfDeceaseTo_year.intValue()!=0)){
+			if ((dateOfDeceaseTo_year.intValue()>1500) && (dateOfDeceaseTo_year.intValue()<2050) ) year = dateOfDeceaseTo_year; 
+		}
+		
+		if ((dateOfDeceaseTo_month != null )&& (dateOfDeceaseTo_month.intValue()!=0)){
+			 if (dateOfDeceaseTo_month.intValue() < 12 ) month = dateOfDeceaseTo_month;
+		}
+
+		if ((dateOfDeceaseTo_day != null ) &&(dateOfDeceaseTo_month.intValue()!=0) && (dateOfDeceaseTo_day.intValue()!=0)){
+			if (dateOfDeceaseTo_day.intValue()<32) day = dateOfDeceaseTo_day;
+		}	
+		date = 	new CustomMemorialDate(year,month,day);	
+		return date;		
 	}
 
-	public String getDateOfDeceaseFrom() {
-		return dateOfDeceaseFrom;
-	}
-
-	public void setDateOfDeceaseFrom(String dateOfDeceaseFrom) {
-		this.dateOfDeceaseFrom = dateOfDeceaseFrom;
-	}
-
-	public String getDateOfDeceaseTo() {
-		return dateOfDeceaseTo;
-	}
-
-	public void setDateOfDeceaseTo(String dateOfDeceaseTo) {
-		this.dateOfDeceaseTo = dateOfDeceaseTo;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -232,6 +475,118 @@ public class SearchFormBackingBean {
 		
 	} 	
 	
+	public List getMonthSelectItemList() {
+
+		List l = new ArrayList();
+
+
+				l.add(new SelectItem("0","Month"));
+
+				l.add(new SelectItem("1","January"));
+				l.add(new SelectItem("2","February"));
+				l.add(new SelectItem("3","March"));
+				l.add(new SelectItem("4","April"));
+				l.add(new SelectItem("5","May"));
+				l.add(new SelectItem("6","June"));
+				l.add(new SelectItem("7","July"));
+				l.add(new SelectItem("8","August"));
+				l.add(new SelectItem("9","Septemder"));
+				l.add(new SelectItem("10","Oktober"));
+				l.add(new SelectItem("11","November"));
+				l.add(new SelectItem("12","December"));
+
+				
+	
+		
+		return l;
+		
+	}	
+
+	public List getDateOfBirthFromDaySelectItemList() {
+		        
+		List l = new ArrayList();
+		Calendar cal = null;
+		if (dateOfBirthFrom_year != null ){
+			cal = new GregorianCalendar(this.dateOfBirthFrom_year.intValue(), this.dateOfBirthFrom_month.intValue()-1, 1);
+		}	
+		else{
+			cal = new GregorianCalendar(2001, this.dateOfBirthFrom_month.intValue()-1, 1);
+		}
+		
+        int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH); 
+			
+		l.add(new SelectItem("0","DD"));
+			 
+        for (int i=1;i<=days;i++) l.add(new SelectItem(String.valueOf(i),String.valueOf(i) ) );
+		
+		return l;
+		
+	}	
+
+	public List getDateOfDeceaseToDaySelectItemList() {
+
+		List l = new ArrayList();
+		Calendar cal = null;
+		if (dateOfDeceaseTo_year != null ){
+			cal = new GregorianCalendar(this.dateOfDeceaseTo_year.intValue(), this.dateOfDeceaseTo_month.intValue()-1, 1);
+		}	
+		else{
+			cal = new GregorianCalendar(2001, this.dateOfDeceaseTo_month.intValue()-1, 1);
+		}
+		
+        int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH); 
+			
+		l.add(new SelectItem("0","DD"));
+			 
+        for (int i=1;i<=days;i++) l.add(new SelectItem(String.valueOf(i),String.valueOf(i) ) );
+		
+		return l;
+		
+	}	
+	
+	public List getDateOfDeceaseFromDaySelectItemList() {
+
+		List l = new ArrayList();
+		Calendar cal = null;
+		if (dateOfDeceaseFrom_year != null ){
+			cal = new GregorianCalendar(this.dateOfDeceaseFrom_year.intValue(), this.dateOfDeceaseFrom_month.intValue()-1, 1);
+		}	
+		else{
+			cal = new GregorianCalendar(2001, this.dateOfDeceaseFrom_month.intValue()-1, 1);
+		}
+		
+        int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH); 
+			
+		l.add(new SelectItem("0","DD"));
+			 
+        for (int i=1;i<=days;i++) l.add(new SelectItem(String.valueOf(i),String.valueOf(i) ) );
+		
+		return l;
+		
+	}		
+
+	public List getDateOfBirthToDaySelectItemList() {
+
+		List l = new ArrayList();
+		Calendar cal = null;
+		if (dateOfBirthTo_year != null ){
+			cal = new GregorianCalendar(this.dateOfBirthTo_year.intValue(), this.dateOfBirthTo_month.intValue()-1, 1);
+		}	
+		else{
+			cal = new GregorianCalendar(2001, this.dateOfBirthTo_month.intValue()-1, 1);
+		}
+		
+        int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH); 
+			
+		l.add(new SelectItem("0","DD"));
+			 
+        for (int i=1;i<=days;i++) l.add(new SelectItem(String.valueOf(i),String.valueOf(i) ) );
+		
+		return l;
+		
+	}	
+	
+	
 	public List getDatabaseSelectItemList() {
 		List l = new ArrayList();
 		
@@ -268,13 +623,12 @@ public class SearchFormBackingBean {
 		
 		searchResults = new ArrayList();	
 	
-			
+	
 		IWContext iwc = IWContext.getIWContext(facesContext);
 		try {
-			SearchImplBroker sib = (SearchImplBroker) IBOLookup
-					.getServiceInstance(iwc, SearchImplBroker.class);
+			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			ObituarySearch os = sib.getSearch(getDatabaseId().intValue());
-	
+			
 			searchResults = (ArrayList) 
 				os.findGraves(
 						getFirstName(),
@@ -332,10 +686,22 @@ public class SearchFormBackingBean {
 	
 		setFirstName(null);
 		setSurname(null);
-		setDateOfBirthFrom(null);
-		setDateOfBirthTo(null);
-		setDateOfDeceaseFrom(null);
-		setDateOfDeceaseTo(null);
+		setDateOfBirthFrom_year(null);
+		setDateOfBirthFrom_month(Integer.valueOf("0"));
+		setDateOfBirthFrom_day(Integer.valueOf("0"));
+		
+		setDateOfBirthTo_year(null);
+		setDateOfBirthTo_month(Integer.valueOf("0"));
+		setDateOfBirthTo_day(Integer.valueOf("0"));
+
+		setDateOfDeceaseFrom_year(null);
+		setDateOfDeceaseFrom_month(Integer.valueOf("0"));
+		setDateOfDeceaseFrom_day(Integer.valueOf("0"));
+		
+		setDateOfDeceaseTo_year(null);
+		setDateOfDeceaseTo_month(Integer.valueOf("0"));
+		setDateOfDeceaseTo_day(Integer.valueOf("0"));
+		
 		setPersonIdentifier(null);
 		setHometown(null);		
 		setGraveyard(null);

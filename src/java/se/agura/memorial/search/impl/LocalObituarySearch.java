@@ -5,23 +5,30 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import se.agura.memorial.search.api.CustomMemorialDate;
 import se.agura.memorial.search.api.Grave;
+import se.agura.memorial.search.api.GraveInformation;
 import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
 import se.agura.memorial.search.data.GraveGraveyard;
 import se.agura.memorial.search.data.GraveGraveyardHome;
 import se.agura.memorial.search.data.GraveLocallyStored;
 import se.agura.memorial.search.data.GraveLocallyStoredHome;
-import se.agura.memorial.search.util.Utility;
+import se.agura.memorial.util.Utility;
 
 import com.idega.data.IDOLookup;
 
 public class LocalObituarySearch implements ObituarySearch {
 
-	public Collection findGraves(String firstName, String lastName,
-			String personIdentifier, String dateOfBirthFrom,
-			String dateOfBirthTo, String dateOfDeathFrom, String dateOfDeathTo,
-			String hometown, String graveyard) 
+	public Collection findGraves(String firstName, 
+			                     String lastName,
+			                     String personIdentifier,
+			                     CustomMemorialDate dateOfBirthFrom,
+			                     CustomMemorialDate dateOfBirthTo,
+								 CustomMemorialDate dateOfDeathFrom,
+								 CustomMemorialDate dateOfDeathTo,
+								 String hometown, 
+								 String graveyard) 
 	{
 		List result = new ArrayList();
 		
@@ -111,17 +118,26 @@ public class LocalObituarySearch implements ObituarySearch {
 			Iterator it = coll.iterator();
 			if (it.hasNext()) {
 				Object o = it.next();
-
-				GraveLocallyStored g = (GraveLocallyStored) o;				
+                
+				
+				GraveLocallyStored g = (GraveLocallyStored) o;	
+				GraveInformation aa = null;
 				grave = new Grave(
 						g.getColumID(),						
 						g.getFirstName(),
 						g.getLastName(),						
 						Utility.dateToMemorialDate(g.getDateOfBirth()),
 						Utility.dateToMemorialDate(g.getDateOfDeath()),
-						null,
-						null,
-						null);
+						null,  //burial date 
+						g.getHomeTown(),
+						aa = new GraveInformation(
+								g.getGraveNumber(),
+								g.getBlock(),
+								g.getDepartment(),
+								g.getCemetery(),
+								g.getParish(),
+								g.getCommune(),
+								g.getCountry() ));
 
 			}				
 			

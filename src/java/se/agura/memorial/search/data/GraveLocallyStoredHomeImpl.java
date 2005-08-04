@@ -7,6 +7,8 @@ import java.util.Collection;
 
 import javax.ejb.FinderException;
 
+import se.agura.memorial.search.api.CustomMemorialDate;
+
 import com.idega.data.IDOFactory;
 import com.idega.data.IDORelationshipException;
 
@@ -30,10 +32,11 @@ public class GraveLocallyStoredHomeImpl extends IDOFactory implements
 	}
 
 	public Collection findGraves(String firstName, String lastName,
-			String personIdentifier, String dateOfBirthFrom,
-			String dateOfBirthTo, String dateOfDeathFrom, String dateOfDeathTo,
-			String hometown, String graveyard) throws FinderException,
-			IDORelationshipException {
+			String personIdentifier, CustomMemorialDate dateOfBirthFrom,
+			CustomMemorialDate dateOfBirthTo,
+			CustomMemorialDate dateOfDeathFrom,
+			CustomMemorialDate dateOfDeathTo, String hometown, String graveyard)
+			throws FinderException, IDORelationshipException {
 		com.idega.data.IDOEntity entity = this.idoCheckOutPooledEntity();
 		java.util.Collection ids = ((GraveLocallyStoredBMPBean) entity)
 				.ejbFindGraves(firstName, lastName, personIdentifier,

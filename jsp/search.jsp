@@ -35,19 +35,7 @@
 					<h:panelGrid columns="5" border="0" cellspacing="5" 
 						footerClass="SearchFormFooterClass" >
 						<!-- 1. row -->
-						<h:panelGroup>
-							<h:outputLabel for="firstName">
-								<h:outputText value="#{localizedStrings['se.agura.memorial']['first_name']}"/>
-							</h:outputLabel>
-							<f:verbatim escape="false">
-								<br />
-							</f:verbatim>
-							<h:inputText id="firstName" 
-								value="#{graveyardSearchBean.firstName}" 
-								maxlength="25" >
-								<f:validateLength maximum="25" minimum="0" />
-							</h:inputText>
-						</h:panelGroup>
+						
 						<h:panelGroup>
 							<h:outputLabel for="surname">
 								<h:outputText value="#{localizedStrings['se.agura.memorial']['surname']}"/>
@@ -55,27 +43,49 @@
 							<f:verbatim escape="false">
 								<br />
 							</f:verbatim>
-							<h:inputText id="surname" 
-								value="#{graveyardSearchBean.surname}" 
-								maxlength="25" >
+							<h:inputText id="surname" value="#{graveyardSearchBean.surname}" maxlength="25" >
 								<f:validateLength maximum="25" minimum="0" />
 							</h:inputText>
 						</h:panelGroup>
+
+
 						<h:panelGroup>
+							<h:outputLabel for="surname">
+								<h:outputText value="#{localizedStrings['se.agura.memorial']['first_name']}"/>
+							</h:outputLabel>
+							<f:verbatim escape="false">
+								<br />
+							</f:verbatim>
+							<h:inputText id="firstName"  value="#{graveyardSearchBean.firstName}" maxlength="25" >
+								<f:validateLength maximum="25" minimum="0" />
+							</h:inputText>
+						</h:panelGroup>
+						
+						
+						<h:panelGroup>
+						
+
+						
 							<h:outputLabel for="dateOfBirthFrom">
 								<h:outputText value="#{localizedStrings['se.agura.memorial']['date_of_birth']}" />
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
 							</f:verbatim>
-							<h:inputText id="dateOfBirthFrom" 
-								value="#{graveyardSearchBean.dateOfBirthFrom}" 
-								maxlength="8"  size="8">
-								<f:validateLength maximum="8" minimum="0" />
-								<f:validator validatorId="se.agura.memorial.search.presentation.SearchFormDateValidator" />
+
+							
+							<h:inputText id="dateOfBirthFrom_year" 	value="#{graveyardSearchBean.dateOfBirthFrom_year}" maxlength="4"  size="4">
 							</h:inputText>	
+							
+                           <h:selectOneMenu id="dateOfBirthFrom_month" value="#{graveyardSearchBean.dateOfBirthFrom_month}" onchange="this.form.submit();" >								
+								<f:selectItems value="#{graveyardSearchBean.monthSelectItemList}" />
+							</h:selectOneMenu>							
 													
-							<h:message for="dateOfBirthFrom"  showSummary="false" showDetail="true" />
+                           <h:selectOneMenu id="dateOfBirthFrom_day" value="#{graveyardSearchBean.dateOfBirthFrom_day}" >								
+								<f:selectItems value="#{graveyardSearchBean.dateOfBirthFromDaySelectItemList}" />
+							</h:selectOneMenu>							
+
+							<h:message for="dateOfBirthFrom_year"  showSummary="false" showDetail="true" />
 														
 						</h:panelGroup>
 						<h:panelGroup>
@@ -88,14 +98,18 @@
 							<f:verbatim escape="false">
 								<br />
 							</f:verbatim>
-							<h:inputText id="dateOfBirthTo" 
-								value="#{graveyardSearchBean.dateOfBirthTo}" 
-								maxlength="8"  size="8">
-								<f:validateLength maximum="8" minimum="0" />
-								<f:validator validatorId="se.agura.memorial.search.presentation.SearchFormDateValidator" />
-							</h:inputText>
+
+	  					   <h:inputText id="dateOfBirthTo_year" value="#{graveyardSearchBean.dateOfBirthTo_year}" 	maxlength="4"  size="4"></h:inputText>	
 							
-							<h:message for="dateOfBirthTo"  showSummary="false" showDetail="true" />
+                           <h:selectOneMenu id="dateOfBirthTo_month" value="#{graveyardSearchBean.dateOfBirthTo_month}" onchange="this.form.submit();">								
+								<f:selectItems   value="#{graveyardSearchBean.monthSelectItemList}" />
+						    </h:selectOneMenu>							
+													
+                           <h:selectOneMenu id="dateOfBirthTo_day" value="#{graveyardSearchBean.dateOfBirthTo_day}" >								
+								<f:selectItems   value="#{graveyardSearchBean.dateOfBirthToDaySelectItemList}" />
+						    </h:selectOneMenu>							
+
+							<h:message for="dateOfBirthTo_year"  showSummary="false" showDetail="true" />
 							
 						</h:panelGroup>
 						<!-- end of 1. row -->
@@ -123,14 +137,17 @@
 							<f:verbatim escape="false">
 								<br />
 							</f:verbatim>
-							<h:inputText id="dateOfDeceaseFrom" 
-								value="#{graveyardSearchBean.dateOfDeceaseFrom}" 
-								maxlength="8" size="8" >
-								<f:validateLength maximum="8" minimum="0" />
-								<f:validator validatorId="se.agura.memorial.search.presentation.SearchFormDateValidator" />
-							</h:inputText>
+	  					   <h:inputText id="dateOfDeceaseFrom_year" value="#{graveyardSearchBean.dateOfDeceaseFrom_year}" 	maxlength="4"  size="4"></h:inputText>	
 							
-							<h:message for="dateOfDeceaseFrom"  showSummary="false" showDetail="true" />
+                           <h:selectOneMenu id="dateOfDeceaseFrom_month" value="#{graveyardSearchBean.dateOfDeceaseFrom_month}" onchange="this.form.submit();">								
+								<f:selectItems   value="#{graveyardSearchBean.monthSelectItemList}" />
+						    </h:selectOneMenu>							
+													
+                           <h:selectOneMenu id="dateOfDeceaseFrom_day" value="#{graveyardSearchBean.dateOfDeceaseFrom_day}" >								
+								<f:selectItems   value="#{graveyardSearchBean.dateOfDeceaseFromDaySelectItemList}" />
+						    </h:selectOneMenu>							
+
+							<h:message for="dateOfDeceaseFrom_year"  showSummary="false" showDetail="true" />
 							
 						</h:panelGroup>
 						<h:panelGroup>
@@ -143,14 +160,17 @@
 							<f:verbatim escape="false">
 								<br />
 							</f:verbatim>
-							<h:inputText id="dateOfDeceaseTo" 
-								value="#{graveyardSearchBean.dateOfDeceaseTo}" 
-								maxlength="8"  size="8">
-								<f:validateLength maximum="8" minimum="0" />
-								<f:validator validatorId="se.agura.memorial.search.presentation.SearchFormDateValidator" />
-							</h:inputText>
+	  					   <h:inputText id="dateOfDeceaseTo_year" value="#{graveyardSearchBean.dateOfDeceaseTo_year}" 	maxlength="4"  size="4"></h:inputText>	
 							
-							<h:message for="dateOfDeceaseTo"  showSummary="false" showDetail="true" />
+                           <h:selectOneMenu id="dateOfDeceaseTo_month" value="#{graveyardSearchBean.dateOfDeceaseTo_month}" onchange="this.form.submit();">								
+								<f:selectItems   value="#{graveyardSearchBean.monthSelectItemList}" />
+						    </h:selectOneMenu>							
+													
+                           <h:selectOneMenu id="dateOfDeceaseTo_day" value="#{graveyardSearchBean.dateOfDeceaseTo_day}" >								
+								<f:selectItems   value="#{graveyardSearchBean.dateOfDeceaseToDaySelectItemList}" />
+						    </h:selectOneMenu>							
+
+							<h:message for="dateOfDeceaseTo_year"  showSummary="false" showDetail="true" />
 							
 						</h:panelGroup>
 						<!-- end of 2. row -->

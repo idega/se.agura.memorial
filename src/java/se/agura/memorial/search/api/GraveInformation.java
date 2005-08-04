@@ -15,13 +15,19 @@ public class GraveInformation {
 	private String department; 
 	private String cemetery;
 	private String otherBurialPlace;
+	private String parish;	
+	private String commune;
+	private String country;	
 	
 	
 	public GraveInformation(
 			String graveNumber, 
 			String block, 
 			String department, 
-			String cemetery) {
+			String cemetery,
+			String parish,	
+			String commune,
+			String country) {
 		super();
 
 		this.graveNumber = graveNumber;
@@ -29,8 +35,41 @@ public class GraveInformation {
 		this.department = department;
 		this.cemetery = cemetery;
 		this.otherBurialPlace = null;
+		this.country = country;
+		this.parish = parish;
+		this.commune = commune;
 	}
 	
+	public String getCommune() {
+		return commune;
+	}
+	
+
+	public void setCommune(String commune) {
+		this.commune = commune;
+	}
+	
+
+	public String getCountry() {
+		return country;
+	}
+	
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	
+
+	public String getParish() {
+		return parish;
+	}
+	
+
+	public void setParish(String parish) {
+		this.parish = parish;
+	}
+	
+
 	public GraveInformation(String otherBurialPlace){
 		this.graveNumber = null;
 		this.block = null;

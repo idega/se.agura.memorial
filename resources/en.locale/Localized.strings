@@ -1,8 +1,8 @@
 first_name = First name
 last_name = Last name
 surname = Surname
-date_of_birth = Date of birth
-date_of_decease = Date of decease
+date_of_birth = Date of birth  ( YYYY/MM/DD )
+date_of_decease = Date of decease ( YYYY/MM/DD )
 person_identifier = Person identifier
 hometown = Hometown
 graveyard = Graveyard
@@ -35,5 +35,21 @@ messages.invalid_date_summary = Invalid date
 messages.invalid_date_detail = Your input doesn't look like valid date
 
 search_for_person=Search for person	
+Month_01=Janvary
+Month_02=February
+Month_03=March
+Month_04=April
+Month_05=May
+Month_06=June
+Month_07=July
+Month_08=August
+Month_09=September
+Month_10=Oktober
+Month_11=November
+Month_12=December
+
+
+
+
 									 
 									 

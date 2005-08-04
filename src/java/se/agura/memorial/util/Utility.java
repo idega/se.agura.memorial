@@ -1,4 +1,4 @@
-package se.agura.memorial.search.util;
+package se.agura.memorial.util;
 
 
 
@@ -18,7 +18,6 @@ import se.agura.memorial.search.api.CustomMemorialDate;
 import com.idega.data.query.AND;
 import com.idega.data.query.BaseLogicGroup;
 import com.idega.data.query.Column;
-import com.idega.data.query.InCriteria;
 import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.SelectQuery;
 
@@ -139,116 +138,34 @@ public class Utility {
 	 */
 	public static Collection getNameCriteriaQueries(String firstName, String lastName, Column colFirstName, Column colLastName, SelectQuery queryBase, Column idColumn) {
 		ArrayList queries = new ArrayList();
+		boolean no_changes = true; 
 		
 		if(firstName != null && lastName != null){
-			//'firstname' and 'lastname'
-			SelectQuery exactMatch = (SelectQuery)queryBase.clone();
-			AND exact = new AND(new MatchCriteria(colFirstName, MatchCriteria.LIKE, firstName.trim()),new MatchCriteria(colLastName, MatchCriteria.LIKE, lastName.trim()));
-			exactMatch.addCriteria(exact);
-			queries.add(exactMatch);
-			
-//			'%firstname%' and 'lastname' and not in ('firstname' and 'lastname')
-			SelectQuery exactMatchIdColumn = (SelectQuery)exactMatch.clone();
-			exactMatchIdColumn.removeAllColumns();
-			exactMatchIdColumn.addColumn(idColumn);
-			exactMatchIdColumn.removeAllOrder();
-			InCriteria notExact = new InCriteria(idColumn,exactMatchIdColumn);
-			notExact.setAsNotInCriteria();
-			
-			
-			SelectQuery exactLastNameMatch = (SelectQuery)queryBase.clone();
-			AND exactLastName = new AND(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"),new MatchCriteria(colLastName, MatchCriteria.LIKE, lastName.trim()));
-			exactLastNameMatch.addCriteria(exactLastName);
-			exactLastNameMatch.addCriteria(notExact);
-			queries.add(exactLastNameMatch);
-			
-
-//			 'firstname' and '%lastname%' and not in ('%firstname%' and 'lastname')
-			SelectQuery exactLastNameIdColumn = (SelectQuery)queryBase.clone();
-			exactLastNameIdColumn.addCriteria(exactLastName);
-			exactLastNameIdColumn.removeAllColumns();
-			exactLastNameIdColumn.addColumn(idColumn);
-			exactLastNameIdColumn.removeAllOrder();
-			InCriteria notExactLastName = new InCriteria(idColumn,exactLastNameIdColumn);
-			notExactLastName.setAsNotInCriteria();
-			
-			
-			SelectQuery exactFirstNameMatch = (SelectQuery)queryBase.clone();
-			AND exactFirstName = new AND(new MatchCriteria(colFirstName, MatchCriteria.LIKE, firstName.trim()),new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
-			exactFirstNameMatch.addCriteria(exactFirstName);
-			exactFirstNameMatch.addCriteria(notExactLastName);
-			queries.add(exactFirstNameMatch);
-			
-//			'firstname%' and 'lastname%' and not 'lastname' and not 'firstname'
-			
-			AND neitherExact = (AND)cloneAndInvert(exact);
-			
-			SelectQuery startsWith = (SelectQuery)queryBase.clone();
-			AND starts = new AND(new MatchCriteria(colFirstName, MatchCriteria.LIKE, firstName.trim() + "%"),new MatchCriteria(colLastName, MatchCriteria.LIKE, lastName.trim() + "%"));
-			startsWith.addCriteria(starts);
-			startsWith.addCriteria(neitherExact);
-			queries.add(startsWith);
-			
-//			'%firstname%' and '%lastname%' and not 'lastname' and not 'firstname' and not in ('firstname%' and 'lastname%')
-			SelectQuery startsWithIdColumn = (SelectQuery)startsWith.clone();
-			startsWithIdColumn.removeAllColumns();
-			startsWithIdColumn.addColumn(idColumn);
-			startsWithIdColumn.removeAllOrder();
-			InCriteria notStartsWith = new InCriteria(idColumn,startsWithIdColumn);
-			notStartsWith.setAsNotInCriteria();
-
-
 			SelectQuery anyMatch = (SelectQuery)queryBase.clone();
 			AND any = new AND(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"),new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
 			anyMatch.addCriteria(any);
-			anyMatch.addCriteria(neitherExact);
-			anyMatch.addCriteria(notStartsWith);
 			queries.add(anyMatch);
+			no_changes = false;			
 			
 		} else if (firstName != null){
-			
-			SelectQuery exactMatch = (SelectQuery)queryBase.clone();
-			exactMatch.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, firstName.trim()));
-			queries.add(exactMatch);
-			
-//			MatchCriteria notExact = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, firstName.trim());
-//			queryBase.addCriteria(notExact);
-			
-			
-			SelectQuery startsWith = (SelectQuery)queryBase.clone();
-			startsWith.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, firstName.trim() + "%"));
-			queries.add(startsWith);
-			
-//			MatchCriteria notStartsWith = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, firstName.trim() + "%");
-//			queryBase.addCriteria(notStartsWith);
-			
 			
 			SelectQuery anyMatch = (SelectQuery)queryBase.clone();
 			anyMatch.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + firstName.trim() + "%"));
 			queries.add(anyMatch);
+			no_changes = false;	
 			
 		} else if (lastName != null){
-			SelectQuery exactMatch = (SelectQuery)queryBase.clone();
-			exactMatch.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, lastName.trim()));
-			queries.add(exactMatch);
-			
-//			MatchCriteria notExact = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, lastName.trim());
-//			queryBase.addCriteria(notExact);
-			
-			
-			SelectQuery startsWith = (SelectQuery)queryBase.clone();
-			startsWith.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, lastName.trim() + "%"));
-			queries.add(startsWith);
-			
-//			MatchCriteria notStartsWith = new MatchCriteria(colFirstName, MatchCriteria.NOTLIKE, lastName.trim() + "%");
-//			queryBase.addCriteria(notStartsWith);
-			
-			
+
 			SelectQuery anyMatch = (SelectQuery)queryBase.clone();
-			anyMatch.addCriteria(new MatchCriteria(colFirstName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
+			anyMatch.addCriteria(new MatchCriteria(colLastName, MatchCriteria.LIKE, "%" + lastName.trim() + "%"));
 			queries.add(anyMatch);
+			no_changes = false;	
 			
 		}
+		
+		
+		if (no_changes) queries.add(queryBase);
+
 		return queries;
 	}
 	

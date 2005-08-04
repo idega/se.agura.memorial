@@ -19,7 +19,7 @@ import se.agura.memorial.search.data.GraveGraveyard;
 import se.agura.memorial.search.data.GraveGraveyardHome;
 import se.agura.memorial.search.data.GraveLocallyStored;
 import se.agura.memorial.search.data.GraveLocallyStoredHome;
-import se.agura.memorial.search.util.Utility;
+import se.agura.memorial.util.Utility;
 
 import com.idega.business.IBOLookup;
 import com.idega.business.IBOLookupException;

@@ -6,6 +6,7 @@ package se.agura.memorial.search.data;
 import java.sql.Date;
 
 
+
 import com.idega.data.IDOEntity;
 
 /**
@@ -22,6 +23,51 @@ public interface GraveLocallyStored extends IDOEntity {
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getFirstName
 	 */
 	public String getFirstName();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getHomeTown
+	 */
+	public String getHomeTown();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getGraveNumber
+	 */
+	public String getGraveNumber();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getCemetery
+	 */
+	public String getCemetery();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getDepartment
+	 */
+	public String getDepartment();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getBurialPlace
+	 */
+	public String getBurialPlace();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getBlock
+	 */
+	public String getBlock();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getCountry
+	 */
+	public String getCountry();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getCommune
+	 */
+	public String getCommune();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getParish
+	 */
+	public String getParish();
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getLastName
@@ -47,6 +93,21 @@ public interface GraveLocallyStored extends IDOEntity {
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setLastName
 	 */
 	public void setLastName(String lastName);
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setParish
+	 */
+	public void setParish(String parish);
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setCountry
+	 */
+	public void setCountry(String country);
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setCommune
+	 */
+	public void setCommune(String commune);
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDateOfBirth

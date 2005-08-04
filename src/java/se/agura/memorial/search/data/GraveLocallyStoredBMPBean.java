@@ -7,10 +7,11 @@ import java.util.Iterator;
 
 import javax.ejb.FinderException;
 
-import se.agura.memorial.search.util.Utility;
+import se.agura.memorial.search.api.CustomMemorialDate;
+import se.agura.memorial.util.Utility;
 
 import com.idega.data.GenericEntity;
-//import com.idega.data.IDOLookup;
+import com.idega.data.IDOLookup;
 import com.idega.data.IDOQuery;
 import com.idega.data.IDORelationshipException;
 import com.idega.data.query.Column;
@@ -26,7 +27,8 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
 	public static String COL_API_DB_CONNECTION = "default";		
 	
-	public static final String DATABASE_NAME = "dafault";		
+	public static final String DATABASE_NAME = "dafault";
+	private int maxResult = Utility.MAX_RESULT;		
 
 	public static final String COLUMN_NAME_ID = "MS_GRAVE_LOCALLY_STORED_ID";
 	public static final String COLUMN_NAME_FIRST_NAME = "FIRST_NAME";
@@ -35,10 +37,12 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 	public static final String COLUMN_NAME_DATE_OF_DEATH = "DATE_OF_DEATH";
 	public static final String COLUMN_NAME_HOMETOWN = "HOMETOWN";
 	public static final String COLUMN_NAME_BURIAL_PLACE = "BURIAL_PLACE";
-	//public static final String COLUMN_NAME_CEMETERY = "GRAVEYARD_NAME";
 	public static final String COLUMN_NAME_GRAVEYARD_ID = "GRAVEYARD_ID";		
 	public static final String COLUMN_NAME_DEPARTMENT = "DEPARTMENT";
 	public static final String COLUMN_NAME_BLOCK = "BLOCK";
+	public static final String COLUMN_NAME_COUNTRY = "COUNTRY";
+	public static final String COLUMN_NAME_COMMUNE = "COMMUNE";
+	public static final String COLUMN_NAME_PARISH = "PARISH";	
 	public static final String COLUMN_NAME_GRAVE_NUMBER = "GRAVE_NUMBER";
 	private static final String COLUMN_NAME_GRAVEYARD_NAME = "graveyard_name";
 
@@ -57,40 +61,75 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		addAttribute(COLUMN_NAME_BURIAL_PLACE, "Place of dead ", true, true,String.class, 50);
 		addAttribute(COLUMN_NAME_DEPARTMENT, "Description of the departament ",	true, true, String.class, 30);
 		addAttribute(COLUMN_NAME_BLOCK, "Name of block ", true, true,String.class, 30);
+		addAttribute(COLUMN_NAME_PARISH, "Parish", true, true,String.class, 30);
+		addAttribute(COLUMN_NAME_COUNTRY, "Country ", true, true,String.class, 30);
+		addAttribute(COLUMN_NAME_COMMUNE, "Commune ", true, true,String.class, 30);		
 		addAttribute(COLUMN_NAME_GRAVE_NUMBER, "Grave number ", true, true,	String.class, 15);
 		addManyToOneRelationship(COLUMN_NAME_GRAVEYARD_ID, GraveGraveyard.class);
 
 	}
 
-//	public void insertStartData() throws Exception {
-//		GraveLocallyStoredHome home = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
-//
-//		GraveLocallyStored data1 = home.create();
-//		data1.setFirstName("Anders Beril Ove");
-//		data1.setLastName("Andersson");			
-//		data1.setDateOfBirth(Date.valueOf("1945-03-02"));			
-//		data1.setDateOfDeath(Date.valueOf("2001-01-02"));
-//
-//		data1.setHomeTown("Ystad");
-//		data1.setBurialPlace("Stockholm");			
-//		
-//
-//		try {
-//			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
-//			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
-//			data1.setGraveGraveyard(gg);
-//		} catch (Exception e){
-//			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
-//			data1.setGraveGraveyard(null); 	
-//		}
-//				
-//		data1.setDepartment("Rad 12");			
-//		data1.setBlock("Kv 4");			
-//		data1.setGraveNumber("0045");			
-//		
-//		data1.store();
-//			
-//	}
+	public void insertStartData() throws Exception {
+		GraveLocallyStoredHome home = (GraveLocallyStoredHome) IDOLookup.getHome(GraveLocallyStored.class);
+
+		GraveLocallyStored data1 = home.create();
+		data1.setFirstName("Anders Beril Ove");
+		data1.setLastName("Andersson");			
+		data1.setDateOfBirth(Date.valueOf("1945-03-02"));			
+		data1.setDateOfDeath(Date.valueOf("2001-01-02"));
+
+		data1.setHomeTown("Ystad");
+		data1.setBurialPlace("Stockholm");			
+		
+
+		try {
+			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
+			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
+			data1.setGraveGraveyard(gg);
+		} catch (Exception e){
+			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
+			data1.setGraveGraveyard(null); 	
+		}
+				
+		data1.setDepartment("Rad 12");			
+		data1.setBlock("Kv 4");			
+		data1.setGraveNumber("0045");			
+		data1.setParish(" parish1");		
+		data1.setCommune(" commune1");
+		data1.setCountry(" country1");		
+		
+		data1.store();
+		
+		GraveLocallyStored data2 = home.create();
+		data2.setFirstName("Anna ");
+		data2.setLastName("Brigadere");			
+		data2.setDateOfBirth(Date.valueOf("1941-03-02"));			
+		data2.setDateOfDeath(Date.valueOf("1975-04-02"));
+
+		data2.setHomeTown("Ystad");
+		data2.setBurialPlace("Stockholm");			
+		
+
+		try {
+			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
+			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
+			data2.setGraveGraveyard(gg);
+		} catch (Exception e){
+			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
+			data2.setGraveGraveyard(null); 	
+		}
+				
+		data2.setDepartment("Rad 15");			
+		data2.setBlock("Kv 3");			
+		data2.setGraveNumber("0015");			
+		data2.setParish(" parish2");		
+		data2.setCommune(" commune2");
+		data2.setCountry(" country2");		
+		
+		data2.store();
+		
+			
+	}
 
 
     public String getColumID() {
@@ -101,7 +140,41 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
         return getStringColumnValue(COLUMN_NAME_FIRST_NAME);
     }		
 
-    public String getLastName() {
+	public String getHomeTown() {
+        return getStringColumnValue(COLUMN_NAME_HOMETOWN);
+    }		
+
+	public String getGraveNumber() {
+        return getStringColumnValue(COLUMN_NAME_GRAVE_NUMBER);
+    }		
+
+	public String getCemetery() {
+        return getStringColumnValue(COLUMN_NAME_GRAVEYARD_NAME);
+    }		
+	public String getDepartment() {
+        return getStringColumnValue(COLUMN_NAME_DEPARTMENT);
+    }		
+
+	public String getBurialPlace() {
+        return getStringColumnValue(COLUMN_NAME_BURIAL_PLACE);
+    }		
+	
+	public String getBlock() {
+        return getStringColumnValue(COLUMN_NAME_BLOCK);
+    }		
+
+	public String getCountry() {
+        return getStringColumnValue(COLUMN_NAME_COUNTRY);
+    }		
+	public String getCommune() {
+        return getStringColumnValue(COLUMN_NAME_COMMUNE);
+    }		
+	public String getParish() {
+        return getStringColumnValue(COLUMN_NAME_PARISH);
+    }		
+
+	
+	public String getLastName() {
         return getStringColumnValue(COLUMN_NAME_LAST_NAME);
     }		
 
@@ -115,13 +188,24 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
     }	
 
-
 	public void setFirstName(String firstName) {
 		setColumn(COLUMN_NAME_FIRST_NAME, firstName);
 	}
 
 	public void setLastName(String lastName) {
 		setColumn(COLUMN_NAME_LAST_NAME, lastName);
+	}
+
+	public void setParish(String parish) {
+		setColumn(COLUMN_NAME_PARISH, parish);
+	}
+
+	public void setCountry(String country) {
+		setColumn(COLUMN_NAME_COUNTRY, country);
+	}
+	
+	public void setCommune(String commune) {
+		setColumn(COLUMN_NAME_COMMUNE, commune);
 	}
 
 	public void setDateOfBirth(Date dateOfBirth) {
@@ -164,21 +248,70 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		setColumn(COLUMN_NAME_GRAVE_NUMBER, graveNumber);
 	}			
 			
+	
+	private void appendDateCriteria(CustomMemorialDate fromDate, 
+            						CustomMemorialDate toDate, 
+            						Column dateColumn, 
+            						SelectQuery query) {
+		
+		if (fromDate.getValue() != null && toDate.getValue() != null) {
+			
+			CustomMemorialDate d1,d2;
+			
+			if ((fromDate.getMonth() == null) || (fromDate.getDay() == null)){
+				d1 = new CustomMemorialDate(fromDate.getYear(),Integer.valueOf("1"),Integer.valueOf("1"));
+			}
+			else d1 = new CustomMemorialDate(fromDate.toDate());
+			
+			if ((toDate.getMonth() == null) || (toDate.getDay() == null)){
+				d2 = new CustomMemorialDate(toDate.getYear(),Integer.valueOf("12"),Integer.valueOf("31"));
+			}
+			else d2 = new CustomMemorialDate(toDate.toDate());
+
+			query.addCriteria(new MatchCriteria(dateColumn,	MatchCriteria.GREATEREQUAL, d1.getString()));
+			query.addCriteria(new MatchCriteria(dateColumn,MatchCriteria.LESSEQUAL, d2.getString()));
+			
+		} else {
+			if (fromDate.getValue() != null) {
+
+				if ((fromDate.getMonth() == null) || (fromDate.getDay() == null )){
+					CustomMemorialDate d1,d2;
+					
+					d1 = new CustomMemorialDate(fromDate.getYear(),Integer.valueOf("1"),Integer.valueOf("1"));
+					d2 = new CustomMemorialDate(fromDate.getYear(),Integer.valueOf("12"),Integer.valueOf("31"));
+
+					query.addCriteria(new MatchCriteria(dateColumn,	MatchCriteria.GREATEREQUAL, d1.getString()));
+					query.addCriteria(new MatchCriteria(dateColumn,MatchCriteria.LESSEQUAL, d2.getString()));
+				}
+
+			} else if (toDate.getValue() != null) {
+				CustomMemorialDate d1,d2;
+				
+				d1 = new CustomMemorialDate(toDate.getYear(),Integer.valueOf("1"),Integer.valueOf("1"));
+				d2 = new CustomMemorialDate(toDate.getYear(),Integer.valueOf("12"),Integer.valueOf("31"));
+
+				query.addCriteria(new MatchCriteria(dateColumn,	MatchCriteria.GREATEREQUAL, d1.getString()));
+				query.addCriteria(new MatchCriteria(dateColumn,MatchCriteria.LESSEQUAL, d2.getString()));
+			}
+		}
+	}
+
+
+	
 	public Collection ejbFindGraves(
 									String firstName, 
 									String lastName, 
 									String personIdentifier, 
-									String dateOfBirthFrom, 
-									String dateOfBirthTo, 
-									String dateOfDeathFrom, 
-									String dateOfDeathTo, 
+									CustomMemorialDate dateOfBirthFrom, 
+									CustomMemorialDate dateOfBirthTo, 
+									CustomMemorialDate dateOfDeathFrom, 
+									CustomMemorialDate dateOfDeathTo, 
 									String hometown,
 									String graveyard) 
 	throws FinderException, IDORelationshipException { 
 		
 	    Table table = new Table(ENTITY_NAME);
 	    Table tableGraveyard = new Table(TABLE_GRAVEYARD);
-
 		
 		SelectQuery query = new SelectQuery(table);
 	    
@@ -199,32 +332,18 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		query.addColumn(colDateOfDeath);
 		query.addColumn(colGraveyard);			
 		sqlStatement = query.toString();
-		
 		sqlStatement = query.toString();
 		
 		query.addJoin(table,COLUMN_NAME_GRAVEYARD_ID,tableGraveyard,"MS_GRAVE_GRAVEYARD_ID");
-		
-
 
 		sqlStatement = query.toString();					
 		StringBuffer sqlQuery = new StringBuffer();
 			
 		if (graveyard != null)  query.addCriteria(new MatchCriteria(colGraveyard, MatchCriteria.LIKE, "%" + graveyard.trim() + "%"));
 		if (hometown != null)  query.addCriteria(new MatchCriteria(colHomeTown, MatchCriteria.LIKE, "%" + hometown.trim() + "%"));
-		if(dateOfBirthTo != null){
-		  // TODO search from - to
-		} else if(dateOfBirthFrom != null){
-			//TODO
-//			query.addCriteria(new MatchCriteria(colDateOfBirth, MatchCriteria.EQUALS, Utility.stringToSQLDate(dateOfBirthFrom).toString()));
-		}
 		
-		if (dateOfDeathTo != null){
-			  // TODO search from - to
-		} else if(dateOfDeathFrom != null) {
-			//TODO
-//			query.addCriteria(new MatchCriteria(colDateOfDeath, MatchCriteria.LIKE, dateOfDeathFrom.trim() + "%"));
-		}
-
+		appendDateCriteria(dateOfBirthFrom, dateOfBirthTo, colDateOfBirth, query);
+		appendDateCriteria(dateOfDeathFrom, dateOfDeathTo, colDateOfDeath, query);
 		
 		Order orderByFirstName = new Order(colFirstName, true);
 		Order orderByLastName = new Order(colLastName, true);		
@@ -232,17 +351,18 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		query.addOrder(orderByLastName);
 		query.addOrder(orderByFirstName);		
 		
+		int maxResult = Utility.MAX_RESULT;
 		
 		Collection queries = Utility.getNameCriteriaQueries(firstName, lastName, colFirstName, colLastName, query,colGraveID);
+		String str2 = queries.toString();
 
-		int maxResult = Utility.MAX_RESULT;
 		Collection result = new ArrayList();
 		Iterator iter = queries.iterator();
 		while(result.size() < maxResult && iter.hasNext()){
 			SelectQuery q = (SelectQuery)iter.next();
-			System.out.println();
-			System.out.println(q);
-			System.out.println();
+//			System.out.println();
+//			System.out.println(q);
+//			System.out.println();
 			result.addAll(this.idoFindPKsByQuery(q,maxResult-result.size()));
 		}	
 		return result;	

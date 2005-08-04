@@ -42,10 +42,10 @@ public interface ObituarySearch {
 			           String firstName,
 			           String lastName,
 					   String personIdentifier,
-			           String dateOfBirthFrom,
-			           String dateOfBirthTo,			           
-			           String dateOfDeathFrom,
-			           String dateOfDeathTo,			           
+					   CustomMemorialDate dateOfBirthFrom,
+					   CustomMemorialDate dateOfBirthTo,			           
+					   CustomMemorialDate dateOfDeathFrom,
+					   CustomMemorialDate dateOfDeathTo,			           
 			           String hometown,
 			           String graveyard);
 	

@@ -25,15 +25,7 @@ public class ObituaryInformationDisplayBackingBean {
 
 	public void setGraveId(String graveId) {		
 		this.graveId = graveId;
-		
-		//i am almost sure that managed properties are 
-		//initialized in order they are defined in faces-config.xml
-		
-		//now lets get grave		
-		
-//		MalmoSearchBMPBean ms = new MalmoSearchBMPBean();
-//		this.grave = ms.findGrave(this.getGraveId()); 
-		
+	
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		IWContext iwc = IWContext.getIWContext(facesContext);
 		
@@ -44,10 +36,8 @@ public class ObituaryInformationDisplayBackingBean {
 			this.grave = os.findGrave(this.getGraveId());
 			
 		} catch (IBOLookupException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();	
 		}
 		

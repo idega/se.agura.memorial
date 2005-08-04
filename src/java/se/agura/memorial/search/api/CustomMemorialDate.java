@@ -41,6 +41,67 @@ public class CustomMemorialDate {
 		this.year = new Integer(cal.get(GregorianCalendar.YEAR));
 	}
 		
+	public String getString() {
+		String str = "";
+		if (year!=null){
+			if((year.intValue()>1500) && (year.intValue()<2200)) str=year.toString();
+			else str="????";
+		}
+		else str="????";
+		
+		if (month!=null){
+			if((month.intValue()==0)&&(month.intValue()>13)) str=str + "??";
+			else 
+				if (month.intValue() < 10) str = str + "0" + month.toString();
+				else  str = str + month.toString();
+		}
+		else str=str + "??";
+		
+		if (day!=null){
+			if((day.intValue()==0)&&(day.intValue()>31)) str=str + "??";
+			else 
+				if (day.intValue() < 10) str = str + "0" + day.toString();
+				else  str = str + day.toString();
+		}
+		else str=str + "??";
+		
+		
+		return str;
+	}
+
+	public String getValue() {
+		if((year != null)||(month != null)||(day != null)) return this.getString();
+		else return null;
+	}
+
+	
+	public String getFormatedString() {
+		String str = "";
+		if (year!=null){
+			if((year.intValue()>1500) && (year.intValue()<2200)) str=year.toString();
+			else str="???? ";
+		}
+		else str="???? ";
+		
+		if (month!=null){
+			if((month.intValue()==0)&&(month.intValue()>13)) str=str + "?? ";
+			else 
+				if (month.intValue() < 10) str = str + "0" + month.toString();
+				else  str = str + month.toString();
+		}
+		else str=str + "?? ";
+		
+		if (day!=null){
+			if((day.intValue()==0)&&(day.intValue()>31)) str=str + "??";
+			else 
+				if (day.intValue() < 10) str = str + "0" + day.toString();
+				else  str = str + day.toString();
+		}
+		else str=str + "??";
+		
+		
+		return str;
+	}
 	
 	public Integer getDay() {
 		return day;
