@@ -47,6 +47,18 @@
      </properties>
    </dependency>
 
+    <dependency>
+      <groupId>bundles</groupId>
+      <artifactId>com.idega.block.help</artifactId>
+      <!--<version>1.0</version>-->
+      <version>SNAPSHOT</version>
+      <type>jar</type>
+      <url>http://www.idega.com/</url>
+      <properties>
+        <eclipse.dependency>true</eclipse.dependency>
+      </properties>
+    </dependency>
+
 
     <dependency>
       <groupId>bundles</groupId>
