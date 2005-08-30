@@ -30,13 +30,13 @@ public class MalmoChurchSearch implements ObituarySearch {
 
 	public static final String COLUMN_NAME_GRAVE_ID = "Grav_ID";
 	public static final String COLUMN_NAME_LOP_NR = "LOPNR";
-	public static final String COLUMN_NAME_LKF = "LKF";	
-	public static final String COLUMN_NAME_FIRST_NAME = "Fornamn";
-	public static final String COLUMN_NAME_LAST_NAME = "Efternamn";
-	public static final String COLUMN_NAME_PERSON_IDENTIFIER = "Pers_nr";
+	public static final String COLUMN_NAME_LKF = "Old_LKF";	
+	public static final String COLUMN_NAME_FIRST_NAME = "Old_Fornamn";
+	public static final String COLUMN_NAME_LAST_NAME = "Old_Efternamn";
+	public static final String COLUMN_NAME_PERSON_IDENTIFIER = "Old_Pers_nr";
 	public static final String COLUMN_NAME_DATE_OF_DEATH = "Dodsdatum";
 	public static final String COLUMN_NAME_BURIAL_DATE = "Begr_datum";
-	public static final String COLUMN_NAME_HOME_TOWN = "HEMORT";
+	public static final String COLUMN_NAME_HOME_TOWN = "Old_HEMORT";
 	public static final String COLUMN_NAME_BURIAL_PLACE = "BURIAL_PLACE";
 	public static final String COLUMN_NAME_CEMETERY = "CEMETERY";
 	public static final String COLUMN_NAME_DEPARTMENT = "BENAMNING AS DEPARTMENT";

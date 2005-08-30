@@ -250,8 +250,6 @@
 					<br />
 				</f:verbatim>
 				
-				<core:help helpTextBundle="se.agura.memorial" helpTextKey="search_help"/>
-				
 				<!-- here are error messages and warnings -->					
 				<h:messages id="messageList" showSummary="false" showDetail="true" globalOnly="true"/> 			
 				
@@ -327,8 +325,8 @@
 					<f:facet name="next">
 						<h:outputText value="#{localizedStrings['se.agura.memorial']['next_page']}" />
 					</f:facet>
+					
 				</x:dataScroller>
-
 				</wf:wfblock >
 			</h:form>
 		</ws:page>

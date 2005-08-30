@@ -33,6 +33,7 @@ import com.idega.data.IDOLookup;
 import com.idega.data.IDOLookupException;
 import com.idega.idegaweb.IWBundle;
 import com.idega.presentation.IWContext;
+import com.idega.presentation.text.Link;
 
 public class SearchFormBackingBean {
 	
@@ -647,7 +648,7 @@ public class SearchFormBackingBean {
 		}			
 		if (searchResults == null) searchResults = new ArrayList();  
 	
-		if (searchResults.size() > 100) {
+		if (searchResults.size() > 99) {
 			
 			this.moreThen100ResultsFound = true; 
 			
@@ -655,21 +656,28 @@ public class SearchFormBackingBean {
 	        
 	        IWContext iwContext = IWContext.getIWContext(facesContext);
 			IWBundle bundle = iwContext.getIWMainApplication().getBundle(IW_BUNDLE_IDENTIFIER);
-			ValueBinding vbSummary = bundle.getValueBinding("messages.more_than_100_hits_summary"); 
-			ValueBinding vbDetail = bundle.getValueBinding("messages.more_than_100_hits_detail");  
+			ValueBinding vbSummary = bundle.getValueBinding("help_button"); 
+			ValueBinding vbDetail = bundle.getValueBinding("messages.more_than_100_hits_detail");
+			//ValueBinding vbDetail = bundle.getValueBinding("help_button");			
 			
 			facesContext.addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_WARN, 
+					FacesMessage.SEVERITY_ERROR,// SEVERITY_WARN, 
 					vbSummary.getValue(facesContext).toString(), // summary
 					vbDetail.getValue(facesContext).toString()// detail
-					));			
+					));
+			
+			//Link link = new Link("..the Link");
+			//facesContext.
+			//link.addParameter(null, null);
+					//PARAMETER_ACTION, ACTION_SEARCH);
+
 						
 			//remove the last element
 			int count = 0;
 			for (Iterator it = searchResults.iterator(); it.hasNext();) {				
 				count++;				
 				Grave g = (Grave) it.next();
-				if (count > 100) it.remove();
+				if (count > 99) it.remove();
 			}
 			
 		}		
