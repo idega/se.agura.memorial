@@ -5,6 +5,7 @@ import java.io.IOException;
 //import java.util.Enumeration;
 //import org.apache.webdav.lib.WebdavResources;
 
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 import org.apache.webdav.lib.PropertyName;
@@ -354,6 +355,18 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 			return false;
 		}
 		return true;
+	}
+
+
+//	public void store() throws IDOStoreException {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
+
+	public Iterator getChildrenIterator(String arg0, boolean arg1) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

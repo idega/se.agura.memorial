@@ -33,7 +33,7 @@ import com.idega.data.IDOLookup;
 import com.idega.data.IDOLookupException;
 import com.idega.idegaweb.IWBundle;
 import com.idega.presentation.IWContext;
-import com.idega.presentation.text.Link;
+
 
 public class SearchFormBackingBean {
 	
