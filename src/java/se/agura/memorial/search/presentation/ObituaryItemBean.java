@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
+import javax.ejb.EJBLocalHome;
+
 import org.apache.webdav.lib.PropertyName;
 import org.apache.webdav.lib.WebdavException;
 import org.apache.webdav.lib.WebdavResource;
@@ -365,6 +367,14 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity {
 
 
 	public Iterator getChildrenIterator(String arg0, boolean arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	public EJBLocalHome getEJBLocalHome(String arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
