@@ -21,6 +21,18 @@
       <email>gummi@idega.is</email>
       <organization>idega software</organization>
     </developer>
+    <developer>
+      <name>Igors Sidrovs</name>
+      <id>igors</id>
+      <email>igors.sidorovs@idega.lv</email>
+      <organization>idega Baltic</organization>
+    </developer>
+    <developer>
+      <name>Dainis Brjuhoveckis</name>
+      <id>dainis</id>
+      <email>dainis.brjuhoveckis@idega.lv</email>
+      <organization>idega Baltic</organization>
+    </developer>
   </developers>
   <dependencies>
     <dependency>
