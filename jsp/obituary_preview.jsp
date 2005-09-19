@@ -24,7 +24,7 @@ version="1.2">
                     <br />
                   </f:verbatim>
 
-                 <h:outputText  styleClass="Text" value="#{obituaryBackingBean.obituaryText}"  />                  
+                 <h:outputText  styleClass="Text" value="#{obituaryCreateBackingBean.obituaryText}"  />                  
 
 				 <f:verbatim>
                     <br />
@@ -51,15 +51,15 @@ version="1.2">
 
                    <h:outputLink value="Obituary_Create"> 
                         <h:commandButton value="BACK" action="" id="cbBack" />
-						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
-						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
+						<f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
 						<f:param name="actionId" value="5" />														                        						
                    </h:outputLink>
 					
                    <h:outputLink value="Obituary"> 
                         <h:commandButton value="SAVE" action="" id="cbSave" />
-						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
-						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
+						<f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
 						<f:param name="actionId" value="4" />														                        						
                    </h:outputLink>
 

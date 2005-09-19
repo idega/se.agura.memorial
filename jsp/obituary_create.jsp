@@ -30,7 +30,7 @@ version="1.2">
 
 
                   <f:verbatim escape="false">
-                     <h:inputTextarea id="textArea"  rows="4" cols="40"  value="#{obituaryBackingBean.obituaryText}"/>
+                     <h:inputTextarea id="textArea"  rows="4" cols="40"  value="#{obituaryCreateBackingBean.obituaryText}"/>
                      <br />
                      <br />
                   </f:verbatim>
@@ -64,15 +64,15 @@ version="1.2">
 
 		                   
                    <h:outputLink value="new%20person"> 
-                        <h:commandButton value="New person" action="obituaryBackingBean.onClick" id="cbNewPerson" />
-						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
-						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
+                        <h:commandButton value="New person" action="obituaryCreateBackingBean.onClick" id="cbNewPerson" />
+						<f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
                    </h:outputLink>
 
                    <h:outputLink value="Obituary_Preview"> 
                         <h:commandButton value="Preview" action="#{obituaryCreateBackingBean.onClick}"/>
-						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
-						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
+						<f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
 						<f:param name="actionId" value="8" />														                        						
                    </h:outputLink>
 
