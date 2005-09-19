@@ -14,7 +14,7 @@ import com.idega.slide.util.WebdavExtendedResource;
  * This software is the proprietary information of Idega hf.
  * Use is subject to license terms.
  */
-public class ObituaryImageItemBean extends ContentItemBean implements ContentItem {
+public abstract class ObituaryImageItemBean extends ContentItemBean implements ContentItem {
 	
 	public final static String FIELDNAME_DESCRIPTION = "description";
 	public final static String FIELDNAME_IMAGE = "image";
