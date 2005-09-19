@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.ejb.FinderException;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 import javax.faces.event.ValueChangeEvent;
@@ -42,11 +43,11 @@ public class SearchFormBackingBean {
 	private String firstName;
 	private String surname;
 
-	private CustomMemorialDate dateOfBirthTo= null;
-	private CustomMemorialDate dateOfBirthFrom= null;
-
-	private CustomMemorialDate dateOfDeceaseTo= null;
-	private CustomMemorialDate dateOfDeceaseFrom= null;
+//	private CustomMemorialDate dateOfBirthTo= null;
+//	private CustomMemorialDate dateOfBirthFrom= null;
+//
+//	private CustomMemorialDate dateOfDeceaseTo= null;
+//	private CustomMemorialDate dateOfDeceaseFrom= null;
 
 	private Integer dateOfBirthFrom_year= null;
 	private Integer dateOfBirthFrom_month = new Integer(0);
@@ -616,6 +617,24 @@ public class SearchFormBackingBean {
 	/**
 	 * searches
 	 */
+	
+    public String onClick()
+    {        
+        
+        boolean result = true;
+        
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		
+		IWContext iwc = IWContext.getIWContext(facesContext);
+		
+        if(result)
+            return "success";
+        else
+            return "failure";
+    }
+
+	
 	public String search() {
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -624,7 +643,7 @@ public class SearchFormBackingBean {
 		
 		searchResults = new ArrayList();	
 	
-	
+		
 		IWContext iwc = IWContext.getIWContext(facesContext);
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
@@ -643,7 +662,6 @@ public class SearchFormBackingBean {
 						this.graveyard != null ? this.graveyard.getBenamning(): null);
 	
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}			
 		if (searchResults == null) searchResults = new ArrayList();  
@@ -666,11 +684,6 @@ public class SearchFormBackingBean {
 					vbDetail.getValue(facesContext).toString()// detail
 					));
 			
-			//Link link = new Link("..the Link");
-			//facesContext.
-			//link.addParameter(null, null);
-					//PARAMETER_ACTION, ACTION_SEARCH);
-
 						
 			//remove the last element
 			int count = 0;
@@ -680,8 +693,7 @@ public class SearchFormBackingBean {
 				if (count > 99) it.remove();
 			}
 			
-		}		
-	
+		}
 		return "success";
 	}
 
@@ -691,7 +703,7 @@ public class SearchFormBackingBean {
 	 * clear search form
 	 */
 	public String clear() {
-	
+		
 		setFirstName(null);
 		setSurname(null);
 		setDateOfBirthFrom_year(null);

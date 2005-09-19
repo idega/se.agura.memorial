@@ -1,4 +1,4 @@
-package se.agura.memorial.search.presentation;
+package se.agura.memorial.util;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

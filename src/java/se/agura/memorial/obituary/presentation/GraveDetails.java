@@ -1,5 +1,5 @@
 /*
- * $Id: GraveDetails.java,v 1.4 2005/08/04 10:46:15 igors Exp $
+ * $Id: GraveDetails.java,v 1.5 2005/09/19 08:47:23 igors Exp $
  * Created on 29.6.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -9,36 +9,30 @@
  */
 package se.agura.memorial.obituary.presentation;
 
-//import java.rmi.RemoteException;
-//import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.convert.Converter;
 import javax.faces.el.ValueBinding;
-//import com.idega.business.IBOLookup;
-//import com.idega.business.IBOLookupException;
+
+import se.agura.memorial.util.*;
+
+
 import com.idega.idegaweb.IWBundle;
-//import com.idega.idegaweb.UnavailableIWContext;
-//import com.idega.presentation.IWContext;
 import com.idega.webface.WFContainer;
 import com.idega.webface.WFUtil;
-//import se.agura.memorial.search.api.Grave;
-//import se.agura.memorial.search.api.ObituarySearch;
-//import se.agura.memorial.search.business.SearchImplBroker;
-import se.agura.memorial.search.presentation.DateConverter;
-import se.agura.memorial.search.presentation.EmptyStringConverter;
-import se.agura.memorial.util.MemorialUtil;
 
 
 /**
  * 
- *  Last modified: $Date: 2005/08/04 10:46:15 $ by $Author: igors $
+ *  Last modified: $Date: 2005/09/19 08:47:23 $ by $Author: igors $
  *  
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class GraveDetails extends WFContainer {
 
+    Integer stateMode = new Integer(0);
+	
 	/**
 	 * 
 	 */
@@ -55,9 +49,11 @@ public class GraveDetails extends WFContainer {
 	
 	
 	protected void initializeContent() {
-		String managedBean = "obituaryInformationDisplayBackingBean";
+		String managedBean = "obituaryBackingBean";
 
+		
 		IWBundle bundle = MemorialUtil.getBundle();
+		
 		
 		addLabelAndValue(bundle,"surname","Last name",WFUtil.createValueBinding("#{" + managedBean+".grave.lastName" + "}"),new EmptyStringConverter(),this,"gravedetail");
 		addLabelAndValue(bundle,"first_name","First name",WFUtil.createValueBinding("#{" + managedBean+".grave.firstName" + "}"),new EmptyStringConverter(),this,"gravedetail");
@@ -72,7 +68,17 @@ public class GraveDetails extends WFContainer {
 		addLabelAndValue(bundle,"department","Department",WFUtil.createValueBinding("#{" + managedBean+".grave.graveInfo.department" + "}"),new EmptyStringConverter(),this,"gravedetail");
 		addLabelAndValue(bundle,"grave_no","Grave number",WFUtil.createValueBinding("#{" + managedBean+".grave.graveInfo.graveNumber" + "}"),new EmptyStringConverter(),this,"gravedetail");
 
-
+		
+//		HtmlCommandButton btn = new HtmlCommandButton();
+//		//btn.setAction(WFUtil.createMethodBinding("#{" + managedBean+".setShowMode"+"}",null));
+//		btn.setId("editButton");
+//		btn.setOnclick(WFUtil.createMethodBinding("#{" + managedBean+".setShowMode"+"}",null).toString());
+//		//btn.setOnclick("clear_searchForm()");
+////		btn.setStyle("Ssss");
+//		btn.setValue("Edit");
+//		getChildren().add(btn);
+		
+		//hometownContainer.setStyleClass("label_value_group");
 
 		
 //		WFContainer hometownContainer = new WFContainer();
@@ -108,6 +114,23 @@ public class GraveDetails extends WFContainer {
 	 * @param parent
 	 * @param styleClass  Style class of a div containing the label and value.  Label and value will have the style class 'label' and 'value'
 	 */
+	
+	protected WFContainer createBtn(IWBundle bundle, String styleClass, HtmlOutputText labelText, HtmlOutputText valueText) {
+		WFContainer btn = new WFContainer();
+		//labelValuePair.setStyleClass(styleClass);
+		btn.getChildren().add("aaa");
+		
+//		HtmlOutputText seperator = new HtmlOutputText();
+//		seperator.setStyleClass("seperator");
+//		bundle.getLocalizedUIComponent("grave_details.label-value.seperator",seperator,": ");
+//		bundle.getLocalizedUIComponent(": ",seperator,": ");
+//		labelValuePair.getChildren().add(seperator);
+		
+		btn.getChildren().add("");
+		return null;
+	}
+
+	
 	protected void addLabelAndValue(IWBundle bundle, String labelLocalizationKey, String labelDefaultValue, ValueBinding value, Converter valueConverter, UIComponent parent, String styleClass){		
 		addLabelAndValue(bundle,labelLocalizationKey,labelDefaultValue,value,valueConverter,parent,styleClass,null);
 	}
@@ -144,7 +167,8 @@ public class GraveDetails extends WFContainer {
 		
 		HtmlOutputText seperator = new HtmlOutputText();
 		seperator.setStyleClass("seperator");
-		bundle.getLocalizedUIComponent("grave_details.label-value.seperator",seperator,": ");
+//		bundle.getLocalizedUIComponent("grave_details.label-value.seperator",seperator,": ");
+		bundle.getLocalizedUIComponent(": ",seperator,": ");
 		labelValuePair.getChildren().add(seperator);
 		
 		labelValuePair.getChildren().add(valueText);

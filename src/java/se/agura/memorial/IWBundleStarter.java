@@ -1,6 +1,6 @@
 /*
 /*
- * $Id: IWBundleStarter.java,v 1.12 2005/09/06 14:14:12 igors Exp $
+ * $Id: IWBundleStarter.java,v 1.13 2005/09/19 08:47:23 igors Exp $
  * Created on 15.5.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -20,10 +20,10 @@ import com.idega.idegaweb.include.GlobalIncludeManager;
 
 /**
  * 
- *  Last modified: $Date: 2005/09/06 14:14:12 $ by $Author: igors $
+ *  Last modified: $Date: 2005/09/19 08:47:23 $ by $Author: igors $
  * 
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class IWBundleStarter implements IWBundleStartable {
 	private static final String STYLE_SHEET_URL = "/style/memorial.css";
@@ -65,6 +65,15 @@ public class IWBundleStarter implements IWBundleStartable {
 		DefaultViewNode searchMemorialNode = new DefaultViewNode("Search",memorialNode);
 		searchMemorialNode.setJspUri(bundle.getJSPURI("search.jsp"));
 		
+		DefaultViewNode obituaryMemorialNode = new DefaultViewNode("Obituary",memorialNode);
+		obituaryMemorialNode.setJspUri(bundle.getJSPURI("obituary.jsp"));
+
+		DefaultViewNode obituaryCreateMemorialNode = new DefaultViewNode("Obituary_Create",memorialNode);
+		obituaryCreateMemorialNode.setJspUri(bundle.getJSPURI("obituary_create.jsp"));
+
+		DefaultViewNode obituaryPreviewMemorialNode = new DefaultViewNode("Obituary_Preview",memorialNode);
+		obituaryPreviewMemorialNode.setJspUri(bundle.getJSPURI("obituary_preview.jsp"));
+		
 		DefaultViewNode newPersonMemorialNode1 = new DefaultViewNode("new person",memorialNode);
 		newPersonMemorialNode1.setJspUri(bundle.getJSPURI("new_person.jsp"));
 	
@@ -73,9 +82,6 @@ public class IWBundleStarter implements IWBundleStartable {
 		
 		DefaultViewNode searchMemorialForTestsNode = new DefaultViewNode("Search",memorialForTestsNode);
 		searchMemorialNode.setJspUri(bundle.getJSPURI("search.jsp"));		
-		
-		DefaultViewNode obituaryMemorialNode = new DefaultViewNode("obituary",memorialForTestsNode);
-		obituaryMemorialNode.setJspUri(bundle.getJSPURI("obituary_create.jsp"));	
 		
 		DefaultViewNode newPersonMemorialNode = new DefaultViewNode("new person",memorialForTestsNode);
 		newPersonMemorialNode.setJspUri(bundle.getJSPURI("new_person.jsp"));

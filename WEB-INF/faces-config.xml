@@ -6,90 +6,19 @@
 
 <faces-config>
 	
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/style_image_l10n.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>navigationTest</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>	
-	
 
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>navigationTest</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>	
+ <navigation-rule>
 
-	<navigation-rule>
-  		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</from-view-id>
-  		<navigation-case>
-    	<from-outcome>navigationTest</from-outcome>
-    	<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-  		</navigation-case>
-	</navigation-rule>
-		
-	<navigation-rule>
-  		<from-view-id>/se.agura.memorial.bundle/jsp/obituary.jsp</from-view-id>
-  		<navigation-case>
-    	<from-outcome>navigationTest</from-outcome>
-    	<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-  		</navigation-case>
-	</navigation-rule>
-
-	<navigation-rule>
-  		<from-view-id>obituary.jsp</from-view-id>
-  		<navigation-case>
-    	<from-outcome>navigationTest</from-outcome>
-    	<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-  		</navigation-case>
-	</navigation-rule>
+   <from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
+	<navigation-case>
+		<from-action>#{graveyardSearchBean.onClick}</from-action>
+		<from-outcome>success</from-outcome>
+		<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</to-view-id>
+    </navigation-case>
 
 
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>showObituaryAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-	
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>showObituaryCreateAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-	
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>showObituaryPreviewAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_preview.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>	
-		
 
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>newPerson</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/new_person.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-
-
-	<navigation-rule>
-		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>showObituaryCreateAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/navigation_test.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
-	
+</navigation-rule>
 	
 	<managed-bean>
 		<description>Backing bean for graveyard search form</description>
@@ -104,24 +33,11 @@
 		<managed-bean-class>se.agura.memorial.search.presentation.NewPersonBackingBean</managed-bean-class>		
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>	
-	
-	<managed-bean>
-		<managed-bean-name>obituaryInformationDisplayBackingBean</managed-bean-name>
-		<managed-bean-class>se.agura.memorial.search.presentation.ObituaryInformationDisplayBackingBean</managed-bean-class>		
-		<managed-bean-scope>request</managed-bean-scope>
-		<managed-property>
-			<property-name>databaseId</property-name>
-			<value>#{param.databaseId}</value>
-		</managed-property> 
-		<managed-property>
-			<property-name>graveId</property-name>
-			<value>#{param.graveId}</value>
-		</managed-property> 
-	</managed-bean>	
 
 	<managed-bean>
-		<managed-bean-name>obituaryItemBean</managed-bean-name>
-		<managed-bean-class>se.agura.memorial.search.presentation.ObituaryItemBean</managed-bean-class>		
+		<description>Backing bean for Obituary page</description>	
+		<managed-bean-name>obituaryBackingBean</managed-bean-name>
+		<managed-bean-class>se.agura.memorial.obituary.presentation.ObituaryInformationDisplayBackingBean</managed-bean-class>		
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
 			<property-name>databaseId</property-name>
@@ -131,16 +47,20 @@
 			<property-name>graveId</property-name>
 			<value>#{param.graveId}</value>
 		</managed-property> 
-	</managed-bean>	
+		<managed-property>
+			<property-name>actionId</property-name>
+			<value>#{param.actionId}</value>
+		</managed-property> 
 		
+	</managed-bean>	
 	
 	<managed-bean>
-		<description>List of persons</description>
-		<managed-bean-name>PersonList</managed-bean-name>
-		<managed-bean-class>se.agura.memorial.experiment.PersonList</managed-bean-class>		
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	
+		<description>Backing bean for Obituary_Create page</description>	
+		<managed-bean-name>obituaryCreateBackingBean</managed-bean-name>
+		<managed-bean-class>se.agura.memorial.obituary.presentation.ObituaryCreateBackingBean</managed-bean-class>		
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>	
+
 	<converter>
 	  <converter-id>se.agura.memorial.search.presentation.GraveyardConverter</converter-id>
 	  <converter-class>
@@ -150,16 +70,16 @@
 	
 	
 	<converter>
-	  <converter-id>se.agura.memorial.search.presentation.DateConverter</converter-id>
+	  <converter-id>se.agura.memorial.util.DateConverter</converter-id>
 	  <converter-class>
-		se.agura.memorial.search.presentation.DateConverter
+		se.agura.memorial.util.DateConverter
 	  </converter-class>
 	</converter> 
 	
 	<converter>
-	  <converter-id>se.agura.memorial.search.presentation.EmptyStringConverter</converter-id>
+	  <converter-id>se.agura.memorial.util.EmptyStringConverter</converter-id>
 	  <converter-class>
-		se.agura.memorial.search.presentation.EmptyStringConverter
+		se.agura.memorial.util.EmptyStringConverter
 	  </converter-class>
 	</converter> 	
 	
