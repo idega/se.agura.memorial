@@ -10,74 +10,60 @@
         xmlns:memorial="http://xmlns.idega.com/se.agura.memorial"  
 version="1.2">
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
+
+
 <f:view>
 	<ws:page id="obituary">
 		<h:form id="obituaryform">    
 			
-					<wf:wfblock title="Obituary page">
-						<f:facet name="wf_block_toolbar">
-							<wf:toolbar id="toolbar">
-							   	
-							   	<h:commandLink id="searchButton" 
-									value="#{localizedStrings['se.agura.memorial']['search']}" 
-									action="#{graveyardSearchBean.search}" 
-									immediate="true" 
-									styleClass="page_preview_link"/>
-								
-								<h:outputLink value="" 
-									styleClass="page_preview_link">
-								  <f:verbatim>Back</f:verbatim>
-								</h:outputLink> 
-								
-							    <h:commandLink 
-							         action="navigationTest"
-							         immediate="true">
- 						             <h:outputText value="Navigation test" />				
- 	    						</h:commandLink>								
-								
-							</wf:toolbar>
-						</f:facet>
+ 			<wf:wfblock title="Obituary page">
 
              <wf:container styleClass="obituary_part">
 
-                  <h:outputText styleClass="headline" value="Detailed  grave information#{localizedStrings['se.agura.memorial']['detailed_grave_information']}" />
-                  
+                 <h:outputText styleClass="headline" value="Obituary" />
+
+				 <f:verbatim>
+                    <br />
+                    <br />
+                  </f:verbatim>
+
+                 <h:outputText styleClass="Text" value="#{obituaryBackingBean.obituaryText}" />
+
+				 <f:verbatim>
+                    <br />
+                    <br />
+                  </f:verbatim>
+
+                 <h:outputText styleClass="headline" value="Detailed Grave Information" />
+
+				 <f:verbatim>
+                    <br />
+                    <br />
+                  </f:verbatim>
+
 				 <memorial:GraveDetails id="theobject"></memorial:GraveDetails>
 
 				 <f:verbatim>
                     <br />
                     <br />
                   </f:verbatim>
-                  <h:outputText styleClass="headline" value="#{localizedStrings['se.agura.memorial']['obituary']}" style="font-weight: bold; " />
+                  </wf:container>
 
 
-                  <f:verbatim escape="false">
+                   <h:commandButton value="Print" action="#{obituaryCreateBackingBean.onClick}"  />
 
-                    <h:outputText styleClass="Text" value="#{obituaryText}" style="font-weight: bold; " />
-                    <br />
-                    <br />
-                    
-                  </f:verbatim>
 
-                  <h:outputText  styleClass="headline" value="#{localizedStrings['se.agura.memorial']['picture_of_person']}" style="font-weight: bold; " />
-                  <f:verbatim>
-                    <br />
-                    <br />
-                  </f:verbatim>
-                  <h:graphicImage alt="" url="/#{bundles['se.agura.memorial'].resourcesPath}/images/jimi.jpg" />
+                   <h:outputLink value="Obituary_Create" > 
+                        <h:commandButton value="Edit" action="#{obituaryCreateBackingBean.onClick}" id="cbCreate" />
+						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
+						<f:param name="actionId" value="5" />														                        						
+                   </h:outputLink>
 
-                  <f:verbatim>
-                    <br />
-                    <br />
-                  </f:verbatim>
-                  <h:outputText styleClass="headline" value="#{localizedStrings['se.agura.memorial']['picture_of_grave']}" style="font-weight: bold; " />
-                  <f:verbatim>
-                    <br />
-                    <br />
-                  </f:verbatim>
-                  <h:graphicImage alt="" url="/#{bundles['se.agura.memorial'].resourcesPath}/images/jimi_headstone.jpg" />
-             </wf:container>
-				
+                   <h:commandButton value="Save as PDF" action="#{obituaryCreateBackingBean.onClick}"  />
+
+                   
+
 			</wf:wfblock >
 
 	    </h:form>    

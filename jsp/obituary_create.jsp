@@ -14,30 +14,13 @@ version="1.2">
 	<ws:page id="obituary_create">
 		<h:form id="obituary_createform">    
 			
-					<wf:wfblock title="Obituary create|edit page">
-						<f:facet name="wf_block_toolbar">
-							<wf:toolbar id="toolbar">
-							   	
-							   	<h:commandLink id="searchButton" 
-									value="#{localizedStrings['se.agura.memorial']['search']}" 
-									action="#{graveyardSearchBean.search}" 
-									immediate="true" 
-									styleClass="page_preview_link"/>
-								
-								<h:outputLink value="" 
-									styleClass="page_preview_link">
-								  <f:verbatim>Back</f:verbatim>
-								</h:outputLink> 
+ 			 <wf:wfblock title="Obituary Edit page">
 
-							</wf:toolbar>
-						</f:facet>
 
              <wf:container styleClass="obituary_part">
 
-                  <h:outputText styleClass="headline" value="Detailed  grave information#{localizedStrings['se.agura.memorial']['detailed_grave_information']}" />
-                  
-				 <memorial:GraveDetails id="theobject"></memorial:GraveDetails>
-                 
+
+							
 
 				 <f:verbatim>
                     <h:outputText styleClass="headline" value="#{localizedStrings['se.agura.memorial']['obituary']}" style="font-weight: bold; " />
@@ -45,10 +28,9 @@ version="1.2">
                     <br />
                   </f:verbatim>
 
-				 <memorial:ObituaryItemViewer id="theobject"></memorial:ObituaryItemViewer>
 
                   <f:verbatim escape="false">
-                     <h:inputTextarea id="textArea"  rows="4" cols="40"  value="Write text for obituary here..."/>
+                     <h:inputTextarea id="textArea"  rows="4" cols="40"  value="#{obituaryBackingBean.obituaryText}"/>
                      <br />
                      <br />
                   </f:verbatim>
@@ -60,7 +42,8 @@ version="1.2">
                   </f:verbatim>
 
                   <f:verbatim>				  
-                   <h:commandButton value="Upload picture of person" action="" id="cbUploadGrave" />		      
+                   <h:commandButton value="Upload picture of person" action="#{obituaryCreateBackingBean.onClick}" id="cbUploadGrave" >		      
+                   </h:commandButton>
                     <br />
                     <br />
                   </f:verbatim>
@@ -79,11 +62,20 @@ version="1.2">
                   </f:verbatim>
 	        
 
-			      <h:commandButton value="Preview" action="showObituaryPreviewAction" id="cbPreview" />		      
 		                   
-		                
-		                
-		           
+                   <h:outputLink value="new%20person"> 
+                        <h:commandButton value="New person" action="obituaryBackingBean.onClick" id="cbNewPerson" />
+						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
+                   </h:outputLink>
+
+                   <h:outputLink value="Obituary_Preview"> 
+                        <h:commandButton value="Preview" action="#{obituaryCreateBackingBean.onClick}"/>
+						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
+						<f:param name="actionId" value="8" />														                        						
+                   </h:outputLink>
+
                   
              </wf:container>
 				

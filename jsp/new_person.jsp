@@ -130,9 +130,21 @@ version="1.2">
         
         <h:commandButton value="Save" action="#{newPersonBean.save}" id="cbSave" />
         
+        
+        
+        
     </h:panelGrid>    
 
 	</wf:wfblock>
+
+     <h:outputLink value="Obituary_Create" id="a12345"> 
+              <h:commandButton value="CANCEL" action="" id="cbCreateBtn1" />
+     </h:outputLink>
+
+     <h:outputLink value="Obituary_Create" id="a1234567"> 
+              <h:commandButton value="SAVE" action="#{newPersonBean.save}" id="cbSaveBtn1" />
+              
+     </h:outputLink>
 
     </h:form>
   

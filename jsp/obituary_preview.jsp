@@ -11,83 +11,59 @@
 version="1.2">
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 <f:view>
-	<ws:page id="obituary_preview">
-		<h:form id="obituary_previewform">    
+	<ws:page id="obituaryPreview">
+		<h:form id="obituaryPreviewform">    
 			
-					<wf:wfblock title="Obituary preview page">
-						<f:facet name="wf_block_toolbar">
-							<wf:toolbar id="toolbar">
-							   	
-							   	<h:commandLink id="searchButton" 
-									value="#{localizedStrings['se.agura.memorial']['search']}" 
-									action="#{graveyardSearchBean.search}" 
-									immediate="true" 
-									styleClass="page_preview_link"/>
-								
-								<h:outputLink value="" 
-									styleClass="page_preview_link">
-								  <f:verbatim>Back</f:verbatim>
-								</h:outputLink> 
-
-							</wf:toolbar>
-						</f:facet>
+			<wf:wfblock title="Obituary Preview page">
 
              <wf:container styleClass="obituary_part">
 
-                  <h:outputText styleClass="headline" value="Detailed  grave information#{localizedStrings['se.agura.memorial']['detailed_grave_information']}" />
-                  
-				 <memorial:GraveDetails id="theobject"></memorial:GraveDetails>
-                 
-				 <memorial:ObituaryItemViewer id="theobject"></memorial:ObituaryItemViewer>
+                 <h:outputText  styleClass="headline" value="Obituary" style="font-weight: bold; " />                  
+				 <f:verbatim>
+                    <br />
+                    <br />
+                  </f:verbatim>
+
+                 <h:outputText  styleClass="Text" value="#{obituaryBackingBean.obituaryText}"  />                  
 
 				 <f:verbatim>
                     <br />
                     <br />
                   </f:verbatim>
-                  <h:outputText styleClass="headline" value="#{localizedStrings['se.agura.memorial']['obituary']}" style="font-weight: bold; " />
 
+                <h:outputText styleClass="headline" value="Detailed Grave Information" />
 
-                  <f:verbatim escape="false">
-<p>
-                    
-                    The date was correct and the words were spelt right,
-                    <br />
-                    And it really gave me one hell of a fright.
-                    <br />
-                    My name and age in a place none too merry,
-                    <br />
-                    No other spot than today's obituary!
-</p>
-<p>
-                    What a crazy mistake, I thought to myself,
-                    <br />
-                    As I picked up the phonebook from off the shelf,
-                    <br />
-                    To see my own death in the newspaper post;
-                    <br />
-                    It was somewhat bizarre, like being a ghost!
-</p>
-                  </f:verbatim>
-
-                  <h:outputText  styleClass="headline" value="#{localizedStrings['se.agura.memorial']['picture_of_person']}" style="font-weight: bold; " />
-                  <f:verbatim>
+				 <f:verbatim>
                     <br />
                     <br />
                   </f:verbatim>
-                  <h:graphicImage alt="" url="/#{bundles['se.agura.memorial'].resourcesPath}/images/jimi.jpg" />
 
-                  <f:verbatim>
+				 <memorial:GraveDetails id="theobject"></memorial:GraveDetails>
+
+
+
+
+				 <f:verbatim>
                     <br />
                     <br />
                   </f:verbatim>
-                  <h:outputText styleClass="headline" value="#{localizedStrings['se.agura.memorial']['picture_of_grave']}" style="font-weight: bold; " />
-                  <f:verbatim>
-                    <br />
-                    <br />
-                  </f:verbatim>
-                  <h:graphicImage alt="" url="/#{bundles['se.agura.memorial'].resourcesPath}/images/jimi_headstone.jpg" />
-             </wf:container>
-				
+                  </wf:container>
+
+                   <h:outputLink value="Obituary_Create"> 
+                        <h:commandButton value="BACK" action="" id="cbBack" />
+						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
+						<f:param name="actionId" value="5" />														                        						
+                   </h:outputLink>
+					
+                   <h:outputLink value="Obituary"> 
+                        <h:commandButton value="SAVE" action="" id="cbSave" />
+						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
+						<f:param name="actionId" value="4" />														                        						
+                   </h:outputLink>
+
+
 			</wf:wfblock >
 
 	    </h:form>    

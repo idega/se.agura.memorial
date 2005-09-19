@@ -64,7 +64,7 @@
 						
 						<h:panelGroup>
 						
-
+ 
 						
 							<h:outputLabel for="dateOfBirthFrom">
 								<h:outputText value="#{localizedStrings['se.agura.memorial']['date_of_birth']}" />
@@ -264,22 +264,22 @@
                         <h:outputText value="" />
 					</h:column>
 					<h:column>
-						
+
 						<h:outputText value="#{grave.lastName}" >
-							<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+							<f:converter converterId="se.agura.memorial.util.EmptyStringConverter" /> 
 						</h:outputText>
 						
 						<h:outputText value=", " />
 						
 						<h:outputText value="#{grave.firstName}" >
-							<f:converter converterId="se.agura.memorial.search.presentation.EmptyStringConverter" /> 
+							<f:converter converterId="se.agura.memorial.util.EmptyStringConverter" /> 
 						</h:outputText>						
 						
 					</h:column>
 					<h:column>
 						<h:outputText value="(" />
 						<h:outputText value="#{grave.dateOfBirth}" >
-							<f:converter converterId="se.agura.memorial.search.presentation.DateConverter" /> 
+							<f:converter converterId="se.agura.memorial.util.DateConverter" /> 
 						</h:outputText>
 					</h:column>
 					<h:column>
@@ -287,28 +287,22 @@
 					</h:column>
 					<h:column>
 						<h:outputText value="#{grave.dateOfDeath}" >
-							<f:converter converterId="se.agura.memorial.search.presentation.DateConverter" /> 
+							<f:converter converterId="se.agura.memorial.util.DateConverter" /> 
 						</h:outputText>
 						<h:outputText value=")" />
 					</h:column>
 					<h:column>
 					
-						<h:commandLink action="showObituaryAction" immediate="true">							
-							<h:outputText value=" #{localizedStrings['se.agura.memorial']['show']}" />							
-							<f:param name="graveId" value="#{grave.graveId}" />
-							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
-						</h:commandLink>
-						<h:commandLink action="showObituaryCreateAction" immediate="true">							
-							<h:outputText value=" #{localizedStrings['se.agura.memorial']['edit']}" />							
-							<f:param name="graveId" value="#{grave.graveId}" />
-							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
-						</h:commandLink> 
-						<h:commandLink action="showObituaryPreviewAction" immediate="true">							
-							<h:outputText value=" #{localizedStrings['se.agura.memorial']['preview']}" />							
-							<f:param name="graveId" value="#{grave.graveId}" />           
-							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
-						</h:commandLink> 
+					<h:outputLink value="Obituary"> 	                    
+						<h:outputText value="SHOW" />							
+                        <h:commandLink action="#{obiaturyBackingBean.onClick}" immediate="true"></h:commandLink>						
+						<f:param name="graveId" value="#{grave.graveId}" />
+						<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														                        
+						<f:param name="actionId" value="4" />														                        						
+                    </h:outputLink>
 
+
+ 
 
 					</h:column>
 				</x:dataTable>
