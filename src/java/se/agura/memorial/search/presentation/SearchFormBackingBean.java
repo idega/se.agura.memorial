@@ -87,7 +87,6 @@ public class SearchFormBackingBean {
 		try {
 			searchFormSessionBean = (SearchFormSessionBean) IBOLookup.getSessionInstance(iwc, SearchFormSessionBean.class);
 		} catch (IBOLookupException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -235,10 +234,8 @@ public class SearchFormBackingBean {
 			}
 			
 		} catch (IBOLookupException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();	
 		}		
 	}
@@ -601,10 +598,8 @@ public class SearchFormBackingBean {
 			}			
 			
 		} catch (IDOLookupException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FinderException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		
@@ -613,9 +608,7 @@ public class SearchFormBackingBean {
 	}	
 	
 
-	/**
-	 * searches
-	 */
+
 	
     public String onClick()
     {        
@@ -634,6 +627,10 @@ public class SearchFormBackingBean {
     }
 
 	
+	
+	/**
+	 * searches
+	 */	
 	public String search() {
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();

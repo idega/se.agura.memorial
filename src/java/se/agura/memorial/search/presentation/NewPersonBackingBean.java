@@ -29,6 +29,7 @@ import com.idega.business.IBOLookupException;
 import com.idega.data.IDOLookup;
 import com.idega.data.IDOLookupException;
 import com.idega.presentation.IWContext;
+import com.idega.presentation.text.Link;
 
 public class NewPersonBackingBean {
 	String firstName;
@@ -312,7 +313,6 @@ public class NewPersonBackingBean {
 			} catch (CreateException e) {				
 				e.printStackTrace();
 			} catch (FinderException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -342,7 +342,6 @@ public class NewPersonBackingBean {
 				GraveGraveyard gg = ggh.findByPrimaryKey(this.getExistingGraveyardId());
 				gls.setGraveGraveyard(gg);
 			} catch (Exception e){
-				//TODO handle error
 				System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
 				gls.setGraveGraveyard(null); 	
 			}	
@@ -357,7 +356,6 @@ public class NewPersonBackingBean {
 			gls.store();			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return "failure";
 		}	
@@ -365,6 +363,22 @@ public class NewPersonBackingBean {
 		
 		return "success";
 	}
+	
+    public String onClick()
+    {        
+        
+        boolean result = true;
+
+		Link link = new Link("..the Link");
+		link.addParameter("ACTION", "OBITUARY");
+		link.setURL("www.times.lv");
+
+        if(result)
+            return "success";
+        else
+            return "failure";
+    }
+	
 	
 	public Integer getExistingGraveyardId() {
 		return existingGraveyardId;
@@ -403,10 +417,8 @@ public class NewPersonBackingBean {
 			
 			
 		} catch (IBOLookupException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		
