@@ -1,6 +1,8 @@
 package se.agura.memorial.obituary.presentation;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.context.FacesContext;
 
@@ -8,6 +10,7 @@ import se.agura.memorial.obituary.bussiness.ObituarySessionBean;
 import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.ObituarySearch;
 import se.agura.memorial.search.business.SearchImplBroker;
+import se.agura.memorial.util.MemorialHeplInfo;
 
 import com.idega.business.IBOLookup;
 import com.idega.business.IBOLookupException;
@@ -26,6 +29,8 @@ public class ObituaryInformationDisplayBackingBean {
 	
 	private Grave grave = null;
 	
+	private MemorialHeplInfo mhi = null;
+
 	private ObituarySessionBean obituarySessionBean = null;
 	
 	public ObituaryInformationDisplayBackingBean() {
@@ -53,6 +58,16 @@ public class ObituaryInformationDisplayBackingBean {
 	}
 	
 	
+	public MemorialHeplInfo getMhi() {
+		return mhi;
+	}
+	
+
+	public void setMhi(MemorialHeplInfo mhi) {
+		this.mhi = mhi;
+	}
+	
+
 	public String getObituaryText() {
 		return obituaryText;
 	}
@@ -87,6 +102,14 @@ public class ObituaryInformationDisplayBackingBean {
 			e.printStackTrace();	
 		}
 	
+//		List mList = new ArrayList();
+//		mList.add("info 1");
+//		
+//		MemorialHeplInfo mhi = new MemorialHeplInfo();
+//		mhi.setInfo(mList);
+		//mhi.setTitle("TOPIC 1");		
+		
+
 	}
 
     public String onClick()

@@ -1,0 +1,1 @@
+maven -o iw-application:war

@@ -8,6 +8,7 @@ hometown = Hometown
 graveyard = Graveyard
 database = Database
 search = Search
+help = Help
 clear = Clear
 next_page = Next page
 previous_page = Previous page
@@ -41,26 +42,44 @@ search_for_person=Search for person
 
 help_button=Click here for search help
 
-help_title=Söktips
+help_title1=S\ufffdktips
 
-help_line_1=1. Prova färre sökord/kriterier.
-			Exempel: Andersson i stället för Anders+Andersson+Limhamns kyrkogård
+help_line1_1=1. Prova f\ufffdrre s\ufffdkord/kriterier.\
+				Exempel: Andersson i st\ufffdllet f\ufffdr Anders+Andersson+Limhamns kyrkog\ufffdrd
 
-help_line_2=2. Skriv endast början av namnet.
-			Exempel: Abra i stället för Abrahamsson. Minskar risken för felstavning.
 
-help_line_3=3. Se till att rensa sökfälten från tidigare sökningar.
+help_line1_2 = 2. Skriv endast b\ufffdrjan av namnet.\
+					Exempel: Abra i st\ufffdllet f\ufffdr Abrahamsson. Minskar risken f\ufffdr felstavning.
 
-help_line_4=4. I intervallfälten för födelse- och dödsdatum kan du skriva exakta datum (ÅÅÅÅMMDD) men även utöka sökningen med bara år (ÅÅÅÅ) eller år och månad (ÅÅÅÅMM)
 
-help_line_5=5. Om du får mer resultat än du förväntat dig, är bästa sättet att förfina sökningen att försöka med andra ord. Om du t.ex. söker efter endast ett ord kan du prova att begränsa sökningen genom att lägga till ytterligare ett ord.
+help_line1_3 = 3. Se till att rensa s\ufffdkf\ufffdlten fr\ufffdn tidigare s\ufffdkningar.
 
-help_bottom=Rensa tidigare sökningar från din webbläsare
-			Dina tidigare sökningar kan sparas som en funktion i Internet Explorer 5.0. Funktionen gör det lättare för dig att upprepa tidigare gjorda sökningar.
+help_line1_4 = 4. I intervallf\ufffdlten f\ufffdr f\ufffddelse- \
+				och d\ufffddsdatum kan du skriva exakta datum \
+				(\ufffd\ufffd\ufffd\ufffdMMDD) men \ufffdven ut\ufffdka s\ufffdkningen \
+				med bara \ufffdr (\ufffd\ufffd\ufffd\ufffd) eller \ufffdr och m\ufffdnad \
+				(\ufffd\ufffd\ufffd\ufffdMM)
 
-			Om du inte vill använda funktionen kan du avaktivera den. Välj "verktyg" i menyn, "Internetalternativ" och fliken "innehåll". Under "personlig information" väljer du "komplettera automatiskt". Klicka sen på knappen "rensa formulär".
-
-			Du kan också avmarkera boxen under denna flik för att tidigare sökningar inte ska synas i framtiden. Du kan också ta bort enskilda sökord genom att använda pil-tangenterna när sökningarna visas och trycka "delete" på de sökord du vill ta bort. På så sätt kan du spara de sökord du vill.
-
-						 
+help_line1_5 = 5. Om du f\ufffdr mer resultat \ufffdn du f\ufffdrv\ufffdntat dig,\
+				 \ufffdr b\ufffdsta s\ufffdttet att f\ufffdrfina s\ufffdkningen att\
+				 	 f\ufffdrs\ufffdka med andra ord. Om du t.ex. s\ufffdker efter endast ett \
+				 	 ord kan du prova att begr\ufffdnsa s\ufffdkningen genom att\
+				 	  l\ufffdgga till ytterligare ett ord.
+				 	  
+help_title2 = Rensa tidigare s\ufffdkningar fr\ufffdn din webbl\ufffdsare	
+help_line2_1 = Dina tidigare s\ufffdkningar kan sparas som en funktion i \
+				Internet Explorer 5.0. Funktionen g\ufffdr det l\ufffdttare \
+				f\ufffdr dig att upprepa tidigare gjorda s\ufffdkningar.
+				
+help_line2_2 = Om du inte vill anv\ufffdnda funktionen kan du avaktivera den.\
+				 V\ufffdlj "verktyg" i menyn, "Internetalternativ" och fliken\
+				  "inneh\ufffdll". Under "personlig information" v\ufffdljer du\
+				   "komplettera automatiskt". Klicka sen p\ufffd knappen "rensa formul\ufffdr".
+				   
+help_line2_3 = Du kan ocks\ufffd avmarkera boxen under denna flik\
+			 f\ufffdr att tidigare s\ufffdkningar inte ska synas i framtiden. \
+			 Du kan ocks\ufffd ta bort enskilda s\ufffdkord genom att anv\ufffdnda\
+			  pil-tangenterna n\ufffdr s\ufffdkningarna visas och trycka \
+			  "delete" p\ufffd de s\ufffdkord du vill ta bort.\
+			   P\ufffd s\ufffd s\ufffdtt kan du spara de s\ufffdkord du vill.
 									 

@@ -9,6 +9,7 @@ graveyard = Graveyard
 database = Database
 search = Search
 clear = Clear
+help = Help
 next_page = Next page
 previous_page = Previous page
 show = Show
@@ -18,6 +19,7 @@ messages.more_than_100_hits_summary = More than 100 found
 messages.more_than_100_hits_detail = Your search resulted in more \
 									 than 100 hits \u2013 only the first 100 is shown. \
 									 Please delimit your search.
+									 
 									 
 county = County
 commune = Commune									 
@@ -35,6 +37,7 @@ messages.invalid_date_summary = Invalid date
 messages.invalid_date_detail = Your input doesn't look like valid date
 
 search_for_person=Search for person	
+Month_00=Month
 Month_01=Janvary
 Month_02=February
 Month_03=March
@@ -48,8 +51,44 @@ Month_10=Oktober
 Month_11=November
 Month_12=December
 
+help_title1=S\ufffdktips
+
+help_line1_1=1. Prova f\ufffdrre s\ufffdkord/kriterier.\
+				Exempel: Andersson i st\ufffdllet f\ufffdr Anders+Andersson+Limhamns kyrkog\ufffdrd
 
 
+help_line1_2 = 2. Skriv endast b\ufffdrjan av namnet.\
+					Exempel: Abra i st\ufffdllet f\ufffdr Abrahamsson. Minskar risken f\ufffdr felstavning.
 
-									 
+
+help_line1_3 = 3. Se till att rensa s\ufffdkf\ufffdlten fr\ufffdn tidigare s\ufffdkningar.
+
+help_line1_4 = 4. I intervallf\ufffdlten f\ufffdr f\ufffddelse- \
+				och d\ufffddsdatum kan du skriva exakta datum \
+				(\ufffd\ufffd\ufffd\ufffdMMDD) men \ufffdven ut\ufffdka s\ufffdkningen \
+				med bara \ufffdr (\ufffd\ufffd\ufffd\ufffd) eller \ufffdr och m\ufffdnad \
+				(\ufffd\ufffd\ufffd\ufffdMM)
+
+help_line1_5 = 5. Om du f\ufffdr mer resultat \ufffdn du f\ufffdrv\ufffdntat dig,\
+				 \ufffdr b\ufffdsta s\ufffdttet att f\ufffdrfina s\ufffdkningen att\
+				 	 f\ufffdrs\ufffdka med andra ord. Om du t.ex. s\ufffdker efter endast ett \
+				 	 ord kan du prova att begr\ufffdnsa s\ufffdkningen genom att\
+				 	  l\ufffdgga till ytterligare ett ord.
+				 	  
+help_title2 = Rensa tidigare s\ufffdkningar fr\ufffdn din webbl\ufffdsare	
+help_line2_1 = Dina tidigare s\ufffdkningar kan sparas som en funktion i \
+				Internet Explorer 5.0. Funktionen g\ufffdr det l\ufffdttare \
+				f\ufffdr dig att upprepa tidigare gjorda s\ufffdkningar.
+				
+help_line2_2 = Om du inte vill anv\ufffdnda funktionen kan du avaktivera den.\
+				 V\ufffdlj "verktyg" i menyn, "Internetalternativ" och fliken\
+				  "inneh\ufffdll". Under "personlig information" v\ufffdljer du\
+				   "komplettera automatiskt". Klicka sen p\ufffd knappen "rensa formul\ufffdr".
+				   
+help_line2_3 = Du kan ocks\ufffd avmarkera boxen under denna flik\
+			 f\ufffdr att tidigare s\ufffdkningar inte ska synas i framtiden. \
+			 Du kan ocks\ufffd ta bort enskilda s\ufffdkord genom att anv\ufffdnda\
+			  pil-tangenterna n\ufffdr s\ufffdkningarna visas och trycka \
+			  "delete" p\ufffd de s\ufffdkord du vill ta bort.\
+			   P\ufffd s\ufffd s\ufffdtt kan du spara de s\ufffdkord du vill.
 									 

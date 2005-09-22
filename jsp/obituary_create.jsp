@@ -8,6 +8,7 @@
         xmlns:builder="http://xmlns.idega.com/com.idega.builder"
         xmlns:x="http://myfaces.apache.org/extensions"       
         xmlns:memorial="http://xmlns.idega.com/se.agura.memorial"  
+        
 version="1.2">
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 <f:view>
@@ -42,7 +43,18 @@ version="1.2">
                   </f:verbatim>
 
                   <f:verbatim>				  
-                   <h:commandButton value="Upload picture of person" action="#{obituaryCreateBackingBean.onClick}" id="cbUploadGrave" >		      
+         
+         
+                 <x:inputFileUpload id="myFileId"
+                      value="#{obituaryCreateBackingBean.myFile}"
+                      storage="file"
+                  required="true"/>
+            
+                   <h:commandButton value="Submit"
+                      action="#{obituaryCreateBackingBean.processMyFile}"/>
+                  <h:outputText value=" "/>
+            
+                   <h:commandButton value="Upload picture of person" action="#{obituaryCreateBackingBean.processMyFile}" id="cbUploadGrave" >		      
                    </h:commandButton>
                     <br />
                     <br />
@@ -76,6 +88,7 @@ version="1.2">
 						<f:param name="actionId" value="8" />														                        						
                    </h:outputLink>
 
+                  <h:commandButton value="SAVE2" action="#{obituaryCreateBackingBean.onClick}" id="cbSaveBtn2" />                  
                   
              </wf:container>
 				

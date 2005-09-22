@@ -18,19 +18,6 @@
 				<h:form id="searchForm">
 					
 					<wf:wfblock title="#{localizedStrings['se.agura.memorial']['search_for_person']}">
-						<f:facet name="wf_block_toolbar">
-							<wf:toolbar id="toolbar">
-							   	<h:commandLink id="searchButton" 
-									value="#{localizedStrings['se.agura.memorial']['search']}" 
-									action="#{graveyardSearchBean.search}" 
-									immediate="false" 
-									styleClass="page_preview_link"/>
-                               <h:commandLink id="clearButton" value="#{localizedStrings['se.agura.memorial']['clear']}" 
-									action="#{graveyardSearchBean.clear}" 
-									immediate="false" 
-									styleClass="page_preview_link"/>    
-							</wf:toolbar>
-						</f:facet>
 					
 					<h:panelGrid columns="5" border="0" cellspacing="5" 
 						footerClass="SearchFormFooterClass" >
@@ -228,30 +215,27 @@
 						</h:panelGroup>
 						<!-- end of 3. row -->
 						<!-- 4. row -->
-						<f:facet name="footer">
-							<h:panelGroup>								
-								<h:commandButton id="searchButton" 
-									value="#{localizedStrings['se.agura.memorial']['search']}" 
-									action="#{graveyardSearchBean.search}" 
-									immediate="false" />
-                               <h:commandButton id="clearButton" value="#{localizedStrings['se.agura.memorial']['clear']}" 
-									action="#{graveyardSearchBean.clear}" 
-									immediate="false" />                                    
-                                    
-							</h:panelGroup>
-						</f:facet>
 						<!-- end of 4. row -->
 					</h:panelGrid >
-				
-				<!-- </h:form>  -->
-				
-				<f:verbatim>
-					<br />
-					<br />
-				</f:verbatim>
+
+
+         
+        <h:commandButton value="#{localizedStrings['se.agura.memorial']['help']}" action="#{graveyardSearchBean.helpinfo}" id="cbHelpLinkInfoBtn" />
+         
+        <h:commandButton value="#{localizedStrings['se.agura.memorial']['search']}" action="#{graveyardSearchBean.search}" id="cbSearchBtn" />
+  
+        <h:commandButton value="#{localizedStrings['se.agura.memorial']['clear']}" action="#{graveyardSearchBean.clear}" id="cbClearBtn" />
+
 				
 				<!-- here are error messages and warnings -->					
 				<h:messages id="messageList" showSummary="false" showDetail="true" globalOnly="true"/> 			
+				
+				
+				<!-- </h:form>  -->
+				
+
+
+				
 				
 				<f:verbatim>					
 					<br />
@@ -304,8 +288,15 @@
 
  
 
+
 					</h:column>
 				</x:dataTable>
+              
+              
+              
+
+
+              
                 
 				<x:dataScroller id="scroll_1" for="searchResultsTable" 
 					fastStep="10" pageCountVar="pageCount" 
@@ -321,6 +312,75 @@
 					</f:facet>
 					
 				</x:dataScroller>
+
+				
+				<f:verbatim>
+					<br />
+					<br />
+				</f:verbatim>
+								
+				
+
+
+				<x:dataTable id="helpTopics" var="mhi" 
+					value="#{graveyardSearchBean.helpTopics}" rows="1">
+
+			<h:column>
+
+					<h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" >
+
+					<h:panelGroup>
+						<h:outputText value="" ></h:outputText>
+			        </h:panelGroup>
+			        
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_title1']}"  style="font-weight: bold; " ></h:outputText>
+			        </h:panelGroup>
+			
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_line1_1']}"  styleClass="Text"></h:outputText>
+			        </h:panelGroup>
+
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_line1_2']}" ></h:outputText>
+			        </h:panelGroup>
+			        
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_line1_3']}" ></h:outputText>
+			        </h:panelGroup>
+
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_line1_4']}" ></h:outputText>
+			        </h:panelGroup>
+
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_line1_5']}" ></h:outputText>
+			        </h:panelGroup>
+
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_title2']}" style="font-weight: bold; " ></h:outputText>
+			        </h:panelGroup>
+			
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_line2_1']}" ></h:outputText>
+			        </h:panelGroup>
+
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_line2_2']}" ></h:outputText>
+			        </h:panelGroup>
+
+					<h:panelGroup>
+						<h:outputText value="#{localizedStrings['se.agura.memorial']['help_line2_3']}" ></h:outputText>
+			        </h:panelGroup>
+
+
+
+					</h:panelGrid >
+
+			</h:column>
+					
+				</x:dataTable>
+				
 				</wf:wfblock >
 			</h:form>
 		</ws:page>

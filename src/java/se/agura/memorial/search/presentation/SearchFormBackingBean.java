@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.ejb.FinderException;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 import javax.faces.event.ValueChangeEvent;
@@ -25,6 +26,7 @@ import se.agura.memorial.search.business.SearchFormSessionBean;
 import se.agura.memorial.search.business.SearchImplBroker;
 import se.agura.memorial.search.data.GraveDatabaseConn;
 import se.agura.memorial.search.data.GraveDatabaseConnHome;
+import se.agura.memorial.util.MemorialHeplInfo;
 import se.agura.memorial.util.Utility;
 
 import com.idega.business.IBOLookup;
@@ -77,6 +79,8 @@ public class SearchFormBackingBean {
 	private Integer dayId = new Integer(0);	
 
 	List searchResults = new ArrayList();
+	List helpTopics = new ArrayList();
+
 	
 	private SearchFormSessionBean searchFormSessionBean = null;
 
@@ -95,6 +99,16 @@ public class SearchFormBackingBean {
 		initGraveyards();
 	}
 	
+	public List getHelpTopics() {
+		return helpTopics;
+	}
+	
+
+	public void setHelpTopics(List helpTopics) {
+		this.helpTopics = helpTopics;
+	}
+	
+
 	public Integer getDateOfBirthFrom_day() {
 		return dateOfBirthFrom_day;
 	}
@@ -218,6 +232,7 @@ public class SearchFormBackingBean {
 	private void initGraveyards() {
 		
 		graveyards = new LinkedHashMap();
+		
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		IWContext iwc = IWContext.getIWContext(facesContext);
@@ -477,21 +492,28 @@ public class SearchFormBackingBean {
 
 		List l = new ArrayList();
 
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		
+		IWContext iwc = IWContext.getIWContext(facesContext);
+		
+        IWContext iwContext = IWContext.getIWContext(facesContext);
+		IWBundle bundle = iwContext.getIWMainApplication().getBundle(IW_BUNDLE_IDENTIFIER);
 
-				l.add(new SelectItem("0","Month"));
+				l.add(new SelectItem("0",bundle.getValueBinding("Month_00").getValue(iwc).toString()));
+				l.add(new SelectItem("1",bundle.getValueBinding("Month_01").getValue(iwc).toString()));
+				l.add(new SelectItem("2",bundle.getValueBinding("Month_02").getValue(iwc).toString()));
+				l.add(new SelectItem("3",bundle.getValueBinding("Month_03").getValue(iwc).toString()));
+				l.add(new SelectItem("4",bundle.getValueBinding("Month_04").getValue(iwc).toString()));
+				l.add(new SelectItem("5",bundle.getValueBinding("Month_05").getValue(iwc).toString()));
+				l.add(new SelectItem("6",bundle.getValueBinding("Month_06").getValue(iwc).toString()));
+				l.add(new SelectItem("7",bundle.getValueBinding("Month_07").getValue(iwc).toString()));
+				l.add(new SelectItem("8",bundle.getValueBinding("Month_08").getValue(iwc).toString()));
+				l.add(new SelectItem("9",bundle.getValueBinding("Month_09").getValue(iwc).toString()));
+				l.add(new SelectItem("10",bundle.getValueBinding("Month_10").getValue(iwc).toString()));
+				l.add(new SelectItem("11",bundle.getValueBinding("Month_11").getValue(iwc).toString()));
+				l.add(new SelectItem("12",bundle.getValueBinding("Month_12").getValue(iwc).toString()));
 
-				l.add(new SelectItem("1","January"));
-				l.add(new SelectItem("2","February"));
-				l.add(new SelectItem("3","March"));
-				l.add(new SelectItem("4","April"));
-				l.add(new SelectItem("5","May"));
-				l.add(new SelectItem("6","June"));
-				l.add(new SelectItem("7","July"));
-				l.add(new SelectItem("8","August"));
-				l.add(new SelectItem("9","Septemder"));
-				l.add(new SelectItem("10","Oktober"));
-				l.add(new SelectItem("11","November"));
-				l.add(new SelectItem("12","December"));
+				
 
 				
 	
@@ -638,7 +660,7 @@ public class SearchFormBackingBean {
 		this.moreThen100ResultsFound = false; 
 		
 		searchResults = new ArrayList();	
-	
+		helpTopics = null;
 		
 		IWContext iwc = IWContext.getIWContext(facesContext);
 		try {
@@ -693,6 +715,48 @@ public class SearchFormBackingBean {
 		return "success";
 	}
 
+	public String helpinfo() {
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		IWContext iwc = IWContext.getIWContext(facesContext);
+	        
+		searchResults = null;
+		helpTopics = new ArrayList();
+		
+		List mList = new ArrayList();
+		mList.add("info 1");
+		mList.add("info 2");		
+		mList.add("info 3");		
+		mList.add("info 4");		
+		
+		MemorialHeplInfo mhi = new MemorialHeplInfo();
+		mhi.setInfo(mList);
+		mhi.setTitle("TOPIC 1");
+		
+		helpTopics = (ArrayList) mList;//mhi.getInfo();
+		
+//		helpTopics.add("TOPIC 1");
+//		helpTopics.add("TOPIC 2");		
+		
+//        IWContext iwContext = IWContext.getIWContext(facesContext);
+//		IWBundle bundle = iwContext.getIWMainApplication().getBundle(IW_BUNDLE_IDENTIFIER);
+//		ValueBinding vbSummary = bundle.getValueBinding("help_button"); 
+//		ValueBinding vbDetail = bundle.getValueBinding("messages.more_than_100_hits_detail");
+//		facesContext.addMessage(null, new FacesMessage(
+//					FacesMessage.SEVERITY_INFO, 
+//					vbSummary.getValue(facesContext).toString(), // summary
+//					vbDetail.getValue(facesContext).toString()// detail
+//					));
+//			
+//		facesContext.addMessage(null, new FacesMessage(
+//				FacesMessage.SEVERITY_INFO, 
+//				vbSummary.getValue(facesContext).toString(), // summary
+//				vbDetail.getValue(facesContext).toString()// detail
+//				));
+
+		return "success";
+	}
+
 
 
 	/**
@@ -700,6 +764,7 @@ public class SearchFormBackingBean {
 	 */
 	public String clear() {
 		
+		helpTopics = null;
 		setFirstName(null);
 		setSurname(null);
 		setDateOfBirthFrom_year(null);

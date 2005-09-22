@@ -14,7 +14,7 @@ version="1.2">
 
 	<h:form id="new_personform">
 
-					<wf:wfblock title="Create Grave">
+	<wf:wfblock title="Create Grave">
 
     <h:panelGrid columns="2" cellspacing="7" border="0"> 
 	     <h:panelGroup>
@@ -187,13 +187,13 @@ version="1.2">
      </h:outputLink>
 
      <h:outputLink value="Obituary_Create" id="a1234567"> 
-              <h:commandButton value="SAVE" action="#{newPersonBean.save}" id="cbSaveBtn1" />
   			  <f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
 			  <f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
 			  <f:param name="actionId" value="5" />														                        						
+              <h:commandButton value="SAVE" type="submit" action="#{newPersonBean.save}" id="cbSaveBtn1" />			  
      </h:outputLink>
 
-     <h:commandButton value="SAVE2" action="#{newPersonBean.save}" id="cbSaveBtn2" />
+     <h:commandButton value="SAVE2" action="#{newPersonBean.onClick}" id="cbSaveBtn2" />
 
     </h:form>
   

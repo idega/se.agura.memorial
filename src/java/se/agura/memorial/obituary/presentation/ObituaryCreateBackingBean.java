@@ -115,7 +115,7 @@ public class ObituaryCreateBackingBean {
 
 
         if(result)
-            return "success";
+            return "rrr";
         else
             return "failure";
     }
