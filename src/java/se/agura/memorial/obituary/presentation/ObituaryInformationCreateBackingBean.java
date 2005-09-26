@@ -209,14 +209,19 @@ public class ObituaryInformationCreateBackingBean {
 //		oib.setGravePicturePath("pictureLink");
 //		oib.setPersonPicturePath("pictureLink");
 		
-		oib.setBody("bla bla bla ");
+		oib.setBody("bla la la ");
 		oib.setDatabaseId(Integer.valueOf("1").intValue());  // bilo integer
-		oib.setGraveId(Integer.valueOf("3002").toString());  // bilo Integer
+		oib.setGraveId(Integer.valueOf("3005").toString());  // bilo Integer
 		oib.setGravePicturePath("wwwww");
 		oib.setPersonPicturePath("eeeee");		
 		oib.store();
 		
-		
+//		aa.load("http://localhost:8080/memorial/content/files/cms/obituary/1/3002.obituary/en.txt");
+//		aa.load("/files/cms/obituary/1/3002.obituary/en.txt");		
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}		
 		
         boolean result = true;
 

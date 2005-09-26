@@ -71,22 +71,6 @@ public class MalmoChurchSearch implements ObituarySearch {
 		String sqlStatement=null;		
 		Collection result = new ArrayList();
 
-//		//TODO Temp: remove asap
-//		ObituaryItemBean aa = new ObituaryItemBean();
-//		aa.setBody("bla bla bla ");
-//		aa.setDatabaseId(Integer.valueOf("1").intValue());
-//		aa.setGraveId(Integer.valueOf("3002").toString());
-//		aa.setGravePicturePath("wwwww");
-//		aa.setPersonPicturePath("eeeee");
-//		aa.store();
-//		try {
-
-		//aa.load("http://localhost:8080/memorial/content/files/cms/obituary/1/3002.obituary/en.txt");
-//		aa.load("/files/cms/obituary/1/3002.obituary/en.txt");		
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
 
 	    Table table = new Table(TABLE_NAME);
 	    Column colGraveID = new Column(table, COLUMN_NAME_GRAVE_ID);
