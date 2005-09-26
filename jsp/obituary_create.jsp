@@ -37,7 +37,7 @@ version="1.2">
                   </f:verbatim>
 
                   <f:verbatim>				  
-                   <h:outputText  styleClass="Text" value="path1" style="font-weight: bold; " />                  
+                   <h:outputText  styleClass="Text" value="#{obituaryCreateBackingBean.databaseId}" style="font-weight: bold; " />                  
                     <br />
                     <br />
                   </f:verbatim>
@@ -45,14 +45,10 @@ version="1.2">
                   <f:verbatim>				  
          
          
-                 <x:inputFileUpload id="myFileId"
-                      value="#{obituaryCreateBackingBean.myFile}"
+                 <x:inputFileUpload id="personImagePath"
+                      value="#{obituaryCreateBackingBean.personImagePath}"
                       storage="file"
                   required="true"/>
-            
-                   <h:commandButton value="Submit"
-                      action="#{obituaryCreateBackingBean.processMyFile}"/>
-                  <h:outputText value=" "/>
             
                    <h:commandButton value="Upload picture of person" action="#{obituaryCreateBackingBean.processMyFile}" id="cbUploadGrave" >		      
                    </h:commandButton>
@@ -66,6 +62,11 @@ version="1.2">
                     <br />
                     <br />
                   </f:verbatim>
+
+                 <x:inputFileUpload id="graveImagePath"
+                      value="#{obituaryCreateBackingBean.graveImagePath}"
+                      storage="file"
+                  required="true"/>
 
                   <f:verbatim>
                      <h:commandButton value="Upload picture of grave" action="" id="cbUploadPerson" />		      
@@ -88,7 +89,7 @@ version="1.2">
 						<f:param name="actionId" value="8" />														                        						
                    </h:outputLink>
 
-                  <h:commandButton value="SAVE2" action="#{obituaryCreateBackingBean.onClick}" id="cbSaveBtn2" />                  
+                  <h:commandButton type = "submit" value="SAVE2" action="#{obituaryCreateBackingBean.save}" id="cbSaveBtn2" />                  
                   
              </wf:container>
 				

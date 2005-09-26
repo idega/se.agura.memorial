@@ -52,7 +52,9 @@ public class ObituaryInformationDisplayBackingBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		IWContext iwc = IWContext.getIWContext(facesContext);
 		
+        this.obituaryText="aaaa";
 
+		
 		  
 	
 	}

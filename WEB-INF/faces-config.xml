@@ -76,8 +76,16 @@
 	<managed-bean>
 		<description>Backing bean for Obituary_Create page</description>	
 		<managed-bean-name>obituaryCreateBackingBean</managed-bean-name>
-		<managed-bean-class>se.agura.memorial.obituary.presentation.ObituaryCreateBackingBean</managed-bean-class>		
+		<managed-bean-class>se.agura.memorial.obituary.presentation.ObituaryInformationCreateBackingBean</managed-bean-class>		
 		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>databaseId</property-name>
+			<value>#{param.databaseId}</value>
+		</managed-property> 
+		<managed-property>
+			<property-name>graveId</property-name>
+			<value>#{param.graveId}</value>
+		</managed-property> 
 	</managed-bean>	
 
 	<converter>

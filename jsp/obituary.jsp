@@ -50,17 +50,17 @@ version="1.2">
                   </wf:container>
 
 
-                   <h:commandButton value="Print" action="#{obituaryCreateBackingBean.onClick}"  />
+                   <h:commandButton value="Print" action="#{obituaryBackingBean.onClick}"  />
 
 
                    <h:outputLink value="Obituary_Create" > 
-                        <h:commandButton value="Edit" action="#{obituaryCreateBackingBean.onClick}" id="cbCreate" />
+                        <h:commandButton value="Edit" action="#{obituaryBackingBean.onClick}" id="cbCreate" />
 						<f:param name="graveId" value="#{obituaryBackingBean.graveId}" />
 						<f:param name="databaseId" value="#{obituaryBackingBean.databaseId}" />														                        
 						<f:param name="actionId" value="5" />														                        						
                    </h:outputLink>
 
-                   <h:commandButton value="Save as PDF" action="#{obituaryCreateBackingBean.onClick}"  />
+                   <h:commandButton value="Save as PDF" action="#{obituaryBackingBean.onClick}"  />
 
                    
 

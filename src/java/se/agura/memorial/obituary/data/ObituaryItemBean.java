@@ -146,6 +146,8 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 	public ObituaryItemBean() {
 		super();
+		//this.obituaryText="ttttt";
+		//this.databaseId=1;
 	}
 
 	public String getBody() {
@@ -194,21 +196,18 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	}
 
 	public String getArticleName() {
-		return ".txt";
+		return ".xml";
 	}
 
 	public String[] getContentFieldNames() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String getContentItemPrefix() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	public void setDatasource(String arg0) {
-		// TODO Auto-generated method stub
 
 	}	
 	public void setUniqueAvenyId(String uniqueAvenyId) {
@@ -395,7 +394,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 
 	public Iterator getChildrenIterator(String arg0, boolean arg1) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -403,27 +401,11 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 
 	public EJBLocalHome getEJBLocalHome(String arg0) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 	public void setGraveId(String graveId) {		
 		this.graveId = graveId;
-	
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		IWContext iwc = IWContext.getIWContext(facesContext);
-		
-		try {
-			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
-			
-			ObituarySearch os = sib.getSearch(this.getDatabaseId());
-			this.grave = os.findGrave(this.getGraveId());
-			
-		} catch (IBOLookupException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();	
-		}
-		
 	}
 
 	public Grave getGrave() {
@@ -441,52 +423,52 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 
 	public void setUserContext(IWUserContext arg0) throws RemoteException {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	public IWUserContext getUserContext() throws RemoteException {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	public void initializeBean() {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	public void addActionListener(ActionListener arg0) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	public String getServiceDescription() throws RemoteException {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	public String getLocalizedServiceDescription(Locale arg0) throws RemoteException {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	public IWApplicationContext getIWApplicationContext() throws RemoteException {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	public EJBHome getEJBHome() throws RemoteException {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	public Handle getHandle() throws RemoteException {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	public boolean isIdentical(EJBObject arg0) throws RemoteException {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
