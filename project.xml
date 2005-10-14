@@ -106,23 +106,13 @@
       </properties>
     </dependency>
     
-    <!-- myfaces -->
-	<dependency>
-      <groupId>myfaces</groupId>
-      <artifactId>myfaces</artifactId>
-      <version>1.0.9</version>
-      <type>jar</type>
-      <url>http://www.myfaces.org/</url>
-    </dependency>    
+
     
-    <!-- for apache myfaces extension -->
-    <dependency>
+    <!-- myfaces -->
       <groupId>myfaces</groupId>
-      <artifactId>myfaces-extensions</artifactId>
-      <version>1.0.9</version>
-      <type>jar</type>
-      <url>http://www.myfaces.org/</url>
-    </dependency>  
+      <artifactId>myfaces-impl</artifactId>
+      <version>1.1.0</version>
+
     
     <!-- for ms-sql-server -->
     <dependency>

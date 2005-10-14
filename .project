@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <projectDescription>
-  <name>se.agura.memorial.bundle</name>
+  <name>se.agura.memorial</name>
   <comment>
   </comment>
   <projects>
     <project>com.idega.slide</project>
+    <project>com.idega.block.help</project>
   </projects>
   <buildSpec>
     <buildCommand>
