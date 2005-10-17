@@ -275,7 +275,8 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 				//Setting the path for creating new file or creating localized version or updating existing file
 
-				String articleFolderPath = getResourcePath() + getArticlePath();
+				String articleFolderPath = getResourcePath() + "test.txt";//getArticlePath();
+				//String articleFolderPath =  "/files/test.txt";//getArticlePath();
 				String filePath = articleFolderPath + getArticleName();
 
 				boolean hadToCreate = session.createAllFoldersInPath(articleFolderPath);
@@ -290,7 +291,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 					rootResource.proppatchMethod(filePath, PROPERTY_CONTENT_TYPE,ARTICLE_FILENAME_SCOPE, true);
 				} else {
 					String fixedURL = session.getURI(filePath);
-					rootResource.putMethod(fixedURL, article);
+					rootResource.putMethod(fixedURL, article); 
 					rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,ARTICLE_FILENAME_SCOPE, true);
 				}
 
