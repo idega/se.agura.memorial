@@ -303,6 +303,9 @@ public class MalmoChurchSearch implements ObituarySearch {
 
 		try {
 			conn = ConnectionBroker.getConnection(DATABASE);
+			if (conn == null) {
+				return result;
+			}
 			ResultSet RS = null;
 			Stmt = conn.createStatement();
 			RS = Stmt.executeQuery(sqlStatement);
