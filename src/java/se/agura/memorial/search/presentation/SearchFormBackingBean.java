@@ -9,15 +9,12 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.ejb.FinderException;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
-
 import se.agura.memorial.search.api.CustomMemorialDate;
 import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.Graveyard;
@@ -28,7 +25,6 @@ import se.agura.memorial.search.data.GraveDatabaseConn;
 import se.agura.memorial.search.data.GraveDatabaseConnHome;
 import se.agura.memorial.util.MemorialHeplInfo;
 import se.agura.memorial.util.Utility;
-
 import com.idega.business.IBOLookup;
 import com.idega.business.IBOLookupException;
 import com.idega.data.IDOLookup;
@@ -71,7 +67,7 @@ public class SearchFormBackingBean {
 	
 	private Graveyard graveyard;
 	private boolean graveyardSetToNull = false;
-	private static Map graveyards;
+	private Map graveyards;
 	
 	private Integer databaseId = new Integer(1);
 	private Integer monthId = new Integer(0);	
