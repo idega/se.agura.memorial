@@ -132,7 +132,7 @@ public class MalmoChurchSearch implements ObituarySearch {
 		appendDateCriteria(dateOfDeathFrom, dateOfDeathTo, colDateOfDeath, query);
 
 		
-		if(personIdentifier != null){
+		if(personIdentifier != null && personIdentifier.length() > 0){
 			query.addCriteria(new MatchCriteria(colPersonIdentifier,MatchCriteria.LIKE,personIdentifier));
 		}
 		
