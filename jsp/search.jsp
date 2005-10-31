@@ -277,15 +277,18 @@
 					</h:column>
 					<h:column>
 					
-					<h:outputLink value="Obituary"> 	                    
+						<h:commandLink action="showObituaryAction" immediate="true">							
+							<h:outputText value="navigation " />							
+							<f:param name="graveId" value="#{grave.graveId}" />
+							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
+						</h:commandLink>
+
+					<h:outputLink value="../Obituary"> 	                    
 						<h:outputText value="SHOW" />							
-                        <h:commandLink action="#{obiaturyBackingBean.onClick}" immediate="true"></h:commandLink>						
 						<f:param name="graveId" value="#{grave.graveId}" />
 						<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														                        
 						<f:param name="actionId" value="4" />														                        						
                     </h:outputLink>
-
-
  
 
 

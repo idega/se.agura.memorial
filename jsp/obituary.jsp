@@ -60,6 +60,13 @@ version="1.2">
 						<f:param name="actionId" value="5" />														                        						
                    </h:outputLink>
 
+                     <h:commandButton value="Edit (navigation)" action="showObituaryCreateAction" id="cbEdit" >
+							<f:param name="graveId" value="#{grave.graveId}" />
+							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
+					</h:commandButton>
+ 
+ 
+
                    <h:commandButton value="Save as PDF" action="#{obituaryBackingBean.onClick}"  />
 
                    
