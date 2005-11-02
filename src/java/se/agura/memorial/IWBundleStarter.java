@@ -1,6 +1,6 @@
 /*
 /*
- * $Id: IWBundleStarter.java,v 1.13 2005/09/19 08:47:23 igors Exp $
+ * $Id: IWBundleStarter.java,v 1.14 2005/11/02 14:48:58 igors Exp $
  * Created on 15.5.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -20,10 +20,10 @@ import com.idega.idegaweb.include.GlobalIncludeManager;
 
 /**
  * 
- *  Last modified: $Date: 2005/09/19 08:47:23 $ by $Author: igors $
+ *  Last modified: $Date: 2005/11/02 14:48:58 $ by $Author: igors $
  * 
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class IWBundleStarter implements IWBundleStartable {
 	private static final String STYLE_SHEET_URL = "/style/memorial.css";
@@ -74,23 +74,11 @@ public class IWBundleStarter implements IWBundleStartable {
 		DefaultViewNode obituaryPreviewMemorialNode = new DefaultViewNode("Obituary_Preview",memorialNode);
 		obituaryPreviewMemorialNode.setJspUri(bundle.getJSPURI("obituary_preview.jsp"));
 		
-		DefaultViewNode newPersonMemorialNode1 = new DefaultViewNode("new person",memorialNode);
+		DefaultViewNode newPersonMemorialNode1 = new DefaultViewNode("New_Person",memorialNode);
 		newPersonMemorialNode1.setJspUri(bundle.getJSPURI("new_person.jsp"));
 	
 		
-		DefaultViewNode memorialForTestsNode = new DefaultViewNode("memorial for tests",contentNode);
-		
-		DefaultViewNode searchMemorialForTestsNode = new DefaultViewNode("Search",memorialForTestsNode);
-		searchMemorialNode.setJspUri(bundle.getJSPURI("search.jsp"));		
-		
-		DefaultViewNode newPersonMemorialNode = new DefaultViewNode("new person",memorialForTestsNode);
-		newPersonMemorialNode.setJspUri(bundle.getJSPURI("new_person.jsp"));
-		
-		DefaultViewNode newTest1MemorialNode = new DefaultViewNode("test 1",memorialForTestsNode);
-		newTest1MemorialNode.setJspUri(bundle.getJSPURI("style_image_l10n.jsp"));
 
-		DefaultViewNode newNaviTestMemorialNode = new DefaultViewNode("navi test",memorialForTestsNode);
-		newNaviTestMemorialNode.setJspUri(bundle.getJSPURI("navigation_test.jsp"));
 		
 		
 

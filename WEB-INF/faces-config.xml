@@ -7,41 +7,29 @@
 <faces-config>
 	
 
- <navigation-rule>
-
-   <from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
-	<navigation-case>
-		<from-action>#{graveyardSearchBean.onClick}</from-action>
-		<from-outcome>success</from-outcome>
-		<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</to-view-id>
-    </navigation-case>
-
-
-
-</navigation-rule>
-	
- <navigation-rule>
-   <from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/new_person.jsp</from-view-id>
-	<navigation-case>
-		<from-action>#{newPersonBean.onClick}</from-action>
-		<from-outcome>success</from-outcome>
-		<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</to-view-id>
-    </navigation-case>
-</navigation-rule>
-
 	<navigation-rule>
 		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>showObituaryAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</to-view-id>
+			<to-view-id>/workspace/content/memorial/Obituary/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
+
 
 	<navigation-rule>
 		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>showObituaryCreateAction</from-outcome>
-			<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</to-view-id>
+			<to-view-id>/workspace/content/memorial/Obituary_Create/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+	
+	<navigation-rule>
+		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>showNewPersonAction</from-outcome>
+			<to-view-id>/workspace/content/memorial/New_Person/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
 
@@ -49,11 +37,57 @@
  <navigation-rule>
    <from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</from-view-id>
 	<navigation-case>
-		<from-action>#{obituaryCreateBackingBean.onClick}</from-action>
+		<from-action>#{obituaryCreateBackingBean.preview}</from-action>
 		<from-outcome>success</from-outcome>
-		<to-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_preview.jsp</to-view-id>
+		<to-view-id>/workspace/content/memorial/Obituary_Preview/</to-view-id>
     </navigation-case>
-</navigation-rule>
+ </navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_create.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>obituaryCreateCancelAction</from-outcome>
+			<to-view-id>/workspace/content/memorial/Obituary/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+
+ <navigation-rule>
+   <from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/new_person.jsp</from-view-id>
+	<navigation-case>
+		<from-action>newPersonCancelAction</from-action>
+		<to-view-id>/workspace/content/memorial/Obituary_Create/</to-view-id>
+    </navigation-case>
+ </navigation-rule>
+
+
+ <navigation-rule>
+   <from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/new_person.jsp</from-view-id>
+	<navigation-case>
+		<from-action>#{newPersonBean.save}</from-action>
+		<from-outcome>success</from-outcome>
+		<to-view-id>/workspace/content/memorial/Obituary_Create/</to-view-id>
+    </navigation-case>
+ </navigation-rule>
+
+
+	<navigation-rule>
+		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_preview.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>obituaryPreviewCancelAction</from-outcome>
+			<to-view-id>/workspace/content/memorial/Obituary_Create/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+
+	<navigation-rule>
+		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary_preview.jsp</from-view-id>
+		<navigation-case>
+			<from-action>#{obituaryPreviewBackingBean.save}</from-action>
+   		        <from-outcome>success</from-outcome>
+			<to-view-id>/workspace/content/memorial/Obituary/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
 
 
 	<managed-bean>
@@ -83,17 +117,27 @@
 			<property-name>graveId</property-name>
 			<value>#{param.graveId}</value>
 		</managed-property> 
-		<managed-property>
-			<property-name>actionId</property-name>
-			<value>#{param.actionId}</value>
-		</managed-property> 
-		
 	</managed-bean>	
 	
 	<managed-bean>
 		<description>Backing bean for Obituary_Create page</description>	
 		<managed-bean-name>obituaryCreateBackingBean</managed-bean-name>
 		<managed-bean-class>se.agura.memorial.obituary.presentation.ObituaryInformationCreateBackingBean</managed-bean-class>		
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>databaseId</property-name>
+			<value>#{param.databaseId}</value>
+		</managed-property> 
+		<managed-property>
+			<property-name>graveId</property-name>
+			<value>#{param.graveId}</value>
+		</managed-property> 
+	</managed-bean>	
+
+	<managed-bean>
+		<description>Backing bean for Obituary Preview page</description>	
+		<managed-bean-name>obituaryPreviewBackingBean</managed-bean-name>
+		<managed-bean-class>se.agura.memorial.obituary.presentation.ObituaryInformationPreviewBackingBean</managed-bean-class>		
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
 			<property-name>databaseId</property-name>

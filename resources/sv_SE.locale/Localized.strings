@@ -13,6 +13,14 @@ help = Help
 next_page = Next page
 previous_page = Previous page
 show = Show
+edit = Edit
+cancel = Cancel
+obituary_preview_page = Obituary Preview Page
+new_person = New person
+preview = Preview
+person_image_path = Person image PATH:
+grave_image_path = Grave image PATH:
+save as pdf = Save as PDF
 messages.more_than_100_hits_summary = More than 100 found
 messages.more_than_100_hits_detail = Your search resulted in more \
 									 than 100 hits \u2013 only the first 100 is shown. \

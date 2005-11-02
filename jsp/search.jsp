@@ -278,19 +278,10 @@
 					<h:column>
 					
 						<h:commandLink action="showObituaryAction" immediate="true">							
-							<h:outputText value="navigation " />							
+							<h:outputText value=" #{localizedStrings['se.agura.memorial']['show']}" />							
 							<f:param name="graveId" value="#{grave.graveId}" />
 							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
 						</h:commandLink>
-
-					<h:outputLink value="../Obituary"> 	                    
-						<h:outputText value="SHOW" />							
-						<f:param name="graveId" value="#{grave.graveId}" />
-						<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														                        
-						<f:param name="actionId" value="4" />														                        						
-                    </h:outputLink>
- 
-
 
 					</h:column>
 				</x:dataTable>

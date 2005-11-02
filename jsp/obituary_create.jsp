@@ -21,7 +21,36 @@ version="1.2">
              <wf:container styleClass="obituary_part">
 
 
+                 <h:outputText styleClass="Text" value="#{obituaryBackingBean.databaseId}" />                 
+
+                 <h:outputText styleClass="Text" value=" | " />
+
+                 <h:outputText styleClass="Text" value="#{obituaryBackingBean.graveId}" />
 							
+                 <h:outputText styleClass="Text" value=" | " />
+
+                 <h:outputText styleClass="Text" value="#{obituaryBackingBean.obituaryText}" />
+    		
+
+				 <f:verbatim>
+                    <br />
+                    <br />
+                  </f:verbatim>
+
+                 <h:outputText styleClass="headline" value="Detailed Grave Information" />
+
+				 <f:verbatim>
+                    <br />
+                    <br />
+                  </f:verbatim>
+
+				 <memorial:GraveDetails id="theobject"></memorial:GraveDetails>
+
+				 <f:verbatim>
+                    <br />
+                    <br />
+                  </f:verbatim>
+                  
 
 				 <f:verbatim>
                     <h:outputText styleClass="headline" value="#{localizedStrings['se.agura.memorial']['obituary']}" style="font-weight: bold; " />
@@ -31,13 +60,13 @@ version="1.2">
 
 
                   <f:verbatim escape="false">
-                     <h:inputTextarea id="textArea"  rows="4" cols="40"  value="#{obituaryCreateBackingBean.obituaryText}"/>
+                     <h:inputTextarea id="textArea"  rows="4" cols="40"  value="#{obituaryBackingBean.obituaryText}"/>
                      <br />
                      <br />
                   </f:verbatim>
 
                   <f:verbatim>				  
-                   <h:outputText  styleClass="Text" value="#{obituaryCreateBackingBean.databaseId}" style="font-weight: bold; " />                  
+                   <h:outputText  styleClass="Text" value="#{obituaryBackingBean.databaseId}" style="font-weight: bold; " />                  
                     <br />
                     <br />
                   </f:verbatim>
@@ -46,11 +75,11 @@ version="1.2">
          
          
                  <x:inputFileUpload id="personImagePath"
-                      value="#{obituaryCreateBackingBean.personImagePath}"
+                      value="#{obituaryBackingBean.personImagePath}"
                       storage="file"
                   required="true"/>
             
-                   <h:commandButton value="Upload picture of person" action="#{obituaryCreateBackingBean.processMyFile}" id="cbUploadGrave" >		      
+                   <h:commandButton value="Upload picture of person" action="#{obituaryBackingBean.processMyFile}" id="cbUploadGrave" >		      
                    </h:commandButton>
                     <br />
                     <br />
@@ -64,7 +93,7 @@ version="1.2">
                   </f:verbatim>
 
                  <x:inputFileUpload id="graveImagePath"
-                      value="#{obituaryCreateBackingBean.graveImagePath}"
+                      value="#{obituaryBackingBean.graveImagePath}"
                       storage="file"
                   required="true"/>
 
@@ -75,21 +104,19 @@ version="1.2">
                   </f:verbatim>
 	        
 
-		                   
-                   <h:outputLink value="new%20person"> 
-                        <h:commandButton value="New person" action="obituaryCreateBackingBean.onClick" id="cbNewPerson" />
+
+                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['new person']}" action="showNewPersonAction" id="cbNewPerson" >
 						<f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
 						<f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
-                   </h:outputLink>
+					</h:commandButton>
 
-                   <h:outputLink value="Obituary_Preview"> 
-                        <h:commandButton value="Preview" action="#{obituaryCreateBackingBean.onClick}"/>
+                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['preview']}" action="#{obituaryBackingBean.preview" id="cbPreview" >
 						<f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
 						<f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
-						<f:param name="actionId" value="8" />														                        						
-                   </h:outputLink>
+					</h:commandButton>
 
-                  <h:commandButton type = "submit" value="SAVE2" action="#{obituaryCreateBackingBean.save}" id="cbSaveBtn2" />                  
+                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['cancel']}" action="obituaryCreateCancelAction" id="cbCancel" >
+					</h:commandButton>
                   
              </wf:container>
 				

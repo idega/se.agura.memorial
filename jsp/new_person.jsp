@@ -179,21 +179,16 @@ version="1.2">
 
 	</wf:wfblock>
 
-     <h:outputLink value="Obituary_Create" id="a12345"> 
-              <h:commandButton value="CANCEL" action="" id="cbCreateBtn1" />
-  			  <f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
-			  <f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
-			  <f:param name="actionId" value="5" />														                        						
-     </h:outputLink>
+                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['cancel']}" action="newPersonCancelAction" id="cbCancel" >
+						<f:param name="graveId" value="#{newPersonBean.graveId}" />
+						<f:param name="databaseId" value="#{newPersonBean.databaseId}" />														                        
+					</h:commandButton>
 
-     <h:outputLink value="Obituary_Create" id="a1234567"> 
-  			  <f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
-			  <f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
-			  <f:param name="actionId" value="5" />														                        						
-              <h:commandButton value="SAVE" type="submit" action="#{newPersonBean.save}" id="cbSaveBtn1" />			  
-     </h:outputLink>
+                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['save']}" action="#{newPersonBean.save}" id="cbSave" >
+						<f:param name="graveId" value="#{newPersonBean.graveId}" />
+						<f:param name="databaseId" value="#{newPersonBean.databaseId}" />														                        
+					</h:commandButton>
 
-     <h:commandButton value="SAVE2" action="#{newPersonBean.onClick}" id="cbSaveBtn2" />
 
     </h:form>
   

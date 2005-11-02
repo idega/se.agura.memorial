@@ -49,19 +49,15 @@ version="1.2">
                   </f:verbatim>
                   </wf:container>
 
-                   <h:outputLink value="Obituary_Create"> 
-                        <h:commandButton value="BACK" action="" id="cbBack" />
-						<f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
-						<f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
-						<f:param name="actionId" value="5" />														                        						
-                   </h:outputLink>
-					
-                   <h:outputLink value="Obituary"> 
-                        <h:commandButton value="SAVE" action="" id="cbSave" />
-						<f:param name="graveId" value="#{obituaryCreateBackingBean.graveId}" />
-						<f:param name="databaseId" value="#{obituaryCreateBackingBean.databaseId}" />														                        
-						<f:param name="actionId" value="4" />														                        						
-                   </h:outputLink>
+                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['cancel']}" action="obituaryPreviewCancelAction" id="cbCancel" >
+						<f:param name="graveId" value="#{obituaryPreviewBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryPreviewBackingBean.databaseId}" />														                        
+					</h:commandButton>
+
+                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['save']}" action="#{obituaryPreviewBackingBean.save" id="cbSave" >
+						<f:param name="graveId" value="#{obituaryPreviewBackingBean.graveId}" />
+						<f:param name="databaseId" value="#{obituaryPreviewBackingBean.databaseId}" />														                        
+					</h:commandButton>
 
 
 			</wf:wfblock >

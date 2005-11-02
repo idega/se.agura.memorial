@@ -1,8 +1,11 @@
 package se.agura.memorial.obituary.presentation;
 
+
+
+
+
 import java.io.BufferedInputStream;
 import java.io.InputStream;
-import java.rmi.RemoteException;
 import java.security.MessageDigest;
 
 import javax.faces.application.FacesMessage;
@@ -12,15 +15,13 @@ import org.apache.myfaces.custom.fileupload.UploadedFile;
 
 import se.agura.memorial.obituary.bussiness.ObituarySessionBean;
 import se.agura.memorial.obituary.data.ObituaryItemBean;
-import se.agura.memorial.search.api.Grave;
-import se.agura.memorial.search.api.ObituarySearch;
-import se.agura.memorial.search.business.SearchImplBroker;
 
 import com.idega.business.IBOLookup;
 import com.idega.business.IBOLookupException;
 import com.idega.presentation.IWContext;
 
-public class ObituaryInformationCreateBackingBean {
+public class ObituaryInformationPreviewBackingBean {
+
 
 	private String obituaryText = "...";
 
@@ -32,18 +33,16 @@ public class ObituaryInformationCreateBackingBean {
 
 	private UploadedFile graveImage;
 	
-	private Grave grave = null;	
-	
 	private UploadedFile myFile;
 
 	private static final String IW_BUNDLE_IDENTIFIER = "se.agura.memorial";
 	
 	
 	private String graveId = null;
-	private Integer databaseId = null;
+	private Integer databaseId = new Integer(1);
 	private ObituarySessionBean obituarySessionBean = null;	
 	
-	public ObituaryInformationCreateBackingBean() {
+	public ObituaryInformationPreviewBackingBean() {
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		IWContext iwc = IWContext.getIWContext(facesContext);
@@ -53,17 +52,15 @@ public class ObituaryInformationCreateBackingBean {
 			e.printStackTrace();
 		}
 		
-		//obituarySessionBean.setDatabaseId(this.databaseId);
-		//initData();
+		obituarySessionBean.setDatabaseId(this.databaseId);
+		initData();
 	}
 	
-	
-	
 	private void initData() {
-//		FacesContext facesContext = FacesContext.getCurrentInstance();
-//		IWContext iwc = IWContext.getIWContext(facesContext);
-//        this.obituaryText="bbbb";
-//		this.databaseId=new Integer(1);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		IWContext iwc = IWContext.getIWContext(facesContext);
+        this.obituaryText="bbbb";
+		this.databaseId=new Integer(1);
 //		this.graveId="5060";
 		//this.personImagePath="ddssd";
 		//this.graveImagePath="gravelsdklflk";
@@ -135,16 +132,12 @@ public class ObituaryInformationCreateBackingBean {
 
 	public void setDatabaseId(Integer databaseId) {
 		this.databaseId = databaseId;
-		if(this.databaseId==null)this.databaseId=new Integer(1);
-		
 	}
 	
 
 
 
 	public String getGraveId() {
-		
-		
 		return graveId;
 	}
 	
@@ -153,26 +146,6 @@ public class ObituaryInformationCreateBackingBean {
 
 	public void setGraveId(String graveId) {
 		this.graveId = graveId;
-		if(this.graveId == null) this.graveId = "60506:3063";
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		IWContext iwc = IWContext.getIWContext(facesContext);
-		
-		try {
-			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
-			
-			ObituarySearch os = sib.getSearch(this.getDatabaseId().intValue());
-			this.grave = os.findGrave(this.getGraveId());
-			this.obituaryText = "obituary text2";
-			
-			
-			
-		} catch (IBOLookupException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();	
-		}
-	
-
 	}
 	
 
@@ -220,14 +193,14 @@ public class ObituaryInformationCreateBackingBean {
     }
 	
 
-    public String preview()
+    public String onClick()
     {        
         
         boolean result = true;
 
 
         if(result)
-            return "success";
+            return "rrr";
         else
             return "failure";
     }
@@ -259,7 +232,7 @@ public class ObituaryInformationCreateBackingBean {
 
 
         if(result)
-            return "rrr";
+            return "success";
         else
             return "failure";
     }
