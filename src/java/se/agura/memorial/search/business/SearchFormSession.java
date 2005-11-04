@@ -3,13 +3,23 @@
  */
 package se.agura.memorial.search.business;
 
-import com.idega.business.IBOSession;
+import com.idega.business.IBOService;
 
 /**
- * @author Dainis
+ * @author is
  *
  */
-public interface SearchFormSession extends IBOSession {
+public interface SearchFormSession extends IBOService {
+	/**
+	 * @see se.agura.memorial.search.business.SearchFormSessionBean#getGraveId
+	 */
+	public String getGraveId() throws java.rmi.RemoteException;
+
+	/**
+	 * @see se.agura.memorial.search.business.SearchFormSessionBean#setGraveId
+	 */
+	public void setGraveId(String graveId) throws java.rmi.RemoteException;
+
 	/**
 	 * @see se.agura.memorial.search.business.SearchFormSessionBean#getDatabaseId
 	 */

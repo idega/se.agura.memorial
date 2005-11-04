@@ -23,7 +23,7 @@ import com.idega.presentation.IWContext;
 public class ObituaryInformationPreviewBackingBean {
 
 
-	private String obituaryText = "...";
+	private String obituaryText;
 
 	private String personImagePath;
 
@@ -38,8 +38,8 @@ public class ObituaryInformationPreviewBackingBean {
 	private static final String IW_BUNDLE_IDENTIFIER = "se.agura.memorial";
 	
 	
-	private String graveId = null;
-	private Integer databaseId = new Integer(1);
+	private String graveId;
+	private Integer databaseId;
 	private ObituarySessionBean obituarySessionBean = null;	
 	
 	public ObituaryInformationPreviewBackingBean() {
@@ -52,20 +52,17 @@ public class ObituaryInformationPreviewBackingBean {
 			e.printStackTrace();
 		}
 		
-		obituarySessionBean.setDatabaseId(this.databaseId);
 		initData();
 	}
 	
 	private void initData() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		IWContext iwc = IWContext.getIWContext(facesContext);
-        this.obituaryText="bbbb";
-		this.databaseId=new Integer(1);
-//		this.graveId="5060";
-		//this.personImagePath="ddssd";
-		//this.graveImagePath="gravelsdklflk";
-		
-		
+        if(obituarySessionBean!=null)
+		{
+		    this.obituaryText = obituarySessionBean.getTmpObituaryText();
+			this.graveId = obituarySessionBean.getGraveId();
+			this.databaseId= obituarySessionBean.getDatabaseId();
+		}
+
 	
 	}	
 	
@@ -208,33 +205,17 @@ public class ObituaryInformationPreviewBackingBean {
     public String save()
     {        
         ObituaryItemBean oib = new ObituaryItemBean(); 
-//		oib.setDatabaseId(2);
-//		oib.setGraveId("5050");
-//		oib.setObituaryText("bla bla bla");
-//		oib.setGravePicturePath("pictureLink");
-//		oib.setPersonPicturePath("pictureLink");
-		
-		oib.setBody("test test test ");
-		oib.setDatabaseId(Integer.valueOf("1").intValue());  // bilo integer
-		oib.setGraveId(Integer.valueOf("3007").toString());  // bilo Integer
-		oib.setGravePicturePath("uuuuu");
-		oib.setPersonPicturePath("eetteee");		
+		oib.setDatabaseId(getDatabaseId());
+		oib.setGraveId(getGraveId());
+		oib.setObituaryText(getObituaryText());
+		oib.setGravePicturePath(getGraveImagePath());
+		oib.setPersonPicturePath(getPersonImagePath());
+		oib.setContentLanguage("en");
 		oib.store();
 		
-//		aa.load("http://localhost:8080/memorial/content/files/cms/obituary/1/3002.obituary/en.txt");
-//		aa.load("/files/cms/obituary/1/3002.obituary/en.txt");		
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}		
+		obituarySessionBean.setObituaryText(getObituaryText()); 
 		
-        boolean result = true;
-
-
-        if(result)
-            return "success";
-        else
-            return "failure";
+        return "success";
     }
 	
 	

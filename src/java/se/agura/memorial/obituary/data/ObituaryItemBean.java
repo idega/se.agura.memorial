@@ -15,18 +15,13 @@ import javax.ejb.EJBHome;
 import javax.ejb.EJBLocalHome;
 import javax.ejb.EJBObject;
 import javax.ejb.Handle;
-import javax.faces.context.FacesContext;
 
 import org.apache.webdav.lib.PropertyName;
 import org.apache.webdav.lib.WebdavException;
 import org.apache.webdav.lib.WebdavResource;
 
-import se.agura.memorial.search.api.Grave;
-import se.agura.memorial.search.api.ObituarySearch;
-import se.agura.memorial.search.business.SearchImplBroker;
 
 import com.idega.business.IBOLookup;
-import com.idega.business.IBOLookupException;
 import com.idega.content.bean.ContentItemBean;
 import com.idega.data.IDOEntity;
 import com.idega.data.IDOStoreException;
@@ -45,28 +40,14 @@ import com.idega.xml.XMLParser;
 
 public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
-	String graveId;
-	int databaseId = 0;
-	
-	private Grave grave = null;	
-	
+	private String graveId;
+	private Integer databaseId;
 	private Integer obituaryId;
-
-	private String obituaryText = "...";
-
+	private String obituaryText;
 	private String personPicturePath;
-
 	private String gravePicturePath;
-
 	private String uniqueAvenyId;
-
-	private static final Integer SHOW_MODE  = new Integer(0);
-	private static final Integer EDIT_MODE  = new Integer(1);
-	private static final Integer PREVIEW_MODE  = new Integer(2);	
-	private static final Integer SAVE_MODE  = new Integer(3);	
-
-	private Integer stateMode = new Integer(0);
-	
+	private String contentLanguage;
 	
 	private final static String FIELDNAME_BODY = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?> <article> </article>";
 
@@ -80,6 +61,8 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 	public final static String FIELDNAME_PERSON_IMAGE_PATH = "PresonImagePath";
 
+	public final static String ARTICLE_NAME= ".xml";
+
 	public final static String FIELDNAME_CONTENT_LANGUAGE = "english";
 
 	public static final PropertyName PROPERTY_CONTENT_TYPE = new PropertyName("IW:", CONTENT_TYPE);
@@ -91,27 +74,24 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	private static final String CONTENT_PATH = "/files/cms/obituary/";
 
 
-	public void setEditMode() {
-		 this.stateMode = EDIT_MODE;
-	}
-
-	public void setPreviewMode() {
-		 this.stateMode = EDIT_MODE;
-	}
-
-	public void setSaveMode() {
-		 this.stateMode = SAVE_MODE;
-	}
-
-	public void setShowMode() {
-		 this.stateMode = SHOW_MODE;
-	}
 	
-	public Integer getStateMode() {
-		 return this.stateMode;
+	public String getRootPath() {
+		String rootPath;
+		
+		rootPath = CONTENT_PATH;
+		rootPath += getDatabaseId().toString();
+		rootPath += "/";
+		rootPath += getGraveId().toString();
+		rootPath += ".obituary/";
+		rootPath += getContentLanguage();
+		rootPath += this.getArticleName();
+		
+		
+		
+		return rootPath;
 	}
 
-
+	
 	public String getResourcePath() {
 		return CONTENT_PATH;
 	}
@@ -128,9 +108,14 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	}
 
 	private String getContentLanguage() {
-		// TODO  multilanguages 
-		return "en";
+		return contentLanguage;
 	}
+
+	
+	public void setContentLanguage(String contentLanguage) {
+		this.contentLanguage = contentLanguage;
+	}
+	
 
 	private String getPersonImagePath() {
 		
@@ -146,8 +131,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 	public ObituaryItemBean() {
 		super();
-		//this.obituaryText="ttttt";
-		//this.databaseId=1;
 	}
 
 	public String getBody() {
@@ -170,8 +153,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 
 	public String getObituaryText() {
-		//return obituaryText;
-		return "AAAAA";
+		return obituaryText;
 	}
 
 
@@ -186,17 +168,13 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 	public String getArticlePath() {
 
-		//TODO test mode only
-
-		String lang = "en";
 		String databaseId = String.valueOf(getDatabaseId());
 		String graveId = getGraveId().toString();
-
 		return databaseId + "/" + graveId + ".obituary/" + getContentLanguage();
 	}
 
 	public String getArticleName() {
-		return ".xml";
+		return ARTICLE_NAME;
 	}
 
 	public String[] getContentFieldNames() {
@@ -222,7 +200,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 		//
 	}
 
-
 	public void setGravePicturePath(String gravePicturePath) {
 		this.gravePicturePath = gravePicturePath;
 	}
@@ -234,9 +211,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	public void setObituaryText(String obituaryText) {
 		this.obituaryText = obituaryText;
 	}
-
-
-
 
 	public String getAsXML() throws IOException, XMLException {
 
@@ -275,8 +249,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 				//Setting the path for creating new file or creating localized version or updating existing file
 
-				String articleFolderPath = getResourcePath() + "test.txt";//getArticlePath();
-				//String articleFolderPath =  "/files/test.txt";//getArticlePath();
+				String articleFolderPath = getResourcePath() + getArticlePath();
 				String filePath = articleFolderPath + getArticleName();
 
 				boolean hadToCreate = session.createAllFoldersInPath(articleFolderPath);
@@ -409,15 +382,12 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 		this.graveId = graveId;
 	}
 
-	public Grave getGrave() {
-		return grave;
-	}
 
-	public int getDatabaseId() {
+	public Integer getDatabaseId() {
 		return databaseId;
 	}
 
-	public void setDatabaseId(int databaseId) {
+	public void setDatabaseId(Integer databaseId) {
 		this.databaseId = databaseId;		
 	}
 

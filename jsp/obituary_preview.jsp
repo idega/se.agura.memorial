@@ -15,7 +15,6 @@ version="1.2">
 		<h:form id="obituaryPreviewform">    
 			
 			<wf:wfblock title="Obituary Preview page">
-
              <wf:container styleClass="obituary_part">
 
                  <h:outputText  styleClass="headline" value="Obituary" style="font-weight: bold; " />                  
@@ -24,7 +23,7 @@ version="1.2">
                     <br />
                   </f:verbatim>
 
-                 <h:outputText  styleClass="Text" value="#{obituaryCreateBackingBean.obituaryText}"  />                  
+                 <h:outputText  styleClass="Text" value="#{obituaryPreviewBackingBean.obituaryText}"  />                  
 
 				 <f:verbatim>
                     <br />
@@ -50,13 +49,9 @@ version="1.2">
                   </wf:container>
 
                    <h:commandButton value="#{localizedStrings['se.agura.memorial']['cancel']}" action="obituaryPreviewCancelAction" id="cbCancel" >
-						<f:param name="graveId" value="#{obituaryPreviewBackingBean.graveId}" />
-						<f:param name="databaseId" value="#{obituaryPreviewBackingBean.databaseId}" />														                        
 					</h:commandButton>
 
-                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['save']}" action="#{obituaryPreviewBackingBean.save" id="cbSave" >
-						<f:param name="graveId" value="#{obituaryPreviewBackingBean.graveId}" />
-						<f:param name="databaseId" value="#{obituaryPreviewBackingBean.databaseId}" />														                        
+                   <h:commandButton value="save" action="#{obituaryPreviewBackingBean.save}" id="cbSave" >
 					</h:commandButton>
 
 

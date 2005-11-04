@@ -627,6 +627,20 @@ public class SearchFormBackingBean {
 	
 
 
+    public String showObiaturyPage()
+    {        
+        
+		//searchFormSessionBean.setGraveId(this.graveyard grave.graveId);
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		
+		IWContext iwc = IWContext.getIWContext(facesContext);
+		
+
+        return "success";
+    }
+	
+	
 	
     public String onClick()
     {        

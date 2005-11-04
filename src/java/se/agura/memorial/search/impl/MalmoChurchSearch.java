@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import se.agura.memorial.obituary.data.ObituaryItemBean;
 import se.agura.memorial.search.api.CustomMemorialDate;
 import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.GraveInformation;

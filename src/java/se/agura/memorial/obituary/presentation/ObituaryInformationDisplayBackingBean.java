@@ -2,8 +2,10 @@ package se.agura.memorial.obituary.presentation;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
@@ -12,14 +14,16 @@ import org.apache.commons.httpclient.HttpException;
 import se.agura.memorial.obituary.bussiness.ObituarySessionBean;
 import se.agura.memorial.obituary.data.ObituaryItemBean;
 import se.agura.memorial.search.api.Grave;
+import se.agura.memorial.search.api.Graveyard;
 import se.agura.memorial.search.api.ObituarySearch;
 import se.agura.memorial.search.business.SearchImplBroker;
 import se.agura.memorial.util.MemorialHeplInfo;
 
 import com.idega.business.IBOLookup;
 import com.idega.business.IBOLookupException;
+import com.idega.idegaweb.IWUserContext;
 import com.idega.presentation.IWContext;
-import com.idega.slide.util.WebdavExtendedResource;
+import com.idega.slide.business.IWSlideSession;
 
 public class ObituaryInformationDisplayBackingBean {
 
@@ -31,14 +35,16 @@ public class ObituaryInformationDisplayBackingBean {
 	private String graveId = null;
 	private Integer actionId = null;	
 	private Integer databaseId = null;
-	
 	private Grave grave = null;
+	private Graveyard graveyard;
+	private boolean graveyardSetToNull = false;
+	private Map graveyards;	
 	
 	private MemorialHeplInfo mhi = null;
 
 	private ObituarySessionBean obituarySessionBean = null;
 	
-	public ObituaryInformationDisplayBackingBean() {
+	public ObituaryInformationDisplayBackingBean() throws HttpException, IOException {
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		IWContext iwc = IWContext.getIWContext(facesContext);
@@ -47,21 +53,61 @@ public class ObituaryInformationDisplayBackingBean {
 		} catch (IBOLookupException e) {
 			e.printStackTrace();
 		}
+		initObituary();
 		
-		//obituarySessionBean.setDatabaseId(this.databaseId); 
-				
-		//initObituary();
 	}
 	
-	private void initObituary() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		IWContext iwc = IWContext.getIWContext(facesContext);
+	private void initObituary() throws HttpException, IOException {
+
+		if(obituarySessionBean.getObituaryText()!=null) obituaryText=obituarySessionBean.getObituaryText();
 		
-        //this.obituaryText="aaaa";
+		if (this.databaseId==null) return;
+			
+		graveyards = new LinkedHashMap();
 
 		
-		  
-	
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		IWContext iwc = IWContext.getIWContext(facesContext);
+
+		try {
+			
+			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
+			ObituarySearch os = sib.getSearch(this.getDatabaseId().intValue());
+			List listOfGraveyards = (List) os.getGraveyards();
+			
+			grave = os.findGrave(this.getGraveId());
+			
+	        ObituaryItemBean oib = new ObituaryItemBean(); 
+			oib.setDatabaseId(getDatabaseId());  
+			oib.setGraveId(getGraveId());
+			oib.setContentLanguage("en"); //TODO multilanguage
+			
+						
+			IWUserContext iwuc = IWContext.getInstance();
+			IWSlideSession session = (IWSlideSession) IBOLookup.getSessionInstance(iwuc, IWSlideSession.class);
+			oib.load(session.getWebdavResource(oib.getRootPath()));
+			obituaryText = oib.getObituaryText();
+			obituarySessionBean.setObituaryText(getObituaryText()); 
+			
+			for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
+				Graveyard g = (Graveyard) it.next();
+				graveyards.put(new Integer(g.getId()).toString(), g);
+			}
+			
+		} catch (IBOLookupException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();	
+		}		
+
+
+		
+			
+
+			
+		
+		
 	}
 	
 	
@@ -91,44 +137,20 @@ public class ObituaryInformationDisplayBackingBean {
 
 	
 	public void setGraveId(String graveId) throws HttpException, IOException {		
+
+		if(graveId == null) return;
+		
+		if(graveId == "") return;
+
 		this.graveId = graveId;
 		
-	
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		IWContext iwc = IWContext.getIWContext(facesContext);
+		obituarySessionBean.setDatabaseId(getDatabaseId()); 
+
+		obituarySessionBean.setGraveId(getGraveId()); 
 		
-		try {
-			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
-			
-			ObituarySearch os = sib.getSearch(this.getDatabaseId().intValue());
-			this.grave = os.findGrave(this.getGraveId());
-			//this.databaseId = new Integer(1);
-			this.obituaryText = "obituary text";
-			this.graveId = "3007";
-			
-//	        ObituaryItemBean oib = new ObituaryItemBean(); 
-//			oib.setDatabaseId(Integer.valueOf("1").intValue());  
-//			
-//			oib.setGraveId(Integer.valueOf("3007").toString());
-//			WebdavExtendedResource webdavResource;
-//			//webdavResource.setHttpURL("http://localhost:8080/memorial/content/files/cms/obituary/test.txt.xml");
-//			webdavResource.setPath("http://localhost:8080/memorial/content/files/cms/obituary/test.txt.xml");
-//			oib.load(webdavResource);
-//			this.obituaryText = oib.getObituaryText();
-			
-			
-		} catch (IBOLookupException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();	
-		}
-	
-//		List mList = new ArrayList();
-//		mList.add("info 1");
-//		
-//		MemorialHeplInfo mhi = new MemorialHeplInfo();
-//		mhi.setInfo(mList);
-		//mhi.setTitle("TOPIC 1");		
+
+		initObituary();	
+		
 		
 
 	}

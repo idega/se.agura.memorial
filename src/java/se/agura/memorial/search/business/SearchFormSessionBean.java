@@ -6,7 +6,26 @@ public class SearchFormSessionBean extends IBOSessionBean  implements SearchForm
 	
 	private Integer databaseId = null;
 	
+	private String graveId = null;	
+	
+
 	public SearchFormSessionBean(){}
+
+	
+	
+	public String getGraveId() {
+		return graveId;
+	}
+	
+
+
+
+	public void setGraveId(String graveId) {
+		this.graveId = graveId;
+	}
+	
+
+
 
 	public Integer getDatabaseId() {
 		return databaseId;

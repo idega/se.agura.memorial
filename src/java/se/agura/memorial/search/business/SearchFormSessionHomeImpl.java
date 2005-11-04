@@ -6,7 +6,7 @@ package se.agura.memorial.search.business;
 import com.idega.business.IBOHomeImpl;
 
 /**
- * @author Dainis
+ * @author is
  *
  */
 public class SearchFormSessionHomeImpl extends IBOHomeImpl implements

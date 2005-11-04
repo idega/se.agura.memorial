@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 
 import se.agura.memorial.obituary.bussiness.ObituarySessionBean;
-import se.agura.memorial.obituary.data.ObituaryItemBean;
 import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.ObituarySearch;
 import se.agura.memorial.search.business.SearchImplBroker;
@@ -22,7 +21,9 @@ import com.idega.presentation.IWContext;
 
 public class ObituaryInformationCreateBackingBean {
 
-	private String obituaryText = "...";
+	private String obituaryText;
+
+	private String tmpObituaryText;
 
 	private String personImagePath;
 
@@ -53,22 +54,20 @@ public class ObituaryInformationCreateBackingBean {
 			e.printStackTrace();
 		}
 		
-		//obituarySessionBean.setDatabaseId(this.databaseId);
-		//initData();
+		  initObituaryCreate();
 	}
 	
 	
 	
-	private void initData() {
-//		FacesContext facesContext = FacesContext.getCurrentInstance();
-//		IWContext iwc = IWContext.getIWContext(facesContext);
-//        this.obituaryText="bbbb";
-//		this.databaseId=new Integer(1);
-//		this.graveId="5060";
-		//this.personImagePath="ddssd";
-		//this.graveImagePath="gravelsdklflk";
-		
-		
+	private void initObituaryCreate() {
+        if(obituarySessionBean!=null)
+		{
+		    this.databaseId = obituarySessionBean.getDatabaseId();
+		    this.graveId = obituarySessionBean.getGraveId();
+			this.obituaryText = obituarySessionBean.getObituaryText();
+			
+		}
+
 	
 	}	
 	
@@ -134,9 +133,7 @@ public class ObituaryInformationCreateBackingBean {
 
 
 	public void setDatabaseId(Integer databaseId) {
-		this.databaseId = databaseId;
-		if(this.databaseId==null)this.databaseId=new Integer(1);
-		
+		this.databaseId = obituarySessionBean.getDatabaseId();
 	}
 	
 
@@ -152,25 +149,29 @@ public class ObituaryInformationCreateBackingBean {
 
 
 	public void setGraveId(String graveId) {
-		this.graveId = graveId;
-		if(this.graveId == null) this.graveId = "60506:3063";
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		IWContext iwc = IWContext.getIWContext(facesContext);
+        if(obituarySessionBean!=null)
+		{
 		
-		try {
-			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
+		
+			this.graveId = obituarySessionBean.getGraveId();;
+			this.obituaryText = obituarySessionBean.getObituaryText();
+		
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			IWContext iwc = IWContext.getIWContext(facesContext);
+		
+			try {
+				SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			
-			ObituarySearch os = sib.getSearch(this.getDatabaseId().intValue());
-			this.grave = os.findGrave(this.getGraveId());
-			this.obituaryText = "obituary text2";
+				ObituarySearch os = sib.getSearch(this.getDatabaseId().intValue());
+				this.grave = os.findGrave(this.getGraveId());
 			
 			
-			
-		} catch (IBOLookupException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();	
-		}
+			} catch (IBOLookupException e) {
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				e.printStackTrace();	
+			}
+		}	
 	
 
 	}
@@ -222,46 +223,18 @@ public class ObituaryInformationCreateBackingBean {
 
     public String preview()
     {        
-        
-        boolean result = true;
+		
+	//	FacesContext facesContext = FacesContext.getCurrentInstance();
+		
+//		IWContext iwc = IWContext.getIWContext(facesContext);
 
-
-        if(result)
-            return "success";
-        else
-            return "failure";
+		obituarySessionBean.setTmpObituaryText(getObituaryText());
+        return "success";
     }
 
     public String save()
     {        
-        ObituaryItemBean oib = new ObituaryItemBean(); 
-//		oib.setDatabaseId(2);
-//		oib.setGraveId("5050");
-//		oib.setObituaryText("bla bla bla");
-//		oib.setGravePicturePath("pictureLink");
-//		oib.setPersonPicturePath("pictureLink");
-		
-		oib.setBody("test test test ");
-		oib.setDatabaseId(Integer.valueOf("1").intValue());  // bilo integer
-		oib.setGraveId(Integer.valueOf("3007").toString());  // bilo Integer
-		oib.setGravePicturePath("uuuuu");
-		oib.setPersonPicturePath("eetteee");		
-		oib.store();
-		
-//		aa.load("http://localhost:8080/memorial/content/files/cms/obituary/1/3002.obituary/en.txt");
-//		aa.load("/files/cms/obituary/1/3002.obituary/en.txt");		
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}		
-		
-        boolean result = true;
-
-
-        if(result)
-            return "rrr";
-        else
-            return "failure";
+		 return "success";
     }
 	
 	

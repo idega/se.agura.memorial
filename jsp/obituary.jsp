@@ -50,14 +50,11 @@ version="1.2">
                   </wf:container>
 
 
-                   <h:commandButton value="{localizedStrings['se.agura.memorial']['print']}" action="#{obituaryBackingBean.onClick}" id="cbPrint"  />
+                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['print']}" action="#{obituaryBackingBean.onClick}" id="cbPrint"  />
 
-                   <h:commandButton value=" #{localizedStrings['se.agura.memorial']['edit']}" action="showObituaryCreateAction" id="cbEdit" >
-							<f:param name="graveId" value="#{grave.graveId}" />
-							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
-					</h:commandButton>
- 
-                   <h:commandButton value="{localizedStrings['se.agura.memorial']['save as pdf']}" action="#{obituaryBackingBean.onClick}" id="cbPDF"  />
+                   <h:commandButton value=" #{localizedStrings['se.agura.memorial']['edit']}" action="showObituaryCreateAction" immediate="true" id="cbEdit" />
+
+                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['save as pdf']}" action="#{obituaryBackingBean.onClick}" id="cbPDF"  />
 
                    
 
