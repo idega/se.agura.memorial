@@ -13,51 +13,109 @@ version="1.2">
 
 
 <f:view>
-	<ws:page id="obituary">
-		<h:form id="obituaryform">    
-			
+  	<ws:page id="obituary">
+			<h:form id="obituaryform">    
  			<wf:wfblock title="Obituary page">
+			<h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" >
+					<h:panelGroup>			
+			                 <h:outputText styleClass="headline" value="#{obituaryBackingBean.personFullName}" />
+							 <f:verbatim>
+            			        <br />
+			                    <br />
+			                  </f:verbatim>
+		            </h:panelGroup>
+            
+					<h:panelGroup>			
+							<h:panelGrid columns="2" border="0" cellspacing="5" footerClass="SearchFormFooterClass"  width = "1000">
+				  					 <h:panelGroup>			
+			 							         <h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" width = "800" >
+									  					 <h:panelGroup>			
+												                <h:outputText styleClass="headline" value="Obituary" />
+												 			    <f:verbatim>
+										            	            <br />
+											    	                <br />
+												                </f:verbatim>
+	 												     </h:panelGroup>
 
-             <wf:container styleClass="obituary_part">
+									  					 <h:panelGroup>			
+										                 		<h:outputText styleClass="Text" value="#{obituaryBackingBean.obituaryText}" />
+						 									 	<f:verbatim>
+												                    <br />
+												                    <br />
+												                </f:verbatim>
+													     </h:panelGroup>
+								                
+									  					 <h:panelGroup>			
+											                   <h:outputText styleClass="headline" value="Detailed Grave Information" />
+												 			   <f:verbatim>
+												                    <br />
+												                    <br />
+											                   </f:verbatim>
+													     </h:panelGroup>
 
-                 <h:outputText styleClass="headline" value="Obituary" />
+									  					 <h:panelGroup>			
+											  				   <memorial:GraveDetails id="theobject"></memorial:GraveDetails>
+									  						   <f:verbatim>
+												                    <br />
+												                    <br />
+											                   </f:verbatim>
+													    </h:panelGroup>
+										 		 </h:panelGrid >								                
+									</h:panelGroup>	
+	
+			  					 	<h:panelGroup>			
+ 							                    <h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" width = "200">
+											         <h:panelGroup>	
+											                    <h:graphicImage value="#{obituaryBackingBean.graveImageResourcePath}" width = "200"/>
+			 				                         </h:panelGroup>							                   
 
-				 <f:verbatim>
-                    <br />
-                    <br />
-                  </f:verbatim>
+											         <h:panelGroup>	
+												                <h:outputText styleClass="headline" value="Picture of grave" />
+                  
+												  			    <f:verbatim>
+												                    <br />
+												                    <br />
+												                </f:verbatim>
+			 				                         </h:panelGroup>							                   
 
-                 <h:outputText styleClass="Text" value="#{obituaryBackingBean.obituaryText}" />
+											         <h:panelGroup>	
+											                   <h:graphicImage value="#{obituaryBackingBean.personImageResourcePath}" width = "200" />
+			 				                         </h:panelGroup>							                   
 
-				 <f:verbatim>
-                    <br />
-                    <br />
-                  </f:verbatim>
+											         <h:panelGroup>	
+											                   <h:outputText styleClass="headline" value="Picture of person" />
+			
+												 			   <f:verbatim>
+												                    <br />
+											    	                <br />
+											                   </f:verbatim>
 
-                 <h:outputText styleClass="headline" value="Detailed Grave Information" />
+			 				                         </h:panelGroup>							                   
+		 									  </h:panelGrid >
+			                         </h:panelGroup>
+				 		 </h:panelGrid >
+                 </h:panelGroup>
 
-				 <f:verbatim>
-                    <br />
-                    <br />
-                  </f:verbatim>
+         
+         <h:panelGroup>	
+                 <h:panelGrid columns="3" border="0" cellspacing="5" footerClass="SearchFormFooterClass" >
+					     <h:panelGroup>
+        				           <h:commandButton value="#{localizedStrings['se.agura.memorial']['print']}" action="#{obituaryBackingBean.onClick}" id="cbPrint"  />
+                         </h:panelGroup>
 
-				 <memorial:GraveDetails id="theobject"></memorial:GraveDetails>
+					     <h:panelGroup>
+				                   <h:commandButton value=" #{localizedStrings['se.agura.memorial']['edit']}" action="showObituaryCreateAction" immediate="true" id="cbEdit" />
+                         </h:panelGroup>
 
-				 <f:verbatim>
-                    <br />
-                    <br />
-                  </f:verbatim>
-                  </wf:container>
+					     <h:panelGroup>
+				                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['save as pdf']}" action="#{obituaryBackingBean.onClick}" id="cbPDF"  />
+                         </h:panelGroup>
+				  </h:panelGrid >
+         </h:panelGroup>
 
+		</h:panelGrid >
 
-                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['print']}" action="#{obituaryBackingBean.onClick}" id="cbPrint"  />
-
-                   <h:commandButton value=" #{localizedStrings['se.agura.memorial']['edit']}" action="showObituaryCreateAction" immediate="true" id="cbEdit" />
-
-                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['save as pdf']}" action="#{obituaryBackingBean.onClick}" id="cbPDF"  />
-
-                   
-
+	
 			</wf:wfblock >
 
 	    </h:form>    

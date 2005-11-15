@@ -1,16 +1,15 @@
 package se.agura.memorial.obituary.presentation;
 
+
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.faces.context.FacesContext;
-
 import org.apache.commons.httpclient.HttpException;
-
 import se.agura.memorial.obituary.bussiness.ObituarySessionBean;
 import se.agura.memorial.obituary.data.ObituaryItemBean;
 import se.agura.memorial.search.api.Grave;
@@ -25,15 +24,21 @@ import com.idega.idegaweb.IWUserContext;
 import com.idega.presentation.IWContext;
 import com.idega.slide.business.IWSlideSession;
 
+
 public class ObituaryInformationDisplayBackingBean {
 
-	private String obituaryText = "...";
+	private String obituaryText = null;
+	private String graveImageResourcePath = null;
+	private String personImageResourcePath = null;
 	
+	private String labelGraveImage = null;
+	private String labelPersonImage = null;
+
 	private static final String IW_BUNDLE_IDENTIFIER = "se.agura.memorial";
-	
-	
+	private static final String CONTENT_PATH = "/content/files/cms/obituary/";
+
 	private String graveId = null;
-	private Integer actionId = null;	
+	private String personFullName = null;	
 	private Integer databaseId = null;
 	private Grave grave = null;
 	private Graveyard graveyard;
@@ -53,20 +58,49 @@ public class ObituaryInformationDisplayBackingBean {
 		} catch (IBOLookupException e) {
 			e.printStackTrace();
 		}
+		personFullName = "";
 		initObituary();
 		
 	}
 	
+	public String getGraveImageResourcePath() {
+		return graveImageResourcePath;
+	}
+	
+
+	public void setGraveImageResourcePath(String graveImageResourcePath) {
+		this.graveImageResourcePath = graveImageResourcePath;
+	}
+	
+
+	public String getPersonImageResourcePath() {
+		return personImageResourcePath;
+	}
+	
+
+	public String getPersonFullName() {
+		if(databaseId!=null)return personFullName;
+		else return "";
+	}
+	
+
+	public void setPersonFullName(String personFullName) {
+		this.personFullName = personFullName;
+	}
+	
+
+	public void setPersonImageResourcePath(String personImageResourcePath) {
+		this.personImageResourcePath = personImageResourcePath;
+	}
+	
+
 	private void initObituary() throws HttpException, IOException {
 
-		if(obituarySessionBean.getObituaryText()!=null) obituaryText=obituarySessionBean.getObituaryText();
-		
+
 		if (this.databaseId==null) return;
 			
 		graveyards = new LinkedHashMap();
-
-		
-		
+		personFullName = "";
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		IWContext iwc = IWContext.getIWContext(facesContext);
 
@@ -78,39 +112,129 @@ public class ObituaryInformationDisplayBackingBean {
 			
 			grave = os.findGrave(this.getGraveId());
 			
+			if(grave.getFirstName()!=null)	personFullName = grave.getFirstName();
+			if(grave.getLastName()!=null) personFullName = personFullName+ " "+grave.getLastName();
 	        ObituaryItemBean oib = new ObituaryItemBean(); 
 			oib.setDatabaseId(getDatabaseId());  
 			oib.setGraveId(getGraveId());
 			oib.setContentLanguage("en"); //TODO multilanguage
-			
 						
 			IWUserContext iwuc = IWContext.getInstance();
 			IWSlideSession session = (IWSlideSession) IBOLookup.getSessionInstance(iwuc, IWSlideSession.class);
 			oib.load(session.getWebdavResource(oib.getRootPath()));
 			obituaryText = oib.getObituaryText();
-			obituarySessionBean.setObituaryText(getObituaryText()); 
+			obituarySessionBean.setObituaryText(getObituaryText());
+			obituarySessionBean.setPersonFullName(personFullName);
+			
 			
 			for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
 				Graveyard g = (Graveyard) it.next();
 				graveyards.put(new Integer(g.getId()).toString(), g);
 			}
 			
+			if(obituarySessionBean!=null)
+			{
+				obituaryText=obituarySessionBean.getObituaryText();
+				graveImageResourcePath = createGraveImageResourcePath();
+				personImageResourcePath = createPersonImageResourcePath();
+				personFullName =obituarySessionBean.getPersonFullName(); 
+				
+				
+				
+				
+//				//-------------------------------------------------------------------------------------------
+//				
+//				String fixedFolderURL = session.getURI("http://localhost:8080/memorial/content/files/cms/obituary/1/23137:2.GraveImage/grave.jpg");
+//				//String fixedFolderURL = session.getURI("/content/files/cms/obituary/1/23137:2.GraveImage/grave.jpg");
+//				URL url = new URL(fixedFolderURL);
+//				Image image = ImageIO.read(url);
+//				
+//				IWUserContext tmp_iwuc = IWContext.getInstance();
+//				IWSlideSession tmp_session = (IWSlideSession) IBOLookup.getSessionInstance(tmp_iwuc, IWSlideSession.class);
+//				WebdavRootResource tmp_rootResource = tmp_session.getWebdavRootResource();
+//
+//			//	boolean asdfg = wer.getExistence();
+//			//	long aaswww = wer.getGetContentLength();
+//				//tmp_rootResource.
+//				boolean hadToCreate = session.createAllFoldersInPath("/content/files/cms/obituary/1/23137:2.GraveImageAAA/");//graveImageResourcePath);
+//				if (tmp_rootResource.putMethod(graveImageResourcePath,(InputStream)null)) 
+//				{
+//					labelGraveImage = "";
+//				} 
+//				else labelGraveImage = "Picture of grave";
+//				
+				//-------------------------------------------------------------------------------------------
+				
+//				String fixedFolderURL = session.getURI(graveImageResourcePath);
+//				URL url = new URL(fixedFolderURL);
+//		        Image image = ImageIO.read(url);
+//				
+//				if(image!=null)
+//				{
+//					
+//				}
+				labelGraveImage = "Picture of grave";
+				labelPersonImage = "Picture of person";
+
+			
+			}	
+
+					
+			
 		} catch (IBOLookupException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
 			e.printStackTrace();	
-		}		
-
-
+		} catch(MalformedURLException e) {
+			//e.printStackTrace();
+		}
+		
+		
+		
 		
 			
+	}
+	
+	public String getLabelGraveImage() {
+		return labelGraveImage;
+	}
+	
 
-			
-		
+	public void setLabelGraveImage(String labelGraveImage) {
+		this.labelGraveImage = labelGraveImage;
+	}
+	
+
+	public String getLabelPersonImage() {
+		return labelPersonImage;
+	}
+	
+
+	public void setLabelPersonImage(String labelPersonImage) {
+		this.labelPersonImage = labelPersonImage;
+	}
+	
+
+	private String createGraveImageResourcePath() {
+		String path = CONTENT_PATH;
+		path += String.valueOf(obituarySessionBean.getDatabaseId());
+		path += "/" + obituarySessionBean.getGraveId();
+		path += ".GraveImage/";
+		path += "grave.jpg";
+		return path;
 		
 	}
 	
-	
+	private String createPersonImageResourcePath() {
+		String path = CONTENT_PATH;
+		path += String.valueOf(obituarySessionBean.getDatabaseId());
+		path += "/" + obituarySessionBean.getGraveId();
+		path += ".PersonImage/";
+		path += "person.jpg";
+		return path;
+		
+	}
+
 	public MemorialHeplInfo getMhi() {
 		return mhi;
 	}
@@ -148,47 +272,16 @@ public class ObituaryInformationDisplayBackingBean {
 
 		obituarySessionBean.setGraveId(getGraveId()); 
 		
+		graveImageResourcePath = createGraveImageResourcePath();
+		personImageResourcePath = createPersonImageResourcePath();
+
+		
 
 		initObituary();	
 		
-		
 
 	}
-
-    public String onClick()
-    {        
-        
-        boolean result = true;
-
-
-        if(result)
-            return "success";
-        else
-            return "failure";
-    }
-
 	
-	public Integer getActionId() {
-		return actionId;
-	}
-	
-
-	public void setActionId(Integer actionId) {
-		this.actionId = actionId;
-//		switch(this.actionId.intValue()){
-//		   case 4:   this.obituaryText="4";
-//		             break;
-//		   case 5:   this.obituaryText="5";
-//		   			 break;
-//		   case 7:   this.obituaryText="7";
-//			 		 break;
-//		   case 8:   this.obituaryText="8";
-//		   			 break;
-//					 
-//		}		
-	}
-	
-
 	public Grave getGrave() {
 		return grave;
 	}
@@ -200,5 +293,7 @@ public class ObituaryInformationDisplayBackingBean {
 	public void setDatabaseId(Integer databaseId) {
 		this.databaseId = databaseId;		
 	}
+
+	
 	
 }

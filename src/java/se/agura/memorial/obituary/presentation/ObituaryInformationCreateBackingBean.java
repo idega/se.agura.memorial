@@ -1,16 +1,18 @@
 package se.agura.memorial.obituary.presentation;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.rmi.RemoteException;
-import java.security.MessageDigest;
+import java.awt.Image;
 
-import javax.faces.application.FacesMessage;
+import java.io.IOException;
+import java.rmi.RemoteException;
+
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 
+
 import se.agura.memorial.obituary.bussiness.ObituarySessionBean;
+import se.agura.memorial.obituary.data.ObituaryItemBean;
 import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.ObituarySearch;
 import se.agura.memorial.search.business.SearchImplBroker;
@@ -22,22 +24,36 @@ import com.idega.presentation.IWContext;
 public class ObituaryInformationCreateBackingBean {
 
 	private String obituaryText;
-
 	private String tmpObituaryText;
 
 	private String personImagePath;
-
 	private String graveImagePath;	
-
-	private UploadedFile personImage;
-
-	private UploadedFile graveImage;
+	private String tmpPersonImagePath;
+	private String tmpGraveImagePath;
+	private String personFullName;		
+	private String graveImageResourcePath;
+	private String personImageResourcePath;
 	
+
+	
+	private UploadedFile personImage;
+	private UploadedFile graveImage;
+	private UploadedFile tmpPersonImage;
+	private UploadedFile tmpGraveImage;
+
 	private Grave grave = null;	
+	
+	private boolean removeOldPersonImage=false;
+	private boolean removeOldGraveImage=false;
+
 	
 	private UploadedFile myFile;
 
 	private static final String IW_BUNDLE_IDENTIFIER = "se.agura.memorial";
+	private static final String CONTENT_PATH = "/content/files/cms/obituary/";
+	private static final String TMP_CONTENT_PATH = "/content/files/cms/obituary/temp/";
+
+	
 	
 	
 	private String graveId = null;
@@ -58,20 +74,204 @@ public class ObituaryInformationCreateBackingBean {
 	}
 	
 	
+	private String createGraveImageResourcePath() {
+		if(databaseId ==null)return "";
+		
+		String path = CONTENT_PATH;
+		path += String.valueOf(obituarySessionBean.getDatabaseId());
+		path += "/" + obituarySessionBean.getGraveId();
+		path += ".GraveImage/";
+		path += "grave.jpg";
+		return path;
+		
+	}
+	
+	private String createPersonImageResourcePath() {
+		if(databaseId ==null)return "";
+
+		String path = CONTENT_PATH;
+		path += String.valueOf(obituarySessionBean.getDatabaseId());
+		path += "/" + obituarySessionBean.getGraveId();
+		path += ".PersonImage/";
+		path += "person.jpg";
+		return path;
+		
+	}
 	
 	private void initObituaryCreate() {
-        if(obituarySessionBean!=null)
-		{
-		    this.databaseId = obituarySessionBean.getDatabaseId();
-		    this.graveId = obituarySessionBean.getGraveId();
-			this.obituaryText = obituarySessionBean.getObituaryText();
-			
-		}
+		//if (this.databaseId==null) return;
+		
+		    databaseId = obituarySessionBean.getDatabaseId();
+		    graveId = obituarySessionBean.getGraveId();
+			obituaryText = obituarySessionBean.getObituaryText();
+			personFullName =obituarySessionBean.getPersonFullName(); 
+			graveImageResourcePath = createGraveImageResourcePath();
+			personImageResourcePath = createPersonImageResourcePath();			
+		
 
 	
 	}	
 	
-    public UploadedFile getGraveImage() {
+    public UploadedFile getTmpGraveImage() {
+		return tmpGraveImage;
+	}
+	
+
+	public String getPersonFullName() {
+		return personFullName;
+	}
+	
+
+
+
+	public boolean isRemoveOldGraveImage() {
+		return removeOldGraveImage;
+	}
+	
+
+
+	public void setRemoveOldGraveImage(boolean removeOldGraveImage) {
+		this.removeOldGraveImage = removeOldGraveImage;
+	}
+	
+
+
+	public boolean isRemoveOldPersonImage() {
+		return removeOldPersonImage;
+	}
+	
+
+
+	public void setRemoveOldPersonImage(boolean removeOldPersonImage) {
+		this.removeOldPersonImage = removeOldPersonImage;
+	}
+	
+
+
+	public void setPersonFullName(String personFullName) {
+		this.personFullName = personFullName;
+	}
+	
+
+
+
+	private String createTmpGraveImageResourcePath() {
+		if(databaseId ==null)return "";
+		
+		String path = TMP_CONTENT_PATH;
+		path += String.valueOf(getDatabaseId());
+		path += "/" + getGraveId();
+		path += ".GraveImage/";
+		path += "grave.jpg";
+		return path;
+		
+	}
+	
+	private String createTmpPersonImageResourcePath() {
+		if(databaseId ==null)return "";
+		
+		String path = TMP_CONTENT_PATH;
+		path += String.valueOf(getDatabaseId());
+		path += "/" + getGraveId();
+		path += ".PersonImage/";
+		path += "person.jpg";
+		return path;
+		
+	}
+
+
+	public void setTmpGraveImage(UploadedFile tmpGraveImage) {
+		this.tmpGraveImage = tmpGraveImage;
+	}
+	
+
+
+
+	public String getTmpGraveImagePath() {
+		return tmpGraveImagePath;
+	}
+	
+
+
+
+	public void setTmpGraveImagePath(String tmpGraveImagePath) {
+		this.tmpGraveImagePath = tmpGraveImagePath;
+	}
+	
+
+
+
+	public String getTmpObituaryText() {
+		return tmpObituaryText;
+	}
+	
+
+
+
+	public String getGraveImageResourcePath() {
+		return graveImageResourcePath;
+	}
+	
+
+
+
+	public void setGraveImageResourcePath(String graveImageResourcePath) {
+		this.graveImageResourcePath = graveImageResourcePath;
+	}
+	
+
+
+
+	public String getPersonImageResourcePath() {
+		return personImageResourcePath;
+	}
+	
+
+
+
+	public void setPersonImageResourcePath(String personImageResourcePath) {
+		this.personImageResourcePath = personImageResourcePath;
+	}
+	
+
+
+
+	public void setTmpObituaryText(String tmpObituaryText) {
+		this.tmpObituaryText = tmpObituaryText;
+	}
+	
+
+
+
+	public UploadedFile getTmpPersonImage() {
+		return tmpPersonImage;
+	}
+	
+
+
+
+	public void setTmpPersonImage(UploadedFile tmpPersonImage) {
+		this.tmpPersonImage = tmpPersonImage;
+	}
+	
+
+
+
+	public String getTmpPersonImagePath() {
+		return tmpPersonImagePath;
+	}
+	
+
+
+
+	public void setTmpPersonImagePath(String tmpPersonImagePath) {
+		this.tmpPersonImagePath = tmpPersonImagePath;
+	}
+	
+
+
+
+	public UploadedFile getGraveImage() {
 		return graveImage;
 	}
 	
@@ -108,6 +308,7 @@ public class ObituaryInformationCreateBackingBean {
 
 	public void setPersonImagePath(String personImagePath) {
 		this.personImagePath = personImagePath;
+
 	}
 	
 
@@ -133,7 +334,7 @@ public class ObituaryInformationCreateBackingBean {
 
 
 	public void setDatabaseId(Integer databaseId) {
-		this.databaseId = obituarySessionBean.getDatabaseId();
+		databaseId = obituarySessionBean.getDatabaseId();
 	}
 	
 
@@ -151,10 +352,10 @@ public class ObituaryInformationCreateBackingBean {
 	public void setGraveId(String graveId) {
         if(obituarySessionBean!=null)
 		{
-		
-		
-			this.graveId = obituarySessionBean.getGraveId();;
-			this.obituaryText = obituarySessionBean.getObituaryText();
+			graveId = obituarySessionBean.getGraveId();
+			obituaryText = obituarySessionBean.getObituaryText();
+		    databaseId = obituarySessionBean.getDatabaseId();
+		    graveId = obituarySessionBean.getGraveId();
 		
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			IWContext iwc = IWContext.getIWContext(facesContext);
@@ -162,8 +363,8 @@ public class ObituaryInformationCreateBackingBean {
 			try {
 				SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			
-				ObituarySearch os = sib.getSearch(this.getDatabaseId().intValue());
-				this.grave = os.findGrave(this.getGraveId());
+				ObituarySearch os = sib.getSearch(getDatabaseId().intValue());
+				grave = os.findGrave(getGraveId());
 			
 			
 			} catch (IBOLookupException e) {
@@ -183,53 +384,33 @@ public class ObituaryInformationCreateBackingBean {
 		this.obituaryText = obituaryText;
 	}
 	
-    public String processMyFile() {
-		String myResult = null;
-		try {
-            MessageDigest md = MessageDigest.getInstance(this.getMyFile().toString());
-            InputStream in = new BufferedInputStream(
-                myFile.getInputStream());
-            try {
-                byte[] buffer = new byte[64 * 1024];
-                int count;
-                while ((count = in.read(buffer)) > 0)
-                    md.update(buffer, 0, count);
-            } finally {
-                in.close();
-            }
-            byte hash[] = md.digest();
-            StringBuffer buf = new StringBuffer();
-            for (int i = 0; i < hash.length; i++) {
-                int b = hash[i] & 0xFF;
-                int c = (b >> 4) & 0xF;
-                c = c < 10 ? '0' + c : 'A' + c - 10;
-                buf.append((char) c);
-                c = b & 0xF;
-                c = c < 10 ? '0' + c : 'A' + c - 10;
-                buf.append((char) c);
-            }
-            myResult = buf.toString();
-            return "OK";
-        } catch (Exception x) {
-            FacesMessage message = new FacesMessage(
-                FacesMessage.SEVERITY_FATAL,
-                x.getClass().getName(), x.getMessage());
-            FacesContext.getCurrentInstance().addMessage(
-                null, message);
-            return null;
-        }
-    }
-	
 
     public String preview()
     {        
+		if(databaseId ==null)return "failed";
 		
-	//	FacesContext facesContext = FacesContext.getCurrentInstance();
-		
-//		IWContext iwc = IWContext.getIWContext(facesContext);
+		Image tmpPersonImageFile = null;
+		Image tmpGraveImageFile = null;
+		try {
+			tmpGraveImageFile = ImageIO.read(getGraveImage().getInputStream());
+			tmpPersonImageFile = ImageIO.read(getPersonImage().getInputStream());
+		} catch (IOException e) {
 
+			e.printStackTrace();
+		}
 		obituarySessionBean.setTmpObituaryText(getObituaryText());
-        return "success";
+		obituarySessionBean.setTmpGraveImageFile(getGraveImage());
+		obituarySessionBean.setTmpPersonImageFile(getPersonImage());
+		
+        ObituaryItemBean oib = new ObituaryItemBean(); 
+		oib.setDatabaseId(getDatabaseId());
+		oib.setGraveId(getGraveId());
+		oib.setTmpGraveImageFile(getGraveImage());	
+		oib.setTmpPersonImageFile(getPersonImage());	
+		oib.storeTMP();
+		obituarySessionBean.setTmpGraveImagePath(createTmpGraveImageResourcePath());
+		obituarySessionBean.setTmpPersonImagePath(createTmpPersonImageResourcePath());		
+		return "success";
     }
 
     public String save()

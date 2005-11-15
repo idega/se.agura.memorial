@@ -4,13 +4,7 @@ package se.agura.memorial.obituary.presentation;
 
 
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.security.MessageDigest;
-
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 
 import se.agura.memorial.obituary.bussiness.ObituarySessionBean;
@@ -32,8 +26,8 @@ public class ObituaryInformationPreviewBackingBean {
 	private UploadedFile personImage;
 
 	private UploadedFile graveImage;
+	private String personFullName = null;		
 	
-	private UploadedFile myFile;
 
 	private static final String IW_BUNDLE_IDENTIFIER = "se.agura.memorial";
 	
@@ -58,21 +52,48 @@ public class ObituaryInformationPreviewBackingBean {
 	private void initData() {
         if(obituarySessionBean!=null)
 		{
-		    this.obituaryText = obituarySessionBean.getTmpObituaryText();
-			this.graveId = obituarySessionBean.getGraveId();
-			this.databaseId= obituarySessionBean.getDatabaseId();
+		    obituaryText = obituarySessionBean.getTmpObituaryText();
+			graveId = obituarySessionBean.getGraveId();
+			databaseId= obituarySessionBean.getDatabaseId();
+			graveImage=obituarySessionBean.getTmpGraveImageFile();
+			personImage=obituarySessionBean.getTmpPersonImageFile();
+			graveImagePath= obituarySessionBean.getTmpGraveImagePath();
+			personImagePath= obituarySessionBean.getTmpPersonImagePath();
+			personFullName =obituarySessionBean.getPersonFullName(); 			
+
 		}
 
 	
 	}	
 	
-    public UploadedFile getGraveImage() {
+
+	public UploadedFile getGraveImage() {
 		return graveImage;
 	}
 	
 
 	public void setGraveImage(UploadedFile graveImage) {
 		this.graveImage = graveImage;
+	}
+	
+
+	public UploadedFile getPersonImage() {
+		return personImage;
+	}
+	
+
+	public String getPersonFullName() {
+		return personFullName;
+	}
+	
+
+	public void setPersonFullName(String personFullName) {
+		this.personFullName = personFullName;
+	}
+	
+
+	public void setPersonImage(UploadedFile personImage) {
+		this.personImage = personImage;
 	}
 	
 
@@ -86,18 +107,10 @@ public class ObituaryInformationPreviewBackingBean {
 	}
 	
 
-	public UploadedFile getPersonImage() {
-		return personImage;
-	}
-	
-
-	public void setPersonImage(UploadedFile personImage) {
-		this.personImage = personImage;
-	}
-	
-
 	public String getPersonImagePath() {
+//		return "http://localhost:8080/memorial/content"+personImagePath;
 		return personImagePath;
+
 	}
 	
 
@@ -106,15 +119,6 @@ public class ObituaryInformationPreviewBackingBean {
 	}
 	
 
-	public UploadedFile getMyFile() {
-        return myFile;
-    }
-
-    public void setMyFile(UploadedFile myFile) {
-        this.myFile = myFile;
-    }	
-	
-	
 	public String getObituaryText() {
 		return obituaryText;
 	}
@@ -133,75 +137,19 @@ public class ObituaryInformationPreviewBackingBean {
 	
 
 
-
 	public String getGraveId() {
 		return graveId;
 	}
-	
-
 
 
 	public void setGraveId(String graveId) {
 		this.graveId = graveId;
 	}
 	
-
-
-
 	public void setObituaryText(String obituaryText) {
 		this.obituaryText = obituaryText;
 	}
 	
-    public String processMyFile() {
-		String myResult = null;
-		try {
-            MessageDigest md = MessageDigest.getInstance(this.getMyFile().toString());
-            InputStream in = new BufferedInputStream(
-                myFile.getInputStream());
-            try {
-                byte[] buffer = new byte[64 * 1024];
-                int count;
-                while ((count = in.read(buffer)) > 0)
-                    md.update(buffer, 0, count);
-            } finally {
-                in.close();
-            }
-            byte hash[] = md.digest();
-            StringBuffer buf = new StringBuffer();
-            for (int i = 0; i < hash.length; i++) {
-                int b = hash[i] & 0xFF;
-                int c = (b >> 4) & 0xF;
-                c = c < 10 ? '0' + c : 'A' + c - 10;
-                buf.append((char) c);
-                c = b & 0xF;
-                c = c < 10 ? '0' + c : 'A' + c - 10;
-                buf.append((char) c);
-            }
-            myResult = buf.toString();
-            return "OK";
-        } catch (Exception x) {
-            FacesMessage message = new FacesMessage(
-                FacesMessage.SEVERITY_FATAL,
-                x.getClass().getName(), x.getMessage());
-            FacesContext.getCurrentInstance().addMessage(
-                null, message);
-            return null;
-        }
-    }
-	
-
-    public String onClick()
-    {        
-        
-        boolean result = true;
-
-
-        if(result)
-            return "rrr";
-        else
-            return "failure";
-    }
-
     public String save()
     {        
         ObituaryItemBean oib = new ObituaryItemBean(); 
@@ -209,6 +157,9 @@ public class ObituaryInformationPreviewBackingBean {
 		oib.setGraveId(getGraveId());
 		oib.setObituaryText(getObituaryText());
 		oib.setGravePicturePath(getGraveImagePath());
+		oib.setPersonImageFile(getPersonImage());	
+		oib.setGraveImageFile(getGraveImage());	
+
 		oib.setPersonPicturePath(getPersonImagePath());
 		oib.setContentLanguage("en");
 		oib.store();
