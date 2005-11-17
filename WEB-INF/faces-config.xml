@@ -89,18 +89,18 @@
 	</navigation-rule>		
 
     <navigation-rule>
-         <from-view-id>/pages/search/</from-view-id>
+         <from-view-id>/pages/sokperson/</from-view-id>
           <navigation-case>
                   <from-outcome>showObituaryAction</from-outcome>
-                  <to-view-id>/pages/obituary/</to-view-id>
+                  <to-view-id>/pages/sokperson/obituary/</to-view-id>
           </navigation-case>
     </navigation-rule>
 
 	<navigation-rule>
-		<from-view-id>/pages/obituary/</from-view-id>
+		<from-view-id>/pages/sokperson/obituary/</from-view-id>
 		<navigation-case>
 			<from-outcome>showObituaryCreateAction</from-outcome>
-			<to-view-id>/pages/obituarycreate/</to-view-id>
+			<to-view-id>/pages/sokperson/obituarycreate/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
 
@@ -108,63 +108,63 @@
 		<from-view-id>/pages/obituarycreate/</from-view-id>
 		<navigation-case>
 			<from-outcome>showNewPersonAction</from-outcome>
-			<to-view-id>/pages/newperson/</to-view-id>
+			<to-view-id>/pages/sokperson/newperson/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
 
 
  <navigation-rule>
-   <from-view-id>/pages/obituarycreate/</from-view-id>
+   <from-view-id>/pages/sokperson/obituarycreate/</from-view-id>
 	<navigation-case>
 		<from-action>#{obituaryCreateBackingBean.preview}</from-action>
 		<from-outcome>success</from-outcome>
-		<to-view-id>/pages/obituarypreview/</to-view-id>
+		<to-view-id>/pages/sokperson/obituarypreview/</to-view-id>
     </navigation-case>
  </navigation-rule>
 
 	<navigation-rule>
-		<from-view-id>/pages/obituarycreate/</from-view-id>
+		<from-view-id>/pages/sokperson/obituarycreate/</from-view-id>
 		<navigation-case>
 			<from-outcome>obituaryCreateCancelAction</from-outcome>
-			<to-view-id>/pages/obituary/</to-view-id>
+			<to-view-id>/pages/sokperson/obituary/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
 
 
  <navigation-rule>
-   <from-view-id>/pages/newperson/</from-view-id>
+   <from-view-id>/pages/sokperson/newperson/</from-view-id>
 	<navigation-case>
 		<from-action>newPersonCancelAction</from-action>
-		<to-view-id>/pages/obituarycreate/</to-view-id>
+		<to-view-id>/pages/sokperson/obituarycreate/</to-view-id>
     </navigation-case>
  </navigation-rule>
 
 
  <navigation-rule>
-   <from-view-id>/pages/newperson/</from-view-id>
+   <from-view-id>/pages/sokperson/newperson/</from-view-id>
 	<navigation-case>
 		<from-action>#{newPersonBean.save}</from-action>
 		<from-outcome>success</from-outcome>
-		<to-view-id>/pages/obituarycreate/</to-view-id>
+		<to-view-id>/pages/sokperson/obituarycreate/</to-view-id>
     </navigation-case>
  </navigation-rule>
 
 
 	<navigation-rule> 
-		<from-view-id>/pages/obituarypreview/</from-view-id>
+		<from-view-id>/pages/sokperson/obituarypreview/</from-view-id>
 		<navigation-case>
 			<from-outcome>obituaryPreviewCancelAction</from-outcome>
-			<to-view-id>/pages/obituarycreate/</to-view-id>
+			<to-view-id>/pages/sokperson/obituarycreate/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
 
 
 	<navigation-rule> 
-		<from-view-id>/pages/obituarypriview/</from-view-id>
+		<from-view-id>/pages/sokperson/obituarypreview/</from-view-id>
 		<navigation-case>
 			<from-action>#{obituaryPreviewBackingBean.save}</from-action>
    		        <from-outcome>success</from-outcome>
-			<to-view-id>/pages/obituary/</to-view-id>
+			<to-view-id>/pages/sokperson/obituary/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
 

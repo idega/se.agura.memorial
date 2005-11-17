@@ -1,5 +1,5 @@
 /*
- * $Id: GraveDetails.java,v 1.5 2005/09/19 08:47:23 igors Exp $
+ * $Id: GraveDetails.java,v 1.6 2005/11/17 15:25:07 igors Exp $
  * Created on 29.6.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -24,10 +24,10 @@ import com.idega.webface.WFUtil;
 
 /**
  * 
- *  Last modified: $Date: 2005/09/19 08:47:23 $ by $Author: igors $
+ *  Last modified: $Date: 2005/11/17 15:25:07 $ by $Author: igors $
  *  
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class GraveDetails extends WFContainer {
 
@@ -55,8 +55,8 @@ public class GraveDetails extends WFContainer {
 		IWBundle bundle = MemorialUtil.getBundle();
 		
 		
-		addLabelAndValue(bundle,"surname","Last name",WFUtil.createValueBinding("#{" + managedBean+".grave.lastName" + "}"),new EmptyStringConverter(),this,"gravedetail");
-		addLabelAndValue(bundle,"first_name","First name",WFUtil.createValueBinding("#{" + managedBean+".grave.firstName" + "}"),new EmptyStringConverter(),this,"gravedetail");
+		//addLabelAndValue(bundle,"surname","Last name",WFUtil.createValueBinding("#{" + managedBean+".grave.lastName" + "}"),new EmptyStringConverter(),this,"gravedetail");
+		//addLabelAndValue(bundle,"first_name","First name",WFUtil.createValueBinding("#{" + managedBean+".grave.firstName" + "}"),new EmptyStringConverter(),this,"gravedetail");
 		addLabelAndValue(bundle,"date_of_birth","Date of birth",WFUtil.createValueBinding("#{" + managedBean+".grave.dateOfBirth" + "}"),new DateConverter(),this,"gravedetail");
 		addLabelAndValue(bundle,"date_of_decease","Date of decease",WFUtil.createValueBinding("#{" + managedBean+".grave.dateOfDeath" + "}"),new DateConverter(),this,"gravedetail");
 		addLabelAndValue(bundle,"burial_date","Burial date",WFUtil.createValueBinding("#{" + managedBean+".grave.dateOfBurial" + "}"),new DateConverter(),this,"gravedetail");
@@ -67,43 +67,8 @@ public class GraveDetails extends WFContainer {
 		addLabelAndValue(bundle,"block","Block",WFUtil.createValueBinding("#{" + managedBean+".grave.graveInfo.block" + "}"),new EmptyStringConverter(),this,"gravedetail");
 		addLabelAndValue(bundle,"department","Department",WFUtil.createValueBinding("#{" + managedBean+".grave.graveInfo.department" + "}"),new EmptyStringConverter(),this,"gravedetail");
 		addLabelAndValue(bundle,"grave_no","Grave number",WFUtil.createValueBinding("#{" + managedBean+".grave.graveInfo.graveNumber" + "}"),new EmptyStringConverter(),this,"gravedetail");
-
-		
-//		HtmlCommandButton btn = new HtmlCommandButton();
-//		//btn.setAction(WFUtil.createMethodBinding("#{" + managedBean+".setShowMode"+"}",null));
-//		btn.setId("editButton");
-//		btn.setOnclick(WFUtil.createMethodBinding("#{" + managedBean+".setShowMode"+"}",null).toString());
-//		//btn.setOnclick("clear_searchForm()");
-////		btn.setStyle("Ssss");
-//		btn.setValue("Edit");
-//		getChildren().add(btn);
-		
-		//hometownContainer.setStyleClass("label_value_group");
-
-		
-//		WFContainer hometownContainer = new WFContainer();
-//		hometownContainer.setStyleClass("label_value_group");
-//		getChildren().add(hometownContainer);
-		
-//		HtmlOutputText hometown = new HtmlOutputText();
-//		hometown.setStyleClass("sub_headline");
-//		bundle.getLocalizedUIComponent("home_region",hometown,"Home region");
-//		hometownContainer.getChildren().add(hometown);
-		
 		
 
-		
-//		WFContainer graveInfoContainer = new WFContainer();
-//		graveInfoContainer.setStyleClass("grave_info");
-//		getChildren().add(graveInfoContainer);
-//		
-//		HtmlOutputText graveInfo = new HtmlOutputText();
-//		//graveInfo.setStyleClass("sub_headline");
-//		bundle.getLocalizedUIComponent("grave_information",graveInfo,"Grave information");
-//		graveInfoContainer.getChildren().add(graveInfo);
-//		
-//		addLabelAndValue(bundle,"other_burial_place","Other burial place",WFUtil.createValueBinding("#{" + managedBean+".grave.graveInfo.otherBurialPlace" + "}"),new EmptyStringConverter(),graveInfoContainer,"gravedetail",WFUtil.createValueBinding("#{" + managedBean+".grave.graveInfo.otherBurialPlace!=null}"));
-		
 	}
 	
 	/**

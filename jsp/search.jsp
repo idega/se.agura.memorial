@@ -54,7 +54,8 @@
  
 						
 							<h:outputLabel for="dateOfBirthFrom">
-								<h:outputText value="#{localizedStrings['se.agura.memorial']['date_of_birth']}" />
+							<!--	<h:outputText value="#{localizedStrings['se.agura.memorial']['date_of_birth']}" /> -->
+								<h:outputText value="Date of birth" />							
 							</h:outputLabel>
 							<f:verbatim escape="false">
 								<br />
@@ -286,10 +287,6 @@
 					</h:column>
 				</x:dataTable>
               
-              
-              
-
-
               
                 
 				<x:dataScroller id="scroll_1" for="searchResultsTable" 

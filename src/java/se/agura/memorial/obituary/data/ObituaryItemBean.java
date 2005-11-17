@@ -523,10 +523,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	}
 
 //--------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
 	
 	public void storeTMP() throws IDOStoreException, WebdavException {
 		boolean storeOk = true;
@@ -602,10 +598,11 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	}
 //--------------------------------------------------------------------------------------------------------------------------	
 	
-	
+
 	public boolean load(WebdavExtendedResource webdavResource) throws IOException {
 		XMLParser builder = new XMLParser();
 		XMLDocument bodyDoc = null;
+		boolean result = false;
 		try {
 			WebdavResource theArticle = null;
 			theArticle = webdavResource;
@@ -616,7 +613,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 				bodyDoc = null;
 			}
 		} catch (XMLException e) {
-			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+			//e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 		}
 		if(bodyDoc!=null){
 			XMLElement rootElement = bodyDoc.getRootElement();
@@ -639,12 +636,14 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 				XMLElement gravePicturePath = rootElement.getChild(FIELDNAME_GRAVE_IMAGE_PATH,idegaXMLNameSpace);
 				if(gravePicturePath != null){
 					setGravePicturePath(gravePicturePath.getText());
-					
+					result = true;
 				} else {
 					setGravePicturePath("");
 				}
 			}catch(Exception e) {		//Nullpointer could occur if field isn't used
+				
 				e.printStackTrace();
+				setPersonPicturePath("");
 				setGravePicturePath("");
 			}
 
@@ -653,7 +652,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 				XMLElement personPicturePath = rootElement.getChild(FIELDNAME_PERSON_IMAGE_PATH,idegaXMLNameSpace);
 				if(personPicturePath != null){
 					setPersonPicturePath(personPicturePath.getText());
-
+					result = true;
 					
 				} else {
 					setGravePicturePath("");
@@ -671,9 +670,8 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 			Logger log = Logger.getLogger(this.getClass().toString());
 			log.warning("Article xml file was not found");
 			setRendered(false);
-			return false;
 		}
-		return true;
+		return result;
 	}
 
 

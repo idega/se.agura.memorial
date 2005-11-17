@@ -71,11 +71,11 @@ version="1.2">
 
 												                    <br />
  											                    </f:verbatim>											                    
- 										                      <x:inputFileUpload id="personImagePath"  value="#{obituaryCreateBackingBean.personImage}" storage="file" />
+ 										                      <x:inputFileUpload id="personImagePath"  value="#{obituaryCreateBackingBean.graveImage}" storage="file" />
 			 				                         </h:panelGroup>							                   
 
 											         <h:panelGroup>	
-												                <h:outputText styleClass="headline" value="Picture of grave" />
+												                <h:outputText styleClass="text" value="Picture of grave" />
                   
 												  			    <f:verbatim>
 												                    <br />
@@ -89,11 +89,11 @@ version="1.2">
 												                    <br />
 												                    <br />
  											                    </f:verbatim>
-                                                                <x:inputFileUpload id="graveImagePath" value="#{obituaryCreateBackingBean.graveImage}" storage="file" /> 											                    
+                                                                <x:inputFileUpload id="graveImagePath" value="#{obituaryCreateBackingBean.personImage}" storage="file" /> 											                    
 			 				                         </h:panelGroup>							                   
 
 											         <h:panelGroup>	
-											                   <h:outputText styleClass="headline" value="Picture of person" />
+											                   <h:outputText styleClass="text" value="Picture of person" />
 			
 												 			   <f:verbatim>
 												                    <br />
