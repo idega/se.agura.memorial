@@ -24,17 +24,22 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
 	public static String ENTITY_NAME = "MS_GRAVE_LOCALLY_STORED";
 	public static String TABLE_GRAVEYARD = "MS_GRAVE_GRAVEYARD";
+	public final Integer LOCAL_DATABASE_CONNECTION_PRIMARY_KEY = new Integer(2);
 
 	public static String COL_API_DB_CONNECTION = "default";		
 	
 	public static final String DATABASE_NAME = "dafault";
-	private int maxResult = Utility.MAX_RESULT;		
+	private int maxResult = Utility.MAX_RESULT;
+	
+	private Integer graveId;
+	
 
 	public static final String COLUMN_NAME_ID = "MS_GRAVE_LOCALLY_STORED_ID";
 	public static final String COLUMN_NAME_FIRST_NAME = "FIRST_NAME";
 	public static final String COLUMN_NAME_LAST_NAME = "LAST_NAME";
 	public static final String COLUMN_NAME_DATE_OF_BIRTH = "DATE_OF_BIRTH";
 	public static final String COLUMN_NAME_DATE_OF_DEATH = "DATE_OF_DEATH";
+	public static final String COLUMN_NAME_BURIAL_DATE = "BURIAL_DATE";
 	public static final String COLUMN_NAME_HOMETOWN = "HOMETOWN";
 	public static final String COLUMN_NAME_BURIAL_PLACE = "BURIAL_PLACE";
 	public static final String COLUMN_NAME_GRAVEYARD_ID = "GRAVEYARD_ID";		
@@ -57,6 +62,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		addAttribute(COLUMN_NAME_LAST_NAME, "person last name ", true, true, String.class, 25);
 		addAttribute(COLUMN_NAME_DATE_OF_BIRTH, "Date of birth ", true, true, Date.class);
 		addAttribute(COLUMN_NAME_DATE_OF_DEATH, "Date of death ", true, true,Date.class);
+		addAttribute(COLUMN_NAME_BURIAL_DATE, "Date of burial ", true, true,Date.class);
 		addAttribute(COLUMN_NAME_HOMETOWN, "Place of birth ", true, true,String.class, 50);
 		addAttribute(COLUMN_NAME_BURIAL_PLACE, "Place of dead ", true, true,String.class, 50);
 		addAttribute(COLUMN_NAME_DEPARTMENT, "Description of the departament ",	true, true, String.class, 30);
@@ -84,7 +90,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
 		try {
 			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
-			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
+			GraveGraveyard gg = ggh.findByPrimaryKey(LOCAL_DATABASE_CONNECTION_PRIMARY_KEY);
 			data1.setGraveGraveyard(gg);
 		} catch (Exception e){
 			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
@@ -99,6 +105,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		data1.setCountry(" country1");		
 		
 		data1.store();
+
 		
 		GraveLocallyStored data2 = home.create();
 		data2.setFirstName("Anna ");
@@ -112,7 +119,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
 		try {
 			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
-			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
+			GraveGraveyard gg = ggh.findByPrimaryKey(LOCAL_DATABASE_CONNECTION_PRIMARY_KEY);
 			data2.setGraveGraveyard(gg);
 		} catch (Exception e){
 			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
@@ -132,7 +139,17 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 	}
 
 
-    public String getColumID() {
+    public Integer getGraveId() {
+		return graveId;
+	}
+	
+
+	public void setGraveId(Integer graveId) {
+		this.graveId = graveId;
+	}
+	
+
+	public String getColumID() {
         return getStringColumnValue(COLUMN_NAME_ID);
     }		
 	
@@ -188,6 +205,13 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
     }	
 
+    public Date getDateOfBurial() {
+		return getDateColumnValue(COLUMN_NAME_BURIAL_DATE) ;		
+
+    }		
+
+
+	
 	public void setFirstName(String firstName) {
 		setColumn(COLUMN_NAME_FIRST_NAME, firstName);
 	}
@@ -216,6 +240,9 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		setColumn(COLUMN_NAME_DATE_OF_DEATH, dateOfDeath);
 	}
 	
+	public void setDateOfBurial(Date dateOfBurial) {
+		setColumn(COLUMN_NAME_BURIAL_DATE, dateOfBurial);
+	}
 	
 	public void setHomeTown(String homeTown) {
 		setColumn(COLUMN_NAME_HOMETOWN, homeTown);

@@ -91,13 +91,14 @@ public class Utility {
 	
 	public static CustomMemorialDate dateToMemorialDate(Date date) {
 
+		int m=date.getMonth();
 		CustomMemorialDate memorialDate = new CustomMemorialDate(null,null,null);
 		
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(date);	
 		
 		memorialDate.setDay(new Integer(cal.get(GregorianCalendar.DAY_OF_MONTH)));
-		memorialDate.setMonth(new Integer(cal.get(GregorianCalendar.MONTH)));
+		memorialDate.setMonth(new Integer(cal.get(GregorianCalendar.MONTH)+1));
 		memorialDate.setYear(new Integer(cal.get(GregorianCalendar.YEAR)));
 		
          return memorialDate;

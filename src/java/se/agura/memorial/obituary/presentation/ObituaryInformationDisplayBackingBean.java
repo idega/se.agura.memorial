@@ -62,7 +62,7 @@ public class ObituaryInformationDisplayBackingBean {
 		} catch (IBOLookupException e) {
 			e.printStackTrace();
 		}
-		personFullName = "";
+		//personFullName = "";
 		labelGraveImage = "Picture of grave";
 		labelPersonImage = "Picture of person";
 		
@@ -109,6 +109,8 @@ public class ObituaryInformationDisplayBackingBean {
 			graveImageResourcePath = createGraveImageResourcePath();
 			personImageResourcePath = createPersonImageResourcePath();
 			obituaryText=obituarySessionBean.getObituaryText();
+			graveId=obituarySessionBean.getGraveId();
+			databaseId=obituarySessionBean.getDatabaseId();
 
 		}
 		if (databaseId==null) return;
@@ -121,10 +123,10 @@ public class ObituaryInformationDisplayBackingBean {
 		try {
 			
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
-			ObituarySearch os = sib.getSearch(this.getDatabaseId().intValue());
+			ObituarySearch os = sib.getSearch(getDatabaseId().intValue());
 			List listOfGraveyards = (List) os.getGraveyards();
 			
-			grave = os.findGrave(this.getGraveId());
+			grave = os.findGrave(getGraveId());
 			if(grave!=null)
 			{	
 				if(grave.getFirstName()!=null)	personFullName = grave.getFirstName();

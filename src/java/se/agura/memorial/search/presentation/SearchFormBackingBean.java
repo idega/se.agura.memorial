@@ -37,8 +37,13 @@ public class SearchFormBackingBean {
 	
 	private static final String IW_BUNDLE_IDENTIFIER = "se.agura.memorial";
 	
+	public final Integer DEFAULT_DATABASE_CONNECTION_PRIMARY_KEY = new Integer(1);
+	public final Integer LOCAL_DATABASE_CONNECTION_PRIMARY_KEY = new Integer(2);
+	
 	private String firstName;
 	private String surname;
+	
+	
 
 //	private CustomMemorialDate dateOfBirthTo= null;
 //	private CustomMemorialDate dateOfBirthFrom= null;
@@ -90,7 +95,7 @@ public class SearchFormBackingBean {
 			e.printStackTrace();
 		}
 		
-		searchFormSessionBean.setDatabaseId(this.databaseId); 
+		searchFormSessionBean.setDatabaseId(databaseId); 
 				
 		initGraveyards();
 	}
@@ -236,7 +241,7 @@ public class SearchFormBackingBean {
 		try {
 			SearchImplBroker sib = (SearchImplBroker) IBOLookup.getServiceInstance(iwc, SearchImplBroker.class);
 			
-			ObituarySearch os = sib.getSearch(this.databaseId.intValue());
+			ObituarySearch os = sib.getSearch(databaseId.intValue());
 			List listOfGraveyards = (List) os.getGraveyards();
 			
 			for (Iterator it = listOfGraveyards.iterator(); it.hasNext();) {
@@ -267,8 +272,8 @@ public class SearchFormBackingBean {
 
 	public void setGraveyard(Graveyard graveyard) {
 		if (graveyardSetToNull) {
-			this.graveyard = null;
-			this.graveyardSetToNull = false;
+			graveyard = null;
+			graveyardSetToNull = false;
 			return;
 		}
 		this.graveyard = graveyard;
@@ -642,24 +647,6 @@ public class SearchFormBackingBean {
 	
 	
 	
-    public String onClick()
-    {        
-        
-        boolean result = true;
-        
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		
-		IWContext iwc = IWContext.getIWContext(facesContext);
-		
-        if(result)
-            return "success";
-        else
-            return "failure";
-    }
-
-	
-	
 	/**
 	 * searches
 	 */	
@@ -823,10 +810,7 @@ public class SearchFormBackingBean {
 	public void changeDatabase(ValueChangeEvent vce) {
 		setDatabaseId((Integer)vce.getNewValue());	
 		
-		graveyard = null; //this won't work	if we don't use the following code	
-		// a little hack, actually right way to do that would be
-		// process this event in right phase
-		// I just dont know how to do that _yet_
+		graveyard = null; 
 		graveyardSetToNull = true;
 		
 		initGraveyards();		

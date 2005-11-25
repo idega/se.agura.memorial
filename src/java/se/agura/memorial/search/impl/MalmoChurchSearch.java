@@ -193,6 +193,7 @@ public class MalmoChurchSearch implements ObituarySearch {
 						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
 						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_BURIAL_DATE)),
 						null, 
+						null,
 						null);
 				
 				count++;
@@ -419,6 +420,7 @@ public class MalmoChurchSearch implements ObituarySearch {
 			Stmt = conn.createStatement();
 			String str = query.toString();
 			RS = Stmt.executeQuery(query.toString());
+			Graveyard gy =null;
 
 			int count = 0;
 			while (RS.next() && count <= maxResult) {
@@ -458,7 +460,8 @@ public class MalmoChurchSearch implements ObituarySearch {
 								parish,
 								commune,
 								country
-								));
+								),
+								gy);
 				count++;
 			}
 			RS.close();

@@ -15,6 +15,16 @@ import com.idega.data.IDOEntity;
  */
 public interface GraveLocallyStored extends IDOEntity {
 	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getGraveId
+	 */
+	public Integer getGraveId();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setGraveId
+	 */
+	public void setGraveId(Integer graveId);
+
+	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getColumID
 	 */
 	public String getColumID();
@@ -85,6 +95,11 @@ public interface GraveLocallyStored extends IDOEntity {
 	public Date getDateOfDeath();
 
 	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getDateOfBurial
+	 */
+	public Date getDateOfBurial();
+
+	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setFirstName
 	 */
 	public void setFirstName(String firstName);
@@ -118,6 +133,11 @@ public interface GraveLocallyStored extends IDOEntity {
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDateOfDeath
 	 */
 	public void setDateOfDeath(Date dateOfDeath);
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDateOfBurial
+	 */
+	public void setDateOfBurial(Date dateOfBurial);
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setHomeTown

@@ -17,6 +17,7 @@ public class Grave {
     private String hometown;
 	
 	private GraveInformation graveInfo;
+	private Graveyard graveyard;
 	
 
 	public Grave(String graveId, 
@@ -26,7 +27,8 @@ public class Grave {
 				 CustomMemorialDate dateOfDeath, 
 				 CustomMemorialDate dateOfBurial,
 			     String hometown, 
-			     GraveInformation graveInfo) {
+			     GraveInformation graveInfo,
+			     Graveyard graveyard) {
 		super();
 
 		this.graveId = graveId;
@@ -37,7 +39,20 @@ public class Grave {
 		this.dateOfBurial = dateOfBurial;
 		this.hometown = hometown;
 		this.graveInfo = graveInfo;
+		this.graveyard = graveyard;		
 	}
+
+
+	public Graveyard getGraveyard() {
+		return graveyard;
+	}
+	
+
+
+	public void setGraveyard(Graveyard graveyard) {
+		this.graveyard = graveyard;
+	}
+	
 
 
 	public CustomMemorialDate getDateOfBirth() {

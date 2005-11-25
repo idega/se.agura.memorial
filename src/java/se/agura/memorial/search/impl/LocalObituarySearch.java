@@ -63,6 +63,7 @@ public class LocalObituarySearch implements ObituarySearch {
 						Utility.dateToMemorialDate(g.getDateOfDeath()),
 						null,
 						null,
+						null,
 						null));
 
 			}				
@@ -122,13 +123,17 @@ public class LocalObituarySearch implements ObituarySearch {
 				
 				GraveLocallyStored g = (GraveLocallyStored) o;	
 				GraveInformation aa = null;
+				Graveyard gy = null;
+				//gy.setId(g.)
+				String graveyardName = "";
+				
 				grave = new Grave(
 						g.getColumID(),						
 						g.getFirstName(),
 						g.getLastName(),						
 						Utility.dateToMemorialDate(g.getDateOfBirth()),
 						Utility.dateToMemorialDate(g.getDateOfDeath()),
-						null,  //burial date 
+						Utility.dateToMemorialDate(g.getDateOfBurial()),
 						g.getHomeTown(),
 						aa = new GraveInformation(
 								g.getGraveNumber(),
@@ -137,8 +142,9 @@ public class LocalObituarySearch implements ObituarySearch {
 								g.getCemetery(),
 								g.getParish(),
 								g.getCommune(),
-								g.getCountry() ));
-
+								g.getCountry()
+								),
+								gy);
 			}				
 			
 		} catch (Exception e) {

@@ -105,7 +105,7 @@
 	</navigation-rule>		
 
 	<navigation-rule>
-		<from-view-id>/pages/obituarycreate/</from-view-id>
+		<from-view-id>/pages/sokperson/obituarycreate/</from-view-id>
 		<navigation-case>
 			<from-outcome>showNewPersonAction</from-outcome>
 			<to-view-id>/pages/sokperson/newperson/</to-view-id>
@@ -138,6 +138,97 @@
 		<to-view-id>/pages/sokperson/obituarycreate/</to-view-id>
     </navigation-case>
  </navigation-rule>
+
+
+
+
+
+
+
+
+
+
+    <navigation-rule>
+         <from-view-id>/pages/hem/sokperson/</from-view-id>
+          <navigation-case>
+                  <from-outcome>showObituaryAction</from-outcome>
+                  <to-view-id>/pages/hem/sokperson/obituary/</to-view-id>
+          </navigation-case>
+    </navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/pages/hem/sokperson/obituary/</from-view-id>
+		<navigation-case>
+			<from-outcome>showObituaryCreateAction</from-outcome>
+			<to-view-id>/pages/hem/sokperson/obituarycreate/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+	<navigation-rule>  
+		<from-view-id>/pages/hem/sokperson/obituarycreate/</from-view-id>
+		<navigation-case>
+			<from-outcome>showNewPersonAction</from-outcome>
+			<to-view-id>/pages/hem/sokperson/newperson/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+
+ <navigation-rule>
+   <from-view-id>/pages/hem/sokperson/obituarycreate/</from-view-id>
+	<navigation-case>
+		<from-action>#{obituaryCreateBackingBean.preview}</from-action>
+		<from-outcome>success</from-outcome>
+		<to-view-id>/pages/hem/sokperson/obituarypreview/</to-view-id>
+    </navigation-case>
+ </navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/pages/hem/sokperson/obituarycreate/</from-view-id>
+		<navigation-case>
+			<from-outcome>obituaryCreateCancelAction</from-outcome>
+			<to-view-id>/pages/hem/sokperson/obituary/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+
+ <navigation-rule>
+   <from-view-id>/pages/hem/sokperson/newperson/</from-view-id>
+	<navigation-case>
+		<from-action>newPersonCancelAction</from-action>
+		<to-view-id>/pages/hem/sokperson/obituarycreate/</to-view-id>
+    </navigation-case>
+ </navigation-rule>
+
+
+ <navigation-rule>
+   <from-view-id>/pages/hem/sokperson/newperson/</from-view-id>
+	<navigation-case>
+		<from-action>#{newPersonBean.save}</from-action>
+		<from-outcome>success</from-outcome>
+		<to-view-id>/pages/hem/sokperson/obituarycreate/</to-view-id>
+    </navigation-case>
+ </navigation-rule>
+
+
+	<navigation-rule> 
+		<from-view-id>/pages/hem/sokperson/obituarypreview/</from-view-id>
+		<navigation-case>
+			<from-outcome>obituaryPreviewCancelAction</from-outcome>
+			<to-view-id>/pages/hem/sokperson/obituarycreate/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+
+	<navigation-rule> 
+		<from-view-id>/pages/hem/sokperson/obituarypreview/</from-view-id>
+		<navigation-case>
+			<from-action>#{obituaryPreviewBackingBean.save}</from-action>
+   		        <from-outcome>success</from-outcome>
+			<to-view-id>/pages/hem/sokperson/obituary/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+
 
 
  <navigation-rule>
