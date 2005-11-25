@@ -6,6 +6,7 @@ import javax.ejb.FinderException;
 
 import com.idega.data.GenericEntity;
 import com.idega.data.IDOLookup;
+import com.idega.data.IDOQuery;
 import com.idega.data.query.SelectQuery;
 import com.idega.data.query.Table;
 import com.idega.data.query.WildCardColumn;
@@ -13,6 +14,8 @@ import com.idega.data.query.WildCardColumn;
 public class GraveGraveyardBMPBean extends GenericEntity  implements GraveGraveyard{ 
 	private final static String ENTITY_NAME = "MS_GRAVE_GRAVEYARD";
 	private static final String COLUMN_GRAVEYARD_NAME = "graveyard_name";
+	private static final String COLUMN_GRAVEYARD_ID = "MS_GRAVE_GRAVEYARD_ID";
+
 	private static final String COLUMN_GRAVE_DATABASE_CONN_ID = "grave_database_connection_id";
 	
 	
@@ -71,5 +74,12 @@ public class GraveGraveyardBMPBean extends GenericEntity  implements GraveGravey
 		
 		return this.idoFindPKsByQuery(query);
 	}	
-
+	public String getGraveyardByID(String graveId) throws FinderException {
+		String graveyard=null;
+		IDOQuery query = this.idoQuery();
+		query.appendSelectAllFrom(this).appendWhereEquals(COLUMN_GRAVEYARD_ID, graveId);
+		Collection col = this.idoFindPKsByQuery(query);
+		graveyard = "AAA";
+	    return graveyard;
+	}	
 }

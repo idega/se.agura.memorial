@@ -193,7 +193,6 @@ public class MalmoChurchSearch implements ObituarySearch {
 						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_DATE_OF_DEATH)), 
 						Utility.stringToMemorialDate(RS.getString(COLUMN_NAME_BURIAL_DATE)),
 						null, 
-						null,
 						null);
 				
 				count++;
@@ -375,7 +374,6 @@ public class MalmoChurchSearch implements ObituarySearch {
 		Column colGraveyard = new Column(tableGA_KGard, COLUMN_NAME_GRAVEYARD);			
 		Column colHomeTown = new Column(table, COLUMN_NAME_HOME_TOWN);
 		Column colLKF = new Column(table, COLUMN_NAME_LKF);
-		//Column colBurialPlace = new Column(table, COLUMN_NAME_BURIAL_PLACE); TODO // correct BURIAL_PLACE !!!
 		Column colBurialPlace = new Column(table, COLUMN_NAME_HOME_TOWN);		
 		Column colDepartment = new Column(tableGA_Avdelning, COLUMN_NAME_DEPARTMENT);
 		Column colBlock = new Column(tableGA_Kvarter, COLUMN_NAME_BLOCK);
@@ -460,8 +458,7 @@ public class MalmoChurchSearch implements ObituarySearch {
 								parish,
 								commune,
 								country
-								),
-								gy);
+								));
 				count++;
 			}
 			RS.close();

@@ -64,8 +64,17 @@
    <from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/newperson.jsp</from-view-id>
 	<navigation-case>
 		<from-action>#{newPersonBean.save}</from-action>
-		<from-outcome>success</from-outcome>
+		<from-outcome>goToObituary</from-outcome>
 		<to-view-id>/workspace/content/memorial/ObituaryCreate/</to-view-id>
+    </navigation-case>
+ </navigation-rule>
+
+ <navigation-rule>
+   <from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/newperson.jsp</from-view-id>
+	<navigation-case>
+		<from-action>#{newPersonBean.save}</from-action>
+		<from-outcome>goToSearch</from-outcome>
+		<to-view-id>/workspace/content/memorial/Search/</to-view-id>
     </navigation-case>
  </navigation-rule>
 
@@ -139,6 +148,24 @@
     </navigation-case>
  </navigation-rule>
 
+ <navigation-rule>
+   <from-view-id>/pages/sokperson/newperson/</from-view-id>
+	<navigation-case>
+		<from-action>#{newPersonBean.save}</from-action>
+		<from-outcome>goToObituary</from-outcome>
+		<to-view-id>/pages/hem/sokperson/obituarycreate/</to-view-id>
+    </navigation-case>
+ </navigation-rule>
+
+ <navigation-rule>
+   <from-view-id>/pages/sokperson/newperson/</from-view-id>
+	<navigation-case>
+		<from-action>#{newPersonBean.save}</from-action>
+		<from-outcome>goToSearch</from-outcome>
+		<to-view-id>/pages/hem/sokperson/search/</to-view-id>
+    </navigation-case>
+ </navigation-rule>
+
 
 
 
@@ -204,11 +231,19 @@
    <from-view-id>/pages/hem/sokperson/newperson/</from-view-id>
 	<navigation-case>
 		<from-action>#{newPersonBean.save}</from-action>
-		<from-outcome>success</from-outcome>
+		<from-outcome>goToObituary</from-outcome>
 		<to-view-id>/pages/hem/sokperson/obituarycreate/</to-view-id>
     </navigation-case>
  </navigation-rule>
 
+ <navigation-rule>
+   <from-view-id>/pages/hem/sokperson/newperson/</from-view-id>
+	<navigation-case>
+		<from-action>#{newPersonBean.save}</from-action>
+		<from-outcome>goToSearch</from-outcome>
+		<to-view-id>/pages/hem/sokperson/search/</to-view-id>
+    </navigation-case>
+ </navigation-rule>
 
 	<navigation-rule> 
 		<from-view-id>/pages/hem/sokperson/obituarypreview/</from-view-id>

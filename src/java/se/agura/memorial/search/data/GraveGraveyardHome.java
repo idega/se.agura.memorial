@@ -10,7 +10,7 @@ import javax.ejb.FinderException;
 import com.idega.data.IDOHome;
 
 /**
- * @author Dainis
+ * @author is
  *
  */
 public interface GraveGraveyardHome extends IDOHome {

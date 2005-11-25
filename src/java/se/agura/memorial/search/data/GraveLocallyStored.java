@@ -5,6 +5,7 @@ package se.agura.memorial.search.data;
 
 import java.sql.Date;
 
+import javax.ejb.FinderException;
 
 
 import com.idega.data.IDOEntity;
@@ -14,6 +15,16 @@ import com.idega.data.IDOEntity;
  *
  */
 public interface GraveLocallyStored extends IDOEntity {
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setGraveGraveyard
+	 */
+	public void setGraveGraveyard(GraveGraveyard graveGraveyard);
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getGraveGraveyard
+	 */
+	public GraveGraveyard getGraveGraveyard(GraveGraveyard graveGraveyard);
+
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getGraveId
 	 */
@@ -100,6 +111,11 @@ public interface GraveLocallyStored extends IDOEntity {
 	public Date getDateOfBurial();
 
 	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getGraveGraveyardId
+	 */
+	public String getGraveGraveyardId();
+
+	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setFirstName
 	 */
 	public void setFirstName(String firstName);
@@ -150,14 +166,9 @@ public interface GraveLocallyStored extends IDOEntity {
 	public void setBurialPlace(String burialPlace);
 
 	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setGraveGraveyard
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setGraveGraveyardId
 	 */
-	public void setGraveGraveyard(GraveGraveyard graveGraveyard);
-
-	/**
-	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getGraveGraveyard
-	 */
-	public GraveGraveyard getGraveGraveyard(GraveGraveyard graveGraveyard);
+	public void setGraveGraveyardId(Integer id);
 
 	/**
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setDepartment
@@ -173,5 +184,10 @@ public interface GraveLocallyStored extends IDOEntity {
 	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#setGraveNumber
 	 */
 	public void setGraveNumber(String graveNumber);
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveLocallyStoredBMPBean#getGraveyardByID
+	 */
+	public String getGraveyardByID(String graveId) throws FinderException;
 
 }

@@ -1,9 +1,14 @@
 package se.agura.memorial.search.data;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+
 
 import javax.ejb.FinderException;
 
@@ -19,21 +24,24 @@ import com.idega.data.query.MatchCriteria;
 import com.idega.data.query.Order;
 import com.idega.data.query.SelectQuery;
 import com.idega.data.query.Table;
+import com.idega.util.database.ConnectionBroker;
 
 public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLocallyStored{
 
 	public static String ENTITY_NAME = "MS_GRAVE_LOCALLY_STORED";
 	public static String TABLE_GRAVEYARD = "MS_GRAVE_GRAVEYARD";
+	
 	public final Integer LOCAL_DATABASE_CONNECTION_PRIMARY_KEY = new Integer(2);
 
 	public static String COL_API_DB_CONNECTION = "default";		
 	
-	public static final String DATABASE_NAME = "dafault";
+	public static final String DATABASE_NAME = "default";
 	private int maxResult = Utility.MAX_RESULT;
 	
 	private Integer graveId;
 	
-
+	public static final String COLUMN_GRAVEYARD_ID = "MS_GRAVE_GRAVEYARD_ID";
+	public static final String COLUMN_GRAVEYARD_NAME = "GRAVEYARD_NAME";
 	public static final String COLUMN_NAME_ID = "MS_GRAVE_LOCALLY_STORED_ID";
 	public static final String COLUMN_NAME_FIRST_NAME = "FIRST_NAME";
 	public static final String COLUMN_NAME_LAST_NAME = "LAST_NAME";
@@ -49,7 +57,8 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 	public static final String COLUMN_NAME_COMMUNE = "COMMUNE";
 	public static final String COLUMN_NAME_PARISH = "PARISH";	
 	public static final String COLUMN_NAME_GRAVE_NUMBER = "GRAVE_NUMBER";
-	private static final String COLUMN_NAME_GRAVEYARD_NAME = "graveyard_name";
+	private static final String COLUMN_NAME_GRAVEYARD_NAME = "GRAVEYARD_NAME as GRAVEYARD";
+	private static final String COLUMN_NICKNAME_GRAVEYARD_NAME = "GRAVEYARD";
 
 	public GraveLocallyStoredBMPBean() {
 		super();
@@ -90,13 +99,13 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
 		try {
 			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
-			GraveGraveyard gg = ggh.findByPrimaryKey(LOCAL_DATABASE_CONNECTION_PRIMARY_KEY);
+			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
 			data1.setGraveGraveyard(gg);
 		} catch (Exception e){
 			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
 			data1.setGraveGraveyard(null); 	
 		}
-				
+
 		data1.setDepartment("Rad 12");			
 		data1.setBlock("Kv 4");			
 		data1.setGraveNumber("0045");			
@@ -117,14 +126,16 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		data2.setBurialPlace("Stockholm");			
 		
 
+
 		try {
 			GraveGraveyardHome ggh = (GraveGraveyardHome) IDOLookup.getHome(GraveGraveyard.class);
-			GraveGraveyard gg = ggh.findByPrimaryKey(LOCAL_DATABASE_CONNECTION_PRIMARY_KEY);
+			GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2));
 			data2.setGraveGraveyard(gg);
 		} catch (Exception e){
 			System.out.println("we got problems when tried to get GraveGraveyard gg = ggh.findByPrimaryKey(new Integer(2))");
 			data2.setGraveGraveyard(null); 	
 		}
+
 				
 		data2.setDepartment("Rad 15");			
 		data2.setBlock("Kv 3");			
@@ -138,7 +149,15 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 			
 	}
 
+	public void setGraveGraveyard(GraveGraveyard graveGraveyard) {
+		setColumn(COLUMN_NAME_GRAVEYARD_ID, graveGraveyard);
+	}
+	
+	public GraveGraveyard getGraveGraveyard(GraveGraveyard graveGraveyard) {			
+		return (GraveGraveyard) getColumnValue(COLUMN_NAME_GRAVEYARD_ID);	
+	}
 
+	
     public Integer getGraveId() {
 		return graveId;
 	}
@@ -166,7 +185,7 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
     }		
 
 	public String getCemetery() {
-        return getStringColumnValue(COLUMN_NAME_GRAVEYARD_NAME);
+		return getStringColumnValue("GRAVEYARD");
     }		
 	public String getDepartment() {
         return getStringColumnValue(COLUMN_NAME_DEPARTMENT);
@@ -210,6 +229,10 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 
     }		
 
+	
+	public String getGraveGraveyardId() {			
+		return getStringColumnValue(COLUMN_NAME_GRAVEYARD_ID);	
+	}
 
 	
 	public void setFirstName(String firstName) {
@@ -253,14 +276,11 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 	}
 
 	
-	public void setGraveGraveyard(GraveGraveyard graveGraveyard) {
-		setColumn(COLUMN_NAME_GRAVEYARD_ID, graveGraveyard);
-	}
 	
-	public GraveGraveyard getGraveGraveyard(GraveGraveyard graveGraveyard) {			
-		return (GraveGraveyard) getColumnValue(COLUMN_NAME_GRAVEYARD_ID);	
+
+	public void setGraveGraveyardId(Integer id) {			
+		setColumn(COLUMN_NAME_GRAVEYARD_ID,id);	
 	}
-	
 
 	
 	public void setDepartment(String department) {
@@ -387,9 +407,6 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 		Iterator iter = queries.iterator();
 		while(result.size() < maxResult && iter.hasNext()){
 			SelectQuery q = (SelectQuery)iter.next();
-//			System.out.println();
-//			System.out.println(q);
-//			System.out.println();
 			result.addAll(this.idoFindPKsByQuery(q,maxResult-result.size()));
 		}	
 		return result;	
@@ -400,11 +417,69 @@ public class GraveLocallyStoredBMPBean extends GenericEntity  implements GraveLo
 	}
 
 	public Collection ejbFindByGraveID(String graveId) throws FinderException {
+
 		IDOQuery query = this.idoQuery();
 		query.appendSelectAllFrom(this).appendWhereEquals(COLUMN_NAME_ID, graveId);
+		
 		return this.idoFindPKsByQuery(query);
 	}
 	
+	public String getGraveyardByID(String graveId) throws FinderException {
+
+		Table tableGraveyard = new Table(TABLE_GRAVEYARD);
+		SelectQuery query = new SelectQuery(tableGraveyard);
+
+		Column colGraveyardId = new Column(tableGraveyard, COLUMN_GRAVEYARD_ID);  
+		Column colGraveyard = new Column(tableGraveyard, COLUMN_GRAVEYARD_NAME);  
+		
+		query.addColumn(colGraveyard);			
+		query.addCriteria(new MatchCriteria(colGraveyardId, MatchCriteria.EQUALS,graveId));
+		String sql = query.toString();
+		Connection conn = null;
+		Statement Stmt = null;
+		String result = null;
+
+		try {
+			conn = ConnectionBroker.getConnection(DATABASE_NAME);
+			if (conn == null) {
+				return result;
+			}
+			ResultSet RS = null;
+			Stmt = conn.createStatement();
+			RS = Stmt.executeQuery(query.toString());
+			int count = 0;
+			while (RS.next() && count <= 1) {
+				result = RS.getString(COLUMN_GRAVEYARD_NAME);
+				count++;
+			}
+
+			RS.close();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+
+		} finally {
+			if (Stmt != null) {
+				try {
+					Stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				ConnectionBroker.freeConnection(DATABASE_NAME, conn);
+			}
+		}
+
+	
+		return result;	
+		
+	
+		
+		
+		
+		
+		
+	}	
 	
 }
 

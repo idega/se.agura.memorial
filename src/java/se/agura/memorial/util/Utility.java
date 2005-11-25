@@ -49,7 +49,8 @@ public class Utility {
 	
 	
 	public static CustomMemorialDate stringToMemorialDate(String date) {
-
+		if((date==null)||(date=="")) return null;
+		
 		CustomMemorialDate memorialDate = new CustomMemorialDate(null,null,null);
 		
 
@@ -91,6 +92,7 @@ public class Utility {
 	
 	public static CustomMemorialDate dateToMemorialDate(Date date) {
 
+		if(date==null) return null;
 		int m=date.getMonth();
 		CustomMemorialDate memorialDate = new CustomMemorialDate(null,null,null);
 		

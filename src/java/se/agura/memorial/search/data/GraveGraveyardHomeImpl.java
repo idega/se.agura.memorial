@@ -10,7 +10,7 @@ import javax.ejb.FinderException;
 import com.idega.data.IDOFactory;
 
 /**
- * @author Dainis
+ * @author is
  *
  */
 public class GraveGraveyardHomeImpl extends IDOFactory implements

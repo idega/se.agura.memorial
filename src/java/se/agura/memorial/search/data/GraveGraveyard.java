@@ -4,11 +4,12 @@
 package se.agura.memorial.search.data;
 
 
+import javax.ejb.FinderException;
 
 import com.idega.data.IDOEntity;
 
 /**
- * @author Dainis
+ * @author is
  *
  */
 public interface GraveGraveyard extends IDOEntity {
@@ -31,5 +32,10 @@ public interface GraveGraveyard extends IDOEntity {
 	 * @see se.agura.memorial.search.data.GraveGraveyardBMPBean#getGraveDatabaseConn
 	 */
 	public GraveDatabaseConn getGraveDatabaseConn();
+
+	/**
+	 * @see se.agura.memorial.search.data.GraveGraveyardBMPBean#getGraveyardByID
+	 */
+	public String getGraveyardByID(String graveId) throws FinderException;
 
 }

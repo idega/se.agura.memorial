@@ -507,8 +507,8 @@ public class NewPersonBackingBean {
 			return "failure";
 		}	
 			
-		
-		return "success";
+		if (this.createObituaryAfterSaving.booleanValue() ==  true) return "goToObituary";
+		else return "goToSearch";
 	}
 	
 	
