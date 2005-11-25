@@ -10,7 +10,7 @@
         xmlns:memorial="http://xmlns.idega.com/se.agura.memorial"  
         
 version="1.2">
-<jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
+<jsp:directive.page  contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 <f:view>
 	<ws:page id="obituary_create">
 			<h:form id="obituary_createform"  enctype="multipart/form-data">     

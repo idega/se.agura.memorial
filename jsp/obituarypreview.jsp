@@ -13,7 +13,7 @@ version="1.2">
 <f:view>
   	<ws:page id="obituaryPreview">
 			<h:form id="obituaryPreviewform">    
- 			<wf:wfblock title="Obituary Preview page">
+ 			<wf:wfblock title="Obituary Preview page" >
 			<h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" >
 					<h:panelGroup>			
 			                 <h:outputText styleClass="headline" value="#{obituaryPreviewBackingBean.personFullName}" />

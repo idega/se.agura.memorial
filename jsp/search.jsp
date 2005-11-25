@@ -14,7 +14,7 @@
 	<f:view>
 		<ws:page id="dainissearch">
 			<!-- if this form is here, then nothing works in IE <h:form id="dainispagesform1">  -->
-				<!-- search form -->
+				<!-- search form  -->
 				<h:form id="searchForm">
 					
 					<wf:wfblock title="#{localizedStrings['se.agura.memorial']['search_for_person']}">

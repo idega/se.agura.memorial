@@ -10,7 +10,7 @@
 version="1.2">
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 <f:view>
-	<ws:page id="new_person">
+	<ws:page  id="new_person">
 
 	<h:form id="new_personform">
 
@@ -77,6 +77,26 @@ version="1.2">
 
     	</h:panelGroup>         
     
+
+    	<h:panelGroup>
+	        <h:outputLabel for="dateOfBurial">
+            <h:outputText value="Date of burial (YYYYMMDD)"/>
+    	    </h:outputLabel>  
+	    </h:panelGroup>           	                                        
+
+        <h:panelGroup>
+
+    		<h:inputText id="dateOfBurial_year" 	value="#{newPersonBean.dateOfBurial_year}" maxlength="4"  size="4"></h:inputText>	
+            <h:selectOneMenu id="dateOfBurial_month" value="#{newPersonBean.dateOfBurial_month}" onchange="this.form.submit();" >								
+			<f:selectItems value="#{newPersonBean.monthSelectItemList}" /></h:selectOneMenu>							
+													
+            <h:selectOneMenu id="dateOfBurial_day" value="#{newPersonBean.dateOfBurial_day}" >								
+			<f:selectItems value="#{newPersonBean.dateOfBurialDaySelectItemList}" /></h:selectOneMenu>							
+
+			<h:message for="dateOfBurial_year"  showSummary="false" showDetail="true" />
+
+    	</h:panelGroup>         
+
 	    <h:panelGroup>
 	        <h:outputLabel for="hometown">
             <h:outputText value="Hometown"/>
@@ -102,6 +122,46 @@ version="1.2">
          	</h:inputText> 
 	    </h:panelGroup>         
     
+    	<h:panelGroup>
+	        <h:outputLabel for="Parish">
+            <h:outputText value="Parish"/>
+    	    </h:outputLabel>    	                                        
+	    </h:panelGroup>         
+        
+
+    	<h:panelGroup>
+        	<h:inputText id="parish" value="#{newPersonBean.parish}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+         	</h:inputText> 
+	    </h:panelGroup>         
+
+    	<h:panelGroup>
+	        <h:outputLabel for="Commune">
+            <h:outputText value="Commune"/>
+    	    </h:outputLabel>    	                                        
+	    </h:panelGroup>         
+        
+
+    	<h:panelGroup>
+        	<h:inputText id="commune" value="#{newPersonBean.commune}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+         	</h:inputText> 
+	    </h:panelGroup>         
+
+
+    	<h:panelGroup>
+	        <h:outputLabel for="Country">
+            <h:outputText value="Country"/>
+    	    </h:outputLabel>    	                                        
+	    </h:panelGroup>         
+        
+
+    	<h:panelGroup>
+        	<h:inputText id="country" value="#{newPersonBean.country}" maxlength="25" >
+            <f:validateLength maximum="25" minimum="0" />
+         	</h:inputText> 
+	    </h:panelGroup>         
+
      	<h:panelGroup>
 	        <h:outputLabel for="newGraveyard">
             <h:outputText value="Graveyard (create new)"/>

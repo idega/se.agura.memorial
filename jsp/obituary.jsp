@@ -8,12 +8,12 @@
         xmlns:builder="http://xmlns.idega.com/com.idega.builder"
         xmlns:x="http://myfaces.apache.org/extensions"       
         xmlns:memorial="http://xmlns.idega.com/se.agura.memorial"  
-version="1.2">
+version="1.2">  
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 
 
 <f:view>
-  	<ws:page id="obituary">
+  	<ws:page id="obituary" >
 			<h:form id="obituaryform">    
  			<wf:wfblock title="Obituary page">
 			<h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" >
@@ -103,7 +103,7 @@ version="1.2">
         				           <h:commandButton value="#{localizedStrings['se.agura.memorial']['print']}" action="#{obituaryBackingBean.onClick}" id="cbPrint"  />
                          </h:panelGroup>
 
-					     <h:panelGroup>
+					     <h:panelGroup >
 				                   <h:commandButton value=" #{localizedStrings['se.agura.memorial']['edit']}" action="showObituaryCreateAction" immediate="true" id="cbEdit" />
                          </h:panelGroup>
 
