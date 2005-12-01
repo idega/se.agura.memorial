@@ -46,6 +46,18 @@
       </properties>
     </dependency>
 
+
+    <dependency>
+      <groupId>itext</groupId>
+      <artifactId>itext</artifactId>
+      <version>1.3</version>
+      <type>jar</type>
+      <url>http://www.idega.com/</url>
+      <properties>
+        <idegaweb.bundle.include>true</idegaweb.bundle.include>
+      </properties>
+    </dependency>
+
    <dependency>
      <groupId>bundles</groupId>
      <artifactId>com.idega.slide</artifactId>

@@ -3,7 +3,6 @@
  */
 package se.agura.memorial.obituary.bussiness;
 
-
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 
 import com.idega.business.IBOSession;
@@ -13,6 +12,11 @@ import com.idega.business.IBOSession;
  *
  */
 public interface ObituarySession extends IBOSession {
+	/**
+	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#initNull
+	 */
+	public void initNull() throws java.rmi.RemoteException;
+
 	/**
 	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#getObituaryText
 	 */
@@ -24,6 +28,28 @@ public interface ObituarySession extends IBOSession {
 	public UploadedFile getGraveImageFile() throws java.rmi.RemoteException;
 
 	/**
+	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#getRemoveOldGraveImage
+	 */
+	public Boolean getRemoveOldGraveImage() throws java.rmi.RemoteException;
+
+	/**
+	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#setRemoveOldGraveImage
+	 */
+	public void setRemoveOldGraveImage(Boolean removeOldGraveImage)
+			throws java.rmi.RemoteException;
+
+	/**
+	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#getRemoveOldPersonImage
+	 */
+	public Boolean getRemoveOldPersonImage() throws java.rmi.RemoteException;
+
+	/**
+	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#setRemoveOldPersonImage
+	 */
+	public void setRemoveOldPersonImage(Boolean removeOldPersonImage)
+			throws java.rmi.RemoteException;
+
+	/**
 	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#setGraveImageFile
 	 */
 	public void setGraveImageFile(UploadedFile graveImageFile)
@@ -33,6 +59,28 @@ public interface ObituarySession extends IBOSession {
 	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#getPersonFullName
 	 */
 	public String getPersonFullName() throws java.rmi.RemoteException;
+
+	/**
+	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#getGraveImageRendered
+	 */
+	public Boolean getGraveImageRendered() throws java.rmi.RemoteException;
+
+	/**
+	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#setGraveImageRendered
+	 */
+	public void setGraveImageRendered(Boolean graveImageRendered)
+			throws java.rmi.RemoteException;
+
+	/**
+	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#getPersonImageRendered
+	 */
+	public Boolean getPersonImageRendered() throws java.rmi.RemoteException;
+
+	/**
+	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#setPersonImageRendered
+	 */
+	public void setPersonImageRendered(Boolean personImageRendered)
+			throws java.rmi.RemoteException;
 
 	/**
 	 * @see se.agura.memorial.obituary.bussiness.ObituarySessionBean#setPersonFullName

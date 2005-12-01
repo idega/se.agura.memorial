@@ -4,7 +4,6 @@
 package se.agura.memorial.obituary.bussiness;
 
 
-
 import com.idega.business.IBOHome;
 
 /**

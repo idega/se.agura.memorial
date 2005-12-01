@@ -7,11 +7,30 @@
 <faces-config>
 	
 
-	<navigation-rule>
+	<navigation-rule> 
 		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/search.jsp</from-view-id>
 		<navigation-case>
-			<from-outcome>showObituaryAction</from-outcome>
+			<from-action>#{graveyardSearchBean.showObiaturyPage}</from-action>
+   		        <from-outcome>success</from-outcome>
 			<to-view-id>/workspace/content/memorial/Obituary/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+
+
+	<navigation-rule>
+		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>showObituaryPrint</from-outcome>
+			<to-view-id>/workspace/content/memorial/ObituaryPrint/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+	<navigation-rule>
+		<from-view-id>/idegaweb/bundles/se.agura.memorial.bundle/jsp/obituary.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>showObituaryPDF</from-outcome>
+			<to-view-id>/workspace/content/memorial/ObituaryPDF/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
 
@@ -31,6 +50,7 @@
 			<to-view-id>/workspace/content/memorial/NewPerson/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
+        
 
 
  <navigation-rule>
@@ -99,11 +119,30 @@
 
     <navigation-rule>
          <from-view-id>/pages/sokperson/</from-view-id>
-          <navigation-case>
-                  <from-outcome>showObituaryAction</from-outcome>
+		<navigation-case>
+			<from-action>#{graveyardSearchBean.showObiaturyPage}</from-action>
+   		        <from-outcome>success</from-outcome>
                   <to-view-id>/pages/sokperson/obituary/</to-view-id>
           </navigation-case>
     </navigation-rule>
+
+
+	<navigation-rule>
+		<from-view-id>/pages/sokperson/obituary/</from-view-id>
+		<navigation-case>
+			<from-outcome>showObituaryPrint</from-outcome>
+			<to-view-id>/pages/sokperson/obituaryprint/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+	<navigation-rule>
+		<from-view-id>/pages/sokperson/obituary/</from-view-id>
+		<navigation-case>
+			<from-outcome>showObituaryPDF</from-outcome>
+			<to-view-id>/pages/sokperson/obituarypdf/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
 
 	<navigation-rule>
 		<from-view-id>/pages/sokperson/obituary/</from-view-id>
@@ -166,19 +205,11 @@
     </navigation-case>
  </navigation-rule>
 
-
-
-
-
-
-
-
-
-
     <navigation-rule>
          <from-view-id>/pages/hem/sokperson/</from-view-id>
-          <navigation-case>
-                  <from-outcome>showObituaryAction</from-outcome>
+		<navigation-case>
+			<from-action>#{graveyardSearchBean.showObiaturyPage}</from-action>
+   		        <from-outcome>success</from-outcome>
                   <to-view-id>/pages/hem/sokperson/obituary/</to-view-id>
           </navigation-case>
     </navigation-rule>
@@ -190,6 +221,23 @@
 			<to-view-id>/pages/hem/sokperson/obituarycreate/</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
+
+	<navigation-rule>
+		<from-view-id>/pages/hem/sokperson/obituary/</from-view-id>
+		<navigation-case>
+			<from-outcome>showObituaryPrint</from-outcome>
+			<to-view-id>/pages/hem/sokperson/obituaryprint/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+	<navigation-rule>
+		<from-view-id>/pages/hem/sokperson/obituary/</from-view-id>
+		<navigation-case>
+			<from-outcome>showObituaryPDF</from-outcome>
+			<to-view-id>/pages/hem/sokperson/obituarypdf/</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
 
 	<navigation-rule>  
 		<from-view-id>/pages/hem/sokperson/obituarycreate/</from-view-id>
@@ -295,6 +343,7 @@
 	</navigation-rule>		
 
 
+        
 	<managed-bean>
 		<description>Backing bean for graveyard search form</description>
 		<managed-bean-name>graveyardSearchBean</managed-bean-name>

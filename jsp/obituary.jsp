@@ -10,7 +10,7 @@
         xmlns:memorial="http://xmlns.idega.com/se.agura.memorial"  
 version="1.2">  
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
-
+ 
 
 <f:view>
   	<ws:page id="obituary" >
@@ -46,7 +46,7 @@ version="1.2">
 													     </h:panelGroup>
 								                
 									  					 <h:panelGroup>			
-											                   <h:outputText styleClass="headline" value="Detailed Grave Information" />
+											                   <h:outputText styleClass="headline" value="Detailed grave information" />
 												 			   <f:verbatim>
 												                    <br />
 												                    <br />
@@ -66,11 +66,11 @@ version="1.2">
 			  					 	<h:panelGroup>			
  							                    <h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" width = "200">
 											         <h:panelGroup>	
-											                    <h:graphicImage value="#{obituaryBackingBean.graveImageResourcePath}" width = "200"/>
+											                    <h:graphicImage value="#{obituaryBackingBean.graveImagePath}" width = "200" rendered="#{obituaryBackingBean.graveImageRendered}"/>
 			 				                         </h:panelGroup>							                   
 
 											         <h:panelGroup>	
-												                <h:outputText styleClass="text" value="#{obituaryBackingBean.labelGraveImage}" />
+												                <h:outputText styleClass="text" value="Picture of grave" rendered="#{obituaryBackingBean.graveImageRendered}" />
                   
 												  			    <f:verbatim>
 												                    <br />
@@ -79,11 +79,11 @@ version="1.2">
 			 				                         </h:panelGroup>							                   
 
 											         <h:panelGroup>	
-											                   <h:graphicImage value="#{obituaryBackingBean.personImageResourcePath}" width = "200" />
+											                   <h:graphicImage value="#{obituaryBackingBean.personImagePath}" width = "200" rendered="#{obituaryBackingBean.personImageRendered}"/>
 			 				                         </h:panelGroup>							                   
 
 											         <h:panelGroup>	
-											                   <h:outputText styleClass="text" value="#{obituaryBackingBean.labelPersonImage}" />
+											                   <h:outputText styleClass="text" value="Picture of person" rendered="#{obituaryBackingBean.personImageRendered}" />
 			
 												 			   <f:verbatim>
 												                    <br />
@@ -100,7 +100,7 @@ version="1.2">
          <h:panelGroup>	
                  <h:panelGrid columns="3" border="0" cellspacing="5" footerClass="SearchFormFooterClass" >
 					     <h:panelGroup>
-        				           <h:commandButton value="#{localizedStrings['se.agura.memorial']['print']}" action="#{obituaryBackingBean.onClick}" id="cbPrint"  />
+        				           <h:commandButton value="#{localizedStrings['se.agura.memorial']['print']}" action="showObituaryPrint" id="cbPrint"  />
                          </h:panelGroup>
 
 					     <h:panelGroup >
@@ -108,7 +108,7 @@ version="1.2">
                          </h:panelGroup>
 
 					     <h:panelGroup>
-				                   <h:commandButton value="#{localizedStrings['se.agura.memorial']['save as pdf']}" action="#{obituaryBackingBean.onClick}" id="cbPDF"  />
+				                   <h:commandButton value="save as pdf" action="showObituaryPDF" id="cbPDF"  />
                          </h:panelGroup>
 				  </h:panelGrid >
          </h:panelGroup>

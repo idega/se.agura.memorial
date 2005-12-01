@@ -20,6 +20,14 @@ public class ObituarySessionBean extends IBOSessionBean  implements ObituarySess
 	private UploadedFile graveImageFile = null;
 	private UploadedFile tmpPersonImageFile = null;
 	private UploadedFile tmpGraveImageFile = null;
+	
+	private Boolean personImageRendered;
+	private Boolean graveImageRendered;	
+	
+
+	private Boolean removeOldPersonImage;
+	private Boolean removeOldGraveImage;
+	
 
 	private String graveId = null;
 	
@@ -27,6 +35,25 @@ public class ObituarySessionBean extends IBOSessionBean  implements ObituarySess
 	public ObituarySessionBean(){}
 
 	
+	public void initNull() {
+		this.databaseId = null;
+		this.obituaryText = null;
+		this.personFullName = null;	
+		this.tmpObituaryText = null;
+		this.tmpGraveImagePath = null;
+		this.tmpPersonImagePath = null;
+		this.graveImagePath = null;
+		this.personImagePath = null;
+		this.personImageFile = null;
+		this.graveImageFile = null;
+		this.tmpPersonImageFile = null;
+		this.tmpGraveImageFile = null;
+		this.personImageRendered = null;
+		this.graveImageRendered = null;	
+		this.removeOldPersonImage = null;
+		this.removeOldGraveImage = null;
+		this.graveId = null;	
+	}
 	
 	public String getObituaryText() {
 		return obituaryText;
@@ -37,6 +64,34 @@ public class ObituarySessionBean extends IBOSessionBean  implements ObituarySess
 
 	public UploadedFile getGraveImageFile() {
 		return graveImageFile;
+	}
+	
+
+
+
+	public Boolean getRemoveOldGraveImage() {
+		return removeOldGraveImage;
+	}
+	
+
+
+
+	public void setRemoveOldGraveImage(Boolean removeOldGraveImage) {
+		this.removeOldGraveImage = removeOldGraveImage;
+	}
+	
+
+
+
+	public Boolean getRemoveOldPersonImage() {
+		return removeOldPersonImage;
+	}
+	
+
+
+
+	public void setRemoveOldPersonImage(Boolean removeOldPersonImage) {
+		this.removeOldPersonImage = removeOldPersonImage;
 	}
 	
 
@@ -53,6 +108,34 @@ public class ObituarySessionBean extends IBOSessionBean  implements ObituarySess
 
 	public String getPersonFullName() {
 		return personFullName;
+	}
+	
+
+
+
+	public Boolean getGraveImageRendered() {
+		return graveImageRendered;
+	}
+	
+
+
+
+	public void setGraveImageRendered(Boolean graveImageRendered) {
+		this.graveImageRendered = graveImageRendered;
+	}
+	
+
+
+
+	public Boolean getPersonImageRendered() {
+		return personImageRendered;
+	}
+	
+
+
+
+	public void setPersonImageRendered(Boolean personImageRendered) {
+		this.personImageRendered = personImageRendered;
 	}
 	
 

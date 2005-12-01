@@ -8,7 +8,7 @@
         xmlns:builder="http://xmlns.idega.com/com.idega.builder"
         xmlns:x="http://myfaces.apache.org/extensions"       
         xmlns:memorial="http://xmlns.idega.com/se.agura.memorial"  
-        
+         
 version="1.2">
 <jsp:directive.page  contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
 <f:view>
@@ -45,7 +45,7 @@ version="1.2">
 													     </h:panelGroup>
 								                
 									  					 <h:panelGroup>			
-											                   <h:outputText styleClass="headline" value="Detailed Grave Information" />
+											                   <h:outputText styleClass="headline" value="#{obituaryCreateBackingBean.graveImageRendered}" />
 												 			   <f:verbatim>
 												                    <br />
 												                    <br />
@@ -65,7 +65,10 @@ version="1.2">
 			  					 	<h:panelGroup>			
  							                    <h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" width = "200">
 											         <h:panelGroup>	
-											                    <h:graphicImage value="#{obituaryCreateBackingBean.graveImageResourcePath}" width = "200"/>
+											                    <h:graphicImage value="#{obituaryCreateBackingBean.graveImagePath}" width = "200" rendered="#{obituaryCreateBackingBean.graveImageRendered}"/>
+											                    <h:selectBooleanCheckbox id="graveImageRemove" value="#{obituaryCreateBackingBean.graveImageRemove}" rendered="#{obituaryCreateBackingBean.graveImageRendered}"/>
+											                   <h:outputText styleClass="text" value="Remove old picture" rendered="#{obituaryCreateBackingBean.graveImageRendered}" />
+
  									  						    <f:verbatim>
 												                    <br />
 
@@ -84,7 +87,10 @@ version="1.2">
 			 				                         </h:panelGroup>							                   
 
 											         <h:panelGroup>	
-											                   <h:graphicImage value="#{obituaryCreateBackingBean.personImageResourcePath}" width = "200" />
+											                   <h:graphicImage value="#{obituaryCreateBackingBean.personImagePath}" width = "200"  rendered="#{obituaryCreateBackingBean.personImageRendered}"/>
+											                   <h:selectBooleanCheckbox id="personImageRemove" value="#{obituaryCreateBackingBean.personImageRemove}" rendered="#{obituaryCreateBackingBean.personImageRendered}"/> 
+											                   <h:outputText styleClass="text" value="Remove old picture" rendered="#{obituaryCreateBackingBean.personImageRendered}"/>
+											                   
    									  						    <f:verbatim>
 												                    <br />
 												                    <br />

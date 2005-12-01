@@ -9,12 +9,15 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.ejb.FinderException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+
+import se.agura.memorial.obituary.bussiness.ObituarySessionBean;
 import se.agura.memorial.search.api.CustomMemorialDate;
 import se.agura.memorial.search.api.Grave;
 import se.agura.memorial.search.api.Graveyard;
@@ -25,6 +28,7 @@ import se.agura.memorial.search.data.GraveDatabaseConn;
 import se.agura.memorial.search.data.GraveDatabaseConnHome;
 import se.agura.memorial.util.MemorialHeplInfo;
 import se.agura.memorial.util.Utility;
+
 import com.idega.business.IBOLookup;
 import com.idega.business.IBOLookupException;
 import com.idega.data.IDOLookup;
@@ -634,14 +638,19 @@ public class SearchFormBackingBean {
 
     public String showObiaturyPage()
     {        
-        
-		//searchFormSessionBean.setGraveId(this.graveyard grave.graveId);
-
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		
 		IWContext iwc = IWContext.getIWContext(facesContext);
-		
+		ObituarySessionBean obituarySessionBean;	
 
+		try {
+			obituarySessionBean = (ObituarySessionBean) IBOLookup.getSessionInstance(iwc, ObituarySessionBean.class);
+			obituarySessionBean.initNull();
+		} catch (IBOLookupException e) {
+			
+			//e.printStackTrace();
+		}
+		
+		
         return "success";
     }
 	

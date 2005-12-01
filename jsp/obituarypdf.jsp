@@ -8,15 +8,17 @@
         xmlns:builder="http://xmlns.idega.com/com.idega.builder"
         xmlns:x="http://myfaces.apache.org/extensions"       
         xmlns:memorial="http://xmlns.idega.com/se.agura.memorial"  
-version="1.2">
+version="1.2">  
 <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
+
+
 <f:view>
-  	<ws:page id="obituaryPreview">
-			<h:form id="obituaryPreviewform">    
- 			<wf:wfblock title="Obituary Preview page" >
+  	<ws:page id="obituary" >
+			<h:form id="obituaryform12">    
+ 			<wf:wfblock title="save sa PDF">
 			<h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" >
 					<h:panelGroup>			
-			                 <h:outputText styleClass="headline" value="#{obituaryPreviewBackingBean.personFullName}" />
+			                 <h:outputText styleClass="headline" value="#{obituaryCreateBackingBean.personFullName}" />
 							 <f:verbatim>
             			        <br />
 			                    <br />
@@ -36,7 +38,7 @@ version="1.2">
 	 												     </h:panelGroup>
 
 									  					 <h:panelGroup>			
-										                 		<h:outputText styleClass="Text" value="#{obituaryPreviewBackingBean.obituaryText}" />
+										                 		<h:outputText styleClass="Text" value="#{obituaryCreateBackingBean.obituaryText}" />
 						 									 	<f:verbatim>
 												                    <br />
 												                    <br />
@@ -64,11 +66,11 @@ version="1.2">
 			  					 	<h:panelGroup>			
  							                    <h:panelGrid columns="1" border="0" cellspacing="5" footerClass="SearchFormFooterClass" width = "200">
 											         <h:panelGroup>	
-											                    <h:graphicImage value="#{obituaryPreviewBackingBean.graveImagePath}" width = "200"/>
+											                    <h:graphicImage value="#{obituaryCreateBackingBean.graveImagePath}" width = "200"/>
 			 				                         </h:panelGroup>							                   
 
 											         <h:panelGroup>	
-												                <h:outputText styleClass="text" value="#{obituaryPreviewBackingBean.graveImagePath}" />
+												                <h:outputText styleClass="text" value="Picture of grave" />
                   
 												  			    <f:verbatim>
 												                    <br />
@@ -77,16 +79,17 @@ version="1.2">
 			 				                         </h:panelGroup>							                   
 
 											         <h:panelGroup>	
-											                   <h:graphicImage value="#{obituaryPreviewBackingBean.personImagePath}" width = "200" />
+											                   <h:graphicImage value="#{obituaryCreateBackingBean.personImagePath}" width = "200" />
 			 				                         </h:panelGroup>							                   
 
 											         <h:panelGroup>	
-											                   <h:outputText styleClass="text" value="#{obituaryPreviewBackingBean.personImagePath}" />
+											                   <h:outputText styleClass="text" value="Picture of person" />
 			
 												 			   <f:verbatim>
 												                    <br />
 											    	                <br />
 											                   </f:verbatim>
+                  <h:outputLink value="http://159.148.83.235/Images/test.tmppdf">  <h:outputText value="PDF DOCUMENT"/> </h:outputLink>
 
 			 				                         </h:panelGroup>							                   
 		 									  </h:panelGrid >
@@ -96,19 +99,7 @@ version="1.2">
 
          
          <h:panelGroup>	
-                 <h:panelGrid columns="3" border="0" cellspacing="5" footerClass="SearchFormFooterClass" >
-					     <h:panelGroup>
-  		                           <h:commandButton value="#{localizedStrings['se.agura.memorial']['cancel']}" action="obituaryPreviewCancelAction" id="cbCancel" />
-                         </h:panelGroup>
 
-					     <h:panelGroup>
-				                   <h:commandButton value="save" action="#{obituaryPreviewBackingBean.save}" id="cbSave" />
-                         </h:panelGroup>
-
-					     <h:panelGroup>
-
-                         </h:panelGroup>
-				  </h:panelGrid >
          </h:panelGroup>
 
 		</h:panelGrid >

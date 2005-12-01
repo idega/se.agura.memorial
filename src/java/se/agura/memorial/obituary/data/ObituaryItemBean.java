@@ -42,18 +42,22 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	private Integer databaseId;
 	private Integer obituaryId;
 	private String obituaryText;
-	private String personPicturePath;
-	private String gravePicturePath;
-	private String tmpPersonPicturePath;
-	private String tmpGravePicturePath;
+	
+	private String personImagePath;
+	private String graveImagePath;
+	
+	private String tmpPersonImagePath;
+	private String tmpGraveImagePath;
+	
 	private UploadedFile personImageFile;
-	private UploadedFile tmpPersonImageFile;
 	private UploadedFile graveImageFile;
+
+	private UploadedFile tmpPersonImageFile;
 	private UploadedFile tmpGraveImageFile;
 
+	private Boolean removeOldPersonImage;
+	private Boolean removeOldGraveImage;	
 
-	private String tmpPersonImageResourcePath;
-	private String tmpGraveImageResourcePath;
 
 
 	
@@ -75,7 +79,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 	public final static String FIELDNAME_GRAVE_IMAGE_PATH = "GraveImagePath";
 
-	public final static String FIELDNAME_PERSON_IMAGE_PATH = "PresonImagePath";
+	public final static String FIELDNAME_PERSON_IMAGE_PATH = "PersonImagePath";
 
 	public final static String ARTICLE_NAME= ".xml";
 
@@ -90,6 +94,7 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	private static final String CONTENT_PATH = "/files/cms/obituary/";
 
 	private static final String TMP_CONTENT_PATH = "/files/cms/obituary/temp/";
+
 
 	
 	public UploadedFile getPersonImageFile() {
@@ -119,9 +124,8 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 		
 		return rootPath;
 	}
-
 	
-	public String getGraveImageResourcePath() {
+	public String createGraveImagePath() {
 		String path;
 
 		path = CONTENT_PATH;
@@ -129,100 +133,100 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 		path += "/" + getGraveId();
 		path += ".GraveImage/";
 		path += "grave.jpg";
+		this.graveImagePath = "/content" + path;
+
 
 		return path;
 	}
-
-	
-	public String getGraveResourcePath(){
-		String path;
-
-		path = CONTENT_PATH;
-		path += String.valueOf(getDatabaseId());
-		path += "/" + getGraveId();
-		path += ".GraveImage/";
 		
-		return path;
-	}
-
-	public String getPersonImageResourcePath() {
+	
+	public String createPersonImagePath(){
 		String path;
 
 		path = CONTENT_PATH;
 		path += String.valueOf(getDatabaseId());
 		path += "/" + getGraveId();
 		path += ".PersonImage/";
-		path += "person.jpg";
-
-		return path;
-	}
-	
-	
-	public String getPersonResourcePath(){
-		String path;
-
-		path = CONTENT_PATH;
-		path += String.valueOf(getDatabaseId());
-		path += "/" + getGraveId();
-		path += ".PersonImage/";
+		path += "person.jpg";		
+		this.personImagePath = "/content" + path;
+			
 		
 		return path;
 	}
 
-	
-	public String getTmpGraveResourcePath(){
-		String path;
 
-		path = TMP_CONTENT_PATH;
-		path += String.valueOf(getDatabaseId());
-		path += "/" + getGraveId();
-		path += ".GraveImage/";
-		
-		return path;
-	}
-
-	public String getTmpGraveImageResourcePath() {
-		String path;
-
+	public String createTmpGraveImagePath() {
+		String path ;
 		path = TMP_CONTENT_PATH;
 		path += String.valueOf(getDatabaseId());
 		path += "/" + getGraveId();
 		path += ".GraveImage/";
 		path += "grave.jpg";
-
-		return path;
-	}
-
-
-
-	public String getTmpPersonResourcePath(){
-		String path;
-
-		path = TMP_CONTENT_PATH;
-		path += String.valueOf(getDatabaseId());
-		path += "/" + getGraveId();
-		path += ".PersonImage/";
+		this.tmpGraveImagePath = "/content" + path;
 		
+	
+
 		return path;
 	}
 
-	public String getTmpPersonImageResourcePath() {
-		String path;
 
+	public String createTmpPersonImagePath(){
+		String path;
 		path = TMP_CONTENT_PATH;
 		path += String.valueOf(getDatabaseId());
 		path += "/" + getGraveId();
 		path += ".PersonImage/";
-		path += "person.jpg";
+		path += "person.jpg";		
+		this.tmpPersonImagePath = "/content" + path;
+		
 
 		return path;
 	}
+
+
+	public String getTmpGraveResourcePath() {
+		String path;
+		path = TMP_CONTENT_PATH;
+		path += String.valueOf(getDatabaseId());
+		path += "/" + getGraveId();
+		path += ".GraveImage/";
+
+		return path;
+	}
+
+	public String getTmpPersonResourcePath() {
+		String path;
+		path = TMP_CONTENT_PATH;
+		path += String.valueOf(getDatabaseId());
+		path += "/" + getGraveId();
+		path += ".PersonImage/";
+
+		return path;
+	}
+
 	
+	public String getGraveResourcePath() {
+		String path;
+		path = CONTENT_PATH;
+		path += String.valueOf(getDatabaseId());
+		path += "/" + getGraveId();
+		path += ".GraveImage/";
+
+		return path;
+	}
+
+	public String getPersonResourcePath() {
+		String path;
+		path = CONTENT_PATH;
+		path += String.valueOf(getDatabaseId());
+		path += "/" + getGraveId();
+		path += ".PersonImage/";
+
+		return path;
+	}
+
+
 	
-
-
-
-
 	public String getResourcePath() {
 		return CONTENT_PATH;
 	}
@@ -267,6 +271,34 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 
 
+	public Boolean isRemoveOldGraveImage() {
+		return removeOldGraveImage;
+	}
+	
+
+
+
+	public void setRemoveOldGraveImage(Boolean removeOldGraveImage) {
+		this.removeOldGraveImage = removeOldGraveImage;
+	}
+	
+
+
+
+	public Boolean isRemoveOldPersonImage() {
+		return removeOldPersonImage;
+	}
+	
+
+
+
+	public void setRemoveOldPersonImage(Boolean removeOldPersonImage) {
+		this.removeOldPersonImage = removeOldPersonImage;
+	}
+	
+
+
+
 	public UploadedFile getTmpGraveImageFile() {
 		return tmpGraveImageFile;
 	}
@@ -281,16 +313,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 
 
-	public String getTmpGravePicturePath() {
-		return tmpGravePicturePath;
-	}
-	
-
-
-
-	public void setTmpGravePicturePath(String tmpGravePicturePath) {
-		this.tmpGravePicturePath = tmpGravePicturePath;
-	}
 	
 
 
@@ -307,18 +329,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	}
 	
 
-
-
-	public String getTmpPersonPicturePath() {
-		return tmpPersonPicturePath;
-	}
-	
-
-
-
-	public void setTmpPersonPicturePath(String tmpPersonPicturePath) {
-		this.tmpPersonPicturePath = tmpPersonPicturePath;
-	}
 	
 
 
@@ -336,9 +346,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 		return graveId;
 	}
 
-	public String getGravePicturePath() {
-		return gravePicturePath;
-	}
 
 
 	public Integer getObituaryId() {
@@ -351,9 +358,6 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	}
 
 
-	public String getPersonPicturePath() {
-		return personPicturePath;
-	}
 
 	public String getUniqueAvenyId() {
 		return uniqueAvenyId;
@@ -386,17 +390,12 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 		this.uniqueAvenyId = uniqueAvenyId;
 	}
 	
-	public void setPersonPicturePath(String presonPicturePath) {
-		this.personPicturePath = presonPicturePath;
-	}	
+
 	
 	public void setBody(String body) {
 		//
 	}
 
-	public void setGravePicturePath(String gravePicturePath) {
-		this.gravePicturePath = gravePicturePath;
-	}
 
 	public void setObituaryId(Integer obituaryId) {
 		this.obituaryId = obituaryId;
@@ -408,21 +407,50 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 	public String getAsXML() throws IOException, XMLException {
 
+		
+		
+		
+		String pip = null;
+		String gip = null;
+		
+		if((this.personImageFile==null)||(this.graveImageFile==null))
+		{
+			IWUserContext iwuc = IWContext.getInstance();
+			IWSlideSession session = (IWSlideSession) IBOLookup.getSessionInstance(iwuc, IWSlideSession.class);
+			this.load(session.getWebdavResource(this.getRootPath()));
+			
+			if(this.removeOldPersonImage.booleanValue()==true) this.setPersonImagePath(null);
+			if(this.removeOldGraveImage.booleanValue()==true) this.setGraveImagePath(null);
+			
+			if(this.personImageFile!=null) this.createPersonImagePath();
+			if(this.graveImageFile!=null) this.createGraveImagePath();
+			
+		}
+		else
+		{
+			this.createPersonImagePath();
+			this.createGraveImagePath();
+		}
+		
 		XMLParser builder = new XMLParser();
 		XMLDocument bodyDoc = null;
 		bodyDoc = builder.parse(new ByteArrayInputStream(getBody().getBytes()));
+        
+		pip = this.getPersonImagePath();
+		gip = this.getGraveImagePath();
 
+		
 		XMLElement bodyElement = bodyDoc.getRootElement();
 		XMLElement root = new XMLElement("article", idegaXMLNameSpace);
-		XMLElement obituary = new XMLElement(FIELDNAME_OBITUARY,idegaXMLNameSpace).setText(getObituaryText());
-		XMLElement personImagePath = new XMLElement(FIELDNAME_PERSON_IMAGE_PATH, idegaXMLNameSpace).setText(getTmpPersonImageResourcePath());
-		XMLElement graveImagePath = new XMLElement(FIELDNAME_GRAVE_IMAGE_PATH,idegaXMLNameSpace).setText(getTmpGraveImageResourcePath());
-		XMLElement contentLanguage = new XMLElement(FIELDNAME_CONTENT_LANGUAGE,idegaXMLNameSpace).setText(getContentLanguage());
+		XMLElement obituary = new XMLElement(FIELDNAME_OBITUARY,idegaXMLNameSpace).setText(this.getObituaryText());
+		XMLElement personImagePath = new XMLElement(FIELDNAME_PERSON_IMAGE_PATH, idegaXMLNameSpace).setText(pip);
+		XMLElement graveImagePath = new XMLElement(FIELDNAME_GRAVE_IMAGE_PATH,idegaXMLNameSpace).setText(gip);
+		XMLElement contentLanguage = new XMLElement(FIELDNAME_CONTENT_LANGUAGE,idegaXMLNameSpace).setText(this.getContentLanguage());
 
-		root.addContent(contentLanguage);
 		root.addContent(obituary);
 		root.addContent(personImagePath);
 		root.addContent(graveImagePath);
+		root.addContent(contentLanguage);
 
 		XMLDocument doc = new XMLDocument(root);
 		XMLOutput outputter = new XMLOutput();
@@ -459,48 +487,67 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 					String fixedURL = session.getURI(filePath);
 					rootResource.putMethod(fixedURL, article); 
 					rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,ARTICLE_FILENAME_SCOPE, true);
+					//rootResource.checkinMethod();
 				}
 
 				/// saving images				
+			
+
+				if((getGraveImageFile()!=null) || (isRemoveOldGraveImage().booleanValue() ) ){
+					folderPath = getGraveResourcePath();
+					filePath = createGraveImagePath();
+					hadToCreate = session.createAllFoldersInPath(folderPath);
+					if (hadToCreate) {
+						String fixedFolderURL = session.getURI(folderPath);
+						rootResource.proppatchMethod(fixedFolderURL,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
+					} else {
+						rootResource.proppatchMethod(folderPath,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
+					}
 				
-				folderPath = getGraveResourcePath();
-				filePath = getGraveImageResourcePath();
-				hadToCreate = session.createAllFoldersInPath(folderPath);
-				if (hadToCreate) {
-					String fixedFolderURL = session.getURI(folderPath);
-					rootResource.proppatchMethod(fixedFolderURL,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
-				} else {
-					rootResource.proppatchMethod(folderPath,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
+					if(isRemoveOldGraveImage().booleanValue()) {
+						String fixedURL = session.getURI(filePath);
+						rootResource.deleteMethod(fixedURL);
+					}
+					else{
+
+						if (rootResource.putMethod(filePath,getGraveImageFile().getInputStream())) {
+							rootResource.proppatchMethod(filePath, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+						} else {
+							String fixedURL = session.getURI(filePath);
+							rootResource.putMethod(fixedURL,getGraveImageFile().getInputStream());
+							rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+						}	
+					}
 				}
 				
-				if (rootResource.putMethod(filePath,getGraveImageFile().getInputStream())) {
-					rootResource.proppatchMethod(filePath, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
-				} else {
-					String fixedURL = session.getURI(filePath);
-					rootResource.putMethod(fixedURL,getGraveImageFile().getInputStream());
-					rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+				if((getPersonImageFile()!=null) || (isRemoveOldPersonImage().booleanValue() ) ){
+					folderPath = getPersonResourcePath();
+					filePath = createPersonImagePath();
+					hadToCreate = session.createAllFoldersInPath(folderPath);
+					if (hadToCreate) {
+						String fixedFolderURL = session.getURI(folderPath);
+						rootResource.proppatchMethod(fixedFolderURL,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
+					} else {
+						rootResource.proppatchMethod(folderPath,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
+					}	
+				
+
+					if(isRemoveOldPersonImage().booleanValue()  ){
+						String fixedURL = session.getURI(filePath);
+						rootResource.deleteMethod(fixedURL);
+					}
+					else{
+						if (rootResource.putMethod(filePath,getPersonImageFile().getInputStream())) {
+							rootResource.proppatchMethod(filePath, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+						} else {
+							String fixedURL = session.getURI(filePath);
+							rootResource.putMethod(fixedURL,getPersonImageFile().getInputStream());
+							rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+						}
+					}
 				}
-				
-				folderPath = getPersonResourcePath();
-				filePath = getPersonImageResourcePath();
-				hadToCreate = session.createAllFoldersInPath(folderPath);
-				if (hadToCreate) {
-					String fixedFolderURL = session.getURI(folderPath);
-					rootResource.proppatchMethod(fixedFolderURL,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
-				} else {
-					rootResource.proppatchMethod(folderPath,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
-				}
-				
-				if (rootResource.putMethod(filePath,getPersonImageFile().getInputStream())) {
-					rootResource.proppatchMethod(filePath, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
-				} else {
-					String fixedURL = session.getURI(filePath);
-					rootResource.putMethod(fixedURL,getPersonImageFile().getInputStream());
-					rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
-				}
-				
-				
-			} catch (IOException e1) {
+			} 
+			catch (IOException e1) {
 				storeOk = false;
 				e1.printStackTrace();
 			} catch (XMLException e) {
@@ -524,6 +571,31 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 //--------------------------------------------------------------------------------------------------------------------------------------
 	
+	public boolean isPersonImageExist(){
+
+		boolean result = false;
+			try {
+
+				IWUserContext iwuc = IWContext.getInstance();
+				IWSlideSession session = (IWSlideSession) IBOLookup.getSessionInstance(iwuc, IWSlideSession.class);
+				WebdavRootResource rootResource = session.getWebdavRootResource();
+
+				String folderPath = getGraveResourcePath();
+				String filePath = createGraveImagePath();
+				String fixedURL = session.getURI(filePath);
+				
+				result = rootResource.bindMethod(fixedURL);  //checkinMethod(fixedURL);
+			}
+			catch (IOException e1) {
+
+			} 
+
+		return result;	
+	}
+
+//--------------------------------------------------------------------------------------------------------------------------------------
+	
+
 	public void storeTMP() throws IDOStoreException, WebdavException {
 		boolean storeOk = true;
 
@@ -541,8 +613,8 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 				String filePath;
 				boolean hadToCreate;
 				
-				folderPath = getTmpGraveResourcePath();
-				filePath = getTmpGraveImageResourcePath();
+				folderPath = this.getTmpGraveResourcePath();
+				filePath = this.createTmpGraveImagePath();
 				hadToCreate = session.createAllFoldersInPath(folderPath);
 				if (hadToCreate) {
 					String fixedFolderURL = session.getURI(folderPath);
@@ -550,17 +622,20 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 				} else {
 					rootResource.proppatchMethod(folderPath,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
 				}
-				
-				if (rootResource.putMethod(filePath,getTmpGraveImageFile().getInputStream())) {
-					rootResource.proppatchMethod(filePath, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
-				} else {
-					String fixedURL = session.getURI(filePath);
-					rootResource.putMethod(fixedURL,getTmpGraveImageFile().getInputStream());
-					rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+
+				if(this.getTmpGraveImageFile()!=null){
+					if (rootResource.putMethod(filePath,getTmpGraveImageFile().getInputStream())) {
+						rootResource.proppatchMethod(filePath, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+					} else {
+						String fixedURL = session.getURI(filePath);
+						rootResource.putMethod(fixedURL,getTmpGraveImageFile().getInputStream());
+						rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+					}
 				}
+
 				
 				folderPath = getTmpPersonResourcePath();
-				filePath = getTmpPersonImageResourcePath();
+				filePath = createTmpPersonImagePath();
 				hadToCreate = session.createAllFoldersInPath(folderPath);
 				if (hadToCreate) {
 					String fixedFolderURL = session.getURI(folderPath);
@@ -568,24 +643,28 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 				} else {
 					rootResource.proppatchMethod(folderPath,PROPERTY_CONTENT_TYPE, "LocalizedFile", true);
 				}
-				
-				if (rootResource.putMethod(filePath,getTmpPersonImageFile().getInputStream())) {
-					rootResource.proppatchMethod(filePath, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
-				} else {
-					String fixedURL = session.getURI(filePath);
-					rootResource.putMethod(fixedURL,getTmpPersonImageFile().getInputStream());
-					rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+
+				if(this.getTmpPersonImageFile()!=null){
+
+					if (rootResource.putMethod(filePath,getTmpPersonImageFile().getInputStream())) {
+						rootResource.proppatchMethod(filePath, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+					} else {
+						String fixedURL = session.getURI(filePath);
+						rootResource.putMethod(fixedURL,getTmpPersonImageFile().getInputStream());
+						rootResource.proppatchMethod(fixedURL, PROPERTY_CONTENT_TYPE,TMP_IMAGE_FILENAME_SCOPE, true);
+					}
 				}
 				
-				
 				rootResource.close();
+				
 
 			} catch (IOException e1) {
 				storeOk = false;
 				e1.printStackTrace();
 			} 
 		}
-
+		
+			
 		if (storeOk) {
 			if (getRequestedStatus() != null) {
 				setStatus(getRequestedStatus());
@@ -635,31 +714,30 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 			try {
 				XMLElement gravePicturePath = rootElement.getChild(FIELDNAME_GRAVE_IMAGE_PATH,idegaXMLNameSpace);
 				if(gravePicturePath != null){
-					setGravePicturePath(gravePicturePath.getText());
+					setGraveImagePath(gravePicturePath.getText());
 					result = true;
 				} else {
-					setGravePicturePath("");
+					setGraveImagePath(null);
 				}
 			}catch(Exception e) {		//Nullpointer could occur if field isn't used
 				
 				e.printStackTrace();
-				setPersonPicturePath("");
-				setGravePicturePath("");
+				setGraveImagePath(null);
 			}
 
 
 			try {
 				XMLElement personPicturePath = rootElement.getChild(FIELDNAME_PERSON_IMAGE_PATH,idegaXMLNameSpace);
 				if(personPicturePath != null){
-					setPersonPicturePath(personPicturePath.getText());
+					setPersonImagePath(personPicturePath.getText());
 					result = true;
 					
 				} else {
-					setGravePicturePath("");
+					setGraveImagePath(null);
 				}
 			}catch(Exception e) {		//Nullpointer could occur if field isn't used
 				e.printStackTrace();
-				setGravePicturePath("");
+				setGraveImagePath(null);
 			}
 
 			
@@ -675,6 +753,96 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 	}
 
 
+//	public boolean loadPersonImage(WebdavExtendedResource webdavResource) throws IOException {
+//		XMLParser builder = new XMLParser();
+//		XMLDocument bodyDoc = null;
+//		boolean result = false;
+//		try {
+//			WebdavResource theArticle = null;
+//			theArticle = webdavResource;
+//			
+//			if(theArticle!=null && !theArticle.isCollection()){
+//				bodyDoc = builder.parse(new ByteArrayInputStream(theArticle.getMethodDataAsString().getBytes()));
+//			} else {
+//				bodyDoc = null;
+//			}
+//		} catch (XMLException e) {
+//			//e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//		}
+//		if(bodyDoc!=null){
+//			XMLElement rootElement = bodyDoc.getRootElement();
+//	
+//			try {
+//				XMLElement personPicturePath = rootElement.getChild(FIELDNAME_PERSON_IMAGE_PATH,idegaXMLNameSpace);
+//				if(personPicturePath != null){
+//					setPersonPicturePath(personPicturePath.getText());
+//					result = true;
+//					
+//				} else {
+//					setGravePicturePath("");
+//				}
+//			}catch(Exception e) {		//Nullpointer could occur if field isn't used
+//				e.printStackTrace();
+//				setGravePicturePath("");
+//			}
+//
+//			
+//
+//			
+//		} else {
+//			Logger log = Logger.getLogger(this.getClass().toString());
+//			log.warning("person Image was not found");
+//			setRendered(false);
+//		}
+//		return result;
+//	}
+
+
+//	public boolean loadGraveImage(WebdavExtendedResource webdavResource) throws IOException {
+//		XMLParser builder = new XMLParser();
+//		XMLDocument bodyDoc = null;
+//		boolean result = false;
+//		try {
+//			WebdavResource theArticle = null;
+//			theArticle = webdavResource;
+//			
+//			if(theArticle!=null && !theArticle.isCollection()){
+//				bodyDoc = builder.parse(new ByteArrayInputStream(theArticle.getMethodDataAsString().getBytes()));
+//			} else {
+//				bodyDoc = null;
+//			}
+//		} catch (XMLException e) {
+//			//e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//		}
+//		if(bodyDoc!=null){
+//			XMLElement rootElement = bodyDoc.getRootElement();
+//			
+//			try {
+//				XMLElement gravePicturePath = rootElement.getChild(FIELDNAME_GRAVE_IMAGE_PATH,idegaXMLNameSpace);
+//				if(gravePicturePath != null){
+//					setGravePicturePath(gravePicturePath.getText());
+//					result = true;
+//				} else {
+//					setGravePicturePath("");
+//				}
+//			}catch(Exception e) {		//Nullpointer could occur if field isn't used
+//				
+//				e.printStackTrace();
+//				setPersonPicturePath("");
+//				setGravePicturePath("");
+//			}
+//			
+//
+//			
+//		} else {
+//			Logger log = Logger.getLogger(this.getClass().toString());
+//			log.warning("graave Image was not found");
+//			setRendered(false);
+//		}
+//		return result;
+//	}
+	
+	
 	public Iterator getChildrenIterator(String arg0, boolean arg1) {
 		return null;
 	}
@@ -750,6 +918,62 @@ public class ObituaryItemBean extends ContentItemBean implements IDOEntity{
 
 		return false;
 	}
+
+
+
+	public String getGraveImagePath() {
+		return graveImagePath;
+	}
+	
+
+
+
+	public void setGraveImagePath(String graveImagePath) {
+		this.graveImagePath = graveImagePath;
+	}
+	
+
+
+
+	public String getPersonImagePath() {
+		return personImagePath;
+	}
+	
+
+
+
+	public void setPersonImagePath(String personImagePath) {
+		this.personImagePath = personImagePath;
+	}
+	
+
+
+
+	public String getTmpGraveImagePath() {
+		return tmpGraveImagePath;
+	}
+	
+
+
+
+	public void setTmpGraveImagePath(String tmpGraveImagePath) {
+		this.tmpGraveImagePath = tmpGraveImagePath;
+	}
+	
+
+
+
+	public String getTmpPersonImagePath() {
+		return tmpPersonImagePath;
+	}
+	
+
+
+
+	public void setTmpPersonImagePath(String tmpPersonImagePath) {
+		this.tmpPersonImagePath = tmpPersonImagePath;
+	}
+	
 
 
 }

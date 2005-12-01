@@ -1,6 +1,6 @@
 /*
 /*
- * $Id: IWBundleStarter.java,v 1.15 2005/11/15 14:23:25 igors Exp $
+ * $Id: IWBundleStarter.java,v 1.16 2005/12/01 11:09:34 igors Exp $
  * Created on 15.5.2005
  *
  * Copyright (C) 2005 Idega Software hf. All Rights Reserved.
@@ -20,10 +20,10 @@ import com.idega.idegaweb.include.GlobalIncludeManager;
 
 /**
  * 
- *  Last modified: $Date: 2005/11/15 14:23:25 $ by $Author: igors $
+ *  Last modified: $Date: 2005/12/01 11:09:34 $ by $Author: igors $
  * 
  * @author <a href="mailto:gummi@idega.com">Gudmundur Agust Saemundsson</a>
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public class IWBundleStarter implements IWBundleStartable {
 	private static final String STYLE_SHEET_URL = "/style/memorial.css";
@@ -69,6 +69,12 @@ public class IWBundleStarter implements IWBundleStartable {
 
 		DefaultViewNode obituaryCreateMemorialNode = new DefaultViewNode("ObituaryCreate",memorialNode);
 		obituaryCreateMemorialNode.setJspUri(bundle.getJSPURI("obituarycreate.jsp"));
+
+		DefaultViewNode obituaryPDFNode = new DefaultViewNode("ObituaryPDF",memorialNode);
+		obituaryPDFNode.setJspUri(bundle.getJSPURI("obituarypdf.jsp"));
+
+		DefaultViewNode obituaryPrintNode = new DefaultViewNode("ObituaryPrint",memorialNode);
+		obituaryPrintNode.setJspUri(bundle.getJSPURI("obituaryprint.jsp"));
 
 		DefaultViewNode obituaryPreviewMemorialNode = new DefaultViewNode("ObituaryPreview",memorialNode);
 		obituaryPreviewMemorialNode.setJspUri(bundle.getJSPURI("obituarypreview.jsp"));

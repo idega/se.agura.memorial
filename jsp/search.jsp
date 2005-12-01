@@ -10,7 +10,7 @@
 	xmlns:x="http://myfaces.apache.org/extensions" version="1.2">
 	
 	<jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
-	
+	  
 	<f:view>
 		<ws:page id="dainissearch">
 			<!-- if this form is here, then nothing works in IE <h:form id="dainispagesform1">  -->
@@ -278,7 +278,7 @@
 					</h:column>
 					<h:column>
 					
-						<h:commandLink action="showObituaryAction" immediate="true">							
+						<h:commandLink action="#{graveyardSearchBean.showObiaturyPage}" immediate="true">							
 							<h:outputText value=" #{localizedStrings['se.agura.memorial']['show']}" />							
 							<f:param name="graveId" value="#{grave.graveId}" />
 							<f:param name="databaseId" value="#{graveyardSearchBean.databaseId}" />														
